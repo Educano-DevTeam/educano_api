@@ -1,0 +1,65 @@
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum TipoUsuario {
+  ALUNO     @map("aluno")
+  PROFESSOR @map("professor")
+  PARCEIRO  @map("parceiro")
+  ADMIN     @map("admin")
+
+  @@map("tipo_usuario")
+}
+
+enum StatusUsuario {
+  PENDENTE @map("pendente")
+  ATIVO    @map("ativo")
+  INATIVO  @map("inativo")
+
+  @@map("status_usuario")
+}
+
+enum TipoPerfil {
+  PUBLICO  @map("publico")
+  PRIVADO  @map("privado")
+
+  @@map("tipo_perfil")
+}
+
+model Usuario {
+  id          String        @id @default(uuid()) @db.Uuid
+  nome        String        @db.VarChar(120)
+  email       String        @unique @db.VarChar(255)
+  senha       String        @db.VarChar(255)
+  tipo        TipoUsuario   @default(ALUNO)
+  status      StatusUsuario @default(PENDENTE)
+  criadoEm    DateTime      @default(now()) @map("criado_em") @db.Timestamptz(3)
+  atualizadoEm DateTime    @default(now()) @map("atualizado_em") @db.Timestamptz(3)
+
+  perfil      Perfil?
+
+  @@map("usuario")
+}
+
+model Perfil {
+  idUsuario       String     @id @map("id_usuario") @db.Uuid
+  tipoPerfil      TipoPerfil @default(PRIVADO) @map("tipo_perfil")
+  planoContaId    String?    @map("plano_conta") @db.Uuid
+  xp              Int        @default(0)
+  moedas          Int        @default(0)
+  nivel           Int        @default(0)
+  cor             String     @default("") @db.VarChar(30)
+  decoracaoId     String?    @map("decoracao") @db.Uuid
+  urlFotoPerfil   String     @default("") @map("url_foto_perfil") @db.Text
+  urlFotoBackground String   @default("") @map("url_foto_background") @db.Text
+
+  usuario         Usuario    @relation(fields: [idUsuario], references: [id], onDelete: Cascade)
+
+  @@map("perfil")
+}
