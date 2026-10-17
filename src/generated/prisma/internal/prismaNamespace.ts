@@ -398,7 +398,8 @@ type FieldRefInputType<Model, FieldType> = Model extends never ? never : FieldRe
 
 export const ModelName = {
   Usuario: 'Usuario',
-  Perfil: 'Perfil'
+  Perfil: 'Perfil',
+  CodigoValidacao: 'CodigoValidacao'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -414,7 +415,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "usuario" | "perfil"
+    modelProps: "usuario" | "perfil" | "codigoValidacao"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -566,6 +567,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    CodigoValidacao: {
+      payload: Prisma.$CodigoValidacaoPayload<ExtArgs>
+      fields: Prisma.CodigoValidacaoFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.CodigoValidacaoFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CodigoValidacaoPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.CodigoValidacaoFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CodigoValidacaoPayload>
+        }
+        findFirst: {
+          args: Prisma.CodigoValidacaoFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CodigoValidacaoPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.CodigoValidacaoFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CodigoValidacaoPayload>
+        }
+        findMany: {
+          args: Prisma.CodigoValidacaoFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CodigoValidacaoPayload>[]
+        }
+        create: {
+          args: Prisma.CodigoValidacaoCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CodigoValidacaoPayload>
+        }
+        createMany: {
+          args: Prisma.CodigoValidacaoCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.CodigoValidacaoCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CodigoValidacaoPayload>[]
+        }
+        delete: {
+          args: Prisma.CodigoValidacaoDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CodigoValidacaoPayload>
+        }
+        update: {
+          args: Prisma.CodigoValidacaoUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CodigoValidacaoPayload>
+        }
+        deleteMany: {
+          args: Prisma.CodigoValidacaoDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.CodigoValidacaoUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.CodigoValidacaoUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CodigoValidacaoPayload>[]
+        }
+        upsert: {
+          args: Prisma.CodigoValidacaoUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CodigoValidacaoPayload>
+        }
+        aggregate: {
+          args: Prisma.CodigoValidacaoAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateCodigoValidacao>
+        }
+        groupBy: {
+          args: Prisma.CodigoValidacaoGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CodigoValidacaoGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.CodigoValidacaoCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CodigoValidacaoCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -633,6 +708,18 @@ export const PerfilScalarFieldEnum = {
 } as const
 
 export type PerfilScalarFieldEnum = (typeof PerfilScalarFieldEnum)[keyof typeof PerfilScalarFieldEnum]
+
+
+export const CodigoValidacaoScalarFieldEnum = {
+  id: 'id',
+  idUsuario: 'idUsuario',
+  codigo: 'codigo',
+  dataCriacao: 'dataCriacao',
+  expiraEm: 'expiraEm',
+  status: 'status'
+} as const
+
+export type CodigoValidacaoScalarFieldEnum = (typeof CodigoValidacaoScalarFieldEnum)[keyof typeof CodigoValidacaoScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -746,6 +833,20 @@ export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'In
  * Reference to a field of type 'Int[]'
  */
 export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
+    
+
+
+/**
+ * Reference to a field of type 'StatusCodigoValidacao'
+ */
+export type EnumStatusCodigoValidacaoFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'StatusCodigoValidacao'>
+    
+
+
+/**
+ * Reference to a field of type 'StatusCodigoValidacao[]'
+ */
+export type ListEnumStatusCodigoValidacaoFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'StatusCodigoValidacao[]'>
     
 
 
@@ -915,6 +1016,7 @@ export type PrismaClientOptions = PrismaClientOptionsWithAccelerateUrl | PrismaC
 export type GlobalOmitConfig = {
   usuario?: Prisma.UsuarioOmit
   perfil?: Prisma.PerfilOmit
+  codigoValidacao?: Prisma.CodigoValidacaoOmit
 }
 
 /* Types for Logging */

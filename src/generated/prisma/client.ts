@@ -51,3 +51,8 @@ export type Usuario = Prisma.UsuarioModel
  * 
  */
 export type Perfil = Prisma.PerfilModel
+/**
+ * Model CodigoValidacao
+ * 
+ */
+export type CodigoValidacao = Prisma.CodigoValidacaoModel

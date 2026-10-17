@@ -207,6 +207,7 @@ export type UsuarioWhereInput = {
   criadoEm?: Prisma.DateTimeFilter<"Usuario"> | Date | string
   atualizadoEm?: Prisma.DateTimeFilter<"Usuario"> | Date | string
   perfil?: Prisma.XOR<Prisma.PerfilNullableScalarRelationFilter, Prisma.PerfilWhereInput> | null
+  codigosValidacao?: Prisma.CodigoValidacaoListRelationFilter
 }
 
 export type UsuarioOrderByWithRelationInput = {
@@ -219,6 +220,7 @@ export type UsuarioOrderByWithRelationInput = {
   criadoEm?: Prisma.SortOrder
   atualizadoEm?: Prisma.SortOrder
   perfil?: Prisma.PerfilOrderByWithRelationInput
+  codigosValidacao?: Prisma.CodigoValidacaoOrderByRelationAggregateInput
 }
 
 export type UsuarioWhereUniqueInput = Prisma.AtLeast<{
@@ -234,6 +236,7 @@ export type UsuarioWhereUniqueInput = Prisma.AtLeast<{
   criadoEm?: Prisma.DateTimeFilter<"Usuario"> | Date | string
   atualizadoEm?: Prisma.DateTimeFilter<"Usuario"> | Date | string
   perfil?: Prisma.XOR<Prisma.PerfilNullableScalarRelationFilter, Prisma.PerfilWhereInput> | null
+  codigosValidacao?: Prisma.CodigoValidacaoListRelationFilter
 }, "id" | "email">
 
 export type UsuarioOrderByWithAggregationInput = {
@@ -274,6 +277,7 @@ export type UsuarioCreateInput = {
   criadoEm?: Date | string
   atualizadoEm?: Date | string
   perfil?: Prisma.PerfilCreateNestedOneWithoutUsuarioInput
+  codigosValidacao?: Prisma.CodigoValidacaoCreateNestedManyWithoutUsuarioInput
 }
 
 export type UsuarioUncheckedCreateInput = {
@@ -286,6 +290,7 @@ export type UsuarioUncheckedCreateInput = {
   criadoEm?: Date | string
   atualizadoEm?: Date | string
   perfil?: Prisma.PerfilUncheckedCreateNestedOneWithoutUsuarioInput
+  codigosValidacao?: Prisma.CodigoValidacaoUncheckedCreateNestedManyWithoutUsuarioInput
 }
 
 export type UsuarioUpdateInput = {
@@ -298,6 +303,7 @@ export type UsuarioUpdateInput = {
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   perfil?: Prisma.PerfilUpdateOneWithoutUsuarioNestedInput
+  codigosValidacao?: Prisma.CodigoValidacaoUpdateManyWithoutUsuarioNestedInput
 }
 
 export type UsuarioUncheckedUpdateInput = {
@@ -310,6 +316,7 @@ export type UsuarioUncheckedUpdateInput = {
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   perfil?: Prisma.PerfilUncheckedUpdateOneWithoutUsuarioNestedInput
+  codigosValidacao?: Prisma.CodigoValidacaoUncheckedUpdateManyWithoutUsuarioNestedInput
 }
 
 export type UsuarioCreateManyInput = {
@@ -413,6 +420,20 @@ export type UsuarioUpdateOneRequiredWithoutPerfilNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UsuarioUpdateToOneWithWhereWithoutPerfilInput, Prisma.UsuarioUpdateWithoutPerfilInput>, Prisma.UsuarioUncheckedUpdateWithoutPerfilInput>
 }
 
+export type UsuarioCreateNestedOneWithoutCodigosValidacaoInput = {
+  create?: Prisma.XOR<Prisma.UsuarioCreateWithoutCodigosValidacaoInput, Prisma.UsuarioUncheckedCreateWithoutCodigosValidacaoInput>
+  connectOrCreate?: Prisma.UsuarioCreateOrConnectWithoutCodigosValidacaoInput
+  connect?: Prisma.UsuarioWhereUniqueInput
+}
+
+export type UsuarioUpdateOneRequiredWithoutCodigosValidacaoNestedInput = {
+  create?: Prisma.XOR<Prisma.UsuarioCreateWithoutCodigosValidacaoInput, Prisma.UsuarioUncheckedCreateWithoutCodigosValidacaoInput>
+  connectOrCreate?: Prisma.UsuarioCreateOrConnectWithoutCodigosValidacaoInput
+  upsert?: Prisma.UsuarioUpsertWithoutCodigosValidacaoInput
+  connect?: Prisma.UsuarioWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UsuarioUpdateToOneWithWhereWithoutCodigosValidacaoInput, Prisma.UsuarioUpdateWithoutCodigosValidacaoInput>, Prisma.UsuarioUncheckedUpdateWithoutCodigosValidacaoInput>
+}
+
 export type UsuarioCreateWithoutPerfilInput = {
   id?: string
   nome: string
@@ -422,6 +443,7 @@ export type UsuarioCreateWithoutPerfilInput = {
   status?: $Enums.StatusUsuario
   criadoEm?: Date | string
   atualizadoEm?: Date | string
+  codigosValidacao?: Prisma.CodigoValidacaoCreateNestedManyWithoutUsuarioInput
 }
 
 export type UsuarioUncheckedCreateWithoutPerfilInput = {
@@ -433,6 +455,7 @@ export type UsuarioUncheckedCreateWithoutPerfilInput = {
   status?: $Enums.StatusUsuario
   criadoEm?: Date | string
   atualizadoEm?: Date | string
+  codigosValidacao?: Prisma.CodigoValidacaoUncheckedCreateNestedManyWithoutUsuarioInput
 }
 
 export type UsuarioCreateOrConnectWithoutPerfilInput = {
@@ -460,6 +483,7 @@ export type UsuarioUpdateWithoutPerfilInput = {
   status?: Prisma.EnumStatusUsuarioFieldUpdateOperationsInput | $Enums.StatusUsuario
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  codigosValidacao?: Prisma.CodigoValidacaoUpdateManyWithoutUsuarioNestedInput
 }
 
 export type UsuarioUncheckedUpdateWithoutPerfilInput = {
@@ -471,8 +495,102 @@ export type UsuarioUncheckedUpdateWithoutPerfilInput = {
   status?: Prisma.EnumStatusUsuarioFieldUpdateOperationsInput | $Enums.StatusUsuario
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  codigosValidacao?: Prisma.CodigoValidacaoUncheckedUpdateManyWithoutUsuarioNestedInput
 }
 
+export type UsuarioCreateWithoutCodigosValidacaoInput = {
+  id?: string
+  nome: string
+  email: string
+  senha: string
+  tipo?: $Enums.TipoUsuario
+  status?: $Enums.StatusUsuario
+  criadoEm?: Date | string
+  atualizadoEm?: Date | string
+  perfil?: Prisma.PerfilCreateNestedOneWithoutUsuarioInput
+}
+
+export type UsuarioUncheckedCreateWithoutCodigosValidacaoInput = {
+  id?: string
+  nome: string
+  email: string
+  senha: string
+  tipo?: $Enums.TipoUsuario
+  status?: $Enums.StatusUsuario
+  criadoEm?: Date | string
+  atualizadoEm?: Date | string
+  perfil?: Prisma.PerfilUncheckedCreateNestedOneWithoutUsuarioInput
+}
+
+export type UsuarioCreateOrConnectWithoutCodigosValidacaoInput = {
+  where: Prisma.UsuarioWhereUniqueInput
+  create: Prisma.XOR<Prisma.UsuarioCreateWithoutCodigosValidacaoInput, Prisma.UsuarioUncheckedCreateWithoutCodigosValidacaoInput>
+}
+
+export type UsuarioUpsertWithoutCodigosValidacaoInput = {
+  update: Prisma.XOR<Prisma.UsuarioUpdateWithoutCodigosValidacaoInput, Prisma.UsuarioUncheckedUpdateWithoutCodigosValidacaoInput>
+  create: Prisma.XOR<Prisma.UsuarioCreateWithoutCodigosValidacaoInput, Prisma.UsuarioUncheckedCreateWithoutCodigosValidacaoInput>
+  where?: Prisma.UsuarioWhereInput
+}
+
+export type UsuarioUpdateToOneWithWhereWithoutCodigosValidacaoInput = {
+  where?: Prisma.UsuarioWhereInput
+  data: Prisma.XOR<Prisma.UsuarioUpdateWithoutCodigosValidacaoInput, Prisma.UsuarioUncheckedUpdateWithoutCodigosValidacaoInput>
+}
+
+export type UsuarioUpdateWithoutCodigosValidacaoInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  nome?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  senha?: Prisma.StringFieldUpdateOperationsInput | string
+  tipo?: Prisma.EnumTipoUsuarioFieldUpdateOperationsInput | $Enums.TipoUsuario
+  status?: Prisma.EnumStatusUsuarioFieldUpdateOperationsInput | $Enums.StatusUsuario
+  criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  perfil?: Prisma.PerfilUpdateOneWithoutUsuarioNestedInput
+}
+
+export type UsuarioUncheckedUpdateWithoutCodigosValidacaoInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  nome?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  senha?: Prisma.StringFieldUpdateOperationsInput | string
+  tipo?: Prisma.EnumTipoUsuarioFieldUpdateOperationsInput | $Enums.TipoUsuario
+  status?: Prisma.EnumStatusUsuarioFieldUpdateOperationsInput | $Enums.StatusUsuario
+  criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  perfil?: Prisma.PerfilUncheckedUpdateOneWithoutUsuarioNestedInput
+}
+
+
+/**
+ * Count Type UsuarioCountOutputType
+ */
+
+export type UsuarioCountOutputType = {
+  codigosValidacao: number
+}
+
+export type UsuarioCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  codigosValidacao?: boolean | UsuarioCountOutputTypeCountCodigosValidacaoArgs
+}
+
+/**
+ * UsuarioCountOutputType without action
+ */
+export type UsuarioCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the UsuarioCountOutputType
+   */
+  select?: Prisma.UsuarioCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * UsuarioCountOutputType without action
+ */
+export type UsuarioCountOutputTypeCountCodigosValidacaoArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.CodigoValidacaoWhereInput
+}
 
 
 export type UsuarioSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -485,6 +603,8 @@ export type UsuarioSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   criadoEm?: boolean
   atualizadoEm?: boolean
   perfil?: boolean | Prisma.Usuario$perfilArgs<ExtArgs>
+  codigosValidacao?: boolean | Prisma.Usuario$codigosValidacaoArgs<ExtArgs>
+  _count?: boolean | Prisma.UsuarioCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["usuario"]>
 
 export type UsuarioSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -523,6 +643,8 @@ export type UsuarioSelectScalar = {
 export type UsuarioOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "nome" | "email" | "senha" | "tipo" | "status" | "criadoEm" | "atualizadoEm", ExtArgs["result"]["usuario"]>
 export type UsuarioInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   perfil?: boolean | Prisma.Usuario$perfilArgs<ExtArgs>
+  codigosValidacao?: boolean | Prisma.Usuario$codigosValidacaoArgs<ExtArgs>
+  _count?: boolean | Prisma.UsuarioCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UsuarioIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
 export type UsuarioIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -531,6 +653,7 @@ export type $UsuarioPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
   name: "Usuario"
   objects: {
     perfil: Prisma.$PerfilPayload<ExtArgs> | null
+    codigosValidacao: Prisma.$CodigoValidacaoPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -936,6 +1059,7 @@ readonly fields: UsuarioFieldRefs;
 export interface Prisma__UsuarioClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   perfil<T extends Prisma.Usuario$perfilArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Usuario$perfilArgs<ExtArgs>>): Prisma.Prisma__PerfilClient<runtime.Types.Result.GetResult<Prisma.$PerfilPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  codigosValidacao<T extends Prisma.Usuario$codigosValidacaoArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Usuario$codigosValidacaoArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CodigoValidacaoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1382,6 +1506,30 @@ export type Usuario$perfilArgs<ExtArgs extends runtime.Types.Extensions.Internal
    */
   include?: Prisma.PerfilInclude<ExtArgs> | null
   where?: Prisma.PerfilWhereInput
+}
+
+/**
+ * Usuario.codigosValidacao
+ */
+export type Usuario$codigosValidacaoArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the CodigoValidacao
+   */
+  select?: Prisma.CodigoValidacaoSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the CodigoValidacao
+   */
+  omit?: Prisma.CodigoValidacaoOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CodigoValidacaoInclude<ExtArgs> | null
+  where?: Prisma.CodigoValidacaoWhereInput
+  orderBy?: Prisma.CodigoValidacaoOrderByWithRelationInput | Prisma.CodigoValidacaoOrderByWithRelationInput[]
+  cursor?: Prisma.CodigoValidacaoWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.CodigoValidacaoScalarFieldEnum | Prisma.CodigoValidacaoScalarFieldEnum[]
 }
 
 /**

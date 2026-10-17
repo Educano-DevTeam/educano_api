@@ -209,6 +209,23 @@ export type IntWithAggregatesFilter<$PrismaModel = never> = {
   _max?: Prisma.NestedIntFilter<$PrismaModel>
 }
 
+export type EnumStatusCodigoValidacaoFilter<$PrismaModel = never> = {
+  equals?: $Enums.StatusCodigoValidacao | Prisma.EnumStatusCodigoValidacaoFieldRefInput<$PrismaModel>
+  in?: $Enums.StatusCodigoValidacao[] | Prisma.ListEnumStatusCodigoValidacaoFieldRefInput<$PrismaModel>
+  notIn?: $Enums.StatusCodigoValidacao[] | Prisma.ListEnumStatusCodigoValidacaoFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumStatusCodigoValidacaoFilter<$PrismaModel> | $Enums.StatusCodigoValidacao
+}
+
+export type EnumStatusCodigoValidacaoWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.StatusCodigoValidacao | Prisma.EnumStatusCodigoValidacaoFieldRefInput<$PrismaModel>
+  in?: $Enums.StatusCodigoValidacao[] | Prisma.ListEnumStatusCodigoValidacaoFieldRefInput<$PrismaModel>
+  notIn?: $Enums.StatusCodigoValidacao[] | Prisma.ListEnumStatusCodigoValidacaoFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumStatusCodigoValidacaoWithAggregatesFilter<$PrismaModel> | $Enums.StatusCodigoValidacao
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumStatusCodigoValidacaoFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumStatusCodigoValidacaoFilter<$PrismaModel>
+}
+
 export type NestedUuidFilter<$PrismaModel = never> = {
   equals?: string | Prisma.StringFieldRefInput<$PrismaModel>
   in?: string[] | Prisma.ListStringFieldRefInput<$PrismaModel>
@@ -427,6 +444,23 @@ export type NestedFloatFilter<$PrismaModel = never> = {
   gt?: number | Prisma.FloatFieldRefInput<$PrismaModel>
   gte?: number | Prisma.FloatFieldRefInput<$PrismaModel>
   not?: Prisma.NestedFloatFilter<$PrismaModel> | number
+}
+
+export type NestedEnumStatusCodigoValidacaoFilter<$PrismaModel = never> = {
+  equals?: $Enums.StatusCodigoValidacao | Prisma.EnumStatusCodigoValidacaoFieldRefInput<$PrismaModel>
+  in?: $Enums.StatusCodigoValidacao[] | Prisma.ListEnumStatusCodigoValidacaoFieldRefInput<$PrismaModel>
+  notIn?: $Enums.StatusCodigoValidacao[] | Prisma.ListEnumStatusCodigoValidacaoFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumStatusCodigoValidacaoFilter<$PrismaModel> | $Enums.StatusCodigoValidacao
+}
+
+export type NestedEnumStatusCodigoValidacaoWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.StatusCodigoValidacao | Prisma.EnumStatusCodigoValidacaoFieldRefInput<$PrismaModel>
+  in?: $Enums.StatusCodigoValidacao[] | Prisma.ListEnumStatusCodigoValidacaoFieldRefInput<$PrismaModel>
+  notIn?: $Enums.StatusCodigoValidacao[] | Prisma.ListEnumStatusCodigoValidacaoFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumStatusCodigoValidacaoWithAggregatesFilter<$PrismaModel> | $Enums.StatusCodigoValidacao
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumStatusCodigoValidacaoFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumStatusCodigoValidacaoFilter<$PrismaModel>
 }
 
 

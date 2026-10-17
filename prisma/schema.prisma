@@ -32,17 +32,26 @@ enum TipoPerfil {
   @@map("tipo_perfil")
 }
 
-model Usuario {
-  id          String        @id @default(uuid()) @db.Uuid
-  nome        String        @db.VarChar(120)
-  email       String        @unique @db.VarChar(255)
-  senha       String        @db.VarChar(255)
-  tipo        TipoUsuario   @default(ALUNO)
-  status      StatusUsuario @default(PENDENTE)
-  criadoEm    DateTime      @default(now()) @map("criado_em") @db.Timestamptz(3)
-  atualizadoEm DateTime    @default(now()) @map("atualizado_em") @db.Timestamptz(3)
+enum StatusCodigoValidacao {
+  ATIVO   @map("ativo")
+  INATIVO @map("inativo")
+  USADO   @map("usado")
 
-  perfil      Perfil?
+  @@map("status_codigo_validacao")
+}
+
+model Usuario {
+  id           String        @id @default(uuid()) @db.Uuid
+  nome         String        @db.VarChar(120)
+  email        String        @unique @db.VarChar(255)
+  senha        String        @db.VarChar(255)
+  tipo         TipoUsuario   @default(ALUNO)
+  status       StatusUsuario @default(PENDENTE)
+  criadoEm     DateTime      @default(now()) @map("criado_em") @db.Timestamptz(3)
+  atualizadoEm DateTime      @default(now()) @map("atualizado_em") @db.Timestamptz(3)
+
+  perfil            Perfil?
+  codigosValidacao  CodigoValidacao[]
 
   @@map("usuario")
 }
@@ -62,4 +71,19 @@ model Perfil {
   usuario         Usuario    @relation(fields: [idUsuario], references: [id], onDelete: Cascade)
 
   @@map("perfil")
+}
+
+model CodigoValidacao {
+  id          String                 @id @default(uuid()) @db.Uuid
+  idUsuario   String                 @map("id_usuario") @db.Uuid
+  codigo      String                 @db.VarChar(64)
+  dataCriacao DateTime               @default(now()) @map("data_criacao") @db.Timestamptz(3)
+  expiraEm    DateTime               @default(dbgenerated("(CURRENT_TIMESTAMP + INTERVAL '10 minutes')")) @map("expira_em") @db.Timestamptz(3)
+  status      StatusCodigoValidacao  @default(ATIVO)
+
+  usuario     Usuario                @relation(fields: [idUsuario], references: [id], onDelete: Cascade)
+
+  @@index([idUsuario, status])
+  @@index([expiraEm, status])
+  @@map("codigo_validacao")
 }

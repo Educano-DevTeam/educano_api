@@ -10,4 +10,5 @@
  */
 export type * from './models/Usuario.js'
 export type * from './models/Perfil.js'
+export type * from './models/CodigoValidacao.js'
 export type * from './commonInputTypes.js'

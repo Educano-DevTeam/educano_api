@@ -52,7 +52,8 @@ export const AnyNull = runtime.AnyNull
 
 export const ModelName = {
   Usuario: 'Usuario',
-  Perfil: 'Perfil'
+  Perfil: 'Perfil',
+  CodigoValidacao: 'CodigoValidacao'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -99,6 +100,18 @@ export const PerfilScalarFieldEnum = {
 } as const
 
 export type PerfilScalarFieldEnum = (typeof PerfilScalarFieldEnum)[keyof typeof PerfilScalarFieldEnum]
+
+
+export const CodigoValidacaoScalarFieldEnum = {
+  id: 'id',
+  idUsuario: 'idUsuario',
+  codigo: 'codigo',
+  dataCriacao: 'dataCriacao',
+  expiraEm: 'expiraEm',
+  status: 'status'
+} as const
+
+export type CodigoValidacaoScalarFieldEnum = (typeof CodigoValidacaoScalarFieldEnum)[keyof typeof CodigoValidacaoScalarFieldEnum]
 
 
 export const SortOrder = {

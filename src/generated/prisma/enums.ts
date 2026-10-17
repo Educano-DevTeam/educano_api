@@ -34,3 +34,12 @@ export const TipoPerfil = {
 } as const
 
 export type TipoPerfil = (typeof TipoPerfil)[keyof typeof TipoPerfil]
+
+
+export const StatusCodigoValidacao = {
+  ATIVO: 'ATIVO',
+  INATIVO: 'INATIVO',
+  USADO: 'USADO'
+} as const
+
+export type StatusCodigoValidacao = (typeof StatusCodigoValidacao)[keyof typeof StatusCodigoValidacao]
