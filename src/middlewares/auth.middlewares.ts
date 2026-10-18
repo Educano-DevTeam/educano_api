@@ -1,22 +1,20 @@
-import type {
-  Request,
-  Response,
-  NextFunction,
-} from "express";
 
+import type { Request, Response, NextFunction } from "express";
 import { prisma } from "../config/prisma.js";
 import { verificarToken } from "../modules/auth/services/token.service.js";
 
-/**
- * Informações mínimas do usuário autenticado disponíveis
- * para controllers e outros middlewares.
- */
+type TipoUsuarioAutenticado =
+  | "ALUNO"
+  | "PROFESSOR"
+  | "PARCEIRO"
+  | "ADMIN";
+
 declare global {
   namespace Express {
     interface Request {
       usuarioAutenticado?: {
         id: string;
-        tipo: "ALUNO" | "PROFESSOR" | "PARCEIRO" | "ADMIN";
+        tipo: TipoUsuarioAutenticado;
       };
     }
   }
@@ -43,12 +41,23 @@ export async function autenticar(
     });
   }
 
-  try {
-    const idUsuario = verificarToken(token);
+  // Erros na validação do JWT são erros de autenticação.
+  let idUsuario: string;
 
-    // Confere o estado atual da conta no banco, em vez de
-    // confiar apenas nas informações de um token antigo.
-    const usuario = await prisma.usuario.findUnique({
+  try {
+    idUsuario = verificarToken(token);
+  } catch {
+    return res.status(401).json({
+      message: "Token inválido ou expirado.",
+    });
+  }
+
+  // A consulta ao banco fica fora do try/catch do JWT.
+  // Assim, uma falha no banco não será tratada como token inválido.
+  let usuario;
+
+  try {
+    usuario = await prisma.usuario.findUnique({
       where: { id: idUsuario },
       select: {
         id: true,
@@ -56,30 +65,28 @@ export async function autenticar(
         status: true,
       },
     });
+  } catch (error) {
+    console.error("Falha ao consultar usuário no middleware:", error);
 
-    if (!usuario || usuario.status !== "ATIVO") {
-      return res.status(401).json({
-        message: "Conta indisponível ou sessão inválida.",
-      });
-    }
-
-    req.usuarioAutenticado = {
-      id: usuario.id,
-      tipo: usuario.tipo,
-    };
-
-    return next();
-  } catch {
-    return res.status(401).json({
-      message: "Token inválido ou expirado.",
+    return res.status(503).json({
+      message: "Serviço temporariamente indisponível. Tente novamente.",
     });
   }
+
+  if (!usuario || usuario.status !== "ATIVO") {
+    return res.status(401).json({
+      message: "Conta indisponível ou sessão inválida.",
+    });
+  }
+
+  req.usuarioAutenticado = {
+    id: usuario.id,
+    tipo: usuario.tipo,
+  };
+
+  return next();
 }
 
-/**
- * Restringe a rota a administradores.
- * Deve ser usado depois do middleware autenticar.
- */
 export function exigirAdmin(
   req: Request,
   res: Response,
