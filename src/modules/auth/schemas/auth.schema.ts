@@ -13,5 +13,11 @@ export const verifyCodeSchema = z.object({
   codigo: z.string().trim().toUpperCase().regex(/^[A-Z0-9]{6}$/),
 });
 
+export const loginSchema = z.object({
+  email: z.string().trim().email().max(255),
+  senha: z.string().min(1).max(72),
+});
+
 export type RegisterInput = z.infer<typeof registerSchema>;
 export type VerifyCodeInput = z.infer<typeof verifyCodeSchema>;
+export type LoginInput = z.infer<typeof loginSchema>;

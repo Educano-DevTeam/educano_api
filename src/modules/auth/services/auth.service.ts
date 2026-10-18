@@ -13,6 +13,8 @@ import type {
   RegisterInput,
   VerifyCodeInput,
 } from "../schemas/auth.schema.js";
+import { emitirToken } from "./token.service.js";
+import type { LoginInput } from "../schemas/auth.schema.js";
 
 const CORES_PERFIL = [
   "#425BC2",
@@ -242,4 +244,55 @@ export async function validarCodigo(dados: VerifyCodeInput): Promise<void> {
       },
     });
   });
+}
+
+export async function autenticarUsuario(dados: LoginInput) {
+  const email = dados.email.toLowerCase();
+
+  const usuario = await prisma.usuario.findUnique({
+    where: { email },
+    select: {
+      id: true,
+      nome: true,
+      email: true,
+      senha: true,
+      tipo: true,
+      status: true,
+    },
+  });
+
+  // A mesma resposta é usada para credenciais inválidas
+  // e contas que ainda não podem acessar o sistema.
+  if (!usuario) {
+    throw new AuthServiceError(
+      "CREDENCIAIS_INVALIDAS",
+      "E-mail, senha inválidos ou conta ainda não ativada.",
+    );
+  }
+
+  const senhaValida = await bcrypt.compare(
+    dados.senha,
+    usuario.senha,
+  );
+
+  if (!senhaValida || usuario.status !== "ATIVO") {
+    throw new AuthServiceError(
+      "CREDENCIAIS_INVALIDAS",
+      "E-mail, senha inválidos ou conta ainda não ativada.",
+    );
+  }
+
+  const token = emitirToken(usuario.id);
+
+  // Nunca devolvemos o hash da senha na resposta.
+  return {
+    token,
+    usuario: {
+      id: usuario.id,
+      nome: usuario.nome,
+      email: usuario.email,
+      tipo: usuario.tipo,
+      status: usuario.status,
+    },
+  };
 }

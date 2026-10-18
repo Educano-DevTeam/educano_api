@@ -1,11 +1,13 @@
 
 import type { Request, Response } from "express";
 import {
+  loginSchema,
   registerSchema,
   verifyCodeSchema,
 } from "../schemas/auth.schema.js";
 import {
   AuthServiceError,
+  autenticarUsuario,
   registrarUsuario,
   validarCodigo,
 } from "../services/auth.service.js";
@@ -20,6 +22,7 @@ function responderErro(res: Response, error: unknown) {
       CODIGO_EXPIRADO: 400,
       CODIGO_INCORRETO: 400,
       CODIGO_EXPIRADO_OU_UTILIZADO: 400,
+      CREDENCIAIS_INVALIDAS: 401,
     };
 
     return res.status(statusPorCodigo[error.code] ?? 400).json({
@@ -83,6 +86,28 @@ export async function verificarCodigo(req: Request, res: Response) {
 
     return res.status(200).json({
       message: "Conta validada e ativada com sucesso.",
+    });
+  } catch (error) {
+    return responderErro(res, error);
+  }
+}
+
+export async function login(req: Request, res: Response) {
+  const validacao = loginSchema.safeParse(req.body);
+
+  if (!validacao.success) {
+    return res.status(400).json({
+      message: "Informe um e-mail válido e uma senha.",
+      errors: validacao.error.issues,
+    });
+  }
+
+  try {
+    const resultado = await autenticarUsuario(validacao.data);
+
+    return res.status(200).json({
+      message: "Login realizado com sucesso.",
+      ...resultado,
     });
   } catch (error) {
     return responderErro(res, error);
