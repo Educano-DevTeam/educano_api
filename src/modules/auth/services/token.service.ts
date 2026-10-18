@@ -25,8 +25,8 @@ export function emitirToken(idUsuario: string): string {
   return jwt.sign({}, obterSegredo(), {
     subject: idUsuario,
     expiresIn: TEMPO_EXPIRACAO_SEGUNDOS,
-    issuer: "educano-api",
-    audience: "educano-app",
+    issuer: "educano_api",
+    audience: "educano_app",
   });
 }
 
