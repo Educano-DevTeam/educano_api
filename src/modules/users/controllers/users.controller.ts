@@ -65,41 +65,35 @@ export async function consultarMeuUsuario(
 export async function consultarUsuarioPorIdentificador(
   req: Request,
   res: Response,
-) {
-  const validacao = identificadorParamsSchema.safeParse(req.params);
-
-  if (!validacao.success) {
-    return res.status(400).json({
-      message: "Identificador inválido.",
-    });
-  }
-
+): Promise<Response> {
   try {
-    const autenticado = req.usuarioAutenticado!;
+    const { identifier } = identificadorParamsSchema.parse(req.params);
 
-    // Usuários comuns só podem consultar a própria conta.
-    if (autenticado.tipo !== "ADMIN") {
-      const proprioUsuario = await consultarUsuario(autenticado.id);
-      const identificador = validacao.data.identifier;
+    // O middleware autenticar garante que o usuário esteja autenticado.
+    const usuario = await consultarUsuario(identifier);
 
-      const consultaEhPropria =
-        identificador.toLowerCase() === proprioUsuario.email.toLowerCase() ||
-        identificador.toLowerCase() === proprioUsuario.id.toLowerCase();
+    // Somente o próprio usuário ou um administrador pode
+    // consultar os dados completos da conta.
+    const ehProprioUsuario =
+      req.usuarioAutenticado?.id === usuario.id;
 
-      if (!consultaEhPropria) {
-        return res.status(403).json({
-          message: "Você não tem permissão para consultar este usuário.",
-        });
-      }
+    const ehAdmin =
+      req.usuarioAutenticado?.tipo === "ADMIN";
+
+    if (ehProprioUsuario || ehAdmin) {
+      return res.status(200).json({ dados: usuario });
     }
 
-    const usuario = await consultarUsuario(
-      validacao.data.identifier,
-    );
-
-    return res.status(200).json({ usuario });
-  } catch (error) {
-    return responderErro(res, error);
+    // Para outros usuários, retornamos apenas dados públicos.
+    return res.status(200).json({
+      dados: {
+        id: usuario.id,
+        nome: usuario.nome,
+        tipo: usuario.tipo,
+      },
+    });
+  } catch (erro) {
+    return responderErro(res, erro);
   }
 }
 

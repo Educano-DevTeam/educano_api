@@ -59,6 +59,7 @@ export async function consultarMeuPerfil(
   }
 }
 
+
 export async function consultarPerfilPorIdentificador(
   req: Request,
   res: Response,
@@ -73,36 +74,56 @@ export async function consultarPerfilPorIdentificador(
 
   try {
     const autenticado = req.usuarioAutenticado!;
+    const identificador = params.data.identifier;
 
-    if (autenticado.tipo !== "ADMIN") {
-      // O próprio usuário pode informar seu ID ou e-mail.
-      // A consulta do e-mail da própria conta evita liberar
-      // a consulta de qualquer outro perfil.
-      const { consultarUsuario } = await import(
-        "../services/users.service.js"
-      );
+    // Busca o usuário correspondente ao ID ou e-mail informado.
+    const { consultarUsuario } = await import(
+      "../services/users.service.js"
+    );
 
-      const proprioUsuario = await consultarUsuario(autenticado.id);
-      const identificador = params.data.identifier;
+    const usuario = await consultarUsuario(identificador);
 
-      const consultaEhPropria =
-        identificador.toLowerCase() === proprioUsuario.id.toLowerCase() ||
-        identificador.toLowerCase() === proprioUsuario.email.toLowerCase();
+    const ehProprioUsuario = autenticado.id === usuario.id;
+    const ehAdmin = autenticado.tipo === "ADMIN";
 
-      if (!consultaEhPropria) {
-        return res.status(403).json({
-          message: "Você não tem permissão para consultar este perfil.",
-        });
-      }
+    // Usuários autenticados podem consultar o próprio perfil.
+    // Administradores também podem consultar qualquer perfil.
+    if (ehProprioUsuario || ehAdmin) {
+      const perfil = await consultarPerfil(usuario.id);
+
+      return res.status(200).json({ perfil });
     }
 
-    const perfil = await consultarPerfil(params.data.identifier);
+    // Outros usuários só podem visualizar perfis públicos.
+    const perfil = await consultarPerfil(usuario.id);
 
-    return res.status(200).json({ perfil });
+    if (perfil.tipoPerfil !== "PUBLICO") {
+      return res.status(404).json({
+        erro: "PERFIL_NAO_ENCONTRADO",
+        mensagem: "Perfil não encontrado.",
+      });
+    }
+
+    // Retorna apenas informações permitidas para a consulta pública.
+    return res.status(200).json({
+      dados: {
+        idUsuario: usuario.id,
+        nome: usuario.nome,
+        tipo: usuario.tipo,
+        tipoPerfil: perfil.tipoPerfil,
+        xp: perfil.xp,
+        moedas: perfil.moedas,
+        nivel: perfil.nivel,
+        cor: perfil.cor,
+        urlFotoPerfil: perfil.urlFotoPerfil,
+        urlFotoBackground: perfil.urlFotoBackground,
+      },
+    });
   } catch (error) {
     return responderErro(res, error);
   }
 }
+
 
 export async function atualizarMeuPerfil(
   req: Request,
