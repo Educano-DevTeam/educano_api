@@ -1,6 +1,13 @@
 
 import { z } from "zod";
 
+export const tipoUsuarioSchema = z.enum([
+  "ALUNO",
+  "PROFESSOR",
+  "PARCEIRO",
+  "ADMIN",
+]);
+
 // O cadastro público cria somente contas de aluno.
 export const registerSchema = z.object({
   nome: z.string().trim().min(2).max(120),
@@ -18,6 +25,7 @@ export const loginSchema = z.object({
   senha: z.string().min(1).max(72),
 });
 
+export type TipoUsuarioCadastro = z.infer<typeof tipoUsuarioSchema>;
 export type RegisterInput = z.infer<typeof registerSchema>;
 export type VerifyCodeInput = z.infer<typeof verifyCodeSchema>;
 export type LoginInput = z.infer<typeof loginSchema>;

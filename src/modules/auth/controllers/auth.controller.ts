@@ -8,6 +8,7 @@ import {
 import {
   AuthServiceError,
   autenticarUsuario,
+  autorizarTipoCadastro,
   registrarUsuario,
   validarCodigo,
 } from "../services/auth.service.js";
@@ -23,6 +24,8 @@ function responderErro(res: Response, error: unknown) {
       CODIGO_INCORRETO: 400,
       CODIGO_EXPIRADO_OU_UTILIZADO: 400,
       CREDENCIAIS_INVALIDAS: 401,
+      TOKEN_INVALIDO: 401,
+      CADASTRO_NAO_AUTORIZADO: 403,
     };
 
     return res.status(statusPorCodigo[error.code] ?? 400).json({
@@ -49,6 +52,7 @@ function responderErro(res: Response, error: unknown) {
   });
 }
 
+
 export async function registrar(req: Request, res: Response) {
   const validacao = registerSchema.safeParse(req.body);
 
@@ -60,7 +64,17 @@ export async function registrar(req: Request, res: Response) {
   }
 
   try {
-    const usuario = await registrarUsuario(validacao.data);
+    // Primeiro autoriza o tipo solicitado.
+    const tipoAutorizado = await autorizarTipoCadastro(
+      req.body.tipo,
+      req.get("authorization"),
+    );
+
+    // Só depois da autorização cria a conta.
+    const usuario = await registrarUsuario(
+      validacao.data,
+      tipoAutorizado,
+    );
 
     return res.status(201).json({
       message: "Cadastro criado. Enviamos um código para seu e-mail.",

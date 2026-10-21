@@ -12,8 +12,9 @@ import { gerarEmailValidacao } from "../templates/validations-email.template.js"
 import type {
   RegisterInput,
   VerifyCodeInput,
+  TipoUsuarioCadastro,
 } from "../schemas/auth.schema.js";
-import { emitirToken } from "./token.service.js";
+import { emitirToken, verificarToken} from "./token.service.js";
 import type { LoginInput } from "../schemas/auth.schema.js";
 
 const CORES_PERFIL = [
@@ -66,7 +67,82 @@ export class AuthServiceError extends Error {
   }
 }
 
-export async function registrarUsuario(dados: RegisterInput) {
+
+export async function autorizarTipoCadastro(
+  tipoSolicitado: TipoUsuarioCadastro,
+  authorization?: string,
+): Promise<TipoUsuarioCadastro> {
+  // Sem token, somente o cadastro público de aluno é permitido.
+  if (!authorization) {
+    if (tipoSolicitado !== "ALUNO") {
+      throw new AuthServiceError(
+        "CADASTRO_NAO_AUTORIZADO",
+        "Você não tem autorização para cadastrar usuários.",
+      );
+    }
+
+    return "ALUNO";
+  }
+
+  // Se o cabeçalho foi enviado, ele precisa conter um Bearer token válido.
+  if (!authorization.startsWith("Bearer ")) {
+    throw new AuthServiceError(
+      "TOKEN_INVALIDO",
+      "Token inválido ou expirado.",
+    );
+  }
+
+  const token = authorization.slice("Bearer ".length).trim();
+
+  if (!token) {
+    throw new AuthServiceError(
+      "TOKEN_INVALIDO",
+      "Token inválido ou expirado.",
+    );
+  }
+
+  let idUsuario: string;
+
+  try {
+    idUsuario = verificarToken(token);
+  } catch {
+    throw new AuthServiceError(
+      "TOKEN_INVALIDO",
+      "Token inválido ou expirado.",
+    );
+  }
+
+  // Confirma no banco o tipo e o status atuais do usuário.
+  const administrador = await prisma.usuario.findUnique({
+    where: { id: idUsuario },
+    select: {
+      id: true,
+      tipo: true,
+      status: true,
+    },
+  });
+
+  if (!administrador || administrador.status !== "ATIVO") {
+    throw new AuthServiceError(
+      "TOKEN_INVALIDO",
+      "Token inválido ou conta indisponível.",
+    );
+  }
+
+  if (administrador.tipo !== "ADMIN") {
+    throw new AuthServiceError(
+      "CADASTRO_NAO_AUTORIZADO",
+      "Você não tem autorização para cadastrar usuários.",
+    );
+  }
+
+  // O tipo só é aceito após a confirmação de que o solicitante é ADMIN.
+  return tipoSolicitado;
+}
+export async function registrarUsuario(
+  dados: RegisterInput,
+  tipoAutorizado: TipoUsuarioCadastro,
+) {
   const email = dados.email.toLowerCase();
 
   const existente = await prisma.usuario.findUnique({
@@ -92,7 +168,7 @@ export async function registrarUsuario(dados: RegisterInput) {
       nome: dados.nome,
       email,
       senha: senhaHash,
-      tipo: "ALUNO",
+      tipo: tipoAutorizado,
       status: "PENDENTE",
 
       perfil: {
