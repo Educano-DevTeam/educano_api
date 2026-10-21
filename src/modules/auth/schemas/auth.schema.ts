@@ -13,6 +13,7 @@ export const registerSchema = z.object({
   nome: z.string().trim().min(2).max(120),
   email: z.string().trim().email().max(255),
   senha: z.string().min(8).max(72),
+  tipo: tipoUsuarioSchema.default("ALUNO"),
 });
 
 export const verifyCodeSchema = z.object({

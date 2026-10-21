@@ -121,27 +121,29 @@ Todas as rotas usam o prefixo `/api`. Os corpos e parâmetros são validados com
 
 ### Autenticação
 
-As rotas de autenticação são públicas. O cadastro cria contas do tipo `ALUNO` com status `PENDENTE` e envia um código de seis caracteres para o e-mail cadastrado. O código expira em 10 minutos e não é incluído na resposta da API.
+Cadastro, validação de e-mail e login são públicos. O cadastro aceita `nome`, `email`, `senha` e `tipo` opcional; se omitido, `tipo` vale `ALUNO`. Sem autenticação, só é permitido cadastrar `ALUNO`. Para cadastrar `PROFESSOR`, `PARCEIRO` ou `ADMIN`, envie um token de administrador no cabeçalho `Authorization`. As contas são criadas com status `PENDENTE` e recebem um código de seis caracteres por e-mail. O código expira em 10 minutos e não é incluído na resposta da API.
 
 | Método e rota | Corpo | Retorno de sucesso |
 | --- | --- | --- |
-| `POST /api/auth/register` | `{ "nome": "Nome", "email": "pessoa@exemplo.com", "senha": "minimo-8-caracteres" }` | `201`: `{ "message": "Cadastro criado. Enviamos um código para seu e-mail.", "usuario": { "id": "UUID", "nome": "Nome", "email": "pessoa@exemplo.com", "tipo": "ALUNO", "status": "PENDENTE" } }` |
+| `POST /api/auth/register` | `{ "nome": "Nome", "email": "pessoa@exemplo.com", "senha": "minimo-8-caracteres", "tipo": "ALUNO" }`. `tipo` é opcional e aceita `ALUNO`, `PROFESSOR`, `PARCEIRO` ou `ADMIN`; sem ele, usa `ALUNO`. | `201`: `{ "message": "Cadastro criado. Enviamos um código para seu e-mail.", "usuario": { "id": "UUID", "nome": "Nome", "email": "pessoa@exemplo.com", "tipo": "ALUNO", "status": "PENDENTE" } }` |
 | `POST /api/auth/verify-code` | `{ "email": "pessoa@exemplo.com", "codigo": "A1B2C3" }` | `200`: `{ "message": "Conta validada e ativada com sucesso." }` |
 | `POST /api/auth/login` | `{ "email": "pessoa@exemplo.com", "senha": "senha" }` | `200`: `{ "message": "Login realizado com sucesso.", "token": "JWT", "usuario": { "id": "UUID", "nome": "Nome", "email": "pessoa@exemplo.com", "tipo": "ALUNO", "status": "ATIVO" } }`. O token expira em 15 minutos. |
+| `GET /api/auth/me` | Sem corpo. Requer `Authorization: Bearer <token>`. | `200`: `{ "autenticado": true, "usuario": { "id": "UUID", "nome": "Nome", "email": "pessoa@exemplo.com", "tipo": "ALUNO", "status": "ATIVO" }, "perfil": { "tipoPerfil": "PRIVADO", "xp": 0, "moedas": 0, "nivel": 0, "cor": "", "urlFotoPerfil": "", "urlFotoBackground": "" } }`. `perfil` pode ser `null`. |
 
 Erros relevantes:
 
 - `400` para corpo inválido. A resposta contém `message` e `errors` com os detalhes da validação.
-- Cadastro: `409` se o e-mail já estiver cadastrado; `503` se não for possível enviar o e-mail de confirmação.
+- Cadastro: `403` se o solicitante não puder cadastrar o tipo solicitado; `401` se o token enviado for inválido; `409` se o e-mail já estiver cadastrado; `503` se não for possível enviar o e-mail de confirmação.
 - Validação do código: `400` se a conta/dados não puderem ser validados, se o código não existir, estiver incorreto, expirado ou já tiver sido usado.
 - Login: `401` para credenciais incorretas ou conta ainda não ativada. A mensagem não diferencia esses casos.
+- `GET /api/auth/me`: `401` para token inválido/expirado ou conta indisponível; `503` se não for possível consultar a conta.
 - Erros inesperados: `500` com `{ "message": "Não foi possível concluir a solicitação." }`.
 
 ### Usuários e perfis
 
 Todas as rotas deste grupo exigem o cabeçalho `Authorization: Bearer <token>`. O token é emitido no login. Sem token, com token inválido/expirado ou com conta indisponível, a API responde `401` com `{ "message": "..." }`. Falha ao consultar a conta no banco durante a autenticação responde `503`.
 
-O identificador `:identifier` pode ser o UUID do usuário ou seu e-mail. Usuários comuns só podem consultar a própria conta ou perfil; operações administrativas indicadas abaixo exigem tipo `ADMIN` e respondem `403` se o usuário não tiver permissão.
+O identificador `:identifier` pode ser o UUID do usuário ou seu e-mail. Usuários autenticados podem consultar os próprios dados completos; qualquer usuário autenticado pode consultar os dados públicos de outra conta ou perfil público. Perfis privados de terceiros não são retornados. Operações administrativas indicadas abaixo exigem tipo `ADMIN` e respondem `403` se o usuário não tiver permissão.
 
 | Método e rota | Acesso | Retorno de sucesso |
 | --- | --- | --- |
@@ -149,10 +151,10 @@ O identificador `:identifier` pode ser o UUID do usuário ou seu e-mail. Usuári
 | `GET /api/users/me/profile` | Qualquer usuário autenticado | `200`: `{ "perfil": { "idUsuario": "UUID", "tipoPerfil": "PRIVADO", "planoContaId": null, "xp": 0, "moedas": 0, "nivel": 0, "cor": "", "decoracaoId": null, "urlFotoPerfil": "", "urlFotoBackground": "" } }`. |
 | `PATCH /api/users/me/profile` | Qualquer usuário autenticado | Atualiza o próprio perfil. `200`: objeto JSON com `message` e `perfil`; `perfil` contém os mesmos campos retornados por `GET /api/users/me/profile`. |
 | `GET /api/users?page=1` | Somente `ADMIN` | Lista usuários com 30 itens por página. `200`: objeto JSON com `dados` (array de usuários) e `paginacao` (`pagina`, `porPagina`, `total`, `totalPaginas`, `temMais`, `proximaPagina`). Cada usuário inclui `id`, `nome`, `email`, `tipo`, `status`, `criadoEm`, `atualizadoEm` e `perfil` (objeto com os campos de perfil ou `null`). `page` é um inteiro a partir de 1 e, se omitido, vale `1`. |
-| `GET /api/users/:identifier` | Autenticado; próprio usuário ou `ADMIN` | `200`: objeto JSON com `usuario`, contendo `id`, `nome`, `email`, `tipo`, `status`, `criadoEm` e `atualizadoEm`. |
+| `GET /api/users/:identifier` | Qualquer usuário autenticado | `200`: os dados completos ficam em `dados` (`id`, `nome`, `email`, `tipo`, `status`, `criadoEm`, `atualizadoEm`) para o próprio usuário ou `ADMIN`; para outros usuários, retorna somente `{ "dados": { "id": "UUID", "nome": "Nome", "tipo": "ALUNO" } }`. |
 | `PATCH /api/users/:identifier` | Somente `ADMIN` | Atualiza `nome` e/ou `email`. `200`: objeto JSON com `message` e `usuario`, contendo os campos de usuário descritos acima. Informe ao menos um campo. |
 | `DELETE /api/users/:identifier` | Somente `ADMIN` | Exclui o usuário e seus dados relacionados em cascata. `200`: `{ "message": "Usuário excluído com sucesso." }`. |
-| `GET /api/users/:identifier/profile` | Autenticado; próprio usuário ou `ADMIN` | `200`: objeto JSON com `perfil`, contendo os campos descritos em `GET /api/users/me/profile`. |
+| `GET /api/users/:identifier/profile` | Qualquer usuário autenticado | `200`: perfil completo em `perfil` para o próprio usuário ou `ADMIN`; para terceiros, retorna em `dados` somente `idUsuario`, `nome`, `tipo`, `tipoPerfil`, `xp`, `moedas`, `nivel`, `cor`, `urlFotoPerfil` e `urlFotoBackground`, se `tipoPerfil` for `PUBLICO`. Para perfil privado de terceiros, retorna `404`: `{ "erro": "PERFIL_NAO_ENCONTRADO", "mensagem": "Perfil não encontrado." }`. |
 | `PATCH /api/users/:identifier/profile` | Somente `ADMIN` | Atualiza o perfil identificado. `200`: objeto JSON com `message` e `perfil`, contendo os campos descritos em `GET /api/users/me/profile`. |
 | `DELETE /api/users/:identifier/profile` | Somente `ADMIN` | Exclui somente o perfil; mantém a conta. `200`: `{ "message": "Perfil excluído com sucesso. A conta do usuário foi mantida." }`. |
 
