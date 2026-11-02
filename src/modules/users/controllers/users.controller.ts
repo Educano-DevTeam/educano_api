@@ -170,3 +170,21 @@ export async function removerUsuario(
     return responderErro(res, error);
   }
 }
+
+export async function removerMinhaConta(
+  req: Request,
+  res: Response,
+) {
+  try {
+    // O ID vem do token autenticado, nunca da requisição do cliente.
+    const idUsuario = req.usuarioAutenticado!.id;
+
+    await excluirUsuario(idUsuario);
+
+    return res.status(200).json({
+      message: "Sua conta foi excluída com sucesso.",
+    });
+  } catch (error) {
+    return responderErro(res, error);
+  }
+}

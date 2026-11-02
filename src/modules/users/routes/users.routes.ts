@@ -7,6 +7,7 @@ import {
   listar,
   atualizarUsuario,
   removerUsuario,
+  removerMinhaConta,
 } from "../controllers/users.controller.js";
 import {
   consultarMeuPerfil,
@@ -25,6 +26,8 @@ usersRouter.use(autenticar);
 usersRouter.get("/me", consultarMeuUsuario);
 usersRouter.get("/me/profile", consultarMeuPerfil);
 usersRouter.patch("/me/profile", atualizarMeuPerfil);
+// Exclusão da própria conta.
+usersRouter.delete("/me", removerMinhaConta);
 
 // Listagem completa: somente administradores.
 usersRouter.get("/", exigirAdmin, listar);
