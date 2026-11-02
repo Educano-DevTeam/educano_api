@@ -53,7 +53,8 @@ export const AnyNull = runtime.AnyNull
 export const ModelName = {
   Usuario: 'Usuario',
   Perfil: 'Perfil',
-  CodigoValidacao: 'CodigoValidacao'
+  CodigoValidacao: 'CodigoValidacao',
+  Arquivo: 'Arquivo'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -112,6 +113,25 @@ export const CodigoValidacaoScalarFieldEnum = {
 } as const
 
 export type CodigoValidacaoScalarFieldEnum = (typeof CodigoValidacaoScalarFieldEnum)[keyof typeof CodigoValidacaoScalarFieldEnum]
+
+
+export const ArquivoScalarFieldEnum = {
+  id: 'id',
+  idOrigem: 'idOrigem',
+  tipo: 'tipo',
+  finalidade: 'finalidade',
+  nomeOriginal: 'nomeOriginal',
+  chaveObjeto: 'chaveObjeto',
+  bucket: 'bucket',
+  contentType: 'contentType',
+  tamanhoBytes: 'tamanhoBytes',
+  etag: 'etag',
+  status: 'status',
+  criadoEm: 'criadoEm',
+  atualizadoEm: 'atualizadoEm'
+} as const
+
+export type ArquivoScalarFieldEnum = (typeof ArquivoScalarFieldEnum)[keyof typeof ArquivoScalarFieldEnum]
 
 
 export const SortOrder = {

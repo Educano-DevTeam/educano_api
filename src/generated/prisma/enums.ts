@@ -43,3 +43,36 @@ export const StatusCodigoValidacao = {
 } as const
 
 export type StatusCodigoValidacao = (typeof StatusCodigoValidacao)[keyof typeof StatusCodigoValidacao]
+
+
+export const TipoArquivo = {
+  IMAGEM: 'IMAGEM',
+  VIDEO: 'VIDEO',
+  AUDIO: 'AUDIO',
+  PDF: 'PDF',
+  DOCUMENTO: 'DOCUMENTO',
+  OUTRO: 'OUTRO'
+} as const
+
+export type TipoArquivo = (typeof TipoArquivo)[keyof typeof TipoArquivo]
+
+
+export const FinalidadeArquivo = {
+  FOTO_PERFIL: 'FOTO_PERFIL',
+  BACKGROUND_PERFIL: 'BACKGROUND_PERFIL',
+  CAPA_CURSO: 'CAPA_CURSO',
+  MATERIAL_CURSO: 'MATERIAL_CURSO',
+  MATERIAL_AULA: 'MATERIAL_AULA',
+  OUTRO: 'OUTRO'
+} as const
+
+export type FinalidadeArquivo = (typeof FinalidadeArquivo)[keyof typeof FinalidadeArquivo]
+
+
+export const StatusArquivo = {
+  PENDENTE: 'PENDENTE',
+  CONCLUIDO: 'CONCLUIDO',
+  FALHA: 'FALHA'
+} as const
+
+export type StatusArquivo = (typeof StatusArquivo)[keyof typeof StatusArquivo]

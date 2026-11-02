@@ -399,7 +399,8 @@ type FieldRefInputType<Model, FieldType> = Model extends never ? never : FieldRe
 export const ModelName = {
   Usuario: 'Usuario',
   Perfil: 'Perfil',
-  CodigoValidacao: 'CodigoValidacao'
+  CodigoValidacao: 'CodigoValidacao',
+  Arquivo: 'Arquivo'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -415,7 +416,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "usuario" | "perfil" | "codigoValidacao"
+    modelProps: "usuario" | "perfil" | "codigoValidacao" | "arquivo"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -641,6 +642,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    Arquivo: {
+      payload: Prisma.$ArquivoPayload<ExtArgs>
+      fields: Prisma.ArquivoFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ArquivoFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ArquivoPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ArquivoFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ArquivoPayload>
+        }
+        findFirst: {
+          args: Prisma.ArquivoFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ArquivoPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ArquivoFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ArquivoPayload>
+        }
+        findMany: {
+          args: Prisma.ArquivoFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ArquivoPayload>[]
+        }
+        create: {
+          args: Prisma.ArquivoCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ArquivoPayload>
+        }
+        createMany: {
+          args: Prisma.ArquivoCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ArquivoCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ArquivoPayload>[]
+        }
+        delete: {
+          args: Prisma.ArquivoDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ArquivoPayload>
+        }
+        update: {
+          args: Prisma.ArquivoUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ArquivoPayload>
+        }
+        deleteMany: {
+          args: Prisma.ArquivoDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ArquivoUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ArquivoUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ArquivoPayload>[]
+        }
+        upsert: {
+          args: Prisma.ArquivoUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ArquivoPayload>
+        }
+        aggregate: {
+          args: Prisma.ArquivoAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateArquivo>
+        }
+        groupBy: {
+          args: Prisma.ArquivoGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ArquivoGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ArquivoCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ArquivoCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -720,6 +795,25 @@ export const CodigoValidacaoScalarFieldEnum = {
 } as const
 
 export type CodigoValidacaoScalarFieldEnum = (typeof CodigoValidacaoScalarFieldEnum)[keyof typeof CodigoValidacaoScalarFieldEnum]
+
+
+export const ArquivoScalarFieldEnum = {
+  id: 'id',
+  idOrigem: 'idOrigem',
+  tipo: 'tipo',
+  finalidade: 'finalidade',
+  nomeOriginal: 'nomeOriginal',
+  chaveObjeto: 'chaveObjeto',
+  bucket: 'bucket',
+  contentType: 'contentType',
+  tamanhoBytes: 'tamanhoBytes',
+  etag: 'etag',
+  status: 'status',
+  criadoEm: 'criadoEm',
+  atualizadoEm: 'atualizadoEm'
+} as const
+
+export type ArquivoScalarFieldEnum = (typeof ArquivoScalarFieldEnum)[keyof typeof ArquivoScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -847,6 +941,62 @@ export type EnumStatusCodigoValidacaoFieldRefInput<$PrismaModel> = FieldRefInput
  * Reference to a field of type 'StatusCodigoValidacao[]'
  */
 export type ListEnumStatusCodigoValidacaoFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'StatusCodigoValidacao[]'>
+    
+
+
+/**
+ * Reference to a field of type 'TipoArquivo'
+ */
+export type EnumTipoArquivoFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TipoArquivo'>
+    
+
+
+/**
+ * Reference to a field of type 'TipoArquivo[]'
+ */
+export type ListEnumTipoArquivoFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TipoArquivo[]'>
+    
+
+
+/**
+ * Reference to a field of type 'FinalidadeArquivo'
+ */
+export type EnumFinalidadeArquivoFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'FinalidadeArquivo'>
+    
+
+
+/**
+ * Reference to a field of type 'FinalidadeArquivo[]'
+ */
+export type ListEnumFinalidadeArquivoFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'FinalidadeArquivo[]'>
+    
+
+
+/**
+ * Reference to a field of type 'BigInt'
+ */
+export type BigIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BigInt'>
+    
+
+
+/**
+ * Reference to a field of type 'BigInt[]'
+ */
+export type ListBigIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BigInt[]'>
+    
+
+
+/**
+ * Reference to a field of type 'StatusArquivo'
+ */
+export type EnumStatusArquivoFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'StatusArquivo'>
+    
+
+
+/**
+ * Reference to a field of type 'StatusArquivo[]'
+ */
+export type ListEnumStatusArquivoFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'StatusArquivo[]'>
     
 
 
@@ -1017,6 +1167,7 @@ export type GlobalOmitConfig = {
   usuario?: Prisma.UsuarioOmit
   perfil?: Prisma.PerfilOmit
   codigoValidacao?: Prisma.CodigoValidacaoOmit
+  arquivo?: Prisma.ArquivoOmit
 }
 
 /* Types for Logging */

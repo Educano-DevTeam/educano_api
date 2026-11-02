@@ -4,3 +4,5 @@ dist/
 .env.*
 !.env.example
 /generated/prisma
+# Arquivos temporários de upload
+tmp/

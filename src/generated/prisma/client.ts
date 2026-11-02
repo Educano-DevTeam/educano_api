@@ -56,3 +56,8 @@ export type Perfil = Prisma.PerfilModel
  * 
  */
 export type CodigoValidacao = Prisma.CodigoValidacaoModel
+/**
+ * Model Arquivo
+ * 
+ */
+export type Arquivo = Prisma.ArquivoModel

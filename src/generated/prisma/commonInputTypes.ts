@@ -226,6 +226,117 @@ export type EnumStatusCodigoValidacaoWithAggregatesFilter<$PrismaModel = never> 
   _max?: Prisma.NestedEnumStatusCodigoValidacaoFilter<$PrismaModel>
 }
 
+export type EnumTipoArquivoFilter<$PrismaModel = never> = {
+  equals?: $Enums.TipoArquivo | Prisma.EnumTipoArquivoFieldRefInput<$PrismaModel>
+  in?: $Enums.TipoArquivo[] | Prisma.ListEnumTipoArquivoFieldRefInput<$PrismaModel>
+  notIn?: $Enums.TipoArquivo[] | Prisma.ListEnumTipoArquivoFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumTipoArquivoFilter<$PrismaModel> | $Enums.TipoArquivo
+}
+
+export type EnumFinalidadeArquivoFilter<$PrismaModel = never> = {
+  equals?: $Enums.FinalidadeArquivo | Prisma.EnumFinalidadeArquivoFieldRefInput<$PrismaModel>
+  in?: $Enums.FinalidadeArquivo[] | Prisma.ListEnumFinalidadeArquivoFieldRefInput<$PrismaModel>
+  notIn?: $Enums.FinalidadeArquivo[] | Prisma.ListEnumFinalidadeArquivoFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumFinalidadeArquivoFilter<$PrismaModel> | $Enums.FinalidadeArquivo
+}
+
+export type BigIntFilter<$PrismaModel = never> = {
+  equals?: bigint | number | Prisma.BigIntFieldRefInput<$PrismaModel>
+  in?: bigint[] | number[] | Prisma.ListBigIntFieldRefInput<$PrismaModel>
+  notIn?: bigint[] | number[] | Prisma.ListBigIntFieldRefInput<$PrismaModel>
+  lt?: bigint | number | Prisma.BigIntFieldRefInput<$PrismaModel>
+  lte?: bigint | number | Prisma.BigIntFieldRefInput<$PrismaModel>
+  gt?: bigint | number | Prisma.BigIntFieldRefInput<$PrismaModel>
+  gte?: bigint | number | Prisma.BigIntFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedBigIntFilter<$PrismaModel> | bigint | number
+}
+
+export type StringNullableFilter<$PrismaModel = never> = {
+  equals?: string | Prisma.StringFieldRefInput<$PrismaModel> | null
+  in?: string[] | Prisma.ListStringFieldRefInput<$PrismaModel> | null
+  notIn?: string[] | Prisma.ListStringFieldRefInput<$PrismaModel> | null
+  lt?: string | Prisma.StringFieldRefInput<$PrismaModel>
+  lte?: string | Prisma.StringFieldRefInput<$PrismaModel>
+  gt?: string | Prisma.StringFieldRefInput<$PrismaModel>
+  gte?: string | Prisma.StringFieldRefInput<$PrismaModel>
+  contains?: string | Prisma.StringFieldRefInput<$PrismaModel>
+  startsWith?: string | Prisma.StringFieldRefInput<$PrismaModel>
+  endsWith?: string | Prisma.StringFieldRefInput<$PrismaModel>
+  mode?: Prisma.QueryMode
+  not?: Prisma.NestedStringNullableFilter<$PrismaModel> | string | null
+}
+
+export type EnumStatusArquivoFilter<$PrismaModel = never> = {
+  equals?: $Enums.StatusArquivo | Prisma.EnumStatusArquivoFieldRefInput<$PrismaModel>
+  in?: $Enums.StatusArquivo[] | Prisma.ListEnumStatusArquivoFieldRefInput<$PrismaModel>
+  notIn?: $Enums.StatusArquivo[] | Prisma.ListEnumStatusArquivoFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumStatusArquivoFilter<$PrismaModel> | $Enums.StatusArquivo
+}
+
+export type EnumTipoArquivoWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.TipoArquivo | Prisma.EnumTipoArquivoFieldRefInput<$PrismaModel>
+  in?: $Enums.TipoArquivo[] | Prisma.ListEnumTipoArquivoFieldRefInput<$PrismaModel>
+  notIn?: $Enums.TipoArquivo[] | Prisma.ListEnumTipoArquivoFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumTipoArquivoWithAggregatesFilter<$PrismaModel> | $Enums.TipoArquivo
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumTipoArquivoFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumTipoArquivoFilter<$PrismaModel>
+}
+
+export type EnumFinalidadeArquivoWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.FinalidadeArquivo | Prisma.EnumFinalidadeArquivoFieldRefInput<$PrismaModel>
+  in?: $Enums.FinalidadeArquivo[] | Prisma.ListEnumFinalidadeArquivoFieldRefInput<$PrismaModel>
+  notIn?: $Enums.FinalidadeArquivo[] | Prisma.ListEnumFinalidadeArquivoFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumFinalidadeArquivoWithAggregatesFilter<$PrismaModel> | $Enums.FinalidadeArquivo
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumFinalidadeArquivoFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumFinalidadeArquivoFilter<$PrismaModel>
+}
+
+export type BigIntWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: bigint | number | Prisma.BigIntFieldRefInput<$PrismaModel>
+  in?: bigint[] | number[] | Prisma.ListBigIntFieldRefInput<$PrismaModel>
+  notIn?: bigint[] | number[] | Prisma.ListBigIntFieldRefInput<$PrismaModel>
+  lt?: bigint | number | Prisma.BigIntFieldRefInput<$PrismaModel>
+  lte?: bigint | number | Prisma.BigIntFieldRefInput<$PrismaModel>
+  gt?: bigint | number | Prisma.BigIntFieldRefInput<$PrismaModel>
+  gte?: bigint | number | Prisma.BigIntFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedBigIntWithAggregatesFilter<$PrismaModel> | bigint | number
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _avg?: Prisma.NestedFloatFilter<$PrismaModel>
+  _sum?: Prisma.NestedBigIntFilter<$PrismaModel>
+  _min?: Prisma.NestedBigIntFilter<$PrismaModel>
+  _max?: Prisma.NestedBigIntFilter<$PrismaModel>
+}
+
+export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: string | Prisma.StringFieldRefInput<$PrismaModel> | null
+  in?: string[] | Prisma.ListStringFieldRefInput<$PrismaModel> | null
+  notIn?: string[] | Prisma.ListStringFieldRefInput<$PrismaModel> | null
+  lt?: string | Prisma.StringFieldRefInput<$PrismaModel>
+  lte?: string | Prisma.StringFieldRefInput<$PrismaModel>
+  gt?: string | Prisma.StringFieldRefInput<$PrismaModel>
+  gte?: string | Prisma.StringFieldRefInput<$PrismaModel>
+  contains?: string | Prisma.StringFieldRefInput<$PrismaModel>
+  startsWith?: string | Prisma.StringFieldRefInput<$PrismaModel>
+  endsWith?: string | Prisma.StringFieldRefInput<$PrismaModel>
+  mode?: Prisma.QueryMode
+  not?: Prisma.NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
+  _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
+  _min?: Prisma.NestedStringNullableFilter<$PrismaModel>
+  _max?: Prisma.NestedStringNullableFilter<$PrismaModel>
+}
+
+export type EnumStatusArquivoWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.StatusArquivo | Prisma.EnumStatusArquivoFieldRefInput<$PrismaModel>
+  in?: $Enums.StatusArquivo[] | Prisma.ListEnumStatusArquivoFieldRefInput<$PrismaModel>
+  notIn?: $Enums.StatusArquivo[] | Prisma.ListEnumStatusArquivoFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumStatusArquivoWithAggregatesFilter<$PrismaModel> | $Enums.StatusArquivo
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumStatusArquivoFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumStatusArquivoFilter<$PrismaModel>
+}
+
 export type NestedUuidFilter<$PrismaModel = never> = {
   equals?: string | Prisma.StringFieldRefInput<$PrismaModel>
   in?: string[] | Prisma.ListStringFieldRefInput<$PrismaModel>
@@ -461,6 +572,101 @@ export type NestedEnumStatusCodigoValidacaoWithAggregatesFilter<$PrismaModel = n
   _count?: Prisma.NestedIntFilter<$PrismaModel>
   _min?: Prisma.NestedEnumStatusCodigoValidacaoFilter<$PrismaModel>
   _max?: Prisma.NestedEnumStatusCodigoValidacaoFilter<$PrismaModel>
+}
+
+export type NestedEnumTipoArquivoFilter<$PrismaModel = never> = {
+  equals?: $Enums.TipoArquivo | Prisma.EnumTipoArquivoFieldRefInput<$PrismaModel>
+  in?: $Enums.TipoArquivo[] | Prisma.ListEnumTipoArquivoFieldRefInput<$PrismaModel>
+  notIn?: $Enums.TipoArquivo[] | Prisma.ListEnumTipoArquivoFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumTipoArquivoFilter<$PrismaModel> | $Enums.TipoArquivo
+}
+
+export type NestedEnumFinalidadeArquivoFilter<$PrismaModel = never> = {
+  equals?: $Enums.FinalidadeArquivo | Prisma.EnumFinalidadeArquivoFieldRefInput<$PrismaModel>
+  in?: $Enums.FinalidadeArquivo[] | Prisma.ListEnumFinalidadeArquivoFieldRefInput<$PrismaModel>
+  notIn?: $Enums.FinalidadeArquivo[] | Prisma.ListEnumFinalidadeArquivoFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumFinalidadeArquivoFilter<$PrismaModel> | $Enums.FinalidadeArquivo
+}
+
+export type NestedBigIntFilter<$PrismaModel = never> = {
+  equals?: bigint | number | Prisma.BigIntFieldRefInput<$PrismaModel>
+  in?: bigint[] | number[] | Prisma.ListBigIntFieldRefInput<$PrismaModel>
+  notIn?: bigint[] | number[] | Prisma.ListBigIntFieldRefInput<$PrismaModel>
+  lt?: bigint | number | Prisma.BigIntFieldRefInput<$PrismaModel>
+  lte?: bigint | number | Prisma.BigIntFieldRefInput<$PrismaModel>
+  gt?: bigint | number | Prisma.BigIntFieldRefInput<$PrismaModel>
+  gte?: bigint | number | Prisma.BigIntFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedBigIntFilter<$PrismaModel> | bigint | number
+}
+
+export type NestedEnumStatusArquivoFilter<$PrismaModel = never> = {
+  equals?: $Enums.StatusArquivo | Prisma.EnumStatusArquivoFieldRefInput<$PrismaModel>
+  in?: $Enums.StatusArquivo[] | Prisma.ListEnumStatusArquivoFieldRefInput<$PrismaModel>
+  notIn?: $Enums.StatusArquivo[] | Prisma.ListEnumStatusArquivoFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumStatusArquivoFilter<$PrismaModel> | $Enums.StatusArquivo
+}
+
+export type NestedEnumTipoArquivoWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.TipoArquivo | Prisma.EnumTipoArquivoFieldRefInput<$PrismaModel>
+  in?: $Enums.TipoArquivo[] | Prisma.ListEnumTipoArquivoFieldRefInput<$PrismaModel>
+  notIn?: $Enums.TipoArquivo[] | Prisma.ListEnumTipoArquivoFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumTipoArquivoWithAggregatesFilter<$PrismaModel> | $Enums.TipoArquivo
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumTipoArquivoFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumTipoArquivoFilter<$PrismaModel>
+}
+
+export type NestedEnumFinalidadeArquivoWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.FinalidadeArquivo | Prisma.EnumFinalidadeArquivoFieldRefInput<$PrismaModel>
+  in?: $Enums.FinalidadeArquivo[] | Prisma.ListEnumFinalidadeArquivoFieldRefInput<$PrismaModel>
+  notIn?: $Enums.FinalidadeArquivo[] | Prisma.ListEnumFinalidadeArquivoFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumFinalidadeArquivoWithAggregatesFilter<$PrismaModel> | $Enums.FinalidadeArquivo
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumFinalidadeArquivoFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumFinalidadeArquivoFilter<$PrismaModel>
+}
+
+export type NestedBigIntWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: bigint | number | Prisma.BigIntFieldRefInput<$PrismaModel>
+  in?: bigint[] | number[] | Prisma.ListBigIntFieldRefInput<$PrismaModel>
+  notIn?: bigint[] | number[] | Prisma.ListBigIntFieldRefInput<$PrismaModel>
+  lt?: bigint | number | Prisma.BigIntFieldRefInput<$PrismaModel>
+  lte?: bigint | number | Prisma.BigIntFieldRefInput<$PrismaModel>
+  gt?: bigint | number | Prisma.BigIntFieldRefInput<$PrismaModel>
+  gte?: bigint | number | Prisma.BigIntFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedBigIntWithAggregatesFilter<$PrismaModel> | bigint | number
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _avg?: Prisma.NestedFloatFilter<$PrismaModel>
+  _sum?: Prisma.NestedBigIntFilter<$PrismaModel>
+  _min?: Prisma.NestedBigIntFilter<$PrismaModel>
+  _max?: Prisma.NestedBigIntFilter<$PrismaModel>
+}
+
+export type NestedStringNullableWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: string | Prisma.StringFieldRefInput<$PrismaModel> | null
+  in?: string[] | Prisma.ListStringFieldRefInput<$PrismaModel> | null
+  notIn?: string[] | Prisma.ListStringFieldRefInput<$PrismaModel> | null
+  lt?: string | Prisma.StringFieldRefInput<$PrismaModel>
+  lte?: string | Prisma.StringFieldRefInput<$PrismaModel>
+  gt?: string | Prisma.StringFieldRefInput<$PrismaModel>
+  gte?: string | Prisma.StringFieldRefInput<$PrismaModel>
+  contains?: string | Prisma.StringFieldRefInput<$PrismaModel>
+  startsWith?: string | Prisma.StringFieldRefInput<$PrismaModel>
+  endsWith?: string | Prisma.StringFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
+  _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
+  _min?: Prisma.NestedStringNullableFilter<$PrismaModel>
+  _max?: Prisma.NestedStringNullableFilter<$PrismaModel>
+}
+
+export type NestedEnumStatusArquivoWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.StatusArquivo | Prisma.EnumStatusArquivoFieldRefInput<$PrismaModel>
+  in?: $Enums.StatusArquivo[] | Prisma.ListEnumStatusArquivoFieldRefInput<$PrismaModel>
+  notIn?: $Enums.StatusArquivo[] | Prisma.ListEnumStatusArquivoFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumStatusArquivoWithAggregatesFilter<$PrismaModel> | $Enums.StatusArquivo
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumStatusArquivoFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumStatusArquivoFilter<$PrismaModel>
 }
 
 

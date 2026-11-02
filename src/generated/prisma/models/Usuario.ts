@@ -208,6 +208,7 @@ export type UsuarioWhereInput = {
   atualizadoEm?: Prisma.DateTimeFilter<"Usuario"> | Date | string
   perfil?: Prisma.XOR<Prisma.PerfilNullableScalarRelationFilter, Prisma.PerfilWhereInput> | null
   codigosValidacao?: Prisma.CodigoValidacaoListRelationFilter
+  arquivos?: Prisma.ArquivoListRelationFilter
 }
 
 export type UsuarioOrderByWithRelationInput = {
@@ -221,6 +222,7 @@ export type UsuarioOrderByWithRelationInput = {
   atualizadoEm?: Prisma.SortOrder
   perfil?: Prisma.PerfilOrderByWithRelationInput
   codigosValidacao?: Prisma.CodigoValidacaoOrderByRelationAggregateInput
+  arquivos?: Prisma.ArquivoOrderByRelationAggregateInput
 }
 
 export type UsuarioWhereUniqueInput = Prisma.AtLeast<{
@@ -237,6 +239,7 @@ export type UsuarioWhereUniqueInput = Prisma.AtLeast<{
   atualizadoEm?: Prisma.DateTimeFilter<"Usuario"> | Date | string
   perfil?: Prisma.XOR<Prisma.PerfilNullableScalarRelationFilter, Prisma.PerfilWhereInput> | null
   codigosValidacao?: Prisma.CodigoValidacaoListRelationFilter
+  arquivos?: Prisma.ArquivoListRelationFilter
 }, "id" | "email">
 
 export type UsuarioOrderByWithAggregationInput = {
@@ -278,6 +281,7 @@ export type UsuarioCreateInput = {
   atualizadoEm?: Date | string
   perfil?: Prisma.PerfilCreateNestedOneWithoutUsuarioInput
   codigosValidacao?: Prisma.CodigoValidacaoCreateNestedManyWithoutUsuarioInput
+  arquivos?: Prisma.ArquivoCreateNestedManyWithoutUsuarioInput
 }
 
 export type UsuarioUncheckedCreateInput = {
@@ -291,6 +295,7 @@ export type UsuarioUncheckedCreateInput = {
   atualizadoEm?: Date | string
   perfil?: Prisma.PerfilUncheckedCreateNestedOneWithoutUsuarioInput
   codigosValidacao?: Prisma.CodigoValidacaoUncheckedCreateNestedManyWithoutUsuarioInput
+  arquivos?: Prisma.ArquivoUncheckedCreateNestedManyWithoutUsuarioInput
 }
 
 export type UsuarioUpdateInput = {
@@ -304,6 +309,7 @@ export type UsuarioUpdateInput = {
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   perfil?: Prisma.PerfilUpdateOneWithoutUsuarioNestedInput
   codigosValidacao?: Prisma.CodigoValidacaoUpdateManyWithoutUsuarioNestedInput
+  arquivos?: Prisma.ArquivoUpdateManyWithoutUsuarioNestedInput
 }
 
 export type UsuarioUncheckedUpdateInput = {
@@ -317,6 +323,7 @@ export type UsuarioUncheckedUpdateInput = {
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   perfil?: Prisma.PerfilUncheckedUpdateOneWithoutUsuarioNestedInput
   codigosValidacao?: Prisma.CodigoValidacaoUncheckedUpdateManyWithoutUsuarioNestedInput
+  arquivos?: Prisma.ArquivoUncheckedUpdateManyWithoutUsuarioNestedInput
 }
 
 export type UsuarioCreateManyInput = {
@@ -434,6 +441,20 @@ export type UsuarioUpdateOneRequiredWithoutCodigosValidacaoNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UsuarioUpdateToOneWithWhereWithoutCodigosValidacaoInput, Prisma.UsuarioUpdateWithoutCodigosValidacaoInput>, Prisma.UsuarioUncheckedUpdateWithoutCodigosValidacaoInput>
 }
 
+export type UsuarioCreateNestedOneWithoutArquivosInput = {
+  create?: Prisma.XOR<Prisma.UsuarioCreateWithoutArquivosInput, Prisma.UsuarioUncheckedCreateWithoutArquivosInput>
+  connectOrCreate?: Prisma.UsuarioCreateOrConnectWithoutArquivosInput
+  connect?: Prisma.UsuarioWhereUniqueInput
+}
+
+export type UsuarioUpdateOneRequiredWithoutArquivosNestedInput = {
+  create?: Prisma.XOR<Prisma.UsuarioCreateWithoutArquivosInput, Prisma.UsuarioUncheckedCreateWithoutArquivosInput>
+  connectOrCreate?: Prisma.UsuarioCreateOrConnectWithoutArquivosInput
+  upsert?: Prisma.UsuarioUpsertWithoutArquivosInput
+  connect?: Prisma.UsuarioWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UsuarioUpdateToOneWithWhereWithoutArquivosInput, Prisma.UsuarioUpdateWithoutArquivosInput>, Prisma.UsuarioUncheckedUpdateWithoutArquivosInput>
+}
+
 export type UsuarioCreateWithoutPerfilInput = {
   id?: string
   nome: string
@@ -444,6 +465,7 @@ export type UsuarioCreateWithoutPerfilInput = {
   criadoEm?: Date | string
   atualizadoEm?: Date | string
   codigosValidacao?: Prisma.CodigoValidacaoCreateNestedManyWithoutUsuarioInput
+  arquivos?: Prisma.ArquivoCreateNestedManyWithoutUsuarioInput
 }
 
 export type UsuarioUncheckedCreateWithoutPerfilInput = {
@@ -456,6 +478,7 @@ export type UsuarioUncheckedCreateWithoutPerfilInput = {
   criadoEm?: Date | string
   atualizadoEm?: Date | string
   codigosValidacao?: Prisma.CodigoValidacaoUncheckedCreateNestedManyWithoutUsuarioInput
+  arquivos?: Prisma.ArquivoUncheckedCreateNestedManyWithoutUsuarioInput
 }
 
 export type UsuarioCreateOrConnectWithoutPerfilInput = {
@@ -484,6 +507,7 @@ export type UsuarioUpdateWithoutPerfilInput = {
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   codigosValidacao?: Prisma.CodigoValidacaoUpdateManyWithoutUsuarioNestedInput
+  arquivos?: Prisma.ArquivoUpdateManyWithoutUsuarioNestedInput
 }
 
 export type UsuarioUncheckedUpdateWithoutPerfilInput = {
@@ -496,6 +520,7 @@ export type UsuarioUncheckedUpdateWithoutPerfilInput = {
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   codigosValidacao?: Prisma.CodigoValidacaoUncheckedUpdateManyWithoutUsuarioNestedInput
+  arquivos?: Prisma.ArquivoUncheckedUpdateManyWithoutUsuarioNestedInput
 }
 
 export type UsuarioCreateWithoutCodigosValidacaoInput = {
@@ -508,6 +533,7 @@ export type UsuarioCreateWithoutCodigosValidacaoInput = {
   criadoEm?: Date | string
   atualizadoEm?: Date | string
   perfil?: Prisma.PerfilCreateNestedOneWithoutUsuarioInput
+  arquivos?: Prisma.ArquivoCreateNestedManyWithoutUsuarioInput
 }
 
 export type UsuarioUncheckedCreateWithoutCodigosValidacaoInput = {
@@ -520,6 +546,7 @@ export type UsuarioUncheckedCreateWithoutCodigosValidacaoInput = {
   criadoEm?: Date | string
   atualizadoEm?: Date | string
   perfil?: Prisma.PerfilUncheckedCreateNestedOneWithoutUsuarioInput
+  arquivos?: Prisma.ArquivoUncheckedCreateNestedManyWithoutUsuarioInput
 }
 
 export type UsuarioCreateOrConnectWithoutCodigosValidacaoInput = {
@@ -548,6 +575,7 @@ export type UsuarioUpdateWithoutCodigosValidacaoInput = {
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   perfil?: Prisma.PerfilUpdateOneWithoutUsuarioNestedInput
+  arquivos?: Prisma.ArquivoUpdateManyWithoutUsuarioNestedInput
 }
 
 export type UsuarioUncheckedUpdateWithoutCodigosValidacaoInput = {
@@ -560,6 +588,75 @@ export type UsuarioUncheckedUpdateWithoutCodigosValidacaoInput = {
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   perfil?: Prisma.PerfilUncheckedUpdateOneWithoutUsuarioNestedInput
+  arquivos?: Prisma.ArquivoUncheckedUpdateManyWithoutUsuarioNestedInput
+}
+
+export type UsuarioCreateWithoutArquivosInput = {
+  id?: string
+  nome: string
+  email: string
+  senha: string
+  tipo?: $Enums.TipoUsuario
+  status?: $Enums.StatusUsuario
+  criadoEm?: Date | string
+  atualizadoEm?: Date | string
+  perfil?: Prisma.PerfilCreateNestedOneWithoutUsuarioInput
+  codigosValidacao?: Prisma.CodigoValidacaoCreateNestedManyWithoutUsuarioInput
+}
+
+export type UsuarioUncheckedCreateWithoutArquivosInput = {
+  id?: string
+  nome: string
+  email: string
+  senha: string
+  tipo?: $Enums.TipoUsuario
+  status?: $Enums.StatusUsuario
+  criadoEm?: Date | string
+  atualizadoEm?: Date | string
+  perfil?: Prisma.PerfilUncheckedCreateNestedOneWithoutUsuarioInput
+  codigosValidacao?: Prisma.CodigoValidacaoUncheckedCreateNestedManyWithoutUsuarioInput
+}
+
+export type UsuarioCreateOrConnectWithoutArquivosInput = {
+  where: Prisma.UsuarioWhereUniqueInput
+  create: Prisma.XOR<Prisma.UsuarioCreateWithoutArquivosInput, Prisma.UsuarioUncheckedCreateWithoutArquivosInput>
+}
+
+export type UsuarioUpsertWithoutArquivosInput = {
+  update: Prisma.XOR<Prisma.UsuarioUpdateWithoutArquivosInput, Prisma.UsuarioUncheckedUpdateWithoutArquivosInput>
+  create: Prisma.XOR<Prisma.UsuarioCreateWithoutArquivosInput, Prisma.UsuarioUncheckedCreateWithoutArquivosInput>
+  where?: Prisma.UsuarioWhereInput
+}
+
+export type UsuarioUpdateToOneWithWhereWithoutArquivosInput = {
+  where?: Prisma.UsuarioWhereInput
+  data: Prisma.XOR<Prisma.UsuarioUpdateWithoutArquivosInput, Prisma.UsuarioUncheckedUpdateWithoutArquivosInput>
+}
+
+export type UsuarioUpdateWithoutArquivosInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  nome?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  senha?: Prisma.StringFieldUpdateOperationsInput | string
+  tipo?: Prisma.EnumTipoUsuarioFieldUpdateOperationsInput | $Enums.TipoUsuario
+  status?: Prisma.EnumStatusUsuarioFieldUpdateOperationsInput | $Enums.StatusUsuario
+  criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  perfil?: Prisma.PerfilUpdateOneWithoutUsuarioNestedInput
+  codigosValidacao?: Prisma.CodigoValidacaoUpdateManyWithoutUsuarioNestedInput
+}
+
+export type UsuarioUncheckedUpdateWithoutArquivosInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  nome?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  senha?: Prisma.StringFieldUpdateOperationsInput | string
+  tipo?: Prisma.EnumTipoUsuarioFieldUpdateOperationsInput | $Enums.TipoUsuario
+  status?: Prisma.EnumStatusUsuarioFieldUpdateOperationsInput | $Enums.StatusUsuario
+  criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  perfil?: Prisma.PerfilUncheckedUpdateOneWithoutUsuarioNestedInput
+  codigosValidacao?: Prisma.CodigoValidacaoUncheckedUpdateManyWithoutUsuarioNestedInput
 }
 
 
@@ -569,10 +666,12 @@ export type UsuarioUncheckedUpdateWithoutCodigosValidacaoInput = {
 
 export type UsuarioCountOutputType = {
   codigosValidacao: number
+  arquivos: number
 }
 
 export type UsuarioCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   codigosValidacao?: boolean | UsuarioCountOutputTypeCountCodigosValidacaoArgs
+  arquivos?: boolean | UsuarioCountOutputTypeCountArquivosArgs
 }
 
 /**
@@ -592,6 +691,13 @@ export type UsuarioCountOutputTypeCountCodigosValidacaoArgs<ExtArgs extends runt
   where?: Prisma.CodigoValidacaoWhereInput
 }
 
+/**
+ * UsuarioCountOutputType without action
+ */
+export type UsuarioCountOutputTypeCountArquivosArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ArquivoWhereInput
+}
+
 
 export type UsuarioSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -604,6 +710,7 @@ export type UsuarioSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   atualizadoEm?: boolean
   perfil?: boolean | Prisma.Usuario$perfilArgs<ExtArgs>
   codigosValidacao?: boolean | Prisma.Usuario$codigosValidacaoArgs<ExtArgs>
+  arquivos?: boolean | Prisma.Usuario$arquivosArgs<ExtArgs>
   _count?: boolean | Prisma.UsuarioCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["usuario"]>
 
@@ -644,6 +751,7 @@ export type UsuarioOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
 export type UsuarioInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   perfil?: boolean | Prisma.Usuario$perfilArgs<ExtArgs>
   codigosValidacao?: boolean | Prisma.Usuario$codigosValidacaoArgs<ExtArgs>
+  arquivos?: boolean | Prisma.Usuario$arquivosArgs<ExtArgs>
   _count?: boolean | Prisma.UsuarioCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UsuarioIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -654,6 +762,7 @@ export type $UsuarioPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
   objects: {
     perfil: Prisma.$PerfilPayload<ExtArgs> | null
     codigosValidacao: Prisma.$CodigoValidacaoPayload<ExtArgs>[]
+    arquivos: Prisma.$ArquivoPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1060,6 +1169,7 @@ export interface Prisma__UsuarioClient<T, Null = never, ExtArgs extends runtime.
   readonly [Symbol.toStringTag]: "PrismaPromise"
   perfil<T extends Prisma.Usuario$perfilArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Usuario$perfilArgs<ExtArgs>>): Prisma.Prisma__PerfilClient<runtime.Types.Result.GetResult<Prisma.$PerfilPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   codigosValidacao<T extends Prisma.Usuario$codigosValidacaoArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Usuario$codigosValidacaoArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CodigoValidacaoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  arquivos<T extends Prisma.Usuario$arquivosArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Usuario$arquivosArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ArquivoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1530,6 +1640,30 @@ export type Usuario$codigosValidacaoArgs<ExtArgs extends runtime.Types.Extension
   take?: number
   skip?: number
   distinct?: Prisma.CodigoValidacaoScalarFieldEnum | Prisma.CodigoValidacaoScalarFieldEnum[]
+}
+
+/**
+ * Usuario.arquivos
+ */
+export type Usuario$arquivosArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Arquivo
+   */
+  select?: Prisma.ArquivoSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Arquivo
+   */
+  omit?: Prisma.ArquivoOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ArquivoInclude<ExtArgs> | null
+  where?: Prisma.ArquivoWhereInput
+  orderBy?: Prisma.ArquivoOrderByWithRelationInput | Prisma.ArquivoOrderByWithRelationInput[]
+  cursor?: Prisma.ArquivoWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ArquivoScalarFieldEnum | Prisma.ArquivoScalarFieldEnum[]
 }
 
 /**

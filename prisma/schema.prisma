@@ -1,4 +1,3 @@
-
 generator client {
   provider = "prisma-client"
   output   = "../src/generated/prisma"
@@ -26,8 +25,8 @@ enum StatusUsuario {
 }
 
 enum TipoPerfil {
-  PUBLICO  @map("publico")
-  PRIVADO  @map("privado")
+  PUBLICO @map("publico")
+  PRIVADO @map("privado")
 
   @@map("tipo_perfil")
 }
@@ -40,6 +39,36 @@ enum StatusCodigoValidacao {
   @@map("status_codigo_validacao")
 }
 
+enum TipoArquivo {
+  IMAGEM
+  VIDEO
+  AUDIO
+  PDF
+  DOCUMENTO
+  OUTRO
+
+  @@map("tipo_arquivo")
+}
+
+enum FinalidadeArquivo {
+  FOTO_PERFIL
+  BACKGROUND_PERFIL
+  CAPA_CURSO
+  MATERIAL_CURSO
+  MATERIAL_AULA
+  OUTRO
+
+  @@map("finalidade_arquivo")
+}
+
+enum StatusArquivo {
+  PENDENTE
+  CONCLUIDO
+  FALHA
+
+  @@map("status_arquivo")
+}
+
 model Usuario {
   id           String        @id @default(uuid()) @db.Uuid
   nome         String        @db.VarChar(120)
@@ -50,40 +79,77 @@ model Usuario {
   criadoEm     DateTime      @default(now()) @map("criado_em") @db.Timestamptz(3)
   atualizadoEm DateTime      @default(now()) @map("atualizado_em") @db.Timestamptz(3)
 
-  perfil            Perfil?
-  codigosValidacao  CodigoValidacao[]
+  perfil           Perfil?
+  codigosValidacao CodigoValidacao[]
+
+  arquivos Arquivo[]
 
   @@map("usuario")
 }
 
 model Perfil {
-  idUsuario       String     @id @map("id_usuario") @db.Uuid
-  tipoPerfil      TipoPerfil @default(PRIVADO) @map("tipo_perfil")
-  planoContaId    String?    @map("plano_conta") @db.Uuid
-  xp              Int        @default(0)
-  moedas          Int        @default(0)
-  nivel           Int        @default(0)
-  cor             String     @default("") @db.VarChar(30)
-  decoracaoId     String?    @map("decoracao") @db.Uuid
-  urlFotoPerfil   String     @default("") @map("url_foto_perfil") @db.Text
-  urlFotoBackground String   @default("") @map("url_foto_background") @db.Text
+  idUsuario         String     @id @map("id_usuario") @db.Uuid
+  tipoPerfil        TipoPerfil @default(PRIVADO) @map("tipo_perfil")
+  planoContaId      String?    @map("plano_conta") @db.Uuid
+  xp                Int        @default(0)
+  moedas            Int        @default(0)
+  nivel             Int        @default(0)
+  cor               String     @default("") @db.VarChar(30)
+  decoracaoId       String?    @map("decoracao") @db.Uuid
+  urlFotoPerfil     String     @default("") @map("url_foto_perfil") @db.Text
+  urlFotoBackground String     @default("") @map("url_foto_background") @db.Text
 
-  usuario         Usuario    @relation(fields: [idUsuario], references: [id], onDelete: Cascade)
+  usuario Usuario @relation(fields: [idUsuario], references: [id], onDelete: Cascade)
 
   @@map("perfil")
 }
 
 model CodigoValidacao {
-  id          String                 @id @default(uuid()) @db.Uuid
-  idUsuario   String                 @map("id_usuario") @db.Uuid
-  codigo      String                 @db.VarChar(64)
-  dataCriacao DateTime               @default(now()) @map("data_criacao") @db.Timestamptz(3)
-  expiraEm    DateTime               @default(dbgenerated("(CURRENT_TIMESTAMP + INTERVAL '10 minutes')")) @map("expira_em") @db.Timestamptz(3)
-  status      StatusCodigoValidacao  @default(ATIVO)
+  id          String                @id @default(uuid()) @db.Uuid
+  idUsuario   String                @map("id_usuario") @db.Uuid
+  codigo      String                @db.VarChar(64)
+  dataCriacao DateTime              @default(now()) @map("data_criacao") @db.Timestamptz(3)
+  expiraEm    DateTime              @default(dbgenerated("(CURRENT_TIMESTAMP + INTERVAL '10 minutes')")) @map("expira_em") @db.Timestamptz(3)
+  status      StatusCodigoValidacao @default(ATIVO)
 
-  usuario     Usuario                @relation(fields: [idUsuario], references: [id], onDelete: Cascade)
+  usuario Usuario @relation(fields: [idUsuario], references: [id], onDelete: Cascade)
 
   @@index([idUsuario, status])
   @@index([expiraEm, status])
   @@map("codigo_validacao")
+}
+
+model Arquivo {
+  id String @id @default(uuid()) @db.Uuid
+
+  idOrigem String @map("id_origem") @db.Uuid
+
+  tipo       TipoArquivo
+  finalidade FinalidadeArquivo
+
+  nomeOriginal String @map("nome_original") @db.VarChar(255)
+
+  chaveObjeto String @unique @map("chave_objeto") @db.VarChar(512)
+
+  bucket String @db.VarChar(255)
+
+  contentType String @map("content_type") @db.VarChar(150)
+
+  tamanhoBytes BigInt @map("tamanho_bytes")
+
+  etag String? @db.VarChar(255)
+
+  status StatusArquivo @default(PENDENTE)
+
+  criadoEm DateTime @default(now()) @map("criado_em") @db.Timestamptz(3)
+
+  atualizadoEm DateTime @updatedAt @map("atualizado_em") @db.Timestamptz(3)
+
+  usuario Usuario @relation(fields: [idOrigem], references: [id], onDelete: Restrict)
+
+  @@index([idOrigem])
+  @@index([finalidade])
+  @@index([tipo])
+  @@index([status])
+  @@map("arquivo")
 }
