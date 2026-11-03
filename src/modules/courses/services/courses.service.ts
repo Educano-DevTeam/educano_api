@@ -145,6 +145,24 @@ function selecionarDadosCurso() {
     } as const;
 }
 
+function serializarCurso<
+    T extends {
+        arquivoCapa: {
+            tamanhoBytes: bigint;
+        } | null;
+    },
+>(curso: T) {
+    return {
+        ...curso,
+        arquivoCapa: curso.arquivoCapa
+            ? {
+                ...curso.arquivoCapa,
+                tamanhoBytes: curso.arquivoCapa.tamanhoBytes.toString(),
+            }
+            : null,
+    };
+}
+
 // -----------------------------------------------------
 // CRIAR CURSO
 // -----------------------------------------------------
@@ -160,7 +178,7 @@ export async function criarCurso(
     const status = obterStatusInicialCurso(dados, idCapa);
 
     try {
-        return await prisma.$transaction(async (tx) => {
+        const curso = await prisma.$transaction(async (tx) => {
             const usuario = await tx.usuario.findUnique({
                 where: { id: idUsuario },
                 select: {
@@ -208,6 +226,8 @@ export async function criarCurso(
 
             return curso;
         });
+
+        return serializarCurso(curso);
     } catch (error) {
         // Se o curso não puder ser criado, remove a imagem enviada.
         if (idCapa) {
@@ -235,6 +255,7 @@ export async function criarCurso(
 
         throw error;
     }
+    
 }
 
 // -----------------------------------------------------
@@ -271,7 +292,7 @@ export async function consultarCurso(
         );
     }
 
-    return curso;
+    return serializarCurso(curso);
 }
 
 // -----------------------------------------------------
@@ -518,7 +539,7 @@ export async function atualizarCurso(
       }
     }
 
-    return cursoAtualizado;
+    return serializarCurso(cursoAtualizado);
   } catch (error) {
     // Se a atualização falhou, a nova imagem não deve ficar órfã.
     if (idCapaNova) {
