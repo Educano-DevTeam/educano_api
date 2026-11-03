@@ -281,6 +281,8 @@ export type ArquivoWhereInput = {
   criadoEm?: Prisma.DateTimeFilter<"Arquivo"> | Date | string
   atualizadoEm?: Prisma.DateTimeFilter<"Arquivo"> | Date | string
   usuario?: Prisma.XOR<Prisma.UsuarioScalarRelationFilter, Prisma.UsuarioWhereInput>
+  aula?: Prisma.XOR<Prisma.AulaNullableScalarRelationFilter, Prisma.AulaWhereInput> | null
+  cursoCapa?: Prisma.XOR<Prisma.CursoNullableScalarRelationFilter, Prisma.CursoWhereInput> | null
 }
 
 export type ArquivoOrderByWithRelationInput = {
@@ -298,6 +300,8 @@ export type ArquivoOrderByWithRelationInput = {
   criadoEm?: Prisma.SortOrder
   atualizadoEm?: Prisma.SortOrder
   usuario?: Prisma.UsuarioOrderByWithRelationInput
+  aula?: Prisma.AulaOrderByWithRelationInput
+  cursoCapa?: Prisma.CursoOrderByWithRelationInput
 }
 
 export type ArquivoWhereUniqueInput = Prisma.AtLeast<{
@@ -318,6 +322,8 @@ export type ArquivoWhereUniqueInput = Prisma.AtLeast<{
   criadoEm?: Prisma.DateTimeFilter<"Arquivo"> | Date | string
   atualizadoEm?: Prisma.DateTimeFilter<"Arquivo"> | Date | string
   usuario?: Prisma.XOR<Prisma.UsuarioScalarRelationFilter, Prisma.UsuarioWhereInput>
+  aula?: Prisma.XOR<Prisma.AulaNullableScalarRelationFilter, Prisma.AulaWhereInput> | null
+  cursoCapa?: Prisma.XOR<Prisma.CursoNullableScalarRelationFilter, Prisma.CursoWhereInput> | null
 }, "id" | "chaveObjeto">
 
 export type ArquivoOrderByWithAggregationInput = {
@@ -374,6 +380,8 @@ export type ArquivoCreateInput = {
   criadoEm?: Date | string
   atualizadoEm?: Date | string
   usuario: Prisma.UsuarioCreateNestedOneWithoutArquivosInput
+  aula?: Prisma.AulaCreateNestedOneWithoutArquivoInput
+  cursoCapa?: Prisma.CursoCreateNestedOneWithoutCapaInput
 }
 
 export type ArquivoUncheckedCreateInput = {
@@ -390,6 +398,8 @@ export type ArquivoUncheckedCreateInput = {
   status?: $Enums.StatusArquivo
   criadoEm?: Date | string
   atualizadoEm?: Date | string
+  aula?: Prisma.AulaUncheckedCreateNestedOneWithoutArquivoInput
+  cursoCapa?: Prisma.CursoUncheckedCreateNestedOneWithoutCapaInput
 }
 
 export type ArquivoUpdateInput = {
@@ -406,6 +416,8 @@ export type ArquivoUpdateInput = {
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   usuario?: Prisma.UsuarioUpdateOneRequiredWithoutArquivosNestedInput
+  aula?: Prisma.AulaUpdateOneWithoutArquivoNestedInput
+  cursoCapa?: Prisma.CursoUpdateOneWithoutCapaNestedInput
 }
 
 export type ArquivoUncheckedUpdateInput = {
@@ -422,6 +434,8 @@ export type ArquivoUncheckedUpdateInput = {
   status?: Prisma.EnumStatusArquivoFieldUpdateOperationsInput | $Enums.StatusArquivo
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  aula?: Prisma.AulaUncheckedUpdateOneWithoutArquivoNestedInput
+  cursoCapa?: Prisma.CursoUncheckedUpdateOneWithoutCapaNestedInput
 }
 
 export type ArquivoCreateManyInput = {
@@ -537,6 +551,11 @@ export type ArquivoSumOrderByAggregateInput = {
   tamanhoBytes?: Prisma.SortOrder
 }
 
+export type ArquivoNullableScalarRelationFilter = {
+  is?: Prisma.ArquivoWhereInput | null
+  isNot?: Prisma.ArquivoWhereInput | null
+}
+
 export type ArquivoCreateNestedManyWithoutUsuarioInput = {
   create?: Prisma.XOR<Prisma.ArquivoCreateWithoutUsuarioInput, Prisma.ArquivoUncheckedCreateWithoutUsuarioInput> | Prisma.ArquivoCreateWithoutUsuarioInput[] | Prisma.ArquivoUncheckedCreateWithoutUsuarioInput[]
   connectOrCreate?: Prisma.ArquivoCreateOrConnectWithoutUsuarioInput | Prisma.ArquivoCreateOrConnectWithoutUsuarioInput[]
@@ -599,6 +618,38 @@ export type EnumStatusArquivoFieldUpdateOperationsInput = {
   set?: $Enums.StatusArquivo
 }
 
+export type ArquivoCreateNestedOneWithoutCursoCapaInput = {
+  create?: Prisma.XOR<Prisma.ArquivoCreateWithoutCursoCapaInput, Prisma.ArquivoUncheckedCreateWithoutCursoCapaInput>
+  connectOrCreate?: Prisma.ArquivoCreateOrConnectWithoutCursoCapaInput
+  connect?: Prisma.ArquivoWhereUniqueInput
+}
+
+export type ArquivoUpdateOneWithoutCursoCapaNestedInput = {
+  create?: Prisma.XOR<Prisma.ArquivoCreateWithoutCursoCapaInput, Prisma.ArquivoUncheckedCreateWithoutCursoCapaInput>
+  connectOrCreate?: Prisma.ArquivoCreateOrConnectWithoutCursoCapaInput
+  upsert?: Prisma.ArquivoUpsertWithoutCursoCapaInput
+  disconnect?: Prisma.ArquivoWhereInput | boolean
+  delete?: Prisma.ArquivoWhereInput | boolean
+  connect?: Prisma.ArquivoWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ArquivoUpdateToOneWithWhereWithoutCursoCapaInput, Prisma.ArquivoUpdateWithoutCursoCapaInput>, Prisma.ArquivoUncheckedUpdateWithoutCursoCapaInput>
+}
+
+export type ArquivoCreateNestedOneWithoutAulaInput = {
+  create?: Prisma.XOR<Prisma.ArquivoCreateWithoutAulaInput, Prisma.ArquivoUncheckedCreateWithoutAulaInput>
+  connectOrCreate?: Prisma.ArquivoCreateOrConnectWithoutAulaInput
+  connect?: Prisma.ArquivoWhereUniqueInput
+}
+
+export type ArquivoUpdateOneWithoutAulaNestedInput = {
+  create?: Prisma.XOR<Prisma.ArquivoCreateWithoutAulaInput, Prisma.ArquivoUncheckedCreateWithoutAulaInput>
+  connectOrCreate?: Prisma.ArquivoCreateOrConnectWithoutAulaInput
+  upsert?: Prisma.ArquivoUpsertWithoutAulaInput
+  disconnect?: Prisma.ArquivoWhereInput | boolean
+  delete?: Prisma.ArquivoWhereInput | boolean
+  connect?: Prisma.ArquivoWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ArquivoUpdateToOneWithWhereWithoutAulaInput, Prisma.ArquivoUpdateWithoutAulaInput>, Prisma.ArquivoUncheckedUpdateWithoutAulaInput>
+}
+
 export type ArquivoCreateWithoutUsuarioInput = {
   id?: string
   tipo: $Enums.TipoArquivo
@@ -612,6 +663,8 @@ export type ArquivoCreateWithoutUsuarioInput = {
   status?: $Enums.StatusArquivo
   criadoEm?: Date | string
   atualizadoEm?: Date | string
+  aula?: Prisma.AulaCreateNestedOneWithoutArquivoInput
+  cursoCapa?: Prisma.CursoCreateNestedOneWithoutCapaInput
 }
 
 export type ArquivoUncheckedCreateWithoutUsuarioInput = {
@@ -627,6 +680,8 @@ export type ArquivoUncheckedCreateWithoutUsuarioInput = {
   status?: $Enums.StatusArquivo
   criadoEm?: Date | string
   atualizadoEm?: Date | string
+  aula?: Prisma.AulaUncheckedCreateNestedOneWithoutArquivoInput
+  cursoCapa?: Prisma.CursoUncheckedCreateNestedOneWithoutCapaInput
 }
 
 export type ArquivoCreateOrConnectWithoutUsuarioInput = {
@@ -674,6 +729,174 @@ export type ArquivoScalarWhereInput = {
   atualizadoEm?: Prisma.DateTimeFilter<"Arquivo"> | Date | string
 }
 
+export type ArquivoCreateWithoutCursoCapaInput = {
+  id?: string
+  tipo: $Enums.TipoArquivo
+  finalidade: $Enums.FinalidadeArquivo
+  nomeOriginal: string
+  chaveObjeto: string
+  bucket: string
+  contentType: string
+  tamanhoBytes: bigint | number
+  etag?: string | null
+  status?: $Enums.StatusArquivo
+  criadoEm?: Date | string
+  atualizadoEm?: Date | string
+  usuario: Prisma.UsuarioCreateNestedOneWithoutArquivosInput
+  aula?: Prisma.AulaCreateNestedOneWithoutArquivoInput
+}
+
+export type ArquivoUncheckedCreateWithoutCursoCapaInput = {
+  id?: string
+  idOrigem: string
+  tipo: $Enums.TipoArquivo
+  finalidade: $Enums.FinalidadeArquivo
+  nomeOriginal: string
+  chaveObjeto: string
+  bucket: string
+  contentType: string
+  tamanhoBytes: bigint | number
+  etag?: string | null
+  status?: $Enums.StatusArquivo
+  criadoEm?: Date | string
+  atualizadoEm?: Date | string
+  aula?: Prisma.AulaUncheckedCreateNestedOneWithoutArquivoInput
+}
+
+export type ArquivoCreateOrConnectWithoutCursoCapaInput = {
+  where: Prisma.ArquivoWhereUniqueInput
+  create: Prisma.XOR<Prisma.ArquivoCreateWithoutCursoCapaInput, Prisma.ArquivoUncheckedCreateWithoutCursoCapaInput>
+}
+
+export type ArquivoUpsertWithoutCursoCapaInput = {
+  update: Prisma.XOR<Prisma.ArquivoUpdateWithoutCursoCapaInput, Prisma.ArquivoUncheckedUpdateWithoutCursoCapaInput>
+  create: Prisma.XOR<Prisma.ArquivoCreateWithoutCursoCapaInput, Prisma.ArquivoUncheckedCreateWithoutCursoCapaInput>
+  where?: Prisma.ArquivoWhereInput
+}
+
+export type ArquivoUpdateToOneWithWhereWithoutCursoCapaInput = {
+  where?: Prisma.ArquivoWhereInput
+  data: Prisma.XOR<Prisma.ArquivoUpdateWithoutCursoCapaInput, Prisma.ArquivoUncheckedUpdateWithoutCursoCapaInput>
+}
+
+export type ArquivoUpdateWithoutCursoCapaInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  tipo?: Prisma.EnumTipoArquivoFieldUpdateOperationsInput | $Enums.TipoArquivo
+  finalidade?: Prisma.EnumFinalidadeArquivoFieldUpdateOperationsInput | $Enums.FinalidadeArquivo
+  nomeOriginal?: Prisma.StringFieldUpdateOperationsInput | string
+  chaveObjeto?: Prisma.StringFieldUpdateOperationsInput | string
+  bucket?: Prisma.StringFieldUpdateOperationsInput | string
+  contentType?: Prisma.StringFieldUpdateOperationsInput | string
+  tamanhoBytes?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
+  etag?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumStatusArquivoFieldUpdateOperationsInput | $Enums.StatusArquivo
+  criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  usuario?: Prisma.UsuarioUpdateOneRequiredWithoutArquivosNestedInput
+  aula?: Prisma.AulaUpdateOneWithoutArquivoNestedInput
+}
+
+export type ArquivoUncheckedUpdateWithoutCursoCapaInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  idOrigem?: Prisma.StringFieldUpdateOperationsInput | string
+  tipo?: Prisma.EnumTipoArquivoFieldUpdateOperationsInput | $Enums.TipoArquivo
+  finalidade?: Prisma.EnumFinalidadeArquivoFieldUpdateOperationsInput | $Enums.FinalidadeArquivo
+  nomeOriginal?: Prisma.StringFieldUpdateOperationsInput | string
+  chaveObjeto?: Prisma.StringFieldUpdateOperationsInput | string
+  bucket?: Prisma.StringFieldUpdateOperationsInput | string
+  contentType?: Prisma.StringFieldUpdateOperationsInput | string
+  tamanhoBytes?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
+  etag?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumStatusArquivoFieldUpdateOperationsInput | $Enums.StatusArquivo
+  criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  aula?: Prisma.AulaUncheckedUpdateOneWithoutArquivoNestedInput
+}
+
+export type ArquivoCreateWithoutAulaInput = {
+  id?: string
+  tipo: $Enums.TipoArquivo
+  finalidade: $Enums.FinalidadeArquivo
+  nomeOriginal: string
+  chaveObjeto: string
+  bucket: string
+  contentType: string
+  tamanhoBytes: bigint | number
+  etag?: string | null
+  status?: $Enums.StatusArquivo
+  criadoEm?: Date | string
+  atualizadoEm?: Date | string
+  usuario: Prisma.UsuarioCreateNestedOneWithoutArquivosInput
+  cursoCapa?: Prisma.CursoCreateNestedOneWithoutCapaInput
+}
+
+export type ArquivoUncheckedCreateWithoutAulaInput = {
+  id?: string
+  idOrigem: string
+  tipo: $Enums.TipoArquivo
+  finalidade: $Enums.FinalidadeArquivo
+  nomeOriginal: string
+  chaveObjeto: string
+  bucket: string
+  contentType: string
+  tamanhoBytes: bigint | number
+  etag?: string | null
+  status?: $Enums.StatusArquivo
+  criadoEm?: Date | string
+  atualizadoEm?: Date | string
+  cursoCapa?: Prisma.CursoUncheckedCreateNestedOneWithoutCapaInput
+}
+
+export type ArquivoCreateOrConnectWithoutAulaInput = {
+  where: Prisma.ArquivoWhereUniqueInput
+  create: Prisma.XOR<Prisma.ArquivoCreateWithoutAulaInput, Prisma.ArquivoUncheckedCreateWithoutAulaInput>
+}
+
+export type ArquivoUpsertWithoutAulaInput = {
+  update: Prisma.XOR<Prisma.ArquivoUpdateWithoutAulaInput, Prisma.ArquivoUncheckedUpdateWithoutAulaInput>
+  create: Prisma.XOR<Prisma.ArquivoCreateWithoutAulaInput, Prisma.ArquivoUncheckedCreateWithoutAulaInput>
+  where?: Prisma.ArquivoWhereInput
+}
+
+export type ArquivoUpdateToOneWithWhereWithoutAulaInput = {
+  where?: Prisma.ArquivoWhereInput
+  data: Prisma.XOR<Prisma.ArquivoUpdateWithoutAulaInput, Prisma.ArquivoUncheckedUpdateWithoutAulaInput>
+}
+
+export type ArquivoUpdateWithoutAulaInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  tipo?: Prisma.EnumTipoArquivoFieldUpdateOperationsInput | $Enums.TipoArquivo
+  finalidade?: Prisma.EnumFinalidadeArquivoFieldUpdateOperationsInput | $Enums.FinalidadeArquivo
+  nomeOriginal?: Prisma.StringFieldUpdateOperationsInput | string
+  chaveObjeto?: Prisma.StringFieldUpdateOperationsInput | string
+  bucket?: Prisma.StringFieldUpdateOperationsInput | string
+  contentType?: Prisma.StringFieldUpdateOperationsInput | string
+  tamanhoBytes?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
+  etag?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumStatusArquivoFieldUpdateOperationsInput | $Enums.StatusArquivo
+  criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  usuario?: Prisma.UsuarioUpdateOneRequiredWithoutArquivosNestedInput
+  cursoCapa?: Prisma.CursoUpdateOneWithoutCapaNestedInput
+}
+
+export type ArquivoUncheckedUpdateWithoutAulaInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  idOrigem?: Prisma.StringFieldUpdateOperationsInput | string
+  tipo?: Prisma.EnumTipoArquivoFieldUpdateOperationsInput | $Enums.TipoArquivo
+  finalidade?: Prisma.EnumFinalidadeArquivoFieldUpdateOperationsInput | $Enums.FinalidadeArquivo
+  nomeOriginal?: Prisma.StringFieldUpdateOperationsInput | string
+  chaveObjeto?: Prisma.StringFieldUpdateOperationsInput | string
+  bucket?: Prisma.StringFieldUpdateOperationsInput | string
+  contentType?: Prisma.StringFieldUpdateOperationsInput | string
+  tamanhoBytes?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
+  etag?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumStatusArquivoFieldUpdateOperationsInput | $Enums.StatusArquivo
+  criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  cursoCapa?: Prisma.CursoUncheckedUpdateOneWithoutCapaNestedInput
+}
+
 export type ArquivoCreateManyUsuarioInput = {
   id?: string
   tipo: $Enums.TipoArquivo
@@ -702,6 +925,8 @@ export type ArquivoUpdateWithoutUsuarioInput = {
   status?: Prisma.EnumStatusArquivoFieldUpdateOperationsInput | $Enums.StatusArquivo
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  aula?: Prisma.AulaUpdateOneWithoutArquivoNestedInput
+  cursoCapa?: Prisma.CursoUpdateOneWithoutCapaNestedInput
 }
 
 export type ArquivoUncheckedUpdateWithoutUsuarioInput = {
@@ -717,6 +942,8 @@ export type ArquivoUncheckedUpdateWithoutUsuarioInput = {
   status?: Prisma.EnumStatusArquivoFieldUpdateOperationsInput | $Enums.StatusArquivo
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  aula?: Prisma.AulaUncheckedUpdateOneWithoutArquivoNestedInput
+  cursoCapa?: Prisma.CursoUncheckedUpdateOneWithoutCapaNestedInput
 }
 
 export type ArquivoUncheckedUpdateManyWithoutUsuarioInput = {
@@ -751,6 +978,8 @@ export type ArquivoSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   criadoEm?: boolean
   atualizadoEm?: boolean
   usuario?: boolean | Prisma.UsuarioDefaultArgs<ExtArgs>
+  aula?: boolean | Prisma.Arquivo$aulaArgs<ExtArgs>
+  cursoCapa?: boolean | Prisma.Arquivo$cursoCapaArgs<ExtArgs>
 }, ExtArgs["result"]["arquivo"]>
 
 export type ArquivoSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -806,6 +1035,8 @@ export type ArquivoSelectScalar = {
 export type ArquivoOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "idOrigem" | "tipo" | "finalidade" | "nomeOriginal" | "chaveObjeto" | "bucket" | "contentType" | "tamanhoBytes" | "etag" | "status" | "criadoEm" | "atualizadoEm", ExtArgs["result"]["arquivo"]>
 export type ArquivoInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   usuario?: boolean | Prisma.UsuarioDefaultArgs<ExtArgs>
+  aula?: boolean | Prisma.Arquivo$aulaArgs<ExtArgs>
+  cursoCapa?: boolean | Prisma.Arquivo$cursoCapaArgs<ExtArgs>
 }
 export type ArquivoIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   usuario?: boolean | Prisma.UsuarioDefaultArgs<ExtArgs>
@@ -818,6 +1049,8 @@ export type $ArquivoPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
   name: "Arquivo"
   objects: {
     usuario: Prisma.$UsuarioPayload<ExtArgs>
+    aula: Prisma.$AulaPayload<ExtArgs> | null
+    cursoCapa: Prisma.$CursoPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1228,6 +1461,8 @@ readonly fields: ArquivoFieldRefs;
 export interface Prisma__ArquivoClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   usuario<T extends Prisma.UsuarioDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UsuarioDefaultArgs<ExtArgs>>): Prisma.Prisma__UsuarioClient<runtime.Types.Result.GetResult<Prisma.$UsuarioPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  aula<T extends Prisma.Arquivo$aulaArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Arquivo$aulaArgs<ExtArgs>>): Prisma.Prisma__AulaClient<runtime.Types.Result.GetResult<Prisma.$AulaPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  cursoCapa<T extends Prisma.Arquivo$cursoCapaArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Arquivo$cursoCapaArgs<ExtArgs>>): Prisma.Prisma__CursoClient<runtime.Types.Result.GetResult<Prisma.$CursoPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1668,6 +1903,44 @@ export type ArquivoDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Inter
    * Limit how many Arquivos to delete.
    */
   limit?: number
+}
+
+/**
+ * Arquivo.aula
+ */
+export type Arquivo$aulaArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Aula
+   */
+  select?: Prisma.AulaSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Aula
+   */
+  omit?: Prisma.AulaOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.AulaInclude<ExtArgs> | null
+  where?: Prisma.AulaWhereInput
+}
+
+/**
+ * Arquivo.cursoCapa
+ */
+export type Arquivo$cursoCapaArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Curso
+   */
+  select?: Prisma.CursoSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Curso
+   */
+  omit?: Prisma.CursoOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CursoInclude<ExtArgs> | null
+  where?: Prisma.CursoWhereInput
 }
 
 /**

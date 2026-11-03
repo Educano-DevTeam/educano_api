@@ -37,3 +37,48 @@ export type CodigoValidacao = Prisma.CodigoValidacaoModel
  * 
  */
 export type Arquivo = Prisma.ArquivoModel
+/**
+ * Model Curso
+ * 
+ */
+export type Curso = Prisma.CursoModel
+/**
+ * Model Sessao
+ * 
+ */
+export type Sessao = Prisma.SessaoModel
+/**
+ * Model Modulo
+ * 
+ */
+export type Modulo = Prisma.ModuloModel
+/**
+ * Model Aula
+ * 
+ */
+export type Aula = Prisma.AulaModel
+/**
+ * Model Teste
+ * 
+ */
+export type Teste = Prisma.TesteModel
+/**
+ * Model Questao
+ * 
+ */
+export type Questao = Prisma.QuestaoModel
+/**
+ * Model Alternativa
+ * 
+ */
+export type Alternativa = Prisma.AlternativaModel
+/**
+ * Model TesteQuestao
+ * 
+ */
+export type TesteQuestao = Prisma.TesteQuestaoModel
+/**
+ * Model Inscricao
+ * 
+ */
+export type Inscricao = Prisma.InscricaoModel

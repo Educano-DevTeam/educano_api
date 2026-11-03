@@ -54,7 +54,16 @@ export const ModelName = {
   Usuario: 'Usuario',
   Perfil: 'Perfil',
   CodigoValidacao: 'CodigoValidacao',
-  Arquivo: 'Arquivo'
+  Arquivo: 'Arquivo',
+  Curso: 'Curso',
+  Sessao: 'Sessao',
+  Modulo: 'Modulo',
+  Aula: 'Aula',
+  Teste: 'Teste',
+  Questao: 'Questao',
+  Alternativa: 'Alternativa',
+  TesteQuestao: 'TesteQuestao',
+  Inscricao: 'Inscricao'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -132,6 +141,131 @@ export const ArquivoScalarFieldEnum = {
 } as const
 
 export type ArquivoScalarFieldEnum = (typeof ArquivoScalarFieldEnum)[keyof typeof ArquivoScalarFieldEnum]
+
+
+export const CursoScalarFieldEnum = {
+  id: 'id',
+  nome: 'nome',
+  categoria: 'categoria',
+  status: 'status',
+  vagas: 'vagas',
+  preco: 'preco',
+  descricao: 'descricao',
+  cor: 'cor',
+  idCapa: 'idCapa',
+  idResponsavel: 'idResponsavel',
+  idAdminAutorizador: 'idAdminAutorizador',
+  criadoEm: 'criadoEm',
+  atualizadoEm: 'atualizadoEm',
+  autorizadoEm: 'autorizadoEm'
+} as const
+
+export type CursoScalarFieldEnum = (typeof CursoScalarFieldEnum)[keyof typeof CursoScalarFieldEnum]
+
+
+export const SessaoScalarFieldEnum = {
+  id: 'id',
+  idCurso: 'idCurso',
+  titulo: 'titulo',
+  subtitulo: 'subtitulo',
+  descricao: 'descricao',
+  idResponsavel: 'idResponsavel',
+  criadoEm: 'criadoEm',
+  atualizadoEm: 'atualizadoEm'
+} as const
+
+export type SessaoScalarFieldEnum = (typeof SessaoScalarFieldEnum)[keyof typeof SessaoScalarFieldEnum]
+
+
+export const ModuloScalarFieldEnum = {
+  id: 'id',
+  idSessao: 'idSessao',
+  titulo: 'titulo',
+  descricao: 'descricao',
+  idResponsavel: 'idResponsavel',
+  criadoEm: 'criadoEm',
+  atualizadoEm: 'atualizadoEm'
+} as const
+
+export type ModuloScalarFieldEnum = (typeof ModuloScalarFieldEnum)[keyof typeof ModuloScalarFieldEnum]
+
+
+export const AulaScalarFieldEnum = {
+  id: 'id',
+  idModulo: 'idModulo',
+  titulo: 'titulo',
+  descricao: 'descricao',
+  idArquivo: 'idArquivo',
+  tipo: 'tipo',
+  quantidadePaginas: 'quantidadePaginas',
+  duracaoMinutos: 'duracaoMinutos',
+  idResponsavel: 'idResponsavel',
+  criadoEm: 'criadoEm',
+  atualizadoEm: 'atualizadoEm'
+} as const
+
+export type AulaScalarFieldEnum = (typeof AulaScalarFieldEnum)[keyof typeof AulaScalarFieldEnum]
+
+
+export const TesteScalarFieldEnum = {
+  id: 'id',
+  idModulo: 'idModulo',
+  idResponsavel: 'idResponsavel',
+  tipo: 'tipo',
+  tema: 'tema',
+  tempoMinutos: 'tempoMinutos',
+  quantidadeQuestoes: 'quantidadeQuestoes',
+  criadoEm: 'criadoEm',
+  atualizadoEm: 'atualizadoEm'
+} as const
+
+export type TesteScalarFieldEnum = (typeof TesteScalarFieldEnum)[keyof typeof TesteScalarFieldEnum]
+
+
+export const QuestaoScalarFieldEnum = {
+  id: 'id',
+  idResponsavel: 'idResponsavel',
+  idAlternativaCorreta: 'idAlternativaCorreta',
+  titulo: 'titulo',
+  enunciado: 'enunciado',
+  dificuldade: 'dificuldade',
+  criadoEm: 'criadoEm',
+  atualizadoEm: 'atualizadoEm'
+} as const
+
+export type QuestaoScalarFieldEnum = (typeof QuestaoScalarFieldEnum)[keyof typeof QuestaoScalarFieldEnum]
+
+
+export const AlternativaScalarFieldEnum = {
+  id: 'id',
+  idQuestao: 'idQuestao',
+  idResponsavel: 'idResponsavel',
+  texto: 'texto',
+  criadoEm: 'criadoEm',
+  atualizadoEm: 'atualizadoEm'
+} as const
+
+export type AlternativaScalarFieldEnum = (typeof AlternativaScalarFieldEnum)[keyof typeof AlternativaScalarFieldEnum]
+
+
+export const TesteQuestaoScalarFieldEnum = {
+  id: 'id',
+  idTeste: 'idTeste',
+  idQuestao: 'idQuestao',
+  ordem: 'ordem'
+} as const
+
+export type TesteQuestaoScalarFieldEnum = (typeof TesteQuestaoScalarFieldEnum)[keyof typeof TesteQuestaoScalarFieldEnum]
+
+
+export const InscricaoScalarFieldEnum = {
+  id: 'id',
+  idUsuario: 'idUsuario',
+  idCurso: 'idCurso',
+  criadoEm: 'criadoEm'
+} as const
+
+export type InscricaoScalarFieldEnum = (typeof InscricaoScalarFieldEnum)[keyof typeof InscricaoScalarFieldEnum]
 
 
 export const SortOrder = {

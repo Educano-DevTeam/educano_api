@@ -69,6 +69,61 @@ enum StatusArquivo {
   @@map("status_arquivo")
 }
 
+enum CategoriaCurso {
+  LINGUAGENS
+  EXATAS
+  CIENCIAS_HUMANAS
+  CIENCIAS_NATURAIS
+  REDACAO
+  VESTIBULAR
+  TECNOLOGIA
+  INTELIGENCIA_ARTIFICIAL
+  DESIGN
+  FINANCAS
+
+  @@map("categoria_curso")
+}
+
+enum StatusCurso {
+  RASCUNHO
+  INATIVO
+  ATIVO
+
+  @@map("status_curso")
+}
+
+enum TipoCapaCurso {
+  ICONE
+  URL
+
+  @@map("tipo_capa_curso")
+}
+
+enum TipoMaterial {
+  VIDEO
+  AUDIO
+  PDF
+  DOCUMENTO
+  OUTRO
+
+  @@map("tipo_material")
+}
+
+enum TipoTeste {
+  SIMULADO
+  ATIVIDADE
+
+  @@map("tipo_teste")
+}
+
+enum NivelDificuldade {
+  FACIL
+  MEDIO
+  DIFICIL
+
+  @@map("nivel_dificuldade")
+}
+
 model Usuario {
   id           String        @id @default(uuid()) @db.Uuid
   nome         String        @db.VarChar(120)
@@ -83,6 +138,19 @@ model Usuario {
   codigosValidacao CodigoValidacao[]
 
   arquivos Arquivo[]
+
+  cursosResponsavel Curso[] @relation("CursoResponsavel")
+  cursosAutorizados Curso[] @relation("CursoAutorizado")
+
+  sessoesResponsavel Sessao[]
+  modulosResponsavel Modulo[]
+  aulasResponsavel   Aula[]
+
+  testesResponsavel       Teste[]
+  questoesResponsavel     Questao[]
+  alternativasResponsavel Alternativa[]
+
+  inscricoes Inscricao[]
 
   @@map("usuario")
 }
@@ -147,9 +215,228 @@ model Arquivo {
 
   usuario Usuario @relation(fields: [idOrigem], references: [id], onDelete: Restrict)
 
+  aula      Aula?  @relation("ArquivoAula")
+  cursoCapa Curso? @relation("ArquivoCapaCurso")
+
   @@index([idOrigem])
   @@index([finalidade])
   @@index([tipo])
   @@index([status])
   @@map("arquivo")
+}
+
+model Curso {
+  id        String         @id @default(uuid()) @db.Uuid
+  nome      String         @db.VarChar(150)
+  categoria CategoriaCurso
+  status    StatusCurso    @default(INATIVO)
+  vagas     Int?
+  preco     Decimal?       @db.Decimal(10, 2)
+  descricao String?        @db.Text
+  cor       String?        @db.VarChar(30)
+
+  idCapa String? @unique @map("id_capa") @db.Uuid
+
+  idResponsavel      String  @map("id_responsavel") @db.Uuid
+  idAdminAutorizador String? @map("id_admin_autorizador") @db.Uuid
+
+  criadoEm     DateTime  @default(now()) @map("criado_em") @db.Timestamptz(3)
+  atualizadoEm DateTime  @updatedAt @map("atualizado_em") @db.Timestamptz(3)
+  autorizadoEm DateTime? @map("autorizado_em") @db.Timestamptz(3)
+
+  capa             Arquivo? @relation("ArquivoCapaCurso", fields: [idCapa], references: [id], onDelete: SetNull)
+  responsavel      Usuario  @relation("CursoResponsavel", fields: [idResponsavel], references: [id], onDelete: Restrict)
+  adminAutorizador Usuario? @relation("CursoAutorizado", fields: [idAdminAutorizador], references: [id], onDelete: SetNull)
+
+  sessoes    Sessao[]
+  inscricoes Inscricao[]
+
+  @@index([nome])
+  @@index([categoria])
+  @@index([status])
+  @@index([idResponsavel])
+  @@map("curso")
+}
+
+model Sessao {
+  id String @id @default(uuid()) @db.Uuid
+
+  idCurso String @map("id_curso") @db.Uuid
+
+  titulo    String  @db.VarChar(150)
+  subtitulo String? @db.VarChar(200)
+  descricao String? @db.Text
+
+  idResponsavel String @map("id_responsavel") @db.Uuid
+
+  criadoEm     DateTime @default(now()) @map("criado_em") @db.Timestamptz(3)
+  atualizadoEm DateTime @updatedAt @map("atualizado_em") @db.Timestamptz(3)
+
+  curso       Curso   @relation(fields: [idCurso], references: [id], onDelete: Cascade)
+  responsavel Usuario @relation(fields: [idResponsavel], references: [id], onDelete: Restrict)
+
+  modulos Modulo[]
+
+  @@index([idCurso])
+  @@index([idResponsavel])
+  @@map("sessao")
+}
+
+model Modulo {
+  id String @id @default(uuid()) @db.Uuid
+
+  idSessao String @map("id_sessao") @db.Uuid
+
+  titulo    String  @db.VarChar(150)
+  descricao String? @db.Text
+
+  idResponsavel String @map("id_responsavel") @db.Uuid
+
+  criadoEm     DateTime @default(now()) @map("criado_em") @db.Timestamptz(3)
+  atualizadoEm DateTime @updatedAt @map("atualizado_em") @db.Timestamptz(3)
+
+  sessao      Sessao  @relation(fields: [idSessao], references: [id], onDelete: Cascade)
+  responsavel Usuario @relation(fields: [idResponsavel], references: [id], onDelete: Restrict)
+
+  aulas  Aula[]
+  testes Teste[]
+
+  @@index([idSessao])
+  @@index([idResponsavel])
+  @@map("modulo")
+}
+
+model Aula {
+  id String @id @default(uuid()) @db.Uuid
+
+  idModulo String @map("id_modulo") @db.Uuid
+
+  titulo    String  @db.VarChar(150)
+  descricao String? @db.Text
+
+  idArquivo String? @unique @map("id_arquivo") @db.Uuid
+
+  tipo TipoMaterial
+
+  quantidadePaginas Int? @map("quantidade_paginas")
+  duracaoMinutos    Int? @map("duracao_minutos")
+
+  idResponsavel String @map("id_responsavel") @db.Uuid
+
+  criadoEm     DateTime @default(now()) @map("criado_em") @db.Timestamptz(3)
+  atualizadoEm DateTime @updatedAt @map("atualizado_em") @db.Timestamptz(3)
+
+  modulo      Modulo   @relation(fields: [idModulo], references: [id], onDelete: Cascade)
+  arquivo     Arquivo? @relation("ArquivoAula", fields: [idArquivo], references: [id], onDelete: SetNull)
+  responsavel Usuario  @relation(fields: [idResponsavel], references: [id], onDelete: Restrict)
+
+  @@index([idModulo])
+  @@index([idResponsavel])
+  @@map("aula")
+}
+
+model Teste {
+  id String @id @default(uuid()) @db.Uuid
+
+  idModulo String? @map("id_modulo") @db.Uuid
+
+  idResponsavel String @map("id_responsavel") @db.Uuid
+
+  tipo TipoTeste
+  tema String?   @db.VarChar(150)
+
+  tempoMinutos Int @default(5) @map("tempo_minutos")
+
+  quantidadeQuestoes Int @default(0) @map("quantidade_questoes")
+
+  criadoEm     DateTime @default(now()) @map("criado_em") @db.Timestamptz(3)
+  atualizadoEm DateTime @updatedAt @map("atualizado_em") @db.Timestamptz(3)
+
+  modulo      Modulo? @relation(fields: [idModulo], references: [id], onDelete: Cascade)
+  responsavel Usuario @relation(fields: [idResponsavel], references: [id], onDelete: Restrict)
+
+  questoes TesteQuestao[]
+
+  @@index([idModulo])
+  @@index([idResponsavel])
+  @@index([tipo])
+  @@map("teste")
+}
+
+model Questao {
+  id                   String  @id @default(uuid()) @db.Uuid
+  idResponsavel        String  @map("id_responsavel") @db.Uuid
+  idAlternativaCorreta String? @map("id_alternativa_correta") @db.Uuid
+
+  titulo      String?          @db.VarChar(150)
+  enunciado   String           @db.Text
+  dificuldade NivelDificuldade @default(MEDIO)
+
+  criadoEm     DateTime @default(now()) @map("criado_em") @db.Timestamptz(3)
+  atualizadoEm DateTime @updatedAt @map("atualizado_em") @db.Timestamptz(3)
+
+  responsavel Usuario @relation(fields: [idResponsavel], references: [id], onDelete: Restrict)
+
+  alternativaCorreta Alternativa? @relation("AlternativaCorreta", fields: [idAlternativaCorreta], references: [id], onDelete: SetNull)
+
+  alternativas Alternativa[]  @relation("AlternativasQuestao")
+  testes       TesteQuestao[]
+
+  @@index([idResponsavel])
+  @@index([idAlternativaCorreta])
+  @@index([dificuldade])
+  @@map("questao")
+}
+
+model Alternativa {
+  id            String @id @default(uuid()) @db.Uuid
+  idQuestao     String @map("id_questao") @db.Uuid
+  idResponsavel String @map("id_responsavel") @db.Uuid
+
+  texto String @db.Text
+
+  criadoEm     DateTime @default(now()) @map("criado_em") @db.Timestamptz(3)
+  atualizadoEm DateTime @updatedAt @map("atualizado_em") @db.Timestamptz(3)
+
+  questao Questao @relation("AlternativasQuestao", fields: [idQuestao], references: [id], onDelete: Cascade)
+
+  questoesCorretas Questao[] @relation("AlternativaCorreta")
+
+  responsavel Usuario @relation(fields: [idResponsavel], references: [id], onDelete: Restrict)
+
+  @@index([idQuestao])
+  @@index([idResponsavel])
+  @@map("alternativa")
+}
+
+model TesteQuestao {
+  id String @id @default(uuid()) @db.Uuid
+
+  idTeste   String @map("id_teste") @db.Uuid
+  idQuestao String @map("id_questao") @db.Uuid
+
+  ordem Int @default(0)
+
+  teste   Teste   @relation(fields: [idTeste], references: [id], onDelete: Cascade)
+  questao Questao @relation(fields: [idQuestao], references: [id], onDelete: Cascade)
+
+  @@unique([idTeste, idQuestao])
+  @@index([idQuestao])
+  @@map("teste_questao")
+}
+
+model Inscricao {
+  id String @id @default(uuid()) @db.Uuid
+
+  idUsuario String @map("id_usuario") @db.Uuid
+  idCurso   String @map("id_curso") @db.Uuid
+
+  criadoEm DateTime @default(now()) @map("criado_em") @db.Timestamptz(3)
+
+  usuario Usuario @relation(fields: [idUsuario], references: [id], onDelete: Cascade)
+  curso   Curso   @relation(fields: [idCurso], references: [id], onDelete: Cascade)
+
+  @@unique([idUsuario, idCurso])
+  @@index([idCurso])
+  @@map("inscricao")
 }

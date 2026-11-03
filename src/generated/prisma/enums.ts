@@ -76,3 +76,64 @@ export const StatusArquivo = {
 } as const
 
 export type StatusArquivo = (typeof StatusArquivo)[keyof typeof StatusArquivo]
+
+
+export const CategoriaCurso = {
+  LINGUAGENS: 'LINGUAGENS',
+  EXATAS: 'EXATAS',
+  CIENCIAS_HUMANAS: 'CIENCIAS_HUMANAS',
+  CIENCIAS_NATURAIS: 'CIENCIAS_NATURAIS',
+  REDACAO: 'REDACAO',
+  VESTIBULAR: 'VESTIBULAR',
+  TECNOLOGIA: 'TECNOLOGIA',
+  INTELIGENCIA_ARTIFICIAL: 'INTELIGENCIA_ARTIFICIAL',
+  DESIGN: 'DESIGN',
+  FINANCAS: 'FINANCAS'
+} as const
+
+export type CategoriaCurso = (typeof CategoriaCurso)[keyof typeof CategoriaCurso]
+
+
+export const StatusCurso = {
+  RASCUNHO: 'RASCUNHO',
+  INATIVO: 'INATIVO',
+  ATIVO: 'ATIVO'
+} as const
+
+export type StatusCurso = (typeof StatusCurso)[keyof typeof StatusCurso]
+
+
+export const TipoCapaCurso = {
+  ICONE: 'ICONE',
+  URL: 'URL'
+} as const
+
+export type TipoCapaCurso = (typeof TipoCapaCurso)[keyof typeof TipoCapaCurso]
+
+
+export const TipoMaterial = {
+  VIDEO: 'VIDEO',
+  AUDIO: 'AUDIO',
+  PDF: 'PDF',
+  DOCUMENTO: 'DOCUMENTO',
+  OUTRO: 'OUTRO'
+} as const
+
+export type TipoMaterial = (typeof TipoMaterial)[keyof typeof TipoMaterial]
+
+
+export const TipoTeste = {
+  SIMULADO: 'SIMULADO',
+  ATIVIDADE: 'ATIVIDADE'
+} as const
+
+export type TipoTeste = (typeof TipoTeste)[keyof typeof TipoTeste]
+
+
+export const NivelDificuldade = {
+  FACIL: 'FACIL',
+  MEDIO: 'MEDIO',
+  DIFICIL: 'DIFICIL'
+} as const
+
+export type NivelDificuldade = (typeof NivelDificuldade)[keyof typeof NivelDificuldade]
