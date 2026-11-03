@@ -103,14 +103,6 @@ export const StatusCurso = {
 export type StatusCurso = (typeof StatusCurso)[keyof typeof StatusCurso]
 
 
-export const TipoCapaCurso = {
-  ICONE: 'ICONE',
-  URL: 'URL'
-} as const
-
-export type TipoCapaCurso = (typeof TipoCapaCurso)[keyof typeof TipoCapaCurso]
-
-
 export const TipoMaterial = {
   VIDEO: 'VIDEO',
   AUDIO: 'AUDIO',

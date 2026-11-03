@@ -92,13 +92,6 @@ enum StatusCurso {
   @@map("status_curso")
 }
 
-enum TipoCapaCurso {
-  ICONE
-  URL
-
-  @@map("tipo_capa_curso")
-}
-
 enum TipoMaterial {
   VIDEO
   AUDIO
@@ -235,16 +228,21 @@ model Curso {
   descricao String?        @db.Text
   cor       String?        @db.VarChar(30)
 
-  idCapa String? @unique @map("id_capa") @db.Uuid
+  // Capa do curso: arquivo enviado ou ícone selecionado
+  idCapa    String? @unique @map("id_capa") @db.Uuid
+  iconeCapa String? @map("icone_capa") @db.VarChar(30)
 
+  // Responsáveis
   idResponsavel      String  @map("id_responsavel") @db.Uuid
   idAdminAutorizador String? @map("id_admin_autorizador") @db.Uuid
 
+  // Datas
   criadoEm     DateTime  @default(now()) @map("criado_em") @db.Timestamptz(3)
   atualizadoEm DateTime  @updatedAt @map("atualizado_em") @db.Timestamptz(3)
   autorizadoEm DateTime? @map("autorizado_em") @db.Timestamptz(3)
 
-  capa             Arquivo? @relation("ArquivoCapaCurso", fields: [idCapa], references: [id], onDelete: SetNull)
+  // Relacionamentos
+  arquivoCapa      Arquivo? @relation("ArquivoCapaCurso", fields: [idCapa], references: [id], onDelete: SetNull)
   responsavel      Usuario  @relation("CursoResponsavel", fields: [idResponsavel], references: [id], onDelete: Restrict)
   adminAutorizador Usuario? @relation("CursoAutorizado", fields: [idAdminAutorizador], references: [id], onDelete: SetNull)
 

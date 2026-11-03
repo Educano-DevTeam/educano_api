@@ -381,7 +381,7 @@ export type ArquivoCreateInput = {
   atualizadoEm?: Date | string
   usuario: Prisma.UsuarioCreateNestedOneWithoutArquivosInput
   aula?: Prisma.AulaCreateNestedOneWithoutArquivoInput
-  cursoCapa?: Prisma.CursoCreateNestedOneWithoutCapaInput
+  cursoCapa?: Prisma.CursoCreateNestedOneWithoutArquivoCapaInput
 }
 
 export type ArquivoUncheckedCreateInput = {
@@ -399,7 +399,7 @@ export type ArquivoUncheckedCreateInput = {
   criadoEm?: Date | string
   atualizadoEm?: Date | string
   aula?: Prisma.AulaUncheckedCreateNestedOneWithoutArquivoInput
-  cursoCapa?: Prisma.CursoUncheckedCreateNestedOneWithoutCapaInput
+  cursoCapa?: Prisma.CursoUncheckedCreateNestedOneWithoutArquivoCapaInput
 }
 
 export type ArquivoUpdateInput = {
@@ -417,7 +417,7 @@ export type ArquivoUpdateInput = {
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   usuario?: Prisma.UsuarioUpdateOneRequiredWithoutArquivosNestedInput
   aula?: Prisma.AulaUpdateOneWithoutArquivoNestedInput
-  cursoCapa?: Prisma.CursoUpdateOneWithoutCapaNestedInput
+  cursoCapa?: Prisma.CursoUpdateOneWithoutArquivoCapaNestedInput
 }
 
 export type ArquivoUncheckedUpdateInput = {
@@ -435,7 +435,7 @@ export type ArquivoUncheckedUpdateInput = {
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   aula?: Prisma.AulaUncheckedUpdateOneWithoutArquivoNestedInput
-  cursoCapa?: Prisma.CursoUncheckedUpdateOneWithoutCapaNestedInput
+  cursoCapa?: Prisma.CursoUncheckedUpdateOneWithoutArquivoCapaNestedInput
 }
 
 export type ArquivoCreateManyInput = {
@@ -664,7 +664,7 @@ export type ArquivoCreateWithoutUsuarioInput = {
   criadoEm?: Date | string
   atualizadoEm?: Date | string
   aula?: Prisma.AulaCreateNestedOneWithoutArquivoInput
-  cursoCapa?: Prisma.CursoCreateNestedOneWithoutCapaInput
+  cursoCapa?: Prisma.CursoCreateNestedOneWithoutArquivoCapaInput
 }
 
 export type ArquivoUncheckedCreateWithoutUsuarioInput = {
@@ -681,7 +681,7 @@ export type ArquivoUncheckedCreateWithoutUsuarioInput = {
   criadoEm?: Date | string
   atualizadoEm?: Date | string
   aula?: Prisma.AulaUncheckedCreateNestedOneWithoutArquivoInput
-  cursoCapa?: Prisma.CursoUncheckedCreateNestedOneWithoutCapaInput
+  cursoCapa?: Prisma.CursoUncheckedCreateNestedOneWithoutArquivoCapaInput
 }
 
 export type ArquivoCreateOrConnectWithoutUsuarioInput = {
@@ -827,7 +827,7 @@ export type ArquivoCreateWithoutAulaInput = {
   criadoEm?: Date | string
   atualizadoEm?: Date | string
   usuario: Prisma.UsuarioCreateNestedOneWithoutArquivosInput
-  cursoCapa?: Prisma.CursoCreateNestedOneWithoutCapaInput
+  cursoCapa?: Prisma.CursoCreateNestedOneWithoutArquivoCapaInput
 }
 
 export type ArquivoUncheckedCreateWithoutAulaInput = {
@@ -844,7 +844,7 @@ export type ArquivoUncheckedCreateWithoutAulaInput = {
   status?: $Enums.StatusArquivo
   criadoEm?: Date | string
   atualizadoEm?: Date | string
-  cursoCapa?: Prisma.CursoUncheckedCreateNestedOneWithoutCapaInput
+  cursoCapa?: Prisma.CursoUncheckedCreateNestedOneWithoutArquivoCapaInput
 }
 
 export type ArquivoCreateOrConnectWithoutAulaInput = {
@@ -877,7 +877,7 @@ export type ArquivoUpdateWithoutAulaInput = {
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   usuario?: Prisma.UsuarioUpdateOneRequiredWithoutArquivosNestedInput
-  cursoCapa?: Prisma.CursoUpdateOneWithoutCapaNestedInput
+  cursoCapa?: Prisma.CursoUpdateOneWithoutArquivoCapaNestedInput
 }
 
 export type ArquivoUncheckedUpdateWithoutAulaInput = {
@@ -894,7 +894,7 @@ export type ArquivoUncheckedUpdateWithoutAulaInput = {
   status?: Prisma.EnumStatusArquivoFieldUpdateOperationsInput | $Enums.StatusArquivo
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  cursoCapa?: Prisma.CursoUncheckedUpdateOneWithoutCapaNestedInput
+  cursoCapa?: Prisma.CursoUncheckedUpdateOneWithoutArquivoCapaNestedInput
 }
 
 export type ArquivoCreateManyUsuarioInput = {
@@ -926,7 +926,7 @@ export type ArquivoUpdateWithoutUsuarioInput = {
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   aula?: Prisma.AulaUpdateOneWithoutArquivoNestedInput
-  cursoCapa?: Prisma.CursoUpdateOneWithoutCapaNestedInput
+  cursoCapa?: Prisma.CursoUpdateOneWithoutArquivoCapaNestedInput
 }
 
 export type ArquivoUncheckedUpdateWithoutUsuarioInput = {
@@ -943,7 +943,7 @@ export type ArquivoUncheckedUpdateWithoutUsuarioInput = {
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   aula?: Prisma.AulaUncheckedUpdateOneWithoutArquivoNestedInput
-  cursoCapa?: Prisma.CursoUncheckedUpdateOneWithoutCapaNestedInput
+  cursoCapa?: Prisma.CursoUncheckedUpdateOneWithoutArquivoCapaNestedInput
 }
 
 export type ArquivoUncheckedUpdateManyWithoutUsuarioInput = {

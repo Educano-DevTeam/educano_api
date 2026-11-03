@@ -2,6 +2,8 @@ import { Router } from "express";
 
 import { autenticar } from "../../../middlewares/auth.middlewares.js";
 
+import { uploadArquivo } from "../../files/middleware/upload.middleware.js";
+
 import {
   criar,
   consultar,
@@ -12,22 +14,21 @@ import {
 
 const coursesRouter = Router();
 
-// Todas as rotas exigem autenticação.
 coursesRouter.use(autenticar);
 
-// Listagem e pesquisa.
 coursesRouter.get("/", listar);
 
-// Criação.
-coursesRouter.post("/", criar);
+// O arquivo deve ser enviado no campo "arquivo".
+coursesRouter.post("/", uploadArquivo.single("arquivo"), criar);
 
-// Consulta individual.
 coursesRouter.get("/:id", consultar);
 
-// Atualização.
-coursesRouter.patch("/:id", atualizar);
+coursesRouter.patch(
+  "/:id",
+  uploadArquivo.single("arquivo"),
+  atualizar,
+);
 
-// Exclusão.
 coursesRouter.delete("/:id", excluir);
 
 export default coursesRouter;

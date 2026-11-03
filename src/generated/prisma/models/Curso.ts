@@ -46,6 +46,7 @@ export type CursoMinAggregateOutputType = {
   descricao: string | null
   cor: string | null
   idCapa: string | null
+  iconeCapa: string | null
   idResponsavel: string | null
   idAdminAutorizador: string | null
   criadoEm: Date | null
@@ -63,6 +64,7 @@ export type CursoMaxAggregateOutputType = {
   descricao: string | null
   cor: string | null
   idCapa: string | null
+  iconeCapa: string | null
   idResponsavel: string | null
   idAdminAutorizador: string | null
   criadoEm: Date | null
@@ -80,6 +82,7 @@ export type CursoCountAggregateOutputType = {
   descricao: number
   cor: number
   idCapa: number
+  iconeCapa: number
   idResponsavel: number
   idAdminAutorizador: number
   criadoEm: number
@@ -109,6 +112,7 @@ export type CursoMinAggregateInputType = {
   descricao?: true
   cor?: true
   idCapa?: true
+  iconeCapa?: true
   idResponsavel?: true
   idAdminAutorizador?: true
   criadoEm?: true
@@ -126,6 +130,7 @@ export type CursoMaxAggregateInputType = {
   descricao?: true
   cor?: true
   idCapa?: true
+  iconeCapa?: true
   idResponsavel?: true
   idAdminAutorizador?: true
   criadoEm?: true
@@ -143,6 +148,7 @@ export type CursoCountAggregateInputType = {
   descricao?: true
   cor?: true
   idCapa?: true
+  iconeCapa?: true
   idResponsavel?: true
   idAdminAutorizador?: true
   criadoEm?: true
@@ -247,6 +253,7 @@ export type CursoGroupByOutputType = {
   descricao: string | null
   cor: string | null
   idCapa: string | null
+  iconeCapa: string | null
   idResponsavel: string
   idAdminAutorizador: string | null
   criadoEm: Date
@@ -287,12 +294,13 @@ export type CursoWhereInput = {
   descricao?: Prisma.StringNullableFilter<"Curso"> | string | null
   cor?: Prisma.StringNullableFilter<"Curso"> | string | null
   idCapa?: Prisma.UuidNullableFilter<"Curso"> | string | null
+  iconeCapa?: Prisma.StringNullableFilter<"Curso"> | string | null
   idResponsavel?: Prisma.UuidFilter<"Curso"> | string
   idAdminAutorizador?: Prisma.UuidNullableFilter<"Curso"> | string | null
   criadoEm?: Prisma.DateTimeFilter<"Curso"> | Date | string
   atualizadoEm?: Prisma.DateTimeFilter<"Curso"> | Date | string
   autorizadoEm?: Prisma.DateTimeNullableFilter<"Curso"> | Date | string | null
-  capa?: Prisma.XOR<Prisma.ArquivoNullableScalarRelationFilter, Prisma.ArquivoWhereInput> | null
+  arquivoCapa?: Prisma.XOR<Prisma.ArquivoNullableScalarRelationFilter, Prisma.ArquivoWhereInput> | null
   responsavel?: Prisma.XOR<Prisma.UsuarioScalarRelationFilter, Prisma.UsuarioWhereInput>
   adminAutorizador?: Prisma.XOR<Prisma.UsuarioNullableScalarRelationFilter, Prisma.UsuarioWhereInput> | null
   sessoes?: Prisma.SessaoListRelationFilter
@@ -309,12 +317,13 @@ export type CursoOrderByWithRelationInput = {
   descricao?: Prisma.SortOrderInput | Prisma.SortOrder
   cor?: Prisma.SortOrderInput | Prisma.SortOrder
   idCapa?: Prisma.SortOrderInput | Prisma.SortOrder
+  iconeCapa?: Prisma.SortOrderInput | Prisma.SortOrder
   idResponsavel?: Prisma.SortOrder
   idAdminAutorizador?: Prisma.SortOrderInput | Prisma.SortOrder
   criadoEm?: Prisma.SortOrder
   atualizadoEm?: Prisma.SortOrder
   autorizadoEm?: Prisma.SortOrderInput | Prisma.SortOrder
-  capa?: Prisma.ArquivoOrderByWithRelationInput
+  arquivoCapa?: Prisma.ArquivoOrderByWithRelationInput
   responsavel?: Prisma.UsuarioOrderByWithRelationInput
   adminAutorizador?: Prisma.UsuarioOrderByWithRelationInput
   sessoes?: Prisma.SessaoOrderByRelationAggregateInput
@@ -334,12 +343,13 @@ export type CursoWhereUniqueInput = Prisma.AtLeast<{
   preco?: Prisma.DecimalNullableFilter<"Curso"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   descricao?: Prisma.StringNullableFilter<"Curso"> | string | null
   cor?: Prisma.StringNullableFilter<"Curso"> | string | null
+  iconeCapa?: Prisma.StringNullableFilter<"Curso"> | string | null
   idResponsavel?: Prisma.UuidFilter<"Curso"> | string
   idAdminAutorizador?: Prisma.UuidNullableFilter<"Curso"> | string | null
   criadoEm?: Prisma.DateTimeFilter<"Curso"> | Date | string
   atualizadoEm?: Prisma.DateTimeFilter<"Curso"> | Date | string
   autorizadoEm?: Prisma.DateTimeNullableFilter<"Curso"> | Date | string | null
-  capa?: Prisma.XOR<Prisma.ArquivoNullableScalarRelationFilter, Prisma.ArquivoWhereInput> | null
+  arquivoCapa?: Prisma.XOR<Prisma.ArquivoNullableScalarRelationFilter, Prisma.ArquivoWhereInput> | null
   responsavel?: Prisma.XOR<Prisma.UsuarioScalarRelationFilter, Prisma.UsuarioWhereInput>
   adminAutorizador?: Prisma.XOR<Prisma.UsuarioNullableScalarRelationFilter, Prisma.UsuarioWhereInput> | null
   sessoes?: Prisma.SessaoListRelationFilter
@@ -356,6 +366,7 @@ export type CursoOrderByWithAggregationInput = {
   descricao?: Prisma.SortOrderInput | Prisma.SortOrder
   cor?: Prisma.SortOrderInput | Prisma.SortOrder
   idCapa?: Prisma.SortOrderInput | Prisma.SortOrder
+  iconeCapa?: Prisma.SortOrderInput | Prisma.SortOrder
   idResponsavel?: Prisma.SortOrder
   idAdminAutorizador?: Prisma.SortOrderInput | Prisma.SortOrder
   criadoEm?: Prisma.SortOrder
@@ -381,6 +392,7 @@ export type CursoScalarWhereWithAggregatesInput = {
   descricao?: Prisma.StringNullableWithAggregatesFilter<"Curso"> | string | null
   cor?: Prisma.StringNullableWithAggregatesFilter<"Curso"> | string | null
   idCapa?: Prisma.UuidNullableWithAggregatesFilter<"Curso"> | string | null
+  iconeCapa?: Prisma.StringNullableWithAggregatesFilter<"Curso"> | string | null
   idResponsavel?: Prisma.UuidWithAggregatesFilter<"Curso"> | string
   idAdminAutorizador?: Prisma.UuidNullableWithAggregatesFilter<"Curso"> | string | null
   criadoEm?: Prisma.DateTimeWithAggregatesFilter<"Curso"> | Date | string
@@ -397,10 +409,11 @@ export type CursoCreateInput = {
   preco?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   descricao?: string | null
   cor?: string | null
+  iconeCapa?: string | null
   criadoEm?: Date | string
   atualizadoEm?: Date | string
   autorizadoEm?: Date | string | null
-  capa?: Prisma.ArquivoCreateNestedOneWithoutCursoCapaInput
+  arquivoCapa?: Prisma.ArquivoCreateNestedOneWithoutCursoCapaInput
   responsavel: Prisma.UsuarioCreateNestedOneWithoutCursosResponsavelInput
   adminAutorizador?: Prisma.UsuarioCreateNestedOneWithoutCursosAutorizadosInput
   sessoes?: Prisma.SessaoCreateNestedManyWithoutCursoInput
@@ -417,6 +430,7 @@ export type CursoUncheckedCreateInput = {
   descricao?: string | null
   cor?: string | null
   idCapa?: string | null
+  iconeCapa?: string | null
   idResponsavel: string
   idAdminAutorizador?: string | null
   criadoEm?: Date | string
@@ -435,10 +449,11 @@ export type CursoUpdateInput = {
   preco?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  iconeCapa?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   autorizadoEm?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  capa?: Prisma.ArquivoUpdateOneWithoutCursoCapaNestedInput
+  arquivoCapa?: Prisma.ArquivoUpdateOneWithoutCursoCapaNestedInput
   responsavel?: Prisma.UsuarioUpdateOneRequiredWithoutCursosResponsavelNestedInput
   adminAutorizador?: Prisma.UsuarioUpdateOneWithoutCursosAutorizadosNestedInput
   sessoes?: Prisma.SessaoUpdateManyWithoutCursoNestedInput
@@ -455,6 +470,7 @@ export type CursoUncheckedUpdateInput = {
   descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   idCapa?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  iconeCapa?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   idResponsavel?: Prisma.StringFieldUpdateOperationsInput | string
   idAdminAutorizador?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -474,6 +490,7 @@ export type CursoCreateManyInput = {
   descricao?: string | null
   cor?: string | null
   idCapa?: string | null
+  iconeCapa?: string | null
   idResponsavel: string
   idAdminAutorizador?: string | null
   criadoEm?: Date | string
@@ -490,6 +507,7 @@ export type CursoUpdateManyMutationInput = {
   preco?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  iconeCapa?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   autorizadoEm?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -505,6 +523,7 @@ export type CursoUncheckedUpdateManyInput = {
   descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   idCapa?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  iconeCapa?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   idResponsavel?: Prisma.StringFieldUpdateOperationsInput | string
   idAdminAutorizador?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -537,6 +556,7 @@ export type CursoCountOrderByAggregateInput = {
   descricao?: Prisma.SortOrder
   cor?: Prisma.SortOrder
   idCapa?: Prisma.SortOrder
+  iconeCapa?: Prisma.SortOrder
   idResponsavel?: Prisma.SortOrder
   idAdminAutorizador?: Prisma.SortOrder
   criadoEm?: Prisma.SortOrder
@@ -559,6 +579,7 @@ export type CursoMaxOrderByAggregateInput = {
   descricao?: Prisma.SortOrder
   cor?: Prisma.SortOrder
   idCapa?: Prisma.SortOrder
+  iconeCapa?: Prisma.SortOrder
   idResponsavel?: Prisma.SortOrder
   idAdminAutorizador?: Prisma.SortOrder
   criadoEm?: Prisma.SortOrder
@@ -576,6 +597,7 @@ export type CursoMinOrderByAggregateInput = {
   descricao?: Prisma.SortOrder
   cor?: Prisma.SortOrder
   idCapa?: Prisma.SortOrder
+  iconeCapa?: Prisma.SortOrder
   idResponsavel?: Prisma.SortOrder
   idAdminAutorizador?: Prisma.SortOrder
   criadoEm?: Prisma.SortOrder
@@ -677,36 +699,36 @@ export type CursoUncheckedUpdateManyWithoutAdminAutorizadorNestedInput = {
   deleteMany?: Prisma.CursoScalarWhereInput | Prisma.CursoScalarWhereInput[]
 }
 
-export type CursoCreateNestedOneWithoutCapaInput = {
-  create?: Prisma.XOR<Prisma.CursoCreateWithoutCapaInput, Prisma.CursoUncheckedCreateWithoutCapaInput>
-  connectOrCreate?: Prisma.CursoCreateOrConnectWithoutCapaInput
+export type CursoCreateNestedOneWithoutArquivoCapaInput = {
+  create?: Prisma.XOR<Prisma.CursoCreateWithoutArquivoCapaInput, Prisma.CursoUncheckedCreateWithoutArquivoCapaInput>
+  connectOrCreate?: Prisma.CursoCreateOrConnectWithoutArquivoCapaInput
   connect?: Prisma.CursoWhereUniqueInput
 }
 
-export type CursoUncheckedCreateNestedOneWithoutCapaInput = {
-  create?: Prisma.XOR<Prisma.CursoCreateWithoutCapaInput, Prisma.CursoUncheckedCreateWithoutCapaInput>
-  connectOrCreate?: Prisma.CursoCreateOrConnectWithoutCapaInput
+export type CursoUncheckedCreateNestedOneWithoutArquivoCapaInput = {
+  create?: Prisma.XOR<Prisma.CursoCreateWithoutArquivoCapaInput, Prisma.CursoUncheckedCreateWithoutArquivoCapaInput>
+  connectOrCreate?: Prisma.CursoCreateOrConnectWithoutArquivoCapaInput
   connect?: Prisma.CursoWhereUniqueInput
 }
 
-export type CursoUpdateOneWithoutCapaNestedInput = {
-  create?: Prisma.XOR<Prisma.CursoCreateWithoutCapaInput, Prisma.CursoUncheckedCreateWithoutCapaInput>
-  connectOrCreate?: Prisma.CursoCreateOrConnectWithoutCapaInput
-  upsert?: Prisma.CursoUpsertWithoutCapaInput
+export type CursoUpdateOneWithoutArquivoCapaNestedInput = {
+  create?: Prisma.XOR<Prisma.CursoCreateWithoutArquivoCapaInput, Prisma.CursoUncheckedCreateWithoutArquivoCapaInput>
+  connectOrCreate?: Prisma.CursoCreateOrConnectWithoutArquivoCapaInput
+  upsert?: Prisma.CursoUpsertWithoutArquivoCapaInput
   disconnect?: Prisma.CursoWhereInput | boolean
   delete?: Prisma.CursoWhereInput | boolean
   connect?: Prisma.CursoWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.CursoUpdateToOneWithWhereWithoutCapaInput, Prisma.CursoUpdateWithoutCapaInput>, Prisma.CursoUncheckedUpdateWithoutCapaInput>
+  update?: Prisma.XOR<Prisma.XOR<Prisma.CursoUpdateToOneWithWhereWithoutArquivoCapaInput, Prisma.CursoUpdateWithoutArquivoCapaInput>, Prisma.CursoUncheckedUpdateWithoutArquivoCapaInput>
 }
 
-export type CursoUncheckedUpdateOneWithoutCapaNestedInput = {
-  create?: Prisma.XOR<Prisma.CursoCreateWithoutCapaInput, Prisma.CursoUncheckedCreateWithoutCapaInput>
-  connectOrCreate?: Prisma.CursoCreateOrConnectWithoutCapaInput
-  upsert?: Prisma.CursoUpsertWithoutCapaInput
+export type CursoUncheckedUpdateOneWithoutArquivoCapaNestedInput = {
+  create?: Prisma.XOR<Prisma.CursoCreateWithoutArquivoCapaInput, Prisma.CursoUncheckedCreateWithoutArquivoCapaInput>
+  connectOrCreate?: Prisma.CursoCreateOrConnectWithoutArquivoCapaInput
+  upsert?: Prisma.CursoUpsertWithoutArquivoCapaInput
   disconnect?: Prisma.CursoWhereInput | boolean
   delete?: Prisma.CursoWhereInput | boolean
   connect?: Prisma.CursoWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.CursoUpdateToOneWithWhereWithoutCapaInput, Prisma.CursoUpdateWithoutCapaInput>, Prisma.CursoUncheckedUpdateWithoutCapaInput>
+  update?: Prisma.XOR<Prisma.XOR<Prisma.CursoUpdateToOneWithWhereWithoutArquivoCapaInput, Prisma.CursoUpdateWithoutArquivoCapaInput>, Prisma.CursoUncheckedUpdateWithoutArquivoCapaInput>
 }
 
 export type EnumCategoriaCursoFieldUpdateOperationsInput = {
@@ -774,10 +796,11 @@ export type CursoCreateWithoutResponsavelInput = {
   preco?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   descricao?: string | null
   cor?: string | null
+  iconeCapa?: string | null
   criadoEm?: Date | string
   atualizadoEm?: Date | string
   autorizadoEm?: Date | string | null
-  capa?: Prisma.ArquivoCreateNestedOneWithoutCursoCapaInput
+  arquivoCapa?: Prisma.ArquivoCreateNestedOneWithoutCursoCapaInput
   adminAutorizador?: Prisma.UsuarioCreateNestedOneWithoutCursosAutorizadosInput
   sessoes?: Prisma.SessaoCreateNestedManyWithoutCursoInput
   inscricoes?: Prisma.InscricaoCreateNestedManyWithoutCursoInput
@@ -793,6 +816,7 @@ export type CursoUncheckedCreateWithoutResponsavelInput = {
   descricao?: string | null
   cor?: string | null
   idCapa?: string | null
+  iconeCapa?: string | null
   idAdminAutorizador?: string | null
   criadoEm?: Date | string
   atualizadoEm?: Date | string
@@ -820,10 +844,11 @@ export type CursoCreateWithoutAdminAutorizadorInput = {
   preco?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   descricao?: string | null
   cor?: string | null
+  iconeCapa?: string | null
   criadoEm?: Date | string
   atualizadoEm?: Date | string
   autorizadoEm?: Date | string | null
-  capa?: Prisma.ArquivoCreateNestedOneWithoutCursoCapaInput
+  arquivoCapa?: Prisma.ArquivoCreateNestedOneWithoutCursoCapaInput
   responsavel: Prisma.UsuarioCreateNestedOneWithoutCursosResponsavelInput
   sessoes?: Prisma.SessaoCreateNestedManyWithoutCursoInput
   inscricoes?: Prisma.InscricaoCreateNestedManyWithoutCursoInput
@@ -839,6 +864,7 @@ export type CursoUncheckedCreateWithoutAdminAutorizadorInput = {
   descricao?: string | null
   cor?: string | null
   idCapa?: string | null
+  iconeCapa?: string | null
   idResponsavel: string
   criadoEm?: Date | string
   atualizadoEm?: Date | string
@@ -886,6 +912,7 @@ export type CursoScalarWhereInput = {
   descricao?: Prisma.StringNullableFilter<"Curso"> | string | null
   cor?: Prisma.StringNullableFilter<"Curso"> | string | null
   idCapa?: Prisma.UuidNullableFilter<"Curso"> | string | null
+  iconeCapa?: Prisma.StringNullableFilter<"Curso"> | string | null
   idResponsavel?: Prisma.UuidFilter<"Curso"> | string
   idAdminAutorizador?: Prisma.UuidNullableFilter<"Curso"> | string | null
   criadoEm?: Prisma.DateTimeFilter<"Curso"> | Date | string
@@ -909,7 +936,7 @@ export type CursoUpdateManyWithWhereWithoutAdminAutorizadorInput = {
   data: Prisma.XOR<Prisma.CursoUpdateManyMutationInput, Prisma.CursoUncheckedUpdateManyWithoutAdminAutorizadorInput>
 }
 
-export type CursoCreateWithoutCapaInput = {
+export type CursoCreateWithoutArquivoCapaInput = {
   id?: string
   nome: string
   categoria: $Enums.CategoriaCurso
@@ -918,6 +945,7 @@ export type CursoCreateWithoutCapaInput = {
   preco?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   descricao?: string | null
   cor?: string | null
+  iconeCapa?: string | null
   criadoEm?: Date | string
   atualizadoEm?: Date | string
   autorizadoEm?: Date | string | null
@@ -927,7 +955,7 @@ export type CursoCreateWithoutCapaInput = {
   inscricoes?: Prisma.InscricaoCreateNestedManyWithoutCursoInput
 }
 
-export type CursoUncheckedCreateWithoutCapaInput = {
+export type CursoUncheckedCreateWithoutArquivoCapaInput = {
   id?: string
   nome: string
   categoria: $Enums.CategoriaCurso
@@ -936,6 +964,7 @@ export type CursoUncheckedCreateWithoutCapaInput = {
   preco?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   descricao?: string | null
   cor?: string | null
+  iconeCapa?: string | null
   idResponsavel: string
   idAdminAutorizador?: string | null
   criadoEm?: Date | string
@@ -945,23 +974,23 @@ export type CursoUncheckedCreateWithoutCapaInput = {
   inscricoes?: Prisma.InscricaoUncheckedCreateNestedManyWithoutCursoInput
 }
 
-export type CursoCreateOrConnectWithoutCapaInput = {
+export type CursoCreateOrConnectWithoutArquivoCapaInput = {
   where: Prisma.CursoWhereUniqueInput
-  create: Prisma.XOR<Prisma.CursoCreateWithoutCapaInput, Prisma.CursoUncheckedCreateWithoutCapaInput>
+  create: Prisma.XOR<Prisma.CursoCreateWithoutArquivoCapaInput, Prisma.CursoUncheckedCreateWithoutArquivoCapaInput>
 }
 
-export type CursoUpsertWithoutCapaInput = {
-  update: Prisma.XOR<Prisma.CursoUpdateWithoutCapaInput, Prisma.CursoUncheckedUpdateWithoutCapaInput>
-  create: Prisma.XOR<Prisma.CursoCreateWithoutCapaInput, Prisma.CursoUncheckedCreateWithoutCapaInput>
+export type CursoUpsertWithoutArquivoCapaInput = {
+  update: Prisma.XOR<Prisma.CursoUpdateWithoutArquivoCapaInput, Prisma.CursoUncheckedUpdateWithoutArquivoCapaInput>
+  create: Prisma.XOR<Prisma.CursoCreateWithoutArquivoCapaInput, Prisma.CursoUncheckedCreateWithoutArquivoCapaInput>
   where?: Prisma.CursoWhereInput
 }
 
-export type CursoUpdateToOneWithWhereWithoutCapaInput = {
+export type CursoUpdateToOneWithWhereWithoutArquivoCapaInput = {
   where?: Prisma.CursoWhereInput
-  data: Prisma.XOR<Prisma.CursoUpdateWithoutCapaInput, Prisma.CursoUncheckedUpdateWithoutCapaInput>
+  data: Prisma.XOR<Prisma.CursoUpdateWithoutArquivoCapaInput, Prisma.CursoUncheckedUpdateWithoutArquivoCapaInput>
 }
 
-export type CursoUpdateWithoutCapaInput = {
+export type CursoUpdateWithoutArquivoCapaInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   nome?: Prisma.StringFieldUpdateOperationsInput | string
   categoria?: Prisma.EnumCategoriaCursoFieldUpdateOperationsInput | $Enums.CategoriaCurso
@@ -970,6 +999,7 @@ export type CursoUpdateWithoutCapaInput = {
   preco?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  iconeCapa?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   autorizadoEm?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -979,7 +1009,7 @@ export type CursoUpdateWithoutCapaInput = {
   inscricoes?: Prisma.InscricaoUpdateManyWithoutCursoNestedInput
 }
 
-export type CursoUncheckedUpdateWithoutCapaInput = {
+export type CursoUncheckedUpdateWithoutArquivoCapaInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   nome?: Prisma.StringFieldUpdateOperationsInput | string
   categoria?: Prisma.EnumCategoriaCursoFieldUpdateOperationsInput | $Enums.CategoriaCurso
@@ -988,6 +1018,7 @@ export type CursoUncheckedUpdateWithoutCapaInput = {
   preco?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  iconeCapa?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   idResponsavel?: Prisma.StringFieldUpdateOperationsInput | string
   idAdminAutorizador?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1006,10 +1037,11 @@ export type CursoCreateWithoutSessoesInput = {
   preco?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   descricao?: string | null
   cor?: string | null
+  iconeCapa?: string | null
   criadoEm?: Date | string
   atualizadoEm?: Date | string
   autorizadoEm?: Date | string | null
-  capa?: Prisma.ArquivoCreateNestedOneWithoutCursoCapaInput
+  arquivoCapa?: Prisma.ArquivoCreateNestedOneWithoutCursoCapaInput
   responsavel: Prisma.UsuarioCreateNestedOneWithoutCursosResponsavelInput
   adminAutorizador?: Prisma.UsuarioCreateNestedOneWithoutCursosAutorizadosInput
   inscricoes?: Prisma.InscricaoCreateNestedManyWithoutCursoInput
@@ -1025,6 +1057,7 @@ export type CursoUncheckedCreateWithoutSessoesInput = {
   descricao?: string | null
   cor?: string | null
   idCapa?: string | null
+  iconeCapa?: string | null
   idResponsavel: string
   idAdminAutorizador?: string | null
   criadoEm?: Date | string
@@ -1058,10 +1091,11 @@ export type CursoUpdateWithoutSessoesInput = {
   preco?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  iconeCapa?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   autorizadoEm?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  capa?: Prisma.ArquivoUpdateOneWithoutCursoCapaNestedInput
+  arquivoCapa?: Prisma.ArquivoUpdateOneWithoutCursoCapaNestedInput
   responsavel?: Prisma.UsuarioUpdateOneRequiredWithoutCursosResponsavelNestedInput
   adminAutorizador?: Prisma.UsuarioUpdateOneWithoutCursosAutorizadosNestedInput
   inscricoes?: Prisma.InscricaoUpdateManyWithoutCursoNestedInput
@@ -1077,6 +1111,7 @@ export type CursoUncheckedUpdateWithoutSessoesInput = {
   descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   idCapa?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  iconeCapa?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   idResponsavel?: Prisma.StringFieldUpdateOperationsInput | string
   idAdminAutorizador?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1094,10 +1129,11 @@ export type CursoCreateWithoutInscricoesInput = {
   preco?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   descricao?: string | null
   cor?: string | null
+  iconeCapa?: string | null
   criadoEm?: Date | string
   atualizadoEm?: Date | string
   autorizadoEm?: Date | string | null
-  capa?: Prisma.ArquivoCreateNestedOneWithoutCursoCapaInput
+  arquivoCapa?: Prisma.ArquivoCreateNestedOneWithoutCursoCapaInput
   responsavel: Prisma.UsuarioCreateNestedOneWithoutCursosResponsavelInput
   adminAutorizador?: Prisma.UsuarioCreateNestedOneWithoutCursosAutorizadosInput
   sessoes?: Prisma.SessaoCreateNestedManyWithoutCursoInput
@@ -1113,6 +1149,7 @@ export type CursoUncheckedCreateWithoutInscricoesInput = {
   descricao?: string | null
   cor?: string | null
   idCapa?: string | null
+  iconeCapa?: string | null
   idResponsavel: string
   idAdminAutorizador?: string | null
   criadoEm?: Date | string
@@ -1146,10 +1183,11 @@ export type CursoUpdateWithoutInscricoesInput = {
   preco?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  iconeCapa?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   autorizadoEm?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  capa?: Prisma.ArquivoUpdateOneWithoutCursoCapaNestedInput
+  arquivoCapa?: Prisma.ArquivoUpdateOneWithoutCursoCapaNestedInput
   responsavel?: Prisma.UsuarioUpdateOneRequiredWithoutCursosResponsavelNestedInput
   adminAutorizador?: Prisma.UsuarioUpdateOneWithoutCursosAutorizadosNestedInput
   sessoes?: Prisma.SessaoUpdateManyWithoutCursoNestedInput
@@ -1165,6 +1203,7 @@ export type CursoUncheckedUpdateWithoutInscricoesInput = {
   descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   idCapa?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  iconeCapa?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   idResponsavel?: Prisma.StringFieldUpdateOperationsInput | string
   idAdminAutorizador?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1183,6 +1222,7 @@ export type CursoCreateManyResponsavelInput = {
   descricao?: string | null
   cor?: string | null
   idCapa?: string | null
+  iconeCapa?: string | null
   idAdminAutorizador?: string | null
   criadoEm?: Date | string
   atualizadoEm?: Date | string
@@ -1199,6 +1239,7 @@ export type CursoCreateManyAdminAutorizadorInput = {
   descricao?: string | null
   cor?: string | null
   idCapa?: string | null
+  iconeCapa?: string | null
   idResponsavel: string
   criadoEm?: Date | string
   atualizadoEm?: Date | string
@@ -1214,10 +1255,11 @@ export type CursoUpdateWithoutResponsavelInput = {
   preco?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  iconeCapa?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   autorizadoEm?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  capa?: Prisma.ArquivoUpdateOneWithoutCursoCapaNestedInput
+  arquivoCapa?: Prisma.ArquivoUpdateOneWithoutCursoCapaNestedInput
   adminAutorizador?: Prisma.UsuarioUpdateOneWithoutCursosAutorizadosNestedInput
   sessoes?: Prisma.SessaoUpdateManyWithoutCursoNestedInput
   inscricoes?: Prisma.InscricaoUpdateManyWithoutCursoNestedInput
@@ -1233,6 +1275,7 @@ export type CursoUncheckedUpdateWithoutResponsavelInput = {
   descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   idCapa?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  iconeCapa?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   idAdminAutorizador?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1251,6 +1294,7 @@ export type CursoUncheckedUpdateManyWithoutResponsavelInput = {
   descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   idCapa?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  iconeCapa?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   idAdminAutorizador?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1266,10 +1310,11 @@ export type CursoUpdateWithoutAdminAutorizadorInput = {
   preco?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  iconeCapa?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   autorizadoEm?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  capa?: Prisma.ArquivoUpdateOneWithoutCursoCapaNestedInput
+  arquivoCapa?: Prisma.ArquivoUpdateOneWithoutCursoCapaNestedInput
   responsavel?: Prisma.UsuarioUpdateOneRequiredWithoutCursosResponsavelNestedInput
   sessoes?: Prisma.SessaoUpdateManyWithoutCursoNestedInput
   inscricoes?: Prisma.InscricaoUpdateManyWithoutCursoNestedInput
@@ -1285,6 +1330,7 @@ export type CursoUncheckedUpdateWithoutAdminAutorizadorInput = {
   descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   idCapa?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  iconeCapa?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   idResponsavel?: Prisma.StringFieldUpdateOperationsInput | string
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1303,6 +1349,7 @@ export type CursoUncheckedUpdateManyWithoutAdminAutorizadorInput = {
   descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   idCapa?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  iconeCapa?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   idResponsavel?: Prisma.StringFieldUpdateOperationsInput | string
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1359,12 +1406,13 @@ export type CursoSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   descricao?: boolean
   cor?: boolean
   idCapa?: boolean
+  iconeCapa?: boolean
   idResponsavel?: boolean
   idAdminAutorizador?: boolean
   criadoEm?: boolean
   atualizadoEm?: boolean
   autorizadoEm?: boolean
-  capa?: boolean | Prisma.Curso$capaArgs<ExtArgs>
+  arquivoCapa?: boolean | Prisma.Curso$arquivoCapaArgs<ExtArgs>
   responsavel?: boolean | Prisma.UsuarioDefaultArgs<ExtArgs>
   adminAutorizador?: boolean | Prisma.Curso$adminAutorizadorArgs<ExtArgs>
   sessoes?: boolean | Prisma.Curso$sessoesArgs<ExtArgs>
@@ -1382,12 +1430,13 @@ export type CursoSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   descricao?: boolean
   cor?: boolean
   idCapa?: boolean
+  iconeCapa?: boolean
   idResponsavel?: boolean
   idAdminAutorizador?: boolean
   criadoEm?: boolean
   atualizadoEm?: boolean
   autorizadoEm?: boolean
-  capa?: boolean | Prisma.Curso$capaArgs<ExtArgs>
+  arquivoCapa?: boolean | Prisma.Curso$arquivoCapaArgs<ExtArgs>
   responsavel?: boolean | Prisma.UsuarioDefaultArgs<ExtArgs>
   adminAutorizador?: boolean | Prisma.Curso$adminAutorizadorArgs<ExtArgs>
 }, ExtArgs["result"]["curso"]>
@@ -1402,12 +1451,13 @@ export type CursoSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   descricao?: boolean
   cor?: boolean
   idCapa?: boolean
+  iconeCapa?: boolean
   idResponsavel?: boolean
   idAdminAutorizador?: boolean
   criadoEm?: boolean
   atualizadoEm?: boolean
   autorizadoEm?: boolean
-  capa?: boolean | Prisma.Curso$capaArgs<ExtArgs>
+  arquivoCapa?: boolean | Prisma.Curso$arquivoCapaArgs<ExtArgs>
   responsavel?: boolean | Prisma.UsuarioDefaultArgs<ExtArgs>
   adminAutorizador?: boolean | Prisma.Curso$adminAutorizadorArgs<ExtArgs>
 }, ExtArgs["result"]["curso"]>
@@ -1422,6 +1472,7 @@ export type CursoSelectScalar = {
   descricao?: boolean
   cor?: boolean
   idCapa?: boolean
+  iconeCapa?: boolean
   idResponsavel?: boolean
   idAdminAutorizador?: boolean
   criadoEm?: boolean
@@ -1429,9 +1480,9 @@ export type CursoSelectScalar = {
   autorizadoEm?: boolean
 }
 
-export type CursoOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "nome" | "categoria" | "status" | "vagas" | "preco" | "descricao" | "cor" | "idCapa" | "idResponsavel" | "idAdminAutorizador" | "criadoEm" | "atualizadoEm" | "autorizadoEm", ExtArgs["result"]["curso"]>
+export type CursoOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "nome" | "categoria" | "status" | "vagas" | "preco" | "descricao" | "cor" | "idCapa" | "iconeCapa" | "idResponsavel" | "idAdminAutorizador" | "criadoEm" | "atualizadoEm" | "autorizadoEm", ExtArgs["result"]["curso"]>
 export type CursoInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  capa?: boolean | Prisma.Curso$capaArgs<ExtArgs>
+  arquivoCapa?: boolean | Prisma.Curso$arquivoCapaArgs<ExtArgs>
   responsavel?: boolean | Prisma.UsuarioDefaultArgs<ExtArgs>
   adminAutorizador?: boolean | Prisma.Curso$adminAutorizadorArgs<ExtArgs>
   sessoes?: boolean | Prisma.Curso$sessoesArgs<ExtArgs>
@@ -1439,12 +1490,12 @@ export type CursoInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   _count?: boolean | Prisma.CursoCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type CursoIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  capa?: boolean | Prisma.Curso$capaArgs<ExtArgs>
+  arquivoCapa?: boolean | Prisma.Curso$arquivoCapaArgs<ExtArgs>
   responsavel?: boolean | Prisma.UsuarioDefaultArgs<ExtArgs>
   adminAutorizador?: boolean | Prisma.Curso$adminAutorizadorArgs<ExtArgs>
 }
 export type CursoIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  capa?: boolean | Prisma.Curso$capaArgs<ExtArgs>
+  arquivoCapa?: boolean | Prisma.Curso$arquivoCapaArgs<ExtArgs>
   responsavel?: boolean | Prisma.UsuarioDefaultArgs<ExtArgs>
   adminAutorizador?: boolean | Prisma.Curso$adminAutorizadorArgs<ExtArgs>
 }
@@ -1452,7 +1503,7 @@ export type CursoIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extens
 export type $CursoPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Curso"
   objects: {
-    capa: Prisma.$ArquivoPayload<ExtArgs> | null
+    arquivoCapa: Prisma.$ArquivoPayload<ExtArgs> | null
     responsavel: Prisma.$UsuarioPayload<ExtArgs>
     adminAutorizador: Prisma.$UsuarioPayload<ExtArgs> | null
     sessoes: Prisma.$SessaoPayload<ExtArgs>[]
@@ -1468,6 +1519,7 @@ export type $CursoPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
     descricao: string | null
     cor: string | null
     idCapa: string | null
+    iconeCapa: string | null
     idResponsavel: string
     idAdminAutorizador: string | null
     criadoEm: Date
@@ -1867,7 +1919,7 @@ readonly fields: CursoFieldRefs;
  */
 export interface Prisma__CursoClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  capa<T extends Prisma.Curso$capaArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Curso$capaArgs<ExtArgs>>): Prisma.Prisma__ArquivoClient<runtime.Types.Result.GetResult<Prisma.$ArquivoPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  arquivoCapa<T extends Prisma.Curso$arquivoCapaArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Curso$arquivoCapaArgs<ExtArgs>>): Prisma.Prisma__ArquivoClient<runtime.Types.Result.GetResult<Prisma.$ArquivoPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   responsavel<T extends Prisma.UsuarioDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UsuarioDefaultArgs<ExtArgs>>): Prisma.Prisma__UsuarioClient<runtime.Types.Result.GetResult<Prisma.$UsuarioPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   adminAutorizador<T extends Prisma.Curso$adminAutorizadorArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Curso$adminAutorizadorArgs<ExtArgs>>): Prisma.Prisma__UsuarioClient<runtime.Types.Result.GetResult<Prisma.$UsuarioPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   sessoes<T extends Prisma.Curso$sessoesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Curso$sessoesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SessaoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -1910,6 +1962,7 @@ export interface CursoFieldRefs {
   readonly descricao: Prisma.FieldRef<"Curso", 'String'>
   readonly cor: Prisma.FieldRef<"Curso", 'String'>
   readonly idCapa: Prisma.FieldRef<"Curso", 'String'>
+  readonly iconeCapa: Prisma.FieldRef<"Curso", 'String'>
   readonly idResponsavel: Prisma.FieldRef<"Curso", 'String'>
   readonly idAdminAutorizador: Prisma.FieldRef<"Curso", 'String'>
   readonly criadoEm: Prisma.FieldRef<"Curso", 'DateTime'>
@@ -2316,9 +2369,9 @@ export type CursoDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Interna
 }
 
 /**
- * Curso.capa
+ * Curso.arquivoCapa
  */
-export type Curso$capaArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type Curso$arquivoCapaArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
    * Select specific fields to fetch from the Arquivo
    */

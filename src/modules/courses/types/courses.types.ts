@@ -3,6 +3,16 @@ import type {
   StatusCurso,
 } from "../../../generated/prisma/client.js";
 
+export type IconeCapaCurso =
+  | "livro"
+  | "matematica"
+  | "biologia"
+  | "ciencias"
+  | "historia"
+  | "geografia"
+  | "idiomas"
+  | "artes";
+
 export interface CriarCursoInput {
   nome: string;
   categoria: CategoriaCurso;
@@ -10,7 +20,7 @@ export interface CriarCursoInput {
   vagas?: number | null;
   preco?: number | null;
   cor?: string | null;
-  idCapa?: string | null;
+  capa?: IconeCapaCurso;
 }
 
 export interface AtualizarCursoInput {
@@ -20,7 +30,7 @@ export interface AtualizarCursoInput {
   vagas?: number | null;
   preco?: number | null;
   cor?: string | null;
-  idCapa?: string | null;
+  capa?: IconeCapaCurso | "" | null;
   status?: StatusCurso;
 }
 

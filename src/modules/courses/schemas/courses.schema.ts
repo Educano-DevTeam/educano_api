@@ -21,19 +21,51 @@ const statusSchema = z.enum([
   "ATIVO",
 ]);
 
+export const iconeCapaSchema = z.enum([
+  "livro",
+  "matematica",
+  "biologia",
+  "ciencias",
+  "historia",
+  "geografia",
+  "idiomas",
+  "artes",
+]);
+
+const vagasSchema = z.preprocess(
+  (valor) => {
+    if (valor === "" || valor === undefined) return undefined;
+    if (valor === "null") return null;
+    if (typeof valor === "string") return Number(valor);
+    return valor;
+  },
+  z.number().int().positive().nullable().optional(),
+);
+
+const precoSchema = z.preprocess(
+  (valor) => {
+    if (valor === "" || valor === undefined) return undefined;
+    if (valor === "null") return null;
+    if (typeof valor === "string") return Number(valor);
+    return valor;
+  },
+  z.number().min(0).nullable().optional(),
+);
+
 export const criarCursoSchema = z.object({
   nome: z.string().trim().min(3).max(150),
   categoria: categoriaSchema,
 
   descricao: z.string().trim().max(10000).optional(),
 
-  vagas: z.number().int().positive().nullable().optional(),
+  vagas: vagasSchema,
 
-  preco: z.number().min(0).nullable().optional(),
+  preco: precoSchema,
 
   cor: z.string().trim().max(30).nullable().optional(),
 
-  idCapa: uuidSchema.nullable().optional(),
+  // Ícone opcional. O id do arquivo nunca é recebido pelo cliente.
+  capa: iconeCapaSchema.optional(),
 }).strict();
 
 export const atualizarCursoSchema = z.object({
@@ -43,13 +75,14 @@ export const atualizarCursoSchema = z.object({
 
   descricao: z.string().trim().max(10000).nullable().optional(),
 
-  vagas: z.number().int().positive().nullable().optional(),
+  vagas: vagasSchema,
 
-  preco: z.number().min(0).nullable().optional(),
+  preco: precoSchema,
 
   cor: z.string().trim().max(30).nullable().optional(),
 
-  idCapa: uuidSchema.nullable().optional(),
+  // null ou string vazia permitem remover a capa atual.
+  capa: z.union([iconeCapaSchema, z.literal(""), z.null()]).optional(),
 
   status: statusSchema.optional(),
 }).strict().refine(
@@ -65,11 +98,8 @@ export const idCursoParamsSchema = z.object({
 
 export const listarCursosQuerySchema = z.object({
   pagina: z.coerce.number().int().min(1).default(1),
-
   nome: z.string().trim().max(150).optional(),
-
   categoria: categoriaSchema.optional(),
-
   status: statusSchema.optional(),
 });
 

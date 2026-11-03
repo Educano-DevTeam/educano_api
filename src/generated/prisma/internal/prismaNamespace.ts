@@ -1501,6 +1501,7 @@ export const CursoScalarFieldEnum = {
   descricao: 'descricao',
   cor: 'cor',
   idCapa: 'idCapa',
+  iconeCapa: 'iconeCapa',
   idResponsavel: 'idResponsavel',
   idAdminAutorizador: 'idAdminAutorizador',
   criadoEm: 'criadoEm',
