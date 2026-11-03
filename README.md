@@ -1,91 +1,109 @@
-# Educano API
+﻿# Educano API
 
-API REST do Educano, desenvolvida com Node.js, TypeScript e Express. O acesso a dados é feito com Prisma ORM e PostgreSQL.
+API REST do Educano, desenvolvida com Node.js, TypeScript e Express. O armazenamento relacional usa PostgreSQL com Prisma ORM; arquivos e imagens podem ser enviados ao Cloudflare R2.
 
 ## Tecnologias
 
-- **Node.js** e **TypeScript**.
-- **Express 5** para o servidor HTTP e as rotas.
-- **Prisma ORM 7** para schema, migrações e acesso ao banco.
-- **PostgreSQL**, com `pg` e `@prisma/adapter-pg`.
-- **Zod 4** para validação de parâmetros e payloads.
-- **JWT** (`jsonwebtoken`) e **bcryptjs** para autenticação e senhas.
-- **Nodemailer** para envio de e-mails de validação.
-- **Helmet**, **CORS** e **dotenv**.
-- **tsx** para desenvolvimento e **pnpm 12.14.0** para gerenciamento de pacotes.
+- Node.js e TypeScript
+- Express 5
+- Prisma ORM 7 e PostgreSQL
+- `pg` e `@prisma/adapter-pg`
+- Zod 4
+- JWT, bcryptjs
+- Multer para uploads temporários em disco
+- AWS SDK S3 para integração com Cloudflare R2
+- Nodemailer para e-mails de validação
+- Helmet, CORS, dotenv
+- tsx para desenvolvimento
+- pnpm 12.14.0
 
 ## Pré-requisitos
 
-- Node.js.
-- pnpm `12.14.0`.
-- PostgreSQL acessível pela aplicação.
-- SMTP configurado para enviar códigos de validação por e-mail.
+- Node.js
+- pnpm 12.14.0
+- PostgreSQL acessível pela aplicação
+- Conta de SMTP configurada
+- Bucket Cloudflare R2 com credenciais válidas
 
-Se pnpm ainda não estiver instalado, habilite o Corepack e ative a versão usada pelo projeto:
+Se necessário, habilite o pnpm pelo Corepack:
 
 ```bash
 corepack enable
 corepack prepare pnpm@12.14.0 --activate
 ```
 
-## Instalação e configuração
+## Instalação
 
-1. Clone o repositório e entre na pasta do projeto.
-2. Instale as dependências:
+```bash
+pnpm install
+cp .env.example .env
+```
 
-   ```bash
-   pnpm install
-   ```
+No PowerShell:
 
-3. Crie o arquivo `.env` a partir do exemplo:
+```powershell
+Copy-Item .env.example .env
+```
 
-   PowerShell:
+### Variáveis de ambiente
 
-   ```powershell
-   Copy-Item .env.example .env
-   ```
+```dotenv
+PORT=3000
+DATABASE_URL="postgresql://usuario:senha@localhost:5432/educano?schema=public"
+VALIDATION_CODE_SECRET="segredo-aleatorio-forte"
+JWT_SECRET="segredo-jwt-forte"
 
-   Bash:
+SMTP_HOST="smtp.gmail.com"
+SMTP_PORT=465
+SMTP_SECURE=true
+SMTP_USER="seu.email@gmail.com"
+SMTP_APP_PASSWORD="SENHA_DE_APP"
+EMAIL_FROM_NAME="Educano"
+EMAIL_FROM_ADDRESS="seu.email@gmail.com"
 
-   ```bash
-   cp .env.example .env
-   ```
+R2_ACCOUNT_ID="id-da-conta-r2"
+R2_ACCESS_KEY_ID="access-key"
+R2_SECRET_ACCESS_KEY="secret-key"
+R2_BUCKET_NAME="educano-arquivos"
+R2_ENDPOINT="https://<account-id>.r2.cloudflarestorage.com"
+```
 
-4. Configure as variáveis no `.env`:
-
-   ```dotenv
-   PORT=3000
-   DATABASE_URL="postgresql://USUARIO:SENHA@HOST:5432/NOME_DO_BANCO?schema=public"
-   VALIDATION_CODE_SECRET="segredo-aleatorio-com-pelo-menos-32-caracteres"
-   JWT_SECRET="outro-segredo-aleatorio-com-pelo-menos-32-caracteres"
-
-   SMTP_HOST="smtp.gmail.com"
-   SMTP_PORT=465
-   SMTP_SECURE=true
-   SMTP_USER="seu.email@gmail.com"
-   SMTP_APP_PASSWORD="SENHA_DE_APP_DO_GOOGLE"
-   EMAIL_FROM_NAME="Educano"
-   EMAIL_FROM_ADDRESS="seu.email@gmail.com"
-   ```
-
-   `VALIDATION_CODE_SECRET` é usado para armazenar os códigos de validação como hash; `JWT_SECRET` assina os tokens de acesso. Configure ambos com segredos aleatórios fortes e não os compartilhe. Para o Gmail, use uma senha de aplicativo SMTP. `PORT` é opcional e, se omitida, a aplicação usa `3000`.
+- `DATABASE_URL`: conexão PostgreSQL usada pelo Prisma.
+- `VALIDATION_CODE_SECRET`: segredo usado para proteger o hash dos códigos de validação.
+- `JWT_SECRET`: segredo usado para assinar e validar tokens JWT.
+- `VALIDATION_CODE_SECRET` e `JWT_SECRET` devem ter valores fortes e exclusivos.
+- `PORT`: opcional; padrão `3000`.
+- Variáveis SMTP: necessárias para enviar códigos por e-mail. Para o Gmail, use senha de aplicativo.
+- Variáveis R2: obrigatórias na inicialização da aplicação por `src/config/storage.ts`.
 
 ## Banco de dados e Prisma
 
-O schema está em `prisma/schema.prisma`. Ele define:
+O schema está em `prisma/schema.prisma`. A aplicação gera o client Prisma em `src/generated/prisma`.
 
-- `Usuario`, com nome, e-mail único, senha armazenada como hash, tipo, status e datas de criação/atualização.
-- `Perfil`, relacionado a um usuário, com visibilidade, plano, XP, moedas, nível, cor, decoração e URLs de imagens.
-- `CodigoValidacao`, com hash do código, estado, data de criação e expiração.
-- Os enums `TipoUsuario`, `StatusUsuario`, `TipoPerfil` e `StatusCodigoValidacao`.
+Principais entidades:
 
-As migrações estão em `prisma/migrations`. Para aplicá-las ao banco configurado:
+- `Usuario`: conta, tipo, status, perfil, códigos e relacionamentos com cursos, arquivos e outros módulos.
+- `Perfil`: privacidade, plano, experiência, moedas, nível, decoração e URLs de imagens.
+- `CodigoValidacao`: código de validação expirável relacionado à conta.
+- `Arquivo`: metadado e objeto armazenado no R2, incluindo tipo, finalidade, bucket, chave, tamanho, ETag e status.
+- `Curso`: dados acadêmicos, responsável, autorização administrativa, status, vagas, preço, capa enviada ou ícone de capa.
+- `Sessao`, `Modulo`, `Aula`, `Teste`, `Questao`, `Alternativa` e `Inscricao`: estrutura acadêmica preparada no schema.
+
+Enums principais:
+
+- Usuário: `TipoUsuario` (`ALUNO`, `PROFESSOR`, `PARCEIRO`, `ADMIN`) e `StatusUsuario` (`PENDENTE`, `ATIVO`, `INATIVO`).
+- Perfil: `TipoPerfil` (`PUBLICO`, `PRIVADO`).
+- Arquivo: `TipoArquivo`, `FinalidadeArquivo` e `StatusArquivo`.
+- Curso: `CategoriaCurso` e `StatusCurso` (`RASCUNHO`, `INATIVO`, `ATIVO`).
+- Conteúdo: `TipoMaterial`, `TipoTeste` e `NivelDificuldade`.
+
+As migrações estão em `prisma/migrations`. Para aplicá-las:
 
 ```bash
 pnpm exec prisma migrate deploy --config prisma7.config.ts
 ```
 
-O comando `pnpm dev` executa `prisma generate` antes de iniciar o servidor. Para gerar o client manualmente:
+Para gerar o client manualmente:
 
 ```bash
 pnpm exec prisma generate --config prisma7.config.ts
@@ -93,205 +111,227 @@ pnpm exec prisma generate --config prisma7.config.ts
 
 ## Executar
 
-Modo de desenvolvimento, com reinicialização ao alterar arquivos:
+Desenvolvimento:
 
 ```bash
 pnpm dev
 ```
 
-Compilar e iniciar a versão compilada:
+O script executa primeiro `prisma generate --config prisma7.config.ts`.
+
+Produção local:
 
 ```bash
 pnpm build
 pnpm start
 ```
 
-O servidor requer uma `DATABASE_URL` válida para inicializar o client Prisma.
+## Autenticação HTTP
+
+Use nas rotas protegidas:
+
+```http
+Authorization: Bearer <token-jwt>
+```
+
+O token é criado no login e expira em 15 minutos. O middleware verifica assinatura, validade, existência da conta e status `ATIVO`.
+
+Algumas operações exigem `ADMIN`. Quando necessário, falhas de permissão retornam `403`.
+
+Respostas padrão incluem JSON com `message` ou `mensagem`. Validações podem incluir `errors` ou `erros`.
 
 ## API
 
-Todas as rotas usam o prefixo `/api`. Os corpos e parâmetros são validados com Zod. Os erros tratados pelos endpoints são retornados em JSON; erros de validação geralmente incluem `message` e, quando indicado abaixo, `errors`.
+Todas as rotas começam com `/api`.
 
 ### Saúde
 
-| Método e rota | Acesso | Retorno de sucesso |
+| Método e rota | Acesso | Descrição |
 | --- | --- | --- |
-| `GET /api/health` | Público | `200`: `{ "status": "ok", "message": "API do Educano funcionando!" }`. Indica que a API está respondendo; não testa o banco. |
-| `GET /api/health/database` | Público | `200`: `{ "status": "ok", "database": "connected" }`. Executa `SELECT 1`. Se o banco estiver indisponível, retorna `503`: `{ "status": "error", "message": "Banco de dados indisponível." }`. |
+| `GET /api/health` | Público | Informa que o servidor HTTP está respondendo. |
+| `GET /api/health/database` | Público | Executa `SELECT 1`. Retorna `503` se o banco estiver indisponível. |
 
 ### Autenticação
 
-Cadastro, validação de e-mail e login são públicos. O cadastro aceita `nome`, `email`, `senha` e `tipo` opcional; se omitido, `tipo` vale `ALUNO`. Sem autenticação, só é permitido cadastrar `ALUNO`. Para cadastrar `PROFESSOR`, `PARCEIRO` ou `ADMIN`, envie um token de administrador no cabeçalho `Authorization`. As contas são criadas com status `PENDENTE` e recebem um código de seis caracteres por e-mail. O código expira em 10 minutos e não é incluído na resposta da API.
-
-| Método e rota | Corpo | Retorno de sucesso |
+| Método e rota | Acesso | Corpo ou resposta |
 | --- | --- | --- |
-| `POST /api/auth/register` | `{ "nome": "Nome", "email": "pessoa@exemplo.com", "senha": "minimo-8-caracteres", "tipo": "ALUNO" }`. `tipo` é opcional e aceita `ALUNO`, `PROFESSOR`, `PARCEIRO` ou `ADMIN`; sem ele, usa `ALUNO`. | `201`: `{ "message": "Cadastro criado. Enviamos um código para seu e-mail.", "usuario": { "id": "UUID", "nome": "Nome", "email": "pessoa@exemplo.com", "tipo": "ALUNO", "status": "PENDENTE" } }` |
-| `POST /api/auth/verify-code` | `{ "email": "pessoa@exemplo.com", "codigo": "A1B2C3" }` | `200`: `{ "message": "Conta validada e ativada com sucesso." }` |
-| `POST /api/auth/login` | `{ "email": "pessoa@exemplo.com", "senha": "senha" }` | `200`: `{ "message": "Login realizado com sucesso.", "token": "JWT", "usuario": { "id": "UUID", "nome": "Nome", "email": "pessoa@exemplo.com", "tipo": "ALUNO", "status": "ATIVO" } }`. O token expira em 15 minutos. |
-| `GET /api/auth/me` | Sem corpo. Requer `Authorization: Bearer <token>`. | `200`: `{ "autenticado": true, "usuario": { "id": "UUID", "nome": "Nome", "email": "pessoa@exemplo.com", "tipo": "ALUNO", "status": "ATIVO" }, "perfil": { "tipoPerfil": "PRIVADO", "xp": 0, "moedas": 0, "nivel": 0, "cor": "", "urlFotoPerfil": "", "urlFotoBackground": "" } }`. `perfil` pode ser `null`. |
+| `POST /api/auth/register` | Público | `{ nome, email, senha, tipo? }`. `tipo` aceita `ALUNO`, `PROFESSOR`, `PARCEIRO` ou `ADMIN`, mas usuários públicos só podem cadastrar `ALUNO`. Um administrador autenticado pode cadastrar outros tipos. |
+| `POST /api/auth/verify-code` | Público | `{ email, codigo }`. Valida o código de seis caracteres e ativa a conta. |
+| `POST /api/auth/login` | Público | `{ email, senha }`. Retorna JWT válido por 15 minutos e os dados do usuário. |
+| `GET /api/auth/me` | Autenticado | Retorna os dados da sessão, da conta e do perfil. |
 
-Erros relevantes:
+O cadastro cria o usuário como `PENDENTE`, gera um código de seis caracteres com validade de 10 minutos e envia-o por e-mail. O código não é retornado pela API.
 
-- `400` para corpo inválido. A resposta contém `message` e `errors` com os detalhes da validação.
-- Cadastro: `403` se o solicitante não puder cadastrar o tipo solicitado; `401` se o token enviado for inválido; `409` se o e-mail já estiver cadastrado; `503` se não for possível enviar o e-mail de confirmação.
-- Validação do código: `400` se a conta/dados não puderem ser validados, se o código não existir, estiver incorreto, expirado ou já tiver sido usado.
-- Login: `401` para credenciais incorretas ou conta ainda não ativada. A mensagem não diferencia esses casos.
-- `GET /api/auth/me`: `401` para token inválido/expirado ou conta indisponível; `503` se não for possível consultar a conta.
-- Erros inesperados: `500` com `{ "message": "Não foi possível concluir a solicitação." }`.
+Erros comuns: `400` para payload inválido, `401` para credenciais ou conta inválida, `403` para cadastro não autorizado, `409` para e-mail existente, `503` para SMTP ou banco indisponível.
 
 ### Usuários e perfis
 
-Todas as rotas deste grupo exigem o cabeçalho `Authorization: Bearer <token>`. O token é emitido no login. Sem token, com token inválido/expirado ou com conta indisponível, a API responde `401` com `{ "message": "..." }`. Falha ao consultar a conta no banco durante a autenticação responde `503`.
+Todas as rotas deste grupo exigem autenticação.
 
-O identificador `:identifier` pode ser o UUID do usuário ou seu e-mail. Usuários autenticados podem consultar os próprios dados completos; qualquer usuário autenticado pode consultar os dados públicos de outra conta ou perfil público. Perfis privados de terceiros não são retornados. Operações administrativas indicadas abaixo exigem tipo `ADMIN` e respondem `403` se o usuário não tiver permissão.
+`identifier` pode ser o UUID ou o e-mail. A própria conta pode ser consultada integralmente; dados de terceiros são públicos ou restritos de acordo com perfil, conta e autorização administrativa.
 
-| Método e rota | Acesso | Retorno de sucesso |
+| Método e rota | Acesso | Descrição |
 | --- | --- | --- |
-| `GET /api/users/me` | Qualquer usuário autenticado | `200`: `{ "usuario": { "id": "UUID", "nome": "Nome", "email": "pessoa@exemplo.com", "tipo": "ALUNO", "status": "ATIVO", "criadoEm": "data ISO-8601", "atualizadoEm": "data ISO-8601" } }`. |
-| `GET /api/users/me/profile` | Qualquer usuário autenticado | `200`: `{ "perfil": { "idUsuario": "UUID", "tipoPerfil": "PRIVADO", "planoContaId": null, "xp": 0, "moedas": 0, "nivel": 0, "cor": "", "decoracaoId": null, "urlFotoPerfil": "", "urlFotoBackground": "" } }`. |
-| `PATCH /api/users/me/profile` | Qualquer usuário autenticado | Atualiza o próprio perfil. `200`: objeto JSON com `message` e `perfil`; `perfil` contém os mesmos campos retornados por `GET /api/users/me/profile`. |
-| `GET /api/users?page=1` | Somente `ADMIN` | Lista usuários com 30 itens por página. `200`: objeto JSON com `dados` (array de usuários) e `paginacao` (`pagina`, `porPagina`, `total`, `totalPaginas`, `temMais`, `proximaPagina`). Cada usuário inclui `id`, `nome`, `email`, `tipo`, `status`, `criadoEm`, `atualizadoEm` e `perfil` (objeto com os campos de perfil ou `null`). `page` é um inteiro a partir de 1 e, se omitido, vale `1`. |
-| `GET /api/users/:identifier` | Qualquer usuário autenticado | `200`: os dados completos ficam em `dados` (`id`, `nome`, `email`, `tipo`, `status`, `criadoEm`, `atualizadoEm`) para o próprio usuário ou `ADMIN`; para outros usuários, retorna somente `{ "dados": { "id": "UUID", "nome": "Nome", "tipo": "ALUNO" } }`. |
-| `PATCH /api/users/:identifier` | Somente `ADMIN` | Atualiza `nome` e/ou `email`. `200`: objeto JSON com `message` e `usuario`, contendo os campos de usuário descritos acima. Informe ao menos um campo. |
-| `DELETE /api/users/:identifier` | Somente `ADMIN` | Exclui o usuário e seus dados relacionados em cascata. `200`: `{ "message": "Usuário excluído com sucesso." }`. |
-| `GET /api/users/:identifier/profile` | Qualquer usuário autenticado | `200`: perfil completo em `perfil` para o próprio usuário ou `ADMIN`; para terceiros, retorna em `dados` somente `idUsuario`, `nome`, `tipo`, `tipoPerfil`, `xp`, `moedas`, `nivel`, `cor`, `urlFotoPerfil` e `urlFotoBackground`, se `tipoPerfil` for `PUBLICO`. Para perfil privado de terceiros, retorna `404`: `{ "erro": "PERFIL_NAO_ENCONTRADO", "mensagem": "Perfil não encontrado." }`. |
-| `PATCH /api/users/:identifier/profile` | Somente `ADMIN` | Atualiza o perfil identificado. `200`: objeto JSON com `message` e `perfil`, contendo os campos descritos em `GET /api/users/me/profile`. |
-| `DELETE /api/users/:identifier/profile` | Somente `ADMIN` | Exclui somente o perfil; mantém a conta. `200`: `{ "message": "Perfil excluído com sucesso. A conta do usuário foi mantida." }`. |
+| `GET /api/users/me` | Autenticado | Dados completos da própria conta. |
+| `GET /api/users/me/profile` | Autenticado | Perfil próprio. |
+| `PATCH /api/users/me/profile` | Autenticado | Atualiza `tipoPerfil`, `cor`, `urlFotoPerfil` e `urlFotoBackground` do próprio perfil. |
+| `DELETE /api/users/me` | Autenticado | Remove a própria conta e os dados relacionados em cascata. |
+| `GET /api/users?page=1` | `ADMIN` | Lista 30 usuários por página. |
+| `GET /api/users/:identifier` | Autenticado | Consulta os dados próprios ou públicos de outro usuário. Administradores recebem dados completos. |
+| `PATCH /api/users/:identifier` | `ADMIN` | Atualiza `nome` e/ou `email`; exige pelo menos um campo. |
+| `DELETE /api/users/:identifier` | `ADMIN` | Exclui usuário e dados relacionados. |
+| `GET /api/users/:identifier/profile` | Autenticado | Consulta perfil próprio ou perfil público de terceiros. |
+| `PATCH /api/users/:identifier/profile` | `ADMIN` | Atualiza o perfil identificado. |
+| `DELETE /api/users/:identifier/profile` | `ADMIN` | Exclui o perfil, mantendo a conta. |
 
-No perfil, `tipoPerfil` aceita `PUBLICO` ou `PRIVADO`; os campos editáveis são `tipoPerfil`, `cor`, `urlFotoPerfil` e `urlFotoBackground`. URL vazia (`""`) também é aceita para limpar as imagens. XP, moedas, nível e plano não podem ser alterados por essas rotas. Para edição de usuário, apenas `nome` e `email` são aceitos.
-
-Erros relevantes neste grupo: `400` para identificador, paginação ou corpo inválidos; `403` para acesso a outro usuário/perfil ou operação administrativa sem permissão; `404` para usuário/perfil inexistente; `409` ao tentar usar e-mail já cadastrado; `503` para indisponibilidade conhecida do banco; `500` para outros erros inesperados. Os erros são retornados como `{ "message": "..." }`; validações podem incluir `errors`.
+No perfil, `tipoPerfil` aceita `PUBLICO` ou `PRIVADO`; URLs vazias podem limpar fotos. XP, moedas, nível, plano e decoração não são alterados pelas rotas de perfil.
 
 ### Ranking
 
-| Método e rota | Acesso | Retorno de sucesso |
+| Método e rota | Acesso | Descrição |
 | --- | --- | --- |
-| `GET /api/ranking?page=1` | Público | `200`: `{ "dados": [{ "posicao": 1, "id": "UUID", "nome": "Nome", "xp": 120, "nivel": 3, "urlFotoPerfil": "" }], "paginacao": { "pagina": 1, "porPagina": 15, "total": 1, "temMais": false, "proximaPagina": null } }`. Retorna 15 usuários por página, considerando apenas contas ativas com perfil e ordenando por XP decrescente. `page` é um inteiro a partir de 1 e, se omitido, vale `1`. |
+| `GET /api/ranking?page=1` | Público | Lista 15 usuários por página, somente contas ativas com perfil, ordenados por XP decrescente. |
 
-Se a paginação do ranking for inválida, a resposta é `400` com `mensagem` e `erros` (detalhes de validação fornecidos pelo Zod).
+### Arquivos
 
-## Middlewares
+Todas as rotas exigem autenticação e usam upload temporário em disco em `tmp/uploads`, limitado a 100 MB por arquivo. Os formatos permitidos são JPEG, PNG, WebP, MP3, WAV, OGG, M4A, AAC, MP4, WebM, MOV, PDF, DOCX, XLSX e PPTX.
 
-A aplicação registra Helmet, CORS com a configuração padrão do middleware e o parser JSON do Express. O grupo `/api/users` valida o token JWT e o status ativo da conta em cada requisição; algumas operações também verificam o tipo `ADMIN`.
+Campo esperado para envio multipart: `arquivo`.
+
+Campos adicionais no envio: `tipo` e `finalidade`.
+
+Tipos permitidos em `tipo`:
+
+- `IMAGEM`
+- `VIDEO`
+- `AUDIO`
+- `PDF`
+- `DOCUMENTO`
+- `OUTRO`
+
+Finalidades permitidas em `finalidade`:
+
+- `FOTO_PERFIL`
+- `BACKGROUND_PERFIL`
+- `CAPA_CURSO`
+- `MATERIAL_CURSO`
+- `MATERIAL_AULA`
+- `OUTRO`
+
+| Método e rota | Acesso | Corpo ou parâmetros | Retorno |
+| --- | --- | --- | --- |
+| `POST /api/files` | Autenticado | Multipart com `arquivo`, `tipo` e `finalidade` | `201`: metadados do arquivo e URL temporária assinada. |
+| `GET /api/files?pagina=1&limite=20&tipo=IMAGEM&finalidade=CAPA_CURSO` | Autenticado | `pagina`, `limite` e filtros opcionais | `200`: arquivos concluídos acessíveis ao usuário. Administradores listam todos os arquivos. |
+| `GET /api/files/:id` | Proprietário ou `ADMIN` | UUID do arquivo | `200`: metadados e URL temporária assinada. |
+| `DELETE /api/files/:id` | Proprietário ou `ADMIN` | UUID do arquivo | Remove o objeto do R2 e o registro do banco. |
+
+As URLs assinadas são válidas por 15 minutos. O upload cria o registro como `PENDENTE`, envia ao R2 e muda para `CONCLUIDO`; falhas removem o objeto e/ou registro criado. Arquivos temporários são excluídos ao concluir ou falhar a operação.
+
+`GET /api/files` retorna 20 itens por página por padrão, máximo 50 por página. A resposta inclui `dados` e `paginacao` (`pagina`, `limite`, `total`, `totalPaginas`). Apenas arquivos `CONCLUIDO` são listados ou consultados.
+
+Erros comuns: `400` para arquivo/formato/filtros inválidos, `403` para acesso a arquivo de outro usuário, `404` para arquivo não encontrado, `413` para tamanho acima de 100 MB, `500` para falhas inesperadas no armazenamento ou banco.
+
+### Cursos
+
+Todas as rotas exigem autenticação. Cursos não ativos só podem ser consultados pelo responsável ou por `ADMIN`; `GET /api/courses` mostra somente cursos ativos para usuários comuns.
+
+Categorias permitidas:
+
+`LINGUAGENS`, `EXATAS`, `CIENCIAS_HUMANAS`, `CIENCIAS_NATURAIS`, `REDACAO`, `VESTIBULAR`, `TECNOLOGIA`, `INTELIGENCIA_ARTIFICIAL`, `DESIGN`, `FINANCAS`.
+
+Status permitidos:
+
+`RASCUNHO`, `INATIVO`, `ATIVO`.
+
+Ícones de capa permitidos:
+
+`livro`, `matematica`, `biologia`, `ciencias`, `historia`, `geografia`, `idiomas`, `artes`.
+
+| Método e rota | Acesso | Corpo ou parâmetros | Retorno |
+| --- | --- | --- | --- |
+| `GET /api/courses?pagina=1&nome=&categoria=&status=` | Autenticado | `pagina`, `nome` e `categoria` opcionais. `status` pode ser usado somente por `ADMIN`. | `200`: lista paginada com 20 cursos por página. Usuários comuns recebem somente cursos ativos. |
+| `POST /api/courses` | Autenticado | `multipart/form-data`: campos `nome`, `categoria`, `descricao?`, `vagas?`, `preco?`, `cor?`, `capa?`; campo opcional de arquivo `arquivo`. | `201`: curso criado e automaticamente convertido em parceiro caso o usuário seja `ALUNO`. |
+| `GET /api/courses/:id` | Responsável/`ADMIN` para cursos não ativos; público entre usuários autenticados para cursos ativos | UUID do curso | `200`: curso completo. |
+| `PATCH /api/courses/:id` | Responsável ou `ADMIN` | Multipart ou JSON com campos opcionais `nome`, `categoria`, `descricao`, `vagas`, `preco`, `cor`, `capa`, `status`. Pode enviar uma nova `arquivo`. | `200`: curso atualizado. |
+| `DELETE /api/courses/:id` | Responsável ou `ADMIN` | UUID do curso | Remove o curso e, se houver, tenta remover a capa no R2. |
+
+No cadastro:
+
+- `nome`: texto entre 3 e 150 caracteres.
+- `descricao`: texto opcional até 10.000 caracteres.
+- `vagas`: inteiro positivo ou `null`.
+- `preco`: número maior ou igual a zero ou `null`.
+- `cor`: texto opcional até 30 caracteres.
+- Em multipart, `vagas` e `preco` enviados como texto são convertidos para número ou `null`.
+- A capa pode ser enviada como imagem JPEG, PNG ou WebP ou selecionada pelo campo textual `capa`.
+- O arquivo de capa, quando enviado, ocupa o campo `arquivo`.
+
+Completude do curso exige nome, categoria, descrição não vazia e uma capa: imagem enviada ou ícone selecionado. Um curso completo recebe `INATIVO` na criação. Sem esses dados, recebe `RASCUNHO`.
+
+Somente administradores podem alterar `status`. Ao definir `ATIVO`, o curso precisa estar completo. A ativação registra administrativamente quem autorizou e quando. Voltar a um status não ativo limpa essa autorização.
+
+Erros comuns: `400` para UUID, filtros, payload ou curso incompleto, `401` para conta indisponível, `403` para autorização/status ou alteração de terceiros, `404` para curso inexistente/inacessível, `409` para capa já vinculada, `502` para falha específica de upload da capa, `503` para banco indisponível.
+
+## Uploads e Cloudflare R2
+
+`src/modules/files/middleware/upload.middleware.ts` guarda os arquivos temporariamente em `tmp/uploads` antes da integração. A aplicação aceita um arquivo por requisição, até 100 MB.
+
+`src/modules/files/services/files.service.ts`:
+
+- cria registros `Arquivo` antes do envio externo;
+- envia conteúdo por streaming para o R2;
+- salva ETag, status e metadados;
+- gera URL assinada com validade de 15 minutos;
+- remove objetos temporários;
+- tenta compensar falhas removendo objeto ou registro criado.
+
+O diretório temporário é criado automaticamente no início da aplicação. Não o versionar.
+
+## Middlewares e segurança
+
+- Helmet aplica headers de segurança HTTP padrão.
+- CORS usa a configuração padrão do middleware.
+- Express aceita JSON nas rotas.
+- `/api/users`, `/api/files` e `/api/courses` usam autenticação JWT.
+- `/api/users` usa verificação adicional de administrador em operações protegidas.
+- Cursos verificam responsável ou administrador antes de atualizar ou excluir.
+- Arquivos verificam proprietário ou administrador antes de consultar/excluir.
+- Rotas seguem respostas JSON e validam payloads, query strings ou UUIDs.
 
 ## Estrutura do projeto
 
-A árvore abaixo mostra o código-fonte, arquivos de configuração e migrações do projeto. Omitidos por serem locais ou artefatos de execução/build: `node_modules/`, `dist/` e `.env`. O diretório `.agents/skills/`, `.claude/skills/` e `.windsurf/skills/` contém material de apoio a agentes de desenvolvimento, não executado pela API.
-
 ```text
 .
-├── .agents/skills/                 # Instruções e referências para agentes
-├── .claude/skills/                 # Instruções e referências para agentes
-├── .windsurf/skills/               # Instruções e referências para agentes
 ├── assets/
-│   └── Educano_Logo.jpeg           # Logo anexado ao e-mail de validação
-├── generated/prisma/               # Client Prisma legado gerado na raiz
-│   ├── internal/
-│   │   ├── class.ts
-│   │   ├── prismaNamespace.ts
-│   │   └── prismaNamespaceBrowser.ts
-│   ├── models/
-│   │   ├── Perfil.ts
-│   │   └── Usuario.ts
-│   ├── browser.ts
-│   ├── client.ts
-│   ├── commonInputTypes.ts
-│   ├── enums.ts
-│   └── models.ts
+│   └── Educano_Logo.jpeg
 ├── prisma/
 │   ├── migrations/
-│   │   ├── 20261017012328_criar_usuario_perfil/
-│   │   │   └── migration.sql
-│   │   ├── 20261017234256_adicionar_codigo_validacao/
-│   │   │   └── migration.sql
-│   │   └── migration_lock.toml
-│   └── schema.prisma               # Modelos, enums e destino do client gerado
+│   └── schema.prisma
 ├── src/
+│   ├── app.ts                         # Middlewares e registro das rotas
+│   ├── server.ts                      # Inicialização HTTP
 │   ├── config/
-│   │   └── prisma.ts               # Client Prisma com adapter PostgreSQL
-│   ├── generated/prisma/           # Client usado pela aplicação (gerado)
-│   │   ├── internal/
-│   │   │   ├── class.ts
-│   │   │   ├── prismaNamespace.ts
-│   │   │   └── prismaNamespaceBrowser.ts
-│   │   ├── models/
-│   │   │   ├── CodigoValidacao.ts
-│   │   │   ├── Perfil.ts
-│   │   │   └── Usuario.ts
-│   │   ├── browser.ts
-│   │   ├── client.ts
-│   │   ├── commonInputTypes.ts
-│   │   ├── enums.ts
-│   │   └── models.ts
+│   │   ├── prisma.ts                  # Client Prisma e adapter PostgreSQL
+│   │   └── storage.ts                 # Client Cloudflare R2
+│   ├── generated/prisma/              # Client Prisma gerado
 │   ├── middlewares/
-│   │   ├── auth.middlewares.ts     # Autenticação JWT e autorização ADMIN
+│   │   ├── auth.middlewares.ts        # Autenticação JWT
 │   │   └── authorization.middleware.ts
 │   ├── modules/
-│   │   ├── auth/
-│   │   │   ├── controllers/auth.controller.ts
-│   │   │   ├── repositories/       # Reservado para repositórios
-│   │   │   ├── routes/auth.routes.ts
-│   │   │   ├── schemas/auth.schema.ts
-│   │   │   ├── services/
-│   │   │   │   ├── auth.service.ts
-│   │   │   │   └── token.service.ts
-│   │   │   └── templates/validations-email.template.ts
-│   │   ├── courses/                # Estrutura reservada; sem implementação
-│   │   │   ├── controllers/
-│   │   │   ├── repositories/
-│   │   │   ├── routes/
-│   │   │   ├── schemas/
-│   │   │   └── services/
-│   │   ├── flashcards/             # Estrutura reservada; sem implementação
-│   │   │   ├── controllers/
-│   │   │   ├── repositories/
-│   │   │   ├── routes/
-│   │   │   ├── schemas/
-│   │   │   └── services/
-│   │   ├── questions/              # Estrutura reservada; sem implementação
-│   │   │   ├── controllers/
-│   │   │   ├── repositories/
-│   │   │   ├── routes/
-│   │   │   ├── schemas/
-│   │   │   └── services/
-│   │   ├── ranking/
-│   │   │   ├── controllers/ranking.controller.ts
-│   │   │   ├── repositories/       # Reservado para repositórios
-│   │   │   ├── routes/ranking,route.ts
-│   │   │   ├── schemas/ranking.schema.ts
-│   │   │   └── services/ranking.service.ts
-│   │   ├── store/                  # Estrutura reservada; sem implementação
-│   │   │   ├── controllers/
-│   │   │   ├── repositories/
-│   │   │   ├── routes/
-│   │   │   ├── schemas/
-│   │   │   └── services/
-│   │   └── users/
-│   │       ├── controllers/
-│   │       │   ├── profile.controller.ts
-│   │       │   └── users.controller.ts
-│   │       ├── repositories/       # Reservado para repositórios
-│   │       ├── routes/users.routes.ts
-│   │       ├── schemas/
-│   │       │   ├── profile.schema.ts
-│   │       │   └── users.schema.ts
-│   │       └── services/
-│   │           ├── profile.service.ts
-│   │           └── users.service.ts
-│   ├── services/email.service.ts   # Transporte SMTP
-│   ├── shared/                     # Reservado para recursos compartilhados
-│   ├── app.ts                      # Middlewares e registro das rotas
-│   └── server.ts                   # Inicialização HTTP e porta
-├── .env.example                    # Modelo de variáveis de ambiente
-├── .gitattributes
-├── .gitignore
-├── package.json                    # Scripts e dependências
+│   │   ├── auth/                      # Registro, login, validação e sessão
+│   │   ├── users/                     # Usuários e perfis
+│   │   ├── ranking/                   # Ranking por XP
+│   │   ├── files/                     # Upload, consulta e exclusão de arquivos
+│   │   └── courses/                   # CRUD e regras de cursos
+│   └── services/
+│       └── email.service.ts           # Envio SMTP
+├── tmp/uploads/                       # Arquivos temporários de upload
+├── .env.example
+├── package.json
 ├── pnpm-lock.yaml
-├── pnpm-workspace.yaml
-├── prisma7.config.ts               # Configuração CLI Prisma 7
-├── README.md
-├── skills-lock.json
-└── tsconfig.json
+├── prisma7.config.ts
+├── tsconfig.json
+└── README.md
 ```
 
-As pastas `courses`, `flashcards`, `questions` e `store` são apenas estrutura preparada: não têm rotas registradas nem endpoints disponíveis. O client Prisma de referência da aplicação é o de `src/generated/prisma`, configurado como saída em `prisma/schema.prisma`.
+A aplicação registra atualmente os módulos de autenticação, usuários, ranking, arquivos e cursos em `src/app.ts`. Outros diretórios presentes em `src/modules` podem representar estrutura ou implementação em desenvolvimento, mas não ficam disponíveis pela API enquanto não forem importados e montados em `src/app.ts`.
