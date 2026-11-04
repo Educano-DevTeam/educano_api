@@ -33,6 +33,7 @@ export type UsuarioMinAggregateOutputType = {
   status: $Enums.StatusUsuario | null
   criadoEm: Date | null
   atualizadoEm: Date | null
+  senhaAtualizadaEm: Date | null
 }
 
 export type UsuarioMaxAggregateOutputType = {
@@ -44,6 +45,7 @@ export type UsuarioMaxAggregateOutputType = {
   status: $Enums.StatusUsuario | null
   criadoEm: Date | null
   atualizadoEm: Date | null
+  senhaAtualizadaEm: Date | null
 }
 
 export type UsuarioCountAggregateOutputType = {
@@ -55,6 +57,7 @@ export type UsuarioCountAggregateOutputType = {
   status: number
   criadoEm: number
   atualizadoEm: number
+  senhaAtualizadaEm: number
   _all: number
 }
 
@@ -68,6 +71,7 @@ export type UsuarioMinAggregateInputType = {
   status?: true
   criadoEm?: true
   atualizadoEm?: true
+  senhaAtualizadaEm?: true
 }
 
 export type UsuarioMaxAggregateInputType = {
@@ -79,6 +83,7 @@ export type UsuarioMaxAggregateInputType = {
   status?: true
   criadoEm?: true
   atualizadoEm?: true
+  senhaAtualizadaEm?: true
 }
 
 export type UsuarioCountAggregateInputType = {
@@ -90,6 +95,7 @@ export type UsuarioCountAggregateInputType = {
   status?: true
   criadoEm?: true
   atualizadoEm?: true
+  senhaAtualizadaEm?: true
   _all?: true
 }
 
@@ -174,6 +180,7 @@ export type UsuarioGroupByOutputType = {
   status: $Enums.StatusUsuario
   criadoEm: Date
   atualizadoEm: Date
+  senhaAtualizadaEm: Date
   _count: UsuarioCountAggregateOutputType | null
   _min: UsuarioMinAggregateOutputType | null
   _max: UsuarioMaxAggregateOutputType | null
@@ -206,6 +213,7 @@ export type UsuarioWhereInput = {
   status?: Prisma.EnumStatusUsuarioFilter<"Usuario"> | $Enums.StatusUsuario
   criadoEm?: Prisma.DateTimeFilter<"Usuario"> | Date | string
   atualizadoEm?: Prisma.DateTimeFilter<"Usuario"> | Date | string
+  senhaAtualizadaEm?: Prisma.DateTimeFilter<"Usuario"> | Date | string
   perfil?: Prisma.XOR<Prisma.PerfilNullableScalarRelationFilter, Prisma.PerfilWhereInput> | null
   codigosValidacao?: Prisma.CodigoValidacaoListRelationFilter
   arquivos?: Prisma.ArquivoListRelationFilter
@@ -218,6 +226,12 @@ export type UsuarioWhereInput = {
   questoesResponsavel?: Prisma.QuestaoListRelationFilter
   alternativasResponsavel?: Prisma.AlternativaListRelationFilter
   inscricoes?: Prisma.InscricaoListRelationFilter
+  progressosAula?: Prisma.ProgressoAulaListRelationFilter
+  tentativas?: Prisma.TentativaTesteListRelationFilter
+  movimentacoes?: Prisma.MovimentacaoRecompensaListRelationFilter
+  inventario?: Prisma.InventarioItemListRelationFilter
+  ativacoes?: Prisma.AtivacaoItemListRelationFilter
+  flashcards?: Prisma.FlashcardListRelationFilter
 }
 
 export type UsuarioOrderByWithRelationInput = {
@@ -229,6 +243,7 @@ export type UsuarioOrderByWithRelationInput = {
   status?: Prisma.SortOrder
   criadoEm?: Prisma.SortOrder
   atualizadoEm?: Prisma.SortOrder
+  senhaAtualizadaEm?: Prisma.SortOrder
   perfil?: Prisma.PerfilOrderByWithRelationInput
   codigosValidacao?: Prisma.CodigoValidacaoOrderByRelationAggregateInput
   arquivos?: Prisma.ArquivoOrderByRelationAggregateInput
@@ -241,6 +256,12 @@ export type UsuarioOrderByWithRelationInput = {
   questoesResponsavel?: Prisma.QuestaoOrderByRelationAggregateInput
   alternativasResponsavel?: Prisma.AlternativaOrderByRelationAggregateInput
   inscricoes?: Prisma.InscricaoOrderByRelationAggregateInput
+  progressosAula?: Prisma.ProgressoAulaOrderByRelationAggregateInput
+  tentativas?: Prisma.TentativaTesteOrderByRelationAggregateInput
+  movimentacoes?: Prisma.MovimentacaoRecompensaOrderByRelationAggregateInput
+  inventario?: Prisma.InventarioItemOrderByRelationAggregateInput
+  ativacoes?: Prisma.AtivacaoItemOrderByRelationAggregateInput
+  flashcards?: Prisma.FlashcardOrderByRelationAggregateInput
 }
 
 export type UsuarioWhereUniqueInput = Prisma.AtLeast<{
@@ -255,6 +276,7 @@ export type UsuarioWhereUniqueInput = Prisma.AtLeast<{
   status?: Prisma.EnumStatusUsuarioFilter<"Usuario"> | $Enums.StatusUsuario
   criadoEm?: Prisma.DateTimeFilter<"Usuario"> | Date | string
   atualizadoEm?: Prisma.DateTimeFilter<"Usuario"> | Date | string
+  senhaAtualizadaEm?: Prisma.DateTimeFilter<"Usuario"> | Date | string
   perfil?: Prisma.XOR<Prisma.PerfilNullableScalarRelationFilter, Prisma.PerfilWhereInput> | null
   codigosValidacao?: Prisma.CodigoValidacaoListRelationFilter
   arquivos?: Prisma.ArquivoListRelationFilter
@@ -267,6 +289,12 @@ export type UsuarioWhereUniqueInput = Prisma.AtLeast<{
   questoesResponsavel?: Prisma.QuestaoListRelationFilter
   alternativasResponsavel?: Prisma.AlternativaListRelationFilter
   inscricoes?: Prisma.InscricaoListRelationFilter
+  progressosAula?: Prisma.ProgressoAulaListRelationFilter
+  tentativas?: Prisma.TentativaTesteListRelationFilter
+  movimentacoes?: Prisma.MovimentacaoRecompensaListRelationFilter
+  inventario?: Prisma.InventarioItemListRelationFilter
+  ativacoes?: Prisma.AtivacaoItemListRelationFilter
+  flashcards?: Prisma.FlashcardListRelationFilter
 }, "id" | "email">
 
 export type UsuarioOrderByWithAggregationInput = {
@@ -278,6 +306,7 @@ export type UsuarioOrderByWithAggregationInput = {
   status?: Prisma.SortOrder
   criadoEm?: Prisma.SortOrder
   atualizadoEm?: Prisma.SortOrder
+  senhaAtualizadaEm?: Prisma.SortOrder
   _count?: Prisma.UsuarioCountOrderByAggregateInput
   _max?: Prisma.UsuarioMaxOrderByAggregateInput
   _min?: Prisma.UsuarioMinOrderByAggregateInput
@@ -295,6 +324,7 @@ export type UsuarioScalarWhereWithAggregatesInput = {
   status?: Prisma.EnumStatusUsuarioWithAggregatesFilter<"Usuario"> | $Enums.StatusUsuario
   criadoEm?: Prisma.DateTimeWithAggregatesFilter<"Usuario"> | Date | string
   atualizadoEm?: Prisma.DateTimeWithAggregatesFilter<"Usuario"> | Date | string
+  senhaAtualizadaEm?: Prisma.DateTimeWithAggregatesFilter<"Usuario"> | Date | string
 }
 
 export type UsuarioCreateInput = {
@@ -306,6 +336,7 @@ export type UsuarioCreateInput = {
   status?: $Enums.StatusUsuario
   criadoEm?: Date | string
   atualizadoEm?: Date | string
+  senhaAtualizadaEm?: Date | string
   perfil?: Prisma.PerfilCreateNestedOneWithoutUsuarioInput
   codigosValidacao?: Prisma.CodigoValidacaoCreateNestedManyWithoutUsuarioInput
   arquivos?: Prisma.ArquivoCreateNestedManyWithoutUsuarioInput
@@ -318,6 +349,12 @@ export type UsuarioCreateInput = {
   questoesResponsavel?: Prisma.QuestaoCreateNestedManyWithoutResponsavelInput
   alternativasResponsavel?: Prisma.AlternativaCreateNestedManyWithoutResponsavelInput
   inscricoes?: Prisma.InscricaoCreateNestedManyWithoutUsuarioInput
+  progressosAula?: Prisma.ProgressoAulaCreateNestedManyWithoutUsuarioInput
+  tentativas?: Prisma.TentativaTesteCreateNestedManyWithoutUsuarioInput
+  movimentacoes?: Prisma.MovimentacaoRecompensaCreateNestedManyWithoutUsuarioInput
+  inventario?: Prisma.InventarioItemCreateNestedManyWithoutUsuarioInput
+  ativacoes?: Prisma.AtivacaoItemCreateNestedManyWithoutUsuarioInput
+  flashcards?: Prisma.FlashcardCreateNestedManyWithoutUsuarioInput
 }
 
 export type UsuarioUncheckedCreateInput = {
@@ -329,6 +366,7 @@ export type UsuarioUncheckedCreateInput = {
   status?: $Enums.StatusUsuario
   criadoEm?: Date | string
   atualizadoEm?: Date | string
+  senhaAtualizadaEm?: Date | string
   perfil?: Prisma.PerfilUncheckedCreateNestedOneWithoutUsuarioInput
   codigosValidacao?: Prisma.CodigoValidacaoUncheckedCreateNestedManyWithoutUsuarioInput
   arquivos?: Prisma.ArquivoUncheckedCreateNestedManyWithoutUsuarioInput
@@ -341,6 +379,12 @@ export type UsuarioUncheckedCreateInput = {
   questoesResponsavel?: Prisma.QuestaoUncheckedCreateNestedManyWithoutResponsavelInput
   alternativasResponsavel?: Prisma.AlternativaUncheckedCreateNestedManyWithoutResponsavelInput
   inscricoes?: Prisma.InscricaoUncheckedCreateNestedManyWithoutUsuarioInput
+  progressosAula?: Prisma.ProgressoAulaUncheckedCreateNestedManyWithoutUsuarioInput
+  tentativas?: Prisma.TentativaTesteUncheckedCreateNestedManyWithoutUsuarioInput
+  movimentacoes?: Prisma.MovimentacaoRecompensaUncheckedCreateNestedManyWithoutUsuarioInput
+  inventario?: Prisma.InventarioItemUncheckedCreateNestedManyWithoutUsuarioInput
+  ativacoes?: Prisma.AtivacaoItemUncheckedCreateNestedManyWithoutUsuarioInput
+  flashcards?: Prisma.FlashcardUncheckedCreateNestedManyWithoutUsuarioInput
 }
 
 export type UsuarioUpdateInput = {
@@ -352,6 +396,7 @@ export type UsuarioUpdateInput = {
   status?: Prisma.EnumStatusUsuarioFieldUpdateOperationsInput | $Enums.StatusUsuario
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  senhaAtualizadaEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   perfil?: Prisma.PerfilUpdateOneWithoutUsuarioNestedInput
   codigosValidacao?: Prisma.CodigoValidacaoUpdateManyWithoutUsuarioNestedInput
   arquivos?: Prisma.ArquivoUpdateManyWithoutUsuarioNestedInput
@@ -364,6 +409,12 @@ export type UsuarioUpdateInput = {
   questoesResponsavel?: Prisma.QuestaoUpdateManyWithoutResponsavelNestedInput
   alternativasResponsavel?: Prisma.AlternativaUpdateManyWithoutResponsavelNestedInput
   inscricoes?: Prisma.InscricaoUpdateManyWithoutUsuarioNestedInput
+  progressosAula?: Prisma.ProgressoAulaUpdateManyWithoutUsuarioNestedInput
+  tentativas?: Prisma.TentativaTesteUpdateManyWithoutUsuarioNestedInput
+  movimentacoes?: Prisma.MovimentacaoRecompensaUpdateManyWithoutUsuarioNestedInput
+  inventario?: Prisma.InventarioItemUpdateManyWithoutUsuarioNestedInput
+  ativacoes?: Prisma.AtivacaoItemUpdateManyWithoutUsuarioNestedInput
+  flashcards?: Prisma.FlashcardUpdateManyWithoutUsuarioNestedInput
 }
 
 export type UsuarioUncheckedUpdateInput = {
@@ -375,6 +426,7 @@ export type UsuarioUncheckedUpdateInput = {
   status?: Prisma.EnumStatusUsuarioFieldUpdateOperationsInput | $Enums.StatusUsuario
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  senhaAtualizadaEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   perfil?: Prisma.PerfilUncheckedUpdateOneWithoutUsuarioNestedInput
   codigosValidacao?: Prisma.CodigoValidacaoUncheckedUpdateManyWithoutUsuarioNestedInput
   arquivos?: Prisma.ArquivoUncheckedUpdateManyWithoutUsuarioNestedInput
@@ -387,6 +439,12 @@ export type UsuarioUncheckedUpdateInput = {
   questoesResponsavel?: Prisma.QuestaoUncheckedUpdateManyWithoutResponsavelNestedInput
   alternativasResponsavel?: Prisma.AlternativaUncheckedUpdateManyWithoutResponsavelNestedInput
   inscricoes?: Prisma.InscricaoUncheckedUpdateManyWithoutUsuarioNestedInput
+  progressosAula?: Prisma.ProgressoAulaUncheckedUpdateManyWithoutUsuarioNestedInput
+  tentativas?: Prisma.TentativaTesteUncheckedUpdateManyWithoutUsuarioNestedInput
+  movimentacoes?: Prisma.MovimentacaoRecompensaUncheckedUpdateManyWithoutUsuarioNestedInput
+  inventario?: Prisma.InventarioItemUncheckedUpdateManyWithoutUsuarioNestedInput
+  ativacoes?: Prisma.AtivacaoItemUncheckedUpdateManyWithoutUsuarioNestedInput
+  flashcards?: Prisma.FlashcardUncheckedUpdateManyWithoutUsuarioNestedInput
 }
 
 export type UsuarioCreateManyInput = {
@@ -398,6 +456,7 @@ export type UsuarioCreateManyInput = {
   status?: $Enums.StatusUsuario
   criadoEm?: Date | string
   atualizadoEm?: Date | string
+  senhaAtualizadaEm?: Date | string
 }
 
 export type UsuarioUpdateManyMutationInput = {
@@ -409,6 +468,7 @@ export type UsuarioUpdateManyMutationInput = {
   status?: Prisma.EnumStatusUsuarioFieldUpdateOperationsInput | $Enums.StatusUsuario
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  senhaAtualizadaEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type UsuarioUncheckedUpdateManyInput = {
@@ -420,6 +480,7 @@ export type UsuarioUncheckedUpdateManyInput = {
   status?: Prisma.EnumStatusUsuarioFieldUpdateOperationsInput | $Enums.StatusUsuario
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  senhaAtualizadaEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type UsuarioCountOrderByAggregateInput = {
@@ -431,6 +492,7 @@ export type UsuarioCountOrderByAggregateInput = {
   status?: Prisma.SortOrder
   criadoEm?: Prisma.SortOrder
   atualizadoEm?: Prisma.SortOrder
+  senhaAtualizadaEm?: Prisma.SortOrder
 }
 
 export type UsuarioMaxOrderByAggregateInput = {
@@ -442,6 +504,7 @@ export type UsuarioMaxOrderByAggregateInput = {
   status?: Prisma.SortOrder
   criadoEm?: Prisma.SortOrder
   atualizadoEm?: Prisma.SortOrder
+  senhaAtualizadaEm?: Prisma.SortOrder
 }
 
 export type UsuarioMinOrderByAggregateInput = {
@@ -453,6 +516,7 @@ export type UsuarioMinOrderByAggregateInput = {
   status?: Prisma.SortOrder
   criadoEm?: Prisma.SortOrder
   atualizadoEm?: Prisma.SortOrder
+  senhaAtualizadaEm?: Prisma.SortOrder
 }
 
 export type UsuarioScalarRelationFilter = {
@@ -651,6 +715,90 @@ export type UsuarioUpdateOneRequiredWithoutInscricoesNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UsuarioUpdateToOneWithWhereWithoutInscricoesInput, Prisma.UsuarioUpdateWithoutInscricoesInput>, Prisma.UsuarioUncheckedUpdateWithoutInscricoesInput>
 }
 
+export type UsuarioCreateNestedOneWithoutProgressosAulaInput = {
+  create?: Prisma.XOR<Prisma.UsuarioCreateWithoutProgressosAulaInput, Prisma.UsuarioUncheckedCreateWithoutProgressosAulaInput>
+  connectOrCreate?: Prisma.UsuarioCreateOrConnectWithoutProgressosAulaInput
+  connect?: Prisma.UsuarioWhereUniqueInput
+}
+
+export type UsuarioUpdateOneRequiredWithoutProgressosAulaNestedInput = {
+  create?: Prisma.XOR<Prisma.UsuarioCreateWithoutProgressosAulaInput, Prisma.UsuarioUncheckedCreateWithoutProgressosAulaInput>
+  connectOrCreate?: Prisma.UsuarioCreateOrConnectWithoutProgressosAulaInput
+  upsert?: Prisma.UsuarioUpsertWithoutProgressosAulaInput
+  connect?: Prisma.UsuarioWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UsuarioUpdateToOneWithWhereWithoutProgressosAulaInput, Prisma.UsuarioUpdateWithoutProgressosAulaInput>, Prisma.UsuarioUncheckedUpdateWithoutProgressosAulaInput>
+}
+
+export type UsuarioCreateNestedOneWithoutTentativasInput = {
+  create?: Prisma.XOR<Prisma.UsuarioCreateWithoutTentativasInput, Prisma.UsuarioUncheckedCreateWithoutTentativasInput>
+  connectOrCreate?: Prisma.UsuarioCreateOrConnectWithoutTentativasInput
+  connect?: Prisma.UsuarioWhereUniqueInput
+}
+
+export type UsuarioUpdateOneRequiredWithoutTentativasNestedInput = {
+  create?: Prisma.XOR<Prisma.UsuarioCreateWithoutTentativasInput, Prisma.UsuarioUncheckedCreateWithoutTentativasInput>
+  connectOrCreate?: Prisma.UsuarioCreateOrConnectWithoutTentativasInput
+  upsert?: Prisma.UsuarioUpsertWithoutTentativasInput
+  connect?: Prisma.UsuarioWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UsuarioUpdateToOneWithWhereWithoutTentativasInput, Prisma.UsuarioUpdateWithoutTentativasInput>, Prisma.UsuarioUncheckedUpdateWithoutTentativasInput>
+}
+
+export type UsuarioCreateNestedOneWithoutMovimentacoesInput = {
+  create?: Prisma.XOR<Prisma.UsuarioCreateWithoutMovimentacoesInput, Prisma.UsuarioUncheckedCreateWithoutMovimentacoesInput>
+  connectOrCreate?: Prisma.UsuarioCreateOrConnectWithoutMovimentacoesInput
+  connect?: Prisma.UsuarioWhereUniqueInput
+}
+
+export type UsuarioUpdateOneRequiredWithoutMovimentacoesNestedInput = {
+  create?: Prisma.XOR<Prisma.UsuarioCreateWithoutMovimentacoesInput, Prisma.UsuarioUncheckedCreateWithoutMovimentacoesInput>
+  connectOrCreate?: Prisma.UsuarioCreateOrConnectWithoutMovimentacoesInput
+  upsert?: Prisma.UsuarioUpsertWithoutMovimentacoesInput
+  connect?: Prisma.UsuarioWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UsuarioUpdateToOneWithWhereWithoutMovimentacoesInput, Prisma.UsuarioUpdateWithoutMovimentacoesInput>, Prisma.UsuarioUncheckedUpdateWithoutMovimentacoesInput>
+}
+
+export type UsuarioCreateNestedOneWithoutInventarioInput = {
+  create?: Prisma.XOR<Prisma.UsuarioCreateWithoutInventarioInput, Prisma.UsuarioUncheckedCreateWithoutInventarioInput>
+  connectOrCreate?: Prisma.UsuarioCreateOrConnectWithoutInventarioInput
+  connect?: Prisma.UsuarioWhereUniqueInput
+}
+
+export type UsuarioUpdateOneRequiredWithoutInventarioNestedInput = {
+  create?: Prisma.XOR<Prisma.UsuarioCreateWithoutInventarioInput, Prisma.UsuarioUncheckedCreateWithoutInventarioInput>
+  connectOrCreate?: Prisma.UsuarioCreateOrConnectWithoutInventarioInput
+  upsert?: Prisma.UsuarioUpsertWithoutInventarioInput
+  connect?: Prisma.UsuarioWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UsuarioUpdateToOneWithWhereWithoutInventarioInput, Prisma.UsuarioUpdateWithoutInventarioInput>, Prisma.UsuarioUncheckedUpdateWithoutInventarioInput>
+}
+
+export type UsuarioCreateNestedOneWithoutAtivacoesInput = {
+  create?: Prisma.XOR<Prisma.UsuarioCreateWithoutAtivacoesInput, Prisma.UsuarioUncheckedCreateWithoutAtivacoesInput>
+  connectOrCreate?: Prisma.UsuarioCreateOrConnectWithoutAtivacoesInput
+  connect?: Prisma.UsuarioWhereUniqueInput
+}
+
+export type UsuarioUpdateOneRequiredWithoutAtivacoesNestedInput = {
+  create?: Prisma.XOR<Prisma.UsuarioCreateWithoutAtivacoesInput, Prisma.UsuarioUncheckedCreateWithoutAtivacoesInput>
+  connectOrCreate?: Prisma.UsuarioCreateOrConnectWithoutAtivacoesInput
+  upsert?: Prisma.UsuarioUpsertWithoutAtivacoesInput
+  connect?: Prisma.UsuarioWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UsuarioUpdateToOneWithWhereWithoutAtivacoesInput, Prisma.UsuarioUpdateWithoutAtivacoesInput>, Prisma.UsuarioUncheckedUpdateWithoutAtivacoesInput>
+}
+
+export type UsuarioCreateNestedOneWithoutFlashcardsInput = {
+  create?: Prisma.XOR<Prisma.UsuarioCreateWithoutFlashcardsInput, Prisma.UsuarioUncheckedCreateWithoutFlashcardsInput>
+  connectOrCreate?: Prisma.UsuarioCreateOrConnectWithoutFlashcardsInput
+  connect?: Prisma.UsuarioWhereUniqueInput
+}
+
+export type UsuarioUpdateOneRequiredWithoutFlashcardsNestedInput = {
+  create?: Prisma.XOR<Prisma.UsuarioCreateWithoutFlashcardsInput, Prisma.UsuarioUncheckedCreateWithoutFlashcardsInput>
+  connectOrCreate?: Prisma.UsuarioCreateOrConnectWithoutFlashcardsInput
+  upsert?: Prisma.UsuarioUpsertWithoutFlashcardsInput
+  connect?: Prisma.UsuarioWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UsuarioUpdateToOneWithWhereWithoutFlashcardsInput, Prisma.UsuarioUpdateWithoutFlashcardsInput>, Prisma.UsuarioUncheckedUpdateWithoutFlashcardsInput>
+}
+
 export type UsuarioCreateWithoutPerfilInput = {
   id?: string
   nome: string
@@ -660,6 +808,7 @@ export type UsuarioCreateWithoutPerfilInput = {
   status?: $Enums.StatusUsuario
   criadoEm?: Date | string
   atualizadoEm?: Date | string
+  senhaAtualizadaEm?: Date | string
   codigosValidacao?: Prisma.CodigoValidacaoCreateNestedManyWithoutUsuarioInput
   arquivos?: Prisma.ArquivoCreateNestedManyWithoutUsuarioInput
   cursosResponsavel?: Prisma.CursoCreateNestedManyWithoutResponsavelInput
@@ -671,6 +820,12 @@ export type UsuarioCreateWithoutPerfilInput = {
   questoesResponsavel?: Prisma.QuestaoCreateNestedManyWithoutResponsavelInput
   alternativasResponsavel?: Prisma.AlternativaCreateNestedManyWithoutResponsavelInput
   inscricoes?: Prisma.InscricaoCreateNestedManyWithoutUsuarioInput
+  progressosAula?: Prisma.ProgressoAulaCreateNestedManyWithoutUsuarioInput
+  tentativas?: Prisma.TentativaTesteCreateNestedManyWithoutUsuarioInput
+  movimentacoes?: Prisma.MovimentacaoRecompensaCreateNestedManyWithoutUsuarioInput
+  inventario?: Prisma.InventarioItemCreateNestedManyWithoutUsuarioInput
+  ativacoes?: Prisma.AtivacaoItemCreateNestedManyWithoutUsuarioInput
+  flashcards?: Prisma.FlashcardCreateNestedManyWithoutUsuarioInput
 }
 
 export type UsuarioUncheckedCreateWithoutPerfilInput = {
@@ -682,6 +837,7 @@ export type UsuarioUncheckedCreateWithoutPerfilInput = {
   status?: $Enums.StatusUsuario
   criadoEm?: Date | string
   atualizadoEm?: Date | string
+  senhaAtualizadaEm?: Date | string
   codigosValidacao?: Prisma.CodigoValidacaoUncheckedCreateNestedManyWithoutUsuarioInput
   arquivos?: Prisma.ArquivoUncheckedCreateNestedManyWithoutUsuarioInput
   cursosResponsavel?: Prisma.CursoUncheckedCreateNestedManyWithoutResponsavelInput
@@ -693,6 +849,12 @@ export type UsuarioUncheckedCreateWithoutPerfilInput = {
   questoesResponsavel?: Prisma.QuestaoUncheckedCreateNestedManyWithoutResponsavelInput
   alternativasResponsavel?: Prisma.AlternativaUncheckedCreateNestedManyWithoutResponsavelInput
   inscricoes?: Prisma.InscricaoUncheckedCreateNestedManyWithoutUsuarioInput
+  progressosAula?: Prisma.ProgressoAulaUncheckedCreateNestedManyWithoutUsuarioInput
+  tentativas?: Prisma.TentativaTesteUncheckedCreateNestedManyWithoutUsuarioInput
+  movimentacoes?: Prisma.MovimentacaoRecompensaUncheckedCreateNestedManyWithoutUsuarioInput
+  inventario?: Prisma.InventarioItemUncheckedCreateNestedManyWithoutUsuarioInput
+  ativacoes?: Prisma.AtivacaoItemUncheckedCreateNestedManyWithoutUsuarioInput
+  flashcards?: Prisma.FlashcardUncheckedCreateNestedManyWithoutUsuarioInput
 }
 
 export type UsuarioCreateOrConnectWithoutPerfilInput = {
@@ -720,6 +882,7 @@ export type UsuarioUpdateWithoutPerfilInput = {
   status?: Prisma.EnumStatusUsuarioFieldUpdateOperationsInput | $Enums.StatusUsuario
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  senhaAtualizadaEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   codigosValidacao?: Prisma.CodigoValidacaoUpdateManyWithoutUsuarioNestedInput
   arquivos?: Prisma.ArquivoUpdateManyWithoutUsuarioNestedInput
   cursosResponsavel?: Prisma.CursoUpdateManyWithoutResponsavelNestedInput
@@ -731,6 +894,12 @@ export type UsuarioUpdateWithoutPerfilInput = {
   questoesResponsavel?: Prisma.QuestaoUpdateManyWithoutResponsavelNestedInput
   alternativasResponsavel?: Prisma.AlternativaUpdateManyWithoutResponsavelNestedInput
   inscricoes?: Prisma.InscricaoUpdateManyWithoutUsuarioNestedInput
+  progressosAula?: Prisma.ProgressoAulaUpdateManyWithoutUsuarioNestedInput
+  tentativas?: Prisma.TentativaTesteUpdateManyWithoutUsuarioNestedInput
+  movimentacoes?: Prisma.MovimentacaoRecompensaUpdateManyWithoutUsuarioNestedInput
+  inventario?: Prisma.InventarioItemUpdateManyWithoutUsuarioNestedInput
+  ativacoes?: Prisma.AtivacaoItemUpdateManyWithoutUsuarioNestedInput
+  flashcards?: Prisma.FlashcardUpdateManyWithoutUsuarioNestedInput
 }
 
 export type UsuarioUncheckedUpdateWithoutPerfilInput = {
@@ -742,6 +911,7 @@ export type UsuarioUncheckedUpdateWithoutPerfilInput = {
   status?: Prisma.EnumStatusUsuarioFieldUpdateOperationsInput | $Enums.StatusUsuario
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  senhaAtualizadaEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   codigosValidacao?: Prisma.CodigoValidacaoUncheckedUpdateManyWithoutUsuarioNestedInput
   arquivos?: Prisma.ArquivoUncheckedUpdateManyWithoutUsuarioNestedInput
   cursosResponsavel?: Prisma.CursoUncheckedUpdateManyWithoutResponsavelNestedInput
@@ -753,6 +923,12 @@ export type UsuarioUncheckedUpdateWithoutPerfilInput = {
   questoesResponsavel?: Prisma.QuestaoUncheckedUpdateManyWithoutResponsavelNestedInput
   alternativasResponsavel?: Prisma.AlternativaUncheckedUpdateManyWithoutResponsavelNestedInput
   inscricoes?: Prisma.InscricaoUncheckedUpdateManyWithoutUsuarioNestedInput
+  progressosAula?: Prisma.ProgressoAulaUncheckedUpdateManyWithoutUsuarioNestedInput
+  tentativas?: Prisma.TentativaTesteUncheckedUpdateManyWithoutUsuarioNestedInput
+  movimentacoes?: Prisma.MovimentacaoRecompensaUncheckedUpdateManyWithoutUsuarioNestedInput
+  inventario?: Prisma.InventarioItemUncheckedUpdateManyWithoutUsuarioNestedInput
+  ativacoes?: Prisma.AtivacaoItemUncheckedUpdateManyWithoutUsuarioNestedInput
+  flashcards?: Prisma.FlashcardUncheckedUpdateManyWithoutUsuarioNestedInput
 }
 
 export type UsuarioCreateWithoutCodigosValidacaoInput = {
@@ -764,6 +940,7 @@ export type UsuarioCreateWithoutCodigosValidacaoInput = {
   status?: $Enums.StatusUsuario
   criadoEm?: Date | string
   atualizadoEm?: Date | string
+  senhaAtualizadaEm?: Date | string
   perfil?: Prisma.PerfilCreateNestedOneWithoutUsuarioInput
   arquivos?: Prisma.ArquivoCreateNestedManyWithoutUsuarioInput
   cursosResponsavel?: Prisma.CursoCreateNestedManyWithoutResponsavelInput
@@ -775,6 +952,12 @@ export type UsuarioCreateWithoutCodigosValidacaoInput = {
   questoesResponsavel?: Prisma.QuestaoCreateNestedManyWithoutResponsavelInput
   alternativasResponsavel?: Prisma.AlternativaCreateNestedManyWithoutResponsavelInput
   inscricoes?: Prisma.InscricaoCreateNestedManyWithoutUsuarioInput
+  progressosAula?: Prisma.ProgressoAulaCreateNestedManyWithoutUsuarioInput
+  tentativas?: Prisma.TentativaTesteCreateNestedManyWithoutUsuarioInput
+  movimentacoes?: Prisma.MovimentacaoRecompensaCreateNestedManyWithoutUsuarioInput
+  inventario?: Prisma.InventarioItemCreateNestedManyWithoutUsuarioInput
+  ativacoes?: Prisma.AtivacaoItemCreateNestedManyWithoutUsuarioInput
+  flashcards?: Prisma.FlashcardCreateNestedManyWithoutUsuarioInput
 }
 
 export type UsuarioUncheckedCreateWithoutCodigosValidacaoInput = {
@@ -786,6 +969,7 @@ export type UsuarioUncheckedCreateWithoutCodigosValidacaoInput = {
   status?: $Enums.StatusUsuario
   criadoEm?: Date | string
   atualizadoEm?: Date | string
+  senhaAtualizadaEm?: Date | string
   perfil?: Prisma.PerfilUncheckedCreateNestedOneWithoutUsuarioInput
   arquivos?: Prisma.ArquivoUncheckedCreateNestedManyWithoutUsuarioInput
   cursosResponsavel?: Prisma.CursoUncheckedCreateNestedManyWithoutResponsavelInput
@@ -797,6 +981,12 @@ export type UsuarioUncheckedCreateWithoutCodigosValidacaoInput = {
   questoesResponsavel?: Prisma.QuestaoUncheckedCreateNestedManyWithoutResponsavelInput
   alternativasResponsavel?: Prisma.AlternativaUncheckedCreateNestedManyWithoutResponsavelInput
   inscricoes?: Prisma.InscricaoUncheckedCreateNestedManyWithoutUsuarioInput
+  progressosAula?: Prisma.ProgressoAulaUncheckedCreateNestedManyWithoutUsuarioInput
+  tentativas?: Prisma.TentativaTesteUncheckedCreateNestedManyWithoutUsuarioInput
+  movimentacoes?: Prisma.MovimentacaoRecompensaUncheckedCreateNestedManyWithoutUsuarioInput
+  inventario?: Prisma.InventarioItemUncheckedCreateNestedManyWithoutUsuarioInput
+  ativacoes?: Prisma.AtivacaoItemUncheckedCreateNestedManyWithoutUsuarioInput
+  flashcards?: Prisma.FlashcardUncheckedCreateNestedManyWithoutUsuarioInput
 }
 
 export type UsuarioCreateOrConnectWithoutCodigosValidacaoInput = {
@@ -824,6 +1014,7 @@ export type UsuarioUpdateWithoutCodigosValidacaoInput = {
   status?: Prisma.EnumStatusUsuarioFieldUpdateOperationsInput | $Enums.StatusUsuario
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  senhaAtualizadaEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   perfil?: Prisma.PerfilUpdateOneWithoutUsuarioNestedInput
   arquivos?: Prisma.ArquivoUpdateManyWithoutUsuarioNestedInput
   cursosResponsavel?: Prisma.CursoUpdateManyWithoutResponsavelNestedInput
@@ -835,6 +1026,12 @@ export type UsuarioUpdateWithoutCodigosValidacaoInput = {
   questoesResponsavel?: Prisma.QuestaoUpdateManyWithoutResponsavelNestedInput
   alternativasResponsavel?: Prisma.AlternativaUpdateManyWithoutResponsavelNestedInput
   inscricoes?: Prisma.InscricaoUpdateManyWithoutUsuarioNestedInput
+  progressosAula?: Prisma.ProgressoAulaUpdateManyWithoutUsuarioNestedInput
+  tentativas?: Prisma.TentativaTesteUpdateManyWithoutUsuarioNestedInput
+  movimentacoes?: Prisma.MovimentacaoRecompensaUpdateManyWithoutUsuarioNestedInput
+  inventario?: Prisma.InventarioItemUpdateManyWithoutUsuarioNestedInput
+  ativacoes?: Prisma.AtivacaoItemUpdateManyWithoutUsuarioNestedInput
+  flashcards?: Prisma.FlashcardUpdateManyWithoutUsuarioNestedInput
 }
 
 export type UsuarioUncheckedUpdateWithoutCodigosValidacaoInput = {
@@ -846,6 +1043,7 @@ export type UsuarioUncheckedUpdateWithoutCodigosValidacaoInput = {
   status?: Prisma.EnumStatusUsuarioFieldUpdateOperationsInput | $Enums.StatusUsuario
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  senhaAtualizadaEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   perfil?: Prisma.PerfilUncheckedUpdateOneWithoutUsuarioNestedInput
   arquivos?: Prisma.ArquivoUncheckedUpdateManyWithoutUsuarioNestedInput
   cursosResponsavel?: Prisma.CursoUncheckedUpdateManyWithoutResponsavelNestedInput
@@ -857,6 +1055,12 @@ export type UsuarioUncheckedUpdateWithoutCodigosValidacaoInput = {
   questoesResponsavel?: Prisma.QuestaoUncheckedUpdateManyWithoutResponsavelNestedInput
   alternativasResponsavel?: Prisma.AlternativaUncheckedUpdateManyWithoutResponsavelNestedInput
   inscricoes?: Prisma.InscricaoUncheckedUpdateManyWithoutUsuarioNestedInput
+  progressosAula?: Prisma.ProgressoAulaUncheckedUpdateManyWithoutUsuarioNestedInput
+  tentativas?: Prisma.TentativaTesteUncheckedUpdateManyWithoutUsuarioNestedInput
+  movimentacoes?: Prisma.MovimentacaoRecompensaUncheckedUpdateManyWithoutUsuarioNestedInput
+  inventario?: Prisma.InventarioItemUncheckedUpdateManyWithoutUsuarioNestedInput
+  ativacoes?: Prisma.AtivacaoItemUncheckedUpdateManyWithoutUsuarioNestedInput
+  flashcards?: Prisma.FlashcardUncheckedUpdateManyWithoutUsuarioNestedInput
 }
 
 export type UsuarioCreateWithoutArquivosInput = {
@@ -868,6 +1072,7 @@ export type UsuarioCreateWithoutArquivosInput = {
   status?: $Enums.StatusUsuario
   criadoEm?: Date | string
   atualizadoEm?: Date | string
+  senhaAtualizadaEm?: Date | string
   perfil?: Prisma.PerfilCreateNestedOneWithoutUsuarioInput
   codigosValidacao?: Prisma.CodigoValidacaoCreateNestedManyWithoutUsuarioInput
   cursosResponsavel?: Prisma.CursoCreateNestedManyWithoutResponsavelInput
@@ -879,6 +1084,12 @@ export type UsuarioCreateWithoutArquivosInput = {
   questoesResponsavel?: Prisma.QuestaoCreateNestedManyWithoutResponsavelInput
   alternativasResponsavel?: Prisma.AlternativaCreateNestedManyWithoutResponsavelInput
   inscricoes?: Prisma.InscricaoCreateNestedManyWithoutUsuarioInput
+  progressosAula?: Prisma.ProgressoAulaCreateNestedManyWithoutUsuarioInput
+  tentativas?: Prisma.TentativaTesteCreateNestedManyWithoutUsuarioInput
+  movimentacoes?: Prisma.MovimentacaoRecompensaCreateNestedManyWithoutUsuarioInput
+  inventario?: Prisma.InventarioItemCreateNestedManyWithoutUsuarioInput
+  ativacoes?: Prisma.AtivacaoItemCreateNestedManyWithoutUsuarioInput
+  flashcards?: Prisma.FlashcardCreateNestedManyWithoutUsuarioInput
 }
 
 export type UsuarioUncheckedCreateWithoutArquivosInput = {
@@ -890,6 +1101,7 @@ export type UsuarioUncheckedCreateWithoutArquivosInput = {
   status?: $Enums.StatusUsuario
   criadoEm?: Date | string
   atualizadoEm?: Date | string
+  senhaAtualizadaEm?: Date | string
   perfil?: Prisma.PerfilUncheckedCreateNestedOneWithoutUsuarioInput
   codigosValidacao?: Prisma.CodigoValidacaoUncheckedCreateNestedManyWithoutUsuarioInput
   cursosResponsavel?: Prisma.CursoUncheckedCreateNestedManyWithoutResponsavelInput
@@ -901,6 +1113,12 @@ export type UsuarioUncheckedCreateWithoutArquivosInput = {
   questoesResponsavel?: Prisma.QuestaoUncheckedCreateNestedManyWithoutResponsavelInput
   alternativasResponsavel?: Prisma.AlternativaUncheckedCreateNestedManyWithoutResponsavelInput
   inscricoes?: Prisma.InscricaoUncheckedCreateNestedManyWithoutUsuarioInput
+  progressosAula?: Prisma.ProgressoAulaUncheckedCreateNestedManyWithoutUsuarioInput
+  tentativas?: Prisma.TentativaTesteUncheckedCreateNestedManyWithoutUsuarioInput
+  movimentacoes?: Prisma.MovimentacaoRecompensaUncheckedCreateNestedManyWithoutUsuarioInput
+  inventario?: Prisma.InventarioItemUncheckedCreateNestedManyWithoutUsuarioInput
+  ativacoes?: Prisma.AtivacaoItemUncheckedCreateNestedManyWithoutUsuarioInput
+  flashcards?: Prisma.FlashcardUncheckedCreateNestedManyWithoutUsuarioInput
 }
 
 export type UsuarioCreateOrConnectWithoutArquivosInput = {
@@ -928,6 +1146,7 @@ export type UsuarioUpdateWithoutArquivosInput = {
   status?: Prisma.EnumStatusUsuarioFieldUpdateOperationsInput | $Enums.StatusUsuario
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  senhaAtualizadaEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   perfil?: Prisma.PerfilUpdateOneWithoutUsuarioNestedInput
   codigosValidacao?: Prisma.CodigoValidacaoUpdateManyWithoutUsuarioNestedInput
   cursosResponsavel?: Prisma.CursoUpdateManyWithoutResponsavelNestedInput
@@ -939,6 +1158,12 @@ export type UsuarioUpdateWithoutArquivosInput = {
   questoesResponsavel?: Prisma.QuestaoUpdateManyWithoutResponsavelNestedInput
   alternativasResponsavel?: Prisma.AlternativaUpdateManyWithoutResponsavelNestedInput
   inscricoes?: Prisma.InscricaoUpdateManyWithoutUsuarioNestedInput
+  progressosAula?: Prisma.ProgressoAulaUpdateManyWithoutUsuarioNestedInput
+  tentativas?: Prisma.TentativaTesteUpdateManyWithoutUsuarioNestedInput
+  movimentacoes?: Prisma.MovimentacaoRecompensaUpdateManyWithoutUsuarioNestedInput
+  inventario?: Prisma.InventarioItemUpdateManyWithoutUsuarioNestedInput
+  ativacoes?: Prisma.AtivacaoItemUpdateManyWithoutUsuarioNestedInput
+  flashcards?: Prisma.FlashcardUpdateManyWithoutUsuarioNestedInput
 }
 
 export type UsuarioUncheckedUpdateWithoutArquivosInput = {
@@ -950,6 +1175,7 @@ export type UsuarioUncheckedUpdateWithoutArquivosInput = {
   status?: Prisma.EnumStatusUsuarioFieldUpdateOperationsInput | $Enums.StatusUsuario
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  senhaAtualizadaEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   perfil?: Prisma.PerfilUncheckedUpdateOneWithoutUsuarioNestedInput
   codigosValidacao?: Prisma.CodigoValidacaoUncheckedUpdateManyWithoutUsuarioNestedInput
   cursosResponsavel?: Prisma.CursoUncheckedUpdateManyWithoutResponsavelNestedInput
@@ -961,6 +1187,12 @@ export type UsuarioUncheckedUpdateWithoutArquivosInput = {
   questoesResponsavel?: Prisma.QuestaoUncheckedUpdateManyWithoutResponsavelNestedInput
   alternativasResponsavel?: Prisma.AlternativaUncheckedUpdateManyWithoutResponsavelNestedInput
   inscricoes?: Prisma.InscricaoUncheckedUpdateManyWithoutUsuarioNestedInput
+  progressosAula?: Prisma.ProgressoAulaUncheckedUpdateManyWithoutUsuarioNestedInput
+  tentativas?: Prisma.TentativaTesteUncheckedUpdateManyWithoutUsuarioNestedInput
+  movimentacoes?: Prisma.MovimentacaoRecompensaUncheckedUpdateManyWithoutUsuarioNestedInput
+  inventario?: Prisma.InventarioItemUncheckedUpdateManyWithoutUsuarioNestedInput
+  ativacoes?: Prisma.AtivacaoItemUncheckedUpdateManyWithoutUsuarioNestedInput
+  flashcards?: Prisma.FlashcardUncheckedUpdateManyWithoutUsuarioNestedInput
 }
 
 export type UsuarioCreateWithoutCursosResponsavelInput = {
@@ -972,6 +1204,7 @@ export type UsuarioCreateWithoutCursosResponsavelInput = {
   status?: $Enums.StatusUsuario
   criadoEm?: Date | string
   atualizadoEm?: Date | string
+  senhaAtualizadaEm?: Date | string
   perfil?: Prisma.PerfilCreateNestedOneWithoutUsuarioInput
   codigosValidacao?: Prisma.CodigoValidacaoCreateNestedManyWithoutUsuarioInput
   arquivos?: Prisma.ArquivoCreateNestedManyWithoutUsuarioInput
@@ -983,6 +1216,12 @@ export type UsuarioCreateWithoutCursosResponsavelInput = {
   questoesResponsavel?: Prisma.QuestaoCreateNestedManyWithoutResponsavelInput
   alternativasResponsavel?: Prisma.AlternativaCreateNestedManyWithoutResponsavelInput
   inscricoes?: Prisma.InscricaoCreateNestedManyWithoutUsuarioInput
+  progressosAula?: Prisma.ProgressoAulaCreateNestedManyWithoutUsuarioInput
+  tentativas?: Prisma.TentativaTesteCreateNestedManyWithoutUsuarioInput
+  movimentacoes?: Prisma.MovimentacaoRecompensaCreateNestedManyWithoutUsuarioInput
+  inventario?: Prisma.InventarioItemCreateNestedManyWithoutUsuarioInput
+  ativacoes?: Prisma.AtivacaoItemCreateNestedManyWithoutUsuarioInput
+  flashcards?: Prisma.FlashcardCreateNestedManyWithoutUsuarioInput
 }
 
 export type UsuarioUncheckedCreateWithoutCursosResponsavelInput = {
@@ -994,6 +1233,7 @@ export type UsuarioUncheckedCreateWithoutCursosResponsavelInput = {
   status?: $Enums.StatusUsuario
   criadoEm?: Date | string
   atualizadoEm?: Date | string
+  senhaAtualizadaEm?: Date | string
   perfil?: Prisma.PerfilUncheckedCreateNestedOneWithoutUsuarioInput
   codigosValidacao?: Prisma.CodigoValidacaoUncheckedCreateNestedManyWithoutUsuarioInput
   arquivos?: Prisma.ArquivoUncheckedCreateNestedManyWithoutUsuarioInput
@@ -1005,6 +1245,12 @@ export type UsuarioUncheckedCreateWithoutCursosResponsavelInput = {
   questoesResponsavel?: Prisma.QuestaoUncheckedCreateNestedManyWithoutResponsavelInput
   alternativasResponsavel?: Prisma.AlternativaUncheckedCreateNestedManyWithoutResponsavelInput
   inscricoes?: Prisma.InscricaoUncheckedCreateNestedManyWithoutUsuarioInput
+  progressosAula?: Prisma.ProgressoAulaUncheckedCreateNestedManyWithoutUsuarioInput
+  tentativas?: Prisma.TentativaTesteUncheckedCreateNestedManyWithoutUsuarioInput
+  movimentacoes?: Prisma.MovimentacaoRecompensaUncheckedCreateNestedManyWithoutUsuarioInput
+  inventario?: Prisma.InventarioItemUncheckedCreateNestedManyWithoutUsuarioInput
+  ativacoes?: Prisma.AtivacaoItemUncheckedCreateNestedManyWithoutUsuarioInput
+  flashcards?: Prisma.FlashcardUncheckedCreateNestedManyWithoutUsuarioInput
 }
 
 export type UsuarioCreateOrConnectWithoutCursosResponsavelInput = {
@@ -1021,6 +1267,7 @@ export type UsuarioCreateWithoutCursosAutorizadosInput = {
   status?: $Enums.StatusUsuario
   criadoEm?: Date | string
   atualizadoEm?: Date | string
+  senhaAtualizadaEm?: Date | string
   perfil?: Prisma.PerfilCreateNestedOneWithoutUsuarioInput
   codigosValidacao?: Prisma.CodigoValidacaoCreateNestedManyWithoutUsuarioInput
   arquivos?: Prisma.ArquivoCreateNestedManyWithoutUsuarioInput
@@ -1032,6 +1279,12 @@ export type UsuarioCreateWithoutCursosAutorizadosInput = {
   questoesResponsavel?: Prisma.QuestaoCreateNestedManyWithoutResponsavelInput
   alternativasResponsavel?: Prisma.AlternativaCreateNestedManyWithoutResponsavelInput
   inscricoes?: Prisma.InscricaoCreateNestedManyWithoutUsuarioInput
+  progressosAula?: Prisma.ProgressoAulaCreateNestedManyWithoutUsuarioInput
+  tentativas?: Prisma.TentativaTesteCreateNestedManyWithoutUsuarioInput
+  movimentacoes?: Prisma.MovimentacaoRecompensaCreateNestedManyWithoutUsuarioInput
+  inventario?: Prisma.InventarioItemCreateNestedManyWithoutUsuarioInput
+  ativacoes?: Prisma.AtivacaoItemCreateNestedManyWithoutUsuarioInput
+  flashcards?: Prisma.FlashcardCreateNestedManyWithoutUsuarioInput
 }
 
 export type UsuarioUncheckedCreateWithoutCursosAutorizadosInput = {
@@ -1043,6 +1296,7 @@ export type UsuarioUncheckedCreateWithoutCursosAutorizadosInput = {
   status?: $Enums.StatusUsuario
   criadoEm?: Date | string
   atualizadoEm?: Date | string
+  senhaAtualizadaEm?: Date | string
   perfil?: Prisma.PerfilUncheckedCreateNestedOneWithoutUsuarioInput
   codigosValidacao?: Prisma.CodigoValidacaoUncheckedCreateNestedManyWithoutUsuarioInput
   arquivos?: Prisma.ArquivoUncheckedCreateNestedManyWithoutUsuarioInput
@@ -1054,6 +1308,12 @@ export type UsuarioUncheckedCreateWithoutCursosAutorizadosInput = {
   questoesResponsavel?: Prisma.QuestaoUncheckedCreateNestedManyWithoutResponsavelInput
   alternativasResponsavel?: Prisma.AlternativaUncheckedCreateNestedManyWithoutResponsavelInput
   inscricoes?: Prisma.InscricaoUncheckedCreateNestedManyWithoutUsuarioInput
+  progressosAula?: Prisma.ProgressoAulaUncheckedCreateNestedManyWithoutUsuarioInput
+  tentativas?: Prisma.TentativaTesteUncheckedCreateNestedManyWithoutUsuarioInput
+  movimentacoes?: Prisma.MovimentacaoRecompensaUncheckedCreateNestedManyWithoutUsuarioInput
+  inventario?: Prisma.InventarioItemUncheckedCreateNestedManyWithoutUsuarioInput
+  ativacoes?: Prisma.AtivacaoItemUncheckedCreateNestedManyWithoutUsuarioInput
+  flashcards?: Prisma.FlashcardUncheckedCreateNestedManyWithoutUsuarioInput
 }
 
 export type UsuarioCreateOrConnectWithoutCursosAutorizadosInput = {
@@ -1081,6 +1341,7 @@ export type UsuarioUpdateWithoutCursosResponsavelInput = {
   status?: Prisma.EnumStatusUsuarioFieldUpdateOperationsInput | $Enums.StatusUsuario
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  senhaAtualizadaEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   perfil?: Prisma.PerfilUpdateOneWithoutUsuarioNestedInput
   codigosValidacao?: Prisma.CodigoValidacaoUpdateManyWithoutUsuarioNestedInput
   arquivos?: Prisma.ArquivoUpdateManyWithoutUsuarioNestedInput
@@ -1092,6 +1353,12 @@ export type UsuarioUpdateWithoutCursosResponsavelInput = {
   questoesResponsavel?: Prisma.QuestaoUpdateManyWithoutResponsavelNestedInput
   alternativasResponsavel?: Prisma.AlternativaUpdateManyWithoutResponsavelNestedInput
   inscricoes?: Prisma.InscricaoUpdateManyWithoutUsuarioNestedInput
+  progressosAula?: Prisma.ProgressoAulaUpdateManyWithoutUsuarioNestedInput
+  tentativas?: Prisma.TentativaTesteUpdateManyWithoutUsuarioNestedInput
+  movimentacoes?: Prisma.MovimentacaoRecompensaUpdateManyWithoutUsuarioNestedInput
+  inventario?: Prisma.InventarioItemUpdateManyWithoutUsuarioNestedInput
+  ativacoes?: Prisma.AtivacaoItemUpdateManyWithoutUsuarioNestedInput
+  flashcards?: Prisma.FlashcardUpdateManyWithoutUsuarioNestedInput
 }
 
 export type UsuarioUncheckedUpdateWithoutCursosResponsavelInput = {
@@ -1103,6 +1370,7 @@ export type UsuarioUncheckedUpdateWithoutCursosResponsavelInput = {
   status?: Prisma.EnumStatusUsuarioFieldUpdateOperationsInput | $Enums.StatusUsuario
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  senhaAtualizadaEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   perfil?: Prisma.PerfilUncheckedUpdateOneWithoutUsuarioNestedInput
   codigosValidacao?: Prisma.CodigoValidacaoUncheckedUpdateManyWithoutUsuarioNestedInput
   arquivos?: Prisma.ArquivoUncheckedUpdateManyWithoutUsuarioNestedInput
@@ -1114,6 +1382,12 @@ export type UsuarioUncheckedUpdateWithoutCursosResponsavelInput = {
   questoesResponsavel?: Prisma.QuestaoUncheckedUpdateManyWithoutResponsavelNestedInput
   alternativasResponsavel?: Prisma.AlternativaUncheckedUpdateManyWithoutResponsavelNestedInput
   inscricoes?: Prisma.InscricaoUncheckedUpdateManyWithoutUsuarioNestedInput
+  progressosAula?: Prisma.ProgressoAulaUncheckedUpdateManyWithoutUsuarioNestedInput
+  tentativas?: Prisma.TentativaTesteUncheckedUpdateManyWithoutUsuarioNestedInput
+  movimentacoes?: Prisma.MovimentacaoRecompensaUncheckedUpdateManyWithoutUsuarioNestedInput
+  inventario?: Prisma.InventarioItemUncheckedUpdateManyWithoutUsuarioNestedInput
+  ativacoes?: Prisma.AtivacaoItemUncheckedUpdateManyWithoutUsuarioNestedInput
+  flashcards?: Prisma.FlashcardUncheckedUpdateManyWithoutUsuarioNestedInput
 }
 
 export type UsuarioUpsertWithoutCursosAutorizadosInput = {
@@ -1136,6 +1410,7 @@ export type UsuarioUpdateWithoutCursosAutorizadosInput = {
   status?: Prisma.EnumStatusUsuarioFieldUpdateOperationsInput | $Enums.StatusUsuario
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  senhaAtualizadaEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   perfil?: Prisma.PerfilUpdateOneWithoutUsuarioNestedInput
   codigosValidacao?: Prisma.CodigoValidacaoUpdateManyWithoutUsuarioNestedInput
   arquivos?: Prisma.ArquivoUpdateManyWithoutUsuarioNestedInput
@@ -1147,6 +1422,12 @@ export type UsuarioUpdateWithoutCursosAutorizadosInput = {
   questoesResponsavel?: Prisma.QuestaoUpdateManyWithoutResponsavelNestedInput
   alternativasResponsavel?: Prisma.AlternativaUpdateManyWithoutResponsavelNestedInput
   inscricoes?: Prisma.InscricaoUpdateManyWithoutUsuarioNestedInput
+  progressosAula?: Prisma.ProgressoAulaUpdateManyWithoutUsuarioNestedInput
+  tentativas?: Prisma.TentativaTesteUpdateManyWithoutUsuarioNestedInput
+  movimentacoes?: Prisma.MovimentacaoRecompensaUpdateManyWithoutUsuarioNestedInput
+  inventario?: Prisma.InventarioItemUpdateManyWithoutUsuarioNestedInput
+  ativacoes?: Prisma.AtivacaoItemUpdateManyWithoutUsuarioNestedInput
+  flashcards?: Prisma.FlashcardUpdateManyWithoutUsuarioNestedInput
 }
 
 export type UsuarioUncheckedUpdateWithoutCursosAutorizadosInput = {
@@ -1158,6 +1439,7 @@ export type UsuarioUncheckedUpdateWithoutCursosAutorizadosInput = {
   status?: Prisma.EnumStatusUsuarioFieldUpdateOperationsInput | $Enums.StatusUsuario
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  senhaAtualizadaEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   perfil?: Prisma.PerfilUncheckedUpdateOneWithoutUsuarioNestedInput
   codigosValidacao?: Prisma.CodigoValidacaoUncheckedUpdateManyWithoutUsuarioNestedInput
   arquivos?: Prisma.ArquivoUncheckedUpdateManyWithoutUsuarioNestedInput
@@ -1169,6 +1451,12 @@ export type UsuarioUncheckedUpdateWithoutCursosAutorizadosInput = {
   questoesResponsavel?: Prisma.QuestaoUncheckedUpdateManyWithoutResponsavelNestedInput
   alternativasResponsavel?: Prisma.AlternativaUncheckedUpdateManyWithoutResponsavelNestedInput
   inscricoes?: Prisma.InscricaoUncheckedUpdateManyWithoutUsuarioNestedInput
+  progressosAula?: Prisma.ProgressoAulaUncheckedUpdateManyWithoutUsuarioNestedInput
+  tentativas?: Prisma.TentativaTesteUncheckedUpdateManyWithoutUsuarioNestedInput
+  movimentacoes?: Prisma.MovimentacaoRecompensaUncheckedUpdateManyWithoutUsuarioNestedInput
+  inventario?: Prisma.InventarioItemUncheckedUpdateManyWithoutUsuarioNestedInput
+  ativacoes?: Prisma.AtivacaoItemUncheckedUpdateManyWithoutUsuarioNestedInput
+  flashcards?: Prisma.FlashcardUncheckedUpdateManyWithoutUsuarioNestedInput
 }
 
 export type UsuarioCreateWithoutSessoesResponsavelInput = {
@@ -1180,6 +1468,7 @@ export type UsuarioCreateWithoutSessoesResponsavelInput = {
   status?: $Enums.StatusUsuario
   criadoEm?: Date | string
   atualizadoEm?: Date | string
+  senhaAtualizadaEm?: Date | string
   perfil?: Prisma.PerfilCreateNestedOneWithoutUsuarioInput
   codigosValidacao?: Prisma.CodigoValidacaoCreateNestedManyWithoutUsuarioInput
   arquivos?: Prisma.ArquivoCreateNestedManyWithoutUsuarioInput
@@ -1191,6 +1480,12 @@ export type UsuarioCreateWithoutSessoesResponsavelInput = {
   questoesResponsavel?: Prisma.QuestaoCreateNestedManyWithoutResponsavelInput
   alternativasResponsavel?: Prisma.AlternativaCreateNestedManyWithoutResponsavelInput
   inscricoes?: Prisma.InscricaoCreateNestedManyWithoutUsuarioInput
+  progressosAula?: Prisma.ProgressoAulaCreateNestedManyWithoutUsuarioInput
+  tentativas?: Prisma.TentativaTesteCreateNestedManyWithoutUsuarioInput
+  movimentacoes?: Prisma.MovimentacaoRecompensaCreateNestedManyWithoutUsuarioInput
+  inventario?: Prisma.InventarioItemCreateNestedManyWithoutUsuarioInput
+  ativacoes?: Prisma.AtivacaoItemCreateNestedManyWithoutUsuarioInput
+  flashcards?: Prisma.FlashcardCreateNestedManyWithoutUsuarioInput
 }
 
 export type UsuarioUncheckedCreateWithoutSessoesResponsavelInput = {
@@ -1202,6 +1497,7 @@ export type UsuarioUncheckedCreateWithoutSessoesResponsavelInput = {
   status?: $Enums.StatusUsuario
   criadoEm?: Date | string
   atualizadoEm?: Date | string
+  senhaAtualizadaEm?: Date | string
   perfil?: Prisma.PerfilUncheckedCreateNestedOneWithoutUsuarioInput
   codigosValidacao?: Prisma.CodigoValidacaoUncheckedCreateNestedManyWithoutUsuarioInput
   arquivos?: Prisma.ArquivoUncheckedCreateNestedManyWithoutUsuarioInput
@@ -1213,6 +1509,12 @@ export type UsuarioUncheckedCreateWithoutSessoesResponsavelInput = {
   questoesResponsavel?: Prisma.QuestaoUncheckedCreateNestedManyWithoutResponsavelInput
   alternativasResponsavel?: Prisma.AlternativaUncheckedCreateNestedManyWithoutResponsavelInput
   inscricoes?: Prisma.InscricaoUncheckedCreateNestedManyWithoutUsuarioInput
+  progressosAula?: Prisma.ProgressoAulaUncheckedCreateNestedManyWithoutUsuarioInput
+  tentativas?: Prisma.TentativaTesteUncheckedCreateNestedManyWithoutUsuarioInput
+  movimentacoes?: Prisma.MovimentacaoRecompensaUncheckedCreateNestedManyWithoutUsuarioInput
+  inventario?: Prisma.InventarioItemUncheckedCreateNestedManyWithoutUsuarioInput
+  ativacoes?: Prisma.AtivacaoItemUncheckedCreateNestedManyWithoutUsuarioInput
+  flashcards?: Prisma.FlashcardUncheckedCreateNestedManyWithoutUsuarioInput
 }
 
 export type UsuarioCreateOrConnectWithoutSessoesResponsavelInput = {
@@ -1240,6 +1542,7 @@ export type UsuarioUpdateWithoutSessoesResponsavelInput = {
   status?: Prisma.EnumStatusUsuarioFieldUpdateOperationsInput | $Enums.StatusUsuario
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  senhaAtualizadaEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   perfil?: Prisma.PerfilUpdateOneWithoutUsuarioNestedInput
   codigosValidacao?: Prisma.CodigoValidacaoUpdateManyWithoutUsuarioNestedInput
   arquivos?: Prisma.ArquivoUpdateManyWithoutUsuarioNestedInput
@@ -1251,6 +1554,12 @@ export type UsuarioUpdateWithoutSessoesResponsavelInput = {
   questoesResponsavel?: Prisma.QuestaoUpdateManyWithoutResponsavelNestedInput
   alternativasResponsavel?: Prisma.AlternativaUpdateManyWithoutResponsavelNestedInput
   inscricoes?: Prisma.InscricaoUpdateManyWithoutUsuarioNestedInput
+  progressosAula?: Prisma.ProgressoAulaUpdateManyWithoutUsuarioNestedInput
+  tentativas?: Prisma.TentativaTesteUpdateManyWithoutUsuarioNestedInput
+  movimentacoes?: Prisma.MovimentacaoRecompensaUpdateManyWithoutUsuarioNestedInput
+  inventario?: Prisma.InventarioItemUpdateManyWithoutUsuarioNestedInput
+  ativacoes?: Prisma.AtivacaoItemUpdateManyWithoutUsuarioNestedInput
+  flashcards?: Prisma.FlashcardUpdateManyWithoutUsuarioNestedInput
 }
 
 export type UsuarioUncheckedUpdateWithoutSessoesResponsavelInput = {
@@ -1262,6 +1571,7 @@ export type UsuarioUncheckedUpdateWithoutSessoesResponsavelInput = {
   status?: Prisma.EnumStatusUsuarioFieldUpdateOperationsInput | $Enums.StatusUsuario
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  senhaAtualizadaEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   perfil?: Prisma.PerfilUncheckedUpdateOneWithoutUsuarioNestedInput
   codigosValidacao?: Prisma.CodigoValidacaoUncheckedUpdateManyWithoutUsuarioNestedInput
   arquivos?: Prisma.ArquivoUncheckedUpdateManyWithoutUsuarioNestedInput
@@ -1273,6 +1583,12 @@ export type UsuarioUncheckedUpdateWithoutSessoesResponsavelInput = {
   questoesResponsavel?: Prisma.QuestaoUncheckedUpdateManyWithoutResponsavelNestedInput
   alternativasResponsavel?: Prisma.AlternativaUncheckedUpdateManyWithoutResponsavelNestedInput
   inscricoes?: Prisma.InscricaoUncheckedUpdateManyWithoutUsuarioNestedInput
+  progressosAula?: Prisma.ProgressoAulaUncheckedUpdateManyWithoutUsuarioNestedInput
+  tentativas?: Prisma.TentativaTesteUncheckedUpdateManyWithoutUsuarioNestedInput
+  movimentacoes?: Prisma.MovimentacaoRecompensaUncheckedUpdateManyWithoutUsuarioNestedInput
+  inventario?: Prisma.InventarioItemUncheckedUpdateManyWithoutUsuarioNestedInput
+  ativacoes?: Prisma.AtivacaoItemUncheckedUpdateManyWithoutUsuarioNestedInput
+  flashcards?: Prisma.FlashcardUncheckedUpdateManyWithoutUsuarioNestedInput
 }
 
 export type UsuarioCreateWithoutModulosResponsavelInput = {
@@ -1284,6 +1600,7 @@ export type UsuarioCreateWithoutModulosResponsavelInput = {
   status?: $Enums.StatusUsuario
   criadoEm?: Date | string
   atualizadoEm?: Date | string
+  senhaAtualizadaEm?: Date | string
   perfil?: Prisma.PerfilCreateNestedOneWithoutUsuarioInput
   codigosValidacao?: Prisma.CodigoValidacaoCreateNestedManyWithoutUsuarioInput
   arquivos?: Prisma.ArquivoCreateNestedManyWithoutUsuarioInput
@@ -1295,6 +1612,12 @@ export type UsuarioCreateWithoutModulosResponsavelInput = {
   questoesResponsavel?: Prisma.QuestaoCreateNestedManyWithoutResponsavelInput
   alternativasResponsavel?: Prisma.AlternativaCreateNestedManyWithoutResponsavelInput
   inscricoes?: Prisma.InscricaoCreateNestedManyWithoutUsuarioInput
+  progressosAula?: Prisma.ProgressoAulaCreateNestedManyWithoutUsuarioInput
+  tentativas?: Prisma.TentativaTesteCreateNestedManyWithoutUsuarioInput
+  movimentacoes?: Prisma.MovimentacaoRecompensaCreateNestedManyWithoutUsuarioInput
+  inventario?: Prisma.InventarioItemCreateNestedManyWithoutUsuarioInput
+  ativacoes?: Prisma.AtivacaoItemCreateNestedManyWithoutUsuarioInput
+  flashcards?: Prisma.FlashcardCreateNestedManyWithoutUsuarioInput
 }
 
 export type UsuarioUncheckedCreateWithoutModulosResponsavelInput = {
@@ -1306,6 +1629,7 @@ export type UsuarioUncheckedCreateWithoutModulosResponsavelInput = {
   status?: $Enums.StatusUsuario
   criadoEm?: Date | string
   atualizadoEm?: Date | string
+  senhaAtualizadaEm?: Date | string
   perfil?: Prisma.PerfilUncheckedCreateNestedOneWithoutUsuarioInput
   codigosValidacao?: Prisma.CodigoValidacaoUncheckedCreateNestedManyWithoutUsuarioInput
   arquivos?: Prisma.ArquivoUncheckedCreateNestedManyWithoutUsuarioInput
@@ -1317,6 +1641,12 @@ export type UsuarioUncheckedCreateWithoutModulosResponsavelInput = {
   questoesResponsavel?: Prisma.QuestaoUncheckedCreateNestedManyWithoutResponsavelInput
   alternativasResponsavel?: Prisma.AlternativaUncheckedCreateNestedManyWithoutResponsavelInput
   inscricoes?: Prisma.InscricaoUncheckedCreateNestedManyWithoutUsuarioInput
+  progressosAula?: Prisma.ProgressoAulaUncheckedCreateNestedManyWithoutUsuarioInput
+  tentativas?: Prisma.TentativaTesteUncheckedCreateNestedManyWithoutUsuarioInput
+  movimentacoes?: Prisma.MovimentacaoRecompensaUncheckedCreateNestedManyWithoutUsuarioInput
+  inventario?: Prisma.InventarioItemUncheckedCreateNestedManyWithoutUsuarioInput
+  ativacoes?: Prisma.AtivacaoItemUncheckedCreateNestedManyWithoutUsuarioInput
+  flashcards?: Prisma.FlashcardUncheckedCreateNestedManyWithoutUsuarioInput
 }
 
 export type UsuarioCreateOrConnectWithoutModulosResponsavelInput = {
@@ -1344,6 +1674,7 @@ export type UsuarioUpdateWithoutModulosResponsavelInput = {
   status?: Prisma.EnumStatusUsuarioFieldUpdateOperationsInput | $Enums.StatusUsuario
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  senhaAtualizadaEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   perfil?: Prisma.PerfilUpdateOneWithoutUsuarioNestedInput
   codigosValidacao?: Prisma.CodigoValidacaoUpdateManyWithoutUsuarioNestedInput
   arquivos?: Prisma.ArquivoUpdateManyWithoutUsuarioNestedInput
@@ -1355,6 +1686,12 @@ export type UsuarioUpdateWithoutModulosResponsavelInput = {
   questoesResponsavel?: Prisma.QuestaoUpdateManyWithoutResponsavelNestedInput
   alternativasResponsavel?: Prisma.AlternativaUpdateManyWithoutResponsavelNestedInput
   inscricoes?: Prisma.InscricaoUpdateManyWithoutUsuarioNestedInput
+  progressosAula?: Prisma.ProgressoAulaUpdateManyWithoutUsuarioNestedInput
+  tentativas?: Prisma.TentativaTesteUpdateManyWithoutUsuarioNestedInput
+  movimentacoes?: Prisma.MovimentacaoRecompensaUpdateManyWithoutUsuarioNestedInput
+  inventario?: Prisma.InventarioItemUpdateManyWithoutUsuarioNestedInput
+  ativacoes?: Prisma.AtivacaoItemUpdateManyWithoutUsuarioNestedInput
+  flashcards?: Prisma.FlashcardUpdateManyWithoutUsuarioNestedInput
 }
 
 export type UsuarioUncheckedUpdateWithoutModulosResponsavelInput = {
@@ -1366,6 +1703,7 @@ export type UsuarioUncheckedUpdateWithoutModulosResponsavelInput = {
   status?: Prisma.EnumStatusUsuarioFieldUpdateOperationsInput | $Enums.StatusUsuario
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  senhaAtualizadaEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   perfil?: Prisma.PerfilUncheckedUpdateOneWithoutUsuarioNestedInput
   codigosValidacao?: Prisma.CodigoValidacaoUncheckedUpdateManyWithoutUsuarioNestedInput
   arquivos?: Prisma.ArquivoUncheckedUpdateManyWithoutUsuarioNestedInput
@@ -1377,6 +1715,12 @@ export type UsuarioUncheckedUpdateWithoutModulosResponsavelInput = {
   questoesResponsavel?: Prisma.QuestaoUncheckedUpdateManyWithoutResponsavelNestedInput
   alternativasResponsavel?: Prisma.AlternativaUncheckedUpdateManyWithoutResponsavelNestedInput
   inscricoes?: Prisma.InscricaoUncheckedUpdateManyWithoutUsuarioNestedInput
+  progressosAula?: Prisma.ProgressoAulaUncheckedUpdateManyWithoutUsuarioNestedInput
+  tentativas?: Prisma.TentativaTesteUncheckedUpdateManyWithoutUsuarioNestedInput
+  movimentacoes?: Prisma.MovimentacaoRecompensaUncheckedUpdateManyWithoutUsuarioNestedInput
+  inventario?: Prisma.InventarioItemUncheckedUpdateManyWithoutUsuarioNestedInput
+  ativacoes?: Prisma.AtivacaoItemUncheckedUpdateManyWithoutUsuarioNestedInput
+  flashcards?: Prisma.FlashcardUncheckedUpdateManyWithoutUsuarioNestedInput
 }
 
 export type UsuarioCreateWithoutAulasResponsavelInput = {
@@ -1388,6 +1732,7 @@ export type UsuarioCreateWithoutAulasResponsavelInput = {
   status?: $Enums.StatusUsuario
   criadoEm?: Date | string
   atualizadoEm?: Date | string
+  senhaAtualizadaEm?: Date | string
   perfil?: Prisma.PerfilCreateNestedOneWithoutUsuarioInput
   codigosValidacao?: Prisma.CodigoValidacaoCreateNestedManyWithoutUsuarioInput
   arquivos?: Prisma.ArquivoCreateNestedManyWithoutUsuarioInput
@@ -1399,6 +1744,12 @@ export type UsuarioCreateWithoutAulasResponsavelInput = {
   questoesResponsavel?: Prisma.QuestaoCreateNestedManyWithoutResponsavelInput
   alternativasResponsavel?: Prisma.AlternativaCreateNestedManyWithoutResponsavelInput
   inscricoes?: Prisma.InscricaoCreateNestedManyWithoutUsuarioInput
+  progressosAula?: Prisma.ProgressoAulaCreateNestedManyWithoutUsuarioInput
+  tentativas?: Prisma.TentativaTesteCreateNestedManyWithoutUsuarioInput
+  movimentacoes?: Prisma.MovimentacaoRecompensaCreateNestedManyWithoutUsuarioInput
+  inventario?: Prisma.InventarioItemCreateNestedManyWithoutUsuarioInput
+  ativacoes?: Prisma.AtivacaoItemCreateNestedManyWithoutUsuarioInput
+  flashcards?: Prisma.FlashcardCreateNestedManyWithoutUsuarioInput
 }
 
 export type UsuarioUncheckedCreateWithoutAulasResponsavelInput = {
@@ -1410,6 +1761,7 @@ export type UsuarioUncheckedCreateWithoutAulasResponsavelInput = {
   status?: $Enums.StatusUsuario
   criadoEm?: Date | string
   atualizadoEm?: Date | string
+  senhaAtualizadaEm?: Date | string
   perfil?: Prisma.PerfilUncheckedCreateNestedOneWithoutUsuarioInput
   codigosValidacao?: Prisma.CodigoValidacaoUncheckedCreateNestedManyWithoutUsuarioInput
   arquivos?: Prisma.ArquivoUncheckedCreateNestedManyWithoutUsuarioInput
@@ -1421,6 +1773,12 @@ export type UsuarioUncheckedCreateWithoutAulasResponsavelInput = {
   questoesResponsavel?: Prisma.QuestaoUncheckedCreateNestedManyWithoutResponsavelInput
   alternativasResponsavel?: Prisma.AlternativaUncheckedCreateNestedManyWithoutResponsavelInput
   inscricoes?: Prisma.InscricaoUncheckedCreateNestedManyWithoutUsuarioInput
+  progressosAula?: Prisma.ProgressoAulaUncheckedCreateNestedManyWithoutUsuarioInput
+  tentativas?: Prisma.TentativaTesteUncheckedCreateNestedManyWithoutUsuarioInput
+  movimentacoes?: Prisma.MovimentacaoRecompensaUncheckedCreateNestedManyWithoutUsuarioInput
+  inventario?: Prisma.InventarioItemUncheckedCreateNestedManyWithoutUsuarioInput
+  ativacoes?: Prisma.AtivacaoItemUncheckedCreateNestedManyWithoutUsuarioInput
+  flashcards?: Prisma.FlashcardUncheckedCreateNestedManyWithoutUsuarioInput
 }
 
 export type UsuarioCreateOrConnectWithoutAulasResponsavelInput = {
@@ -1448,6 +1806,7 @@ export type UsuarioUpdateWithoutAulasResponsavelInput = {
   status?: Prisma.EnumStatusUsuarioFieldUpdateOperationsInput | $Enums.StatusUsuario
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  senhaAtualizadaEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   perfil?: Prisma.PerfilUpdateOneWithoutUsuarioNestedInput
   codigosValidacao?: Prisma.CodigoValidacaoUpdateManyWithoutUsuarioNestedInput
   arquivos?: Prisma.ArquivoUpdateManyWithoutUsuarioNestedInput
@@ -1459,6 +1818,12 @@ export type UsuarioUpdateWithoutAulasResponsavelInput = {
   questoesResponsavel?: Prisma.QuestaoUpdateManyWithoutResponsavelNestedInput
   alternativasResponsavel?: Prisma.AlternativaUpdateManyWithoutResponsavelNestedInput
   inscricoes?: Prisma.InscricaoUpdateManyWithoutUsuarioNestedInput
+  progressosAula?: Prisma.ProgressoAulaUpdateManyWithoutUsuarioNestedInput
+  tentativas?: Prisma.TentativaTesteUpdateManyWithoutUsuarioNestedInput
+  movimentacoes?: Prisma.MovimentacaoRecompensaUpdateManyWithoutUsuarioNestedInput
+  inventario?: Prisma.InventarioItemUpdateManyWithoutUsuarioNestedInput
+  ativacoes?: Prisma.AtivacaoItemUpdateManyWithoutUsuarioNestedInput
+  flashcards?: Prisma.FlashcardUpdateManyWithoutUsuarioNestedInput
 }
 
 export type UsuarioUncheckedUpdateWithoutAulasResponsavelInput = {
@@ -1470,6 +1835,7 @@ export type UsuarioUncheckedUpdateWithoutAulasResponsavelInput = {
   status?: Prisma.EnumStatusUsuarioFieldUpdateOperationsInput | $Enums.StatusUsuario
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  senhaAtualizadaEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   perfil?: Prisma.PerfilUncheckedUpdateOneWithoutUsuarioNestedInput
   codigosValidacao?: Prisma.CodigoValidacaoUncheckedUpdateManyWithoutUsuarioNestedInput
   arquivos?: Prisma.ArquivoUncheckedUpdateManyWithoutUsuarioNestedInput
@@ -1481,6 +1847,12 @@ export type UsuarioUncheckedUpdateWithoutAulasResponsavelInput = {
   questoesResponsavel?: Prisma.QuestaoUncheckedUpdateManyWithoutResponsavelNestedInput
   alternativasResponsavel?: Prisma.AlternativaUncheckedUpdateManyWithoutResponsavelNestedInput
   inscricoes?: Prisma.InscricaoUncheckedUpdateManyWithoutUsuarioNestedInput
+  progressosAula?: Prisma.ProgressoAulaUncheckedUpdateManyWithoutUsuarioNestedInput
+  tentativas?: Prisma.TentativaTesteUncheckedUpdateManyWithoutUsuarioNestedInput
+  movimentacoes?: Prisma.MovimentacaoRecompensaUncheckedUpdateManyWithoutUsuarioNestedInput
+  inventario?: Prisma.InventarioItemUncheckedUpdateManyWithoutUsuarioNestedInput
+  ativacoes?: Prisma.AtivacaoItemUncheckedUpdateManyWithoutUsuarioNestedInput
+  flashcards?: Prisma.FlashcardUncheckedUpdateManyWithoutUsuarioNestedInput
 }
 
 export type UsuarioCreateWithoutTestesResponsavelInput = {
@@ -1492,6 +1864,7 @@ export type UsuarioCreateWithoutTestesResponsavelInput = {
   status?: $Enums.StatusUsuario
   criadoEm?: Date | string
   atualizadoEm?: Date | string
+  senhaAtualizadaEm?: Date | string
   perfil?: Prisma.PerfilCreateNestedOneWithoutUsuarioInput
   codigosValidacao?: Prisma.CodigoValidacaoCreateNestedManyWithoutUsuarioInput
   arquivos?: Prisma.ArquivoCreateNestedManyWithoutUsuarioInput
@@ -1503,6 +1876,12 @@ export type UsuarioCreateWithoutTestesResponsavelInput = {
   questoesResponsavel?: Prisma.QuestaoCreateNestedManyWithoutResponsavelInput
   alternativasResponsavel?: Prisma.AlternativaCreateNestedManyWithoutResponsavelInput
   inscricoes?: Prisma.InscricaoCreateNestedManyWithoutUsuarioInput
+  progressosAula?: Prisma.ProgressoAulaCreateNestedManyWithoutUsuarioInput
+  tentativas?: Prisma.TentativaTesteCreateNestedManyWithoutUsuarioInput
+  movimentacoes?: Prisma.MovimentacaoRecompensaCreateNestedManyWithoutUsuarioInput
+  inventario?: Prisma.InventarioItemCreateNestedManyWithoutUsuarioInput
+  ativacoes?: Prisma.AtivacaoItemCreateNestedManyWithoutUsuarioInput
+  flashcards?: Prisma.FlashcardCreateNestedManyWithoutUsuarioInput
 }
 
 export type UsuarioUncheckedCreateWithoutTestesResponsavelInput = {
@@ -1514,6 +1893,7 @@ export type UsuarioUncheckedCreateWithoutTestesResponsavelInput = {
   status?: $Enums.StatusUsuario
   criadoEm?: Date | string
   atualizadoEm?: Date | string
+  senhaAtualizadaEm?: Date | string
   perfil?: Prisma.PerfilUncheckedCreateNestedOneWithoutUsuarioInput
   codigosValidacao?: Prisma.CodigoValidacaoUncheckedCreateNestedManyWithoutUsuarioInput
   arquivos?: Prisma.ArquivoUncheckedCreateNestedManyWithoutUsuarioInput
@@ -1525,6 +1905,12 @@ export type UsuarioUncheckedCreateWithoutTestesResponsavelInput = {
   questoesResponsavel?: Prisma.QuestaoUncheckedCreateNestedManyWithoutResponsavelInput
   alternativasResponsavel?: Prisma.AlternativaUncheckedCreateNestedManyWithoutResponsavelInput
   inscricoes?: Prisma.InscricaoUncheckedCreateNestedManyWithoutUsuarioInput
+  progressosAula?: Prisma.ProgressoAulaUncheckedCreateNestedManyWithoutUsuarioInput
+  tentativas?: Prisma.TentativaTesteUncheckedCreateNestedManyWithoutUsuarioInput
+  movimentacoes?: Prisma.MovimentacaoRecompensaUncheckedCreateNestedManyWithoutUsuarioInput
+  inventario?: Prisma.InventarioItemUncheckedCreateNestedManyWithoutUsuarioInput
+  ativacoes?: Prisma.AtivacaoItemUncheckedCreateNestedManyWithoutUsuarioInput
+  flashcards?: Prisma.FlashcardUncheckedCreateNestedManyWithoutUsuarioInput
 }
 
 export type UsuarioCreateOrConnectWithoutTestesResponsavelInput = {
@@ -1552,6 +1938,7 @@ export type UsuarioUpdateWithoutTestesResponsavelInput = {
   status?: Prisma.EnumStatusUsuarioFieldUpdateOperationsInput | $Enums.StatusUsuario
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  senhaAtualizadaEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   perfil?: Prisma.PerfilUpdateOneWithoutUsuarioNestedInput
   codigosValidacao?: Prisma.CodigoValidacaoUpdateManyWithoutUsuarioNestedInput
   arquivos?: Prisma.ArquivoUpdateManyWithoutUsuarioNestedInput
@@ -1563,6 +1950,12 @@ export type UsuarioUpdateWithoutTestesResponsavelInput = {
   questoesResponsavel?: Prisma.QuestaoUpdateManyWithoutResponsavelNestedInput
   alternativasResponsavel?: Prisma.AlternativaUpdateManyWithoutResponsavelNestedInput
   inscricoes?: Prisma.InscricaoUpdateManyWithoutUsuarioNestedInput
+  progressosAula?: Prisma.ProgressoAulaUpdateManyWithoutUsuarioNestedInput
+  tentativas?: Prisma.TentativaTesteUpdateManyWithoutUsuarioNestedInput
+  movimentacoes?: Prisma.MovimentacaoRecompensaUpdateManyWithoutUsuarioNestedInput
+  inventario?: Prisma.InventarioItemUpdateManyWithoutUsuarioNestedInput
+  ativacoes?: Prisma.AtivacaoItemUpdateManyWithoutUsuarioNestedInput
+  flashcards?: Prisma.FlashcardUpdateManyWithoutUsuarioNestedInput
 }
 
 export type UsuarioUncheckedUpdateWithoutTestesResponsavelInput = {
@@ -1574,6 +1967,7 @@ export type UsuarioUncheckedUpdateWithoutTestesResponsavelInput = {
   status?: Prisma.EnumStatusUsuarioFieldUpdateOperationsInput | $Enums.StatusUsuario
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  senhaAtualizadaEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   perfil?: Prisma.PerfilUncheckedUpdateOneWithoutUsuarioNestedInput
   codigosValidacao?: Prisma.CodigoValidacaoUncheckedUpdateManyWithoutUsuarioNestedInput
   arquivos?: Prisma.ArquivoUncheckedUpdateManyWithoutUsuarioNestedInput
@@ -1585,6 +1979,12 @@ export type UsuarioUncheckedUpdateWithoutTestesResponsavelInput = {
   questoesResponsavel?: Prisma.QuestaoUncheckedUpdateManyWithoutResponsavelNestedInput
   alternativasResponsavel?: Prisma.AlternativaUncheckedUpdateManyWithoutResponsavelNestedInput
   inscricoes?: Prisma.InscricaoUncheckedUpdateManyWithoutUsuarioNestedInput
+  progressosAula?: Prisma.ProgressoAulaUncheckedUpdateManyWithoutUsuarioNestedInput
+  tentativas?: Prisma.TentativaTesteUncheckedUpdateManyWithoutUsuarioNestedInput
+  movimentacoes?: Prisma.MovimentacaoRecompensaUncheckedUpdateManyWithoutUsuarioNestedInput
+  inventario?: Prisma.InventarioItemUncheckedUpdateManyWithoutUsuarioNestedInput
+  ativacoes?: Prisma.AtivacaoItemUncheckedUpdateManyWithoutUsuarioNestedInput
+  flashcards?: Prisma.FlashcardUncheckedUpdateManyWithoutUsuarioNestedInput
 }
 
 export type UsuarioCreateWithoutQuestoesResponsavelInput = {
@@ -1596,6 +1996,7 @@ export type UsuarioCreateWithoutQuestoesResponsavelInput = {
   status?: $Enums.StatusUsuario
   criadoEm?: Date | string
   atualizadoEm?: Date | string
+  senhaAtualizadaEm?: Date | string
   perfil?: Prisma.PerfilCreateNestedOneWithoutUsuarioInput
   codigosValidacao?: Prisma.CodigoValidacaoCreateNestedManyWithoutUsuarioInput
   arquivos?: Prisma.ArquivoCreateNestedManyWithoutUsuarioInput
@@ -1607,6 +2008,12 @@ export type UsuarioCreateWithoutQuestoesResponsavelInput = {
   testesResponsavel?: Prisma.TesteCreateNestedManyWithoutResponsavelInput
   alternativasResponsavel?: Prisma.AlternativaCreateNestedManyWithoutResponsavelInput
   inscricoes?: Prisma.InscricaoCreateNestedManyWithoutUsuarioInput
+  progressosAula?: Prisma.ProgressoAulaCreateNestedManyWithoutUsuarioInput
+  tentativas?: Prisma.TentativaTesteCreateNestedManyWithoutUsuarioInput
+  movimentacoes?: Prisma.MovimentacaoRecompensaCreateNestedManyWithoutUsuarioInput
+  inventario?: Prisma.InventarioItemCreateNestedManyWithoutUsuarioInput
+  ativacoes?: Prisma.AtivacaoItemCreateNestedManyWithoutUsuarioInput
+  flashcards?: Prisma.FlashcardCreateNestedManyWithoutUsuarioInput
 }
 
 export type UsuarioUncheckedCreateWithoutQuestoesResponsavelInput = {
@@ -1618,6 +2025,7 @@ export type UsuarioUncheckedCreateWithoutQuestoesResponsavelInput = {
   status?: $Enums.StatusUsuario
   criadoEm?: Date | string
   atualizadoEm?: Date | string
+  senhaAtualizadaEm?: Date | string
   perfil?: Prisma.PerfilUncheckedCreateNestedOneWithoutUsuarioInput
   codigosValidacao?: Prisma.CodigoValidacaoUncheckedCreateNestedManyWithoutUsuarioInput
   arquivos?: Prisma.ArquivoUncheckedCreateNestedManyWithoutUsuarioInput
@@ -1629,6 +2037,12 @@ export type UsuarioUncheckedCreateWithoutQuestoesResponsavelInput = {
   testesResponsavel?: Prisma.TesteUncheckedCreateNestedManyWithoutResponsavelInput
   alternativasResponsavel?: Prisma.AlternativaUncheckedCreateNestedManyWithoutResponsavelInput
   inscricoes?: Prisma.InscricaoUncheckedCreateNestedManyWithoutUsuarioInput
+  progressosAula?: Prisma.ProgressoAulaUncheckedCreateNestedManyWithoutUsuarioInput
+  tentativas?: Prisma.TentativaTesteUncheckedCreateNestedManyWithoutUsuarioInput
+  movimentacoes?: Prisma.MovimentacaoRecompensaUncheckedCreateNestedManyWithoutUsuarioInput
+  inventario?: Prisma.InventarioItemUncheckedCreateNestedManyWithoutUsuarioInput
+  ativacoes?: Prisma.AtivacaoItemUncheckedCreateNestedManyWithoutUsuarioInput
+  flashcards?: Prisma.FlashcardUncheckedCreateNestedManyWithoutUsuarioInput
 }
 
 export type UsuarioCreateOrConnectWithoutQuestoesResponsavelInput = {
@@ -1656,6 +2070,7 @@ export type UsuarioUpdateWithoutQuestoesResponsavelInput = {
   status?: Prisma.EnumStatusUsuarioFieldUpdateOperationsInput | $Enums.StatusUsuario
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  senhaAtualizadaEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   perfil?: Prisma.PerfilUpdateOneWithoutUsuarioNestedInput
   codigosValidacao?: Prisma.CodigoValidacaoUpdateManyWithoutUsuarioNestedInput
   arquivos?: Prisma.ArquivoUpdateManyWithoutUsuarioNestedInput
@@ -1667,6 +2082,12 @@ export type UsuarioUpdateWithoutQuestoesResponsavelInput = {
   testesResponsavel?: Prisma.TesteUpdateManyWithoutResponsavelNestedInput
   alternativasResponsavel?: Prisma.AlternativaUpdateManyWithoutResponsavelNestedInput
   inscricoes?: Prisma.InscricaoUpdateManyWithoutUsuarioNestedInput
+  progressosAula?: Prisma.ProgressoAulaUpdateManyWithoutUsuarioNestedInput
+  tentativas?: Prisma.TentativaTesteUpdateManyWithoutUsuarioNestedInput
+  movimentacoes?: Prisma.MovimentacaoRecompensaUpdateManyWithoutUsuarioNestedInput
+  inventario?: Prisma.InventarioItemUpdateManyWithoutUsuarioNestedInput
+  ativacoes?: Prisma.AtivacaoItemUpdateManyWithoutUsuarioNestedInput
+  flashcards?: Prisma.FlashcardUpdateManyWithoutUsuarioNestedInput
 }
 
 export type UsuarioUncheckedUpdateWithoutQuestoesResponsavelInput = {
@@ -1678,6 +2099,7 @@ export type UsuarioUncheckedUpdateWithoutQuestoesResponsavelInput = {
   status?: Prisma.EnumStatusUsuarioFieldUpdateOperationsInput | $Enums.StatusUsuario
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  senhaAtualizadaEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   perfil?: Prisma.PerfilUncheckedUpdateOneWithoutUsuarioNestedInput
   codigosValidacao?: Prisma.CodigoValidacaoUncheckedUpdateManyWithoutUsuarioNestedInput
   arquivos?: Prisma.ArquivoUncheckedUpdateManyWithoutUsuarioNestedInput
@@ -1689,6 +2111,12 @@ export type UsuarioUncheckedUpdateWithoutQuestoesResponsavelInput = {
   testesResponsavel?: Prisma.TesteUncheckedUpdateManyWithoutResponsavelNestedInput
   alternativasResponsavel?: Prisma.AlternativaUncheckedUpdateManyWithoutResponsavelNestedInput
   inscricoes?: Prisma.InscricaoUncheckedUpdateManyWithoutUsuarioNestedInput
+  progressosAula?: Prisma.ProgressoAulaUncheckedUpdateManyWithoutUsuarioNestedInput
+  tentativas?: Prisma.TentativaTesteUncheckedUpdateManyWithoutUsuarioNestedInput
+  movimentacoes?: Prisma.MovimentacaoRecompensaUncheckedUpdateManyWithoutUsuarioNestedInput
+  inventario?: Prisma.InventarioItemUncheckedUpdateManyWithoutUsuarioNestedInput
+  ativacoes?: Prisma.AtivacaoItemUncheckedUpdateManyWithoutUsuarioNestedInput
+  flashcards?: Prisma.FlashcardUncheckedUpdateManyWithoutUsuarioNestedInput
 }
 
 export type UsuarioCreateWithoutAlternativasResponsavelInput = {
@@ -1700,6 +2128,7 @@ export type UsuarioCreateWithoutAlternativasResponsavelInput = {
   status?: $Enums.StatusUsuario
   criadoEm?: Date | string
   atualizadoEm?: Date | string
+  senhaAtualizadaEm?: Date | string
   perfil?: Prisma.PerfilCreateNestedOneWithoutUsuarioInput
   codigosValidacao?: Prisma.CodigoValidacaoCreateNestedManyWithoutUsuarioInput
   arquivos?: Prisma.ArquivoCreateNestedManyWithoutUsuarioInput
@@ -1711,6 +2140,12 @@ export type UsuarioCreateWithoutAlternativasResponsavelInput = {
   testesResponsavel?: Prisma.TesteCreateNestedManyWithoutResponsavelInput
   questoesResponsavel?: Prisma.QuestaoCreateNestedManyWithoutResponsavelInput
   inscricoes?: Prisma.InscricaoCreateNestedManyWithoutUsuarioInput
+  progressosAula?: Prisma.ProgressoAulaCreateNestedManyWithoutUsuarioInput
+  tentativas?: Prisma.TentativaTesteCreateNestedManyWithoutUsuarioInput
+  movimentacoes?: Prisma.MovimentacaoRecompensaCreateNestedManyWithoutUsuarioInput
+  inventario?: Prisma.InventarioItemCreateNestedManyWithoutUsuarioInput
+  ativacoes?: Prisma.AtivacaoItemCreateNestedManyWithoutUsuarioInput
+  flashcards?: Prisma.FlashcardCreateNestedManyWithoutUsuarioInput
 }
 
 export type UsuarioUncheckedCreateWithoutAlternativasResponsavelInput = {
@@ -1722,6 +2157,7 @@ export type UsuarioUncheckedCreateWithoutAlternativasResponsavelInput = {
   status?: $Enums.StatusUsuario
   criadoEm?: Date | string
   atualizadoEm?: Date | string
+  senhaAtualizadaEm?: Date | string
   perfil?: Prisma.PerfilUncheckedCreateNestedOneWithoutUsuarioInput
   codigosValidacao?: Prisma.CodigoValidacaoUncheckedCreateNestedManyWithoutUsuarioInput
   arquivos?: Prisma.ArquivoUncheckedCreateNestedManyWithoutUsuarioInput
@@ -1733,6 +2169,12 @@ export type UsuarioUncheckedCreateWithoutAlternativasResponsavelInput = {
   testesResponsavel?: Prisma.TesteUncheckedCreateNestedManyWithoutResponsavelInput
   questoesResponsavel?: Prisma.QuestaoUncheckedCreateNestedManyWithoutResponsavelInput
   inscricoes?: Prisma.InscricaoUncheckedCreateNestedManyWithoutUsuarioInput
+  progressosAula?: Prisma.ProgressoAulaUncheckedCreateNestedManyWithoutUsuarioInput
+  tentativas?: Prisma.TentativaTesteUncheckedCreateNestedManyWithoutUsuarioInput
+  movimentacoes?: Prisma.MovimentacaoRecompensaUncheckedCreateNestedManyWithoutUsuarioInput
+  inventario?: Prisma.InventarioItemUncheckedCreateNestedManyWithoutUsuarioInput
+  ativacoes?: Prisma.AtivacaoItemUncheckedCreateNestedManyWithoutUsuarioInput
+  flashcards?: Prisma.FlashcardUncheckedCreateNestedManyWithoutUsuarioInput
 }
 
 export type UsuarioCreateOrConnectWithoutAlternativasResponsavelInput = {
@@ -1760,6 +2202,7 @@ export type UsuarioUpdateWithoutAlternativasResponsavelInput = {
   status?: Prisma.EnumStatusUsuarioFieldUpdateOperationsInput | $Enums.StatusUsuario
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  senhaAtualizadaEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   perfil?: Prisma.PerfilUpdateOneWithoutUsuarioNestedInput
   codigosValidacao?: Prisma.CodigoValidacaoUpdateManyWithoutUsuarioNestedInput
   arquivos?: Prisma.ArquivoUpdateManyWithoutUsuarioNestedInput
@@ -1771,6 +2214,12 @@ export type UsuarioUpdateWithoutAlternativasResponsavelInput = {
   testesResponsavel?: Prisma.TesteUpdateManyWithoutResponsavelNestedInput
   questoesResponsavel?: Prisma.QuestaoUpdateManyWithoutResponsavelNestedInput
   inscricoes?: Prisma.InscricaoUpdateManyWithoutUsuarioNestedInput
+  progressosAula?: Prisma.ProgressoAulaUpdateManyWithoutUsuarioNestedInput
+  tentativas?: Prisma.TentativaTesteUpdateManyWithoutUsuarioNestedInput
+  movimentacoes?: Prisma.MovimentacaoRecompensaUpdateManyWithoutUsuarioNestedInput
+  inventario?: Prisma.InventarioItemUpdateManyWithoutUsuarioNestedInput
+  ativacoes?: Prisma.AtivacaoItemUpdateManyWithoutUsuarioNestedInput
+  flashcards?: Prisma.FlashcardUpdateManyWithoutUsuarioNestedInput
 }
 
 export type UsuarioUncheckedUpdateWithoutAlternativasResponsavelInput = {
@@ -1782,6 +2231,7 @@ export type UsuarioUncheckedUpdateWithoutAlternativasResponsavelInput = {
   status?: Prisma.EnumStatusUsuarioFieldUpdateOperationsInput | $Enums.StatusUsuario
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  senhaAtualizadaEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   perfil?: Prisma.PerfilUncheckedUpdateOneWithoutUsuarioNestedInput
   codigosValidacao?: Prisma.CodigoValidacaoUncheckedUpdateManyWithoutUsuarioNestedInput
   arquivos?: Prisma.ArquivoUncheckedUpdateManyWithoutUsuarioNestedInput
@@ -1793,6 +2243,12 @@ export type UsuarioUncheckedUpdateWithoutAlternativasResponsavelInput = {
   testesResponsavel?: Prisma.TesteUncheckedUpdateManyWithoutResponsavelNestedInput
   questoesResponsavel?: Prisma.QuestaoUncheckedUpdateManyWithoutResponsavelNestedInput
   inscricoes?: Prisma.InscricaoUncheckedUpdateManyWithoutUsuarioNestedInput
+  progressosAula?: Prisma.ProgressoAulaUncheckedUpdateManyWithoutUsuarioNestedInput
+  tentativas?: Prisma.TentativaTesteUncheckedUpdateManyWithoutUsuarioNestedInput
+  movimentacoes?: Prisma.MovimentacaoRecompensaUncheckedUpdateManyWithoutUsuarioNestedInput
+  inventario?: Prisma.InventarioItemUncheckedUpdateManyWithoutUsuarioNestedInput
+  ativacoes?: Prisma.AtivacaoItemUncheckedUpdateManyWithoutUsuarioNestedInput
+  flashcards?: Prisma.FlashcardUncheckedUpdateManyWithoutUsuarioNestedInput
 }
 
 export type UsuarioCreateWithoutInscricoesInput = {
@@ -1804,6 +2260,7 @@ export type UsuarioCreateWithoutInscricoesInput = {
   status?: $Enums.StatusUsuario
   criadoEm?: Date | string
   atualizadoEm?: Date | string
+  senhaAtualizadaEm?: Date | string
   perfil?: Prisma.PerfilCreateNestedOneWithoutUsuarioInput
   codigosValidacao?: Prisma.CodigoValidacaoCreateNestedManyWithoutUsuarioInput
   arquivos?: Prisma.ArquivoCreateNestedManyWithoutUsuarioInput
@@ -1815,6 +2272,12 @@ export type UsuarioCreateWithoutInscricoesInput = {
   testesResponsavel?: Prisma.TesteCreateNestedManyWithoutResponsavelInput
   questoesResponsavel?: Prisma.QuestaoCreateNestedManyWithoutResponsavelInput
   alternativasResponsavel?: Prisma.AlternativaCreateNestedManyWithoutResponsavelInput
+  progressosAula?: Prisma.ProgressoAulaCreateNestedManyWithoutUsuarioInput
+  tentativas?: Prisma.TentativaTesteCreateNestedManyWithoutUsuarioInput
+  movimentacoes?: Prisma.MovimentacaoRecompensaCreateNestedManyWithoutUsuarioInput
+  inventario?: Prisma.InventarioItemCreateNestedManyWithoutUsuarioInput
+  ativacoes?: Prisma.AtivacaoItemCreateNestedManyWithoutUsuarioInput
+  flashcards?: Prisma.FlashcardCreateNestedManyWithoutUsuarioInput
 }
 
 export type UsuarioUncheckedCreateWithoutInscricoesInput = {
@@ -1826,6 +2289,7 @@ export type UsuarioUncheckedCreateWithoutInscricoesInput = {
   status?: $Enums.StatusUsuario
   criadoEm?: Date | string
   atualizadoEm?: Date | string
+  senhaAtualizadaEm?: Date | string
   perfil?: Prisma.PerfilUncheckedCreateNestedOneWithoutUsuarioInput
   codigosValidacao?: Prisma.CodigoValidacaoUncheckedCreateNestedManyWithoutUsuarioInput
   arquivos?: Prisma.ArquivoUncheckedCreateNestedManyWithoutUsuarioInput
@@ -1837,6 +2301,12 @@ export type UsuarioUncheckedCreateWithoutInscricoesInput = {
   testesResponsavel?: Prisma.TesteUncheckedCreateNestedManyWithoutResponsavelInput
   questoesResponsavel?: Prisma.QuestaoUncheckedCreateNestedManyWithoutResponsavelInput
   alternativasResponsavel?: Prisma.AlternativaUncheckedCreateNestedManyWithoutResponsavelInput
+  progressosAula?: Prisma.ProgressoAulaUncheckedCreateNestedManyWithoutUsuarioInput
+  tentativas?: Prisma.TentativaTesteUncheckedCreateNestedManyWithoutUsuarioInput
+  movimentacoes?: Prisma.MovimentacaoRecompensaUncheckedCreateNestedManyWithoutUsuarioInput
+  inventario?: Prisma.InventarioItemUncheckedCreateNestedManyWithoutUsuarioInput
+  ativacoes?: Prisma.AtivacaoItemUncheckedCreateNestedManyWithoutUsuarioInput
+  flashcards?: Prisma.FlashcardUncheckedCreateNestedManyWithoutUsuarioInput
 }
 
 export type UsuarioCreateOrConnectWithoutInscricoesInput = {
@@ -1864,6 +2334,7 @@ export type UsuarioUpdateWithoutInscricoesInput = {
   status?: Prisma.EnumStatusUsuarioFieldUpdateOperationsInput | $Enums.StatusUsuario
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  senhaAtualizadaEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   perfil?: Prisma.PerfilUpdateOneWithoutUsuarioNestedInput
   codigosValidacao?: Prisma.CodigoValidacaoUpdateManyWithoutUsuarioNestedInput
   arquivos?: Prisma.ArquivoUpdateManyWithoutUsuarioNestedInput
@@ -1875,6 +2346,12 @@ export type UsuarioUpdateWithoutInscricoesInput = {
   testesResponsavel?: Prisma.TesteUpdateManyWithoutResponsavelNestedInput
   questoesResponsavel?: Prisma.QuestaoUpdateManyWithoutResponsavelNestedInput
   alternativasResponsavel?: Prisma.AlternativaUpdateManyWithoutResponsavelNestedInput
+  progressosAula?: Prisma.ProgressoAulaUpdateManyWithoutUsuarioNestedInput
+  tentativas?: Prisma.TentativaTesteUpdateManyWithoutUsuarioNestedInput
+  movimentacoes?: Prisma.MovimentacaoRecompensaUpdateManyWithoutUsuarioNestedInput
+  inventario?: Prisma.InventarioItemUpdateManyWithoutUsuarioNestedInput
+  ativacoes?: Prisma.AtivacaoItemUpdateManyWithoutUsuarioNestedInput
+  flashcards?: Prisma.FlashcardUpdateManyWithoutUsuarioNestedInput
 }
 
 export type UsuarioUncheckedUpdateWithoutInscricoesInput = {
@@ -1886,6 +2363,7 @@ export type UsuarioUncheckedUpdateWithoutInscricoesInput = {
   status?: Prisma.EnumStatusUsuarioFieldUpdateOperationsInput | $Enums.StatusUsuario
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  senhaAtualizadaEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   perfil?: Prisma.PerfilUncheckedUpdateOneWithoutUsuarioNestedInput
   codigosValidacao?: Prisma.CodigoValidacaoUncheckedUpdateManyWithoutUsuarioNestedInput
   arquivos?: Prisma.ArquivoUncheckedUpdateManyWithoutUsuarioNestedInput
@@ -1897,6 +2375,804 @@ export type UsuarioUncheckedUpdateWithoutInscricoesInput = {
   testesResponsavel?: Prisma.TesteUncheckedUpdateManyWithoutResponsavelNestedInput
   questoesResponsavel?: Prisma.QuestaoUncheckedUpdateManyWithoutResponsavelNestedInput
   alternativasResponsavel?: Prisma.AlternativaUncheckedUpdateManyWithoutResponsavelNestedInput
+  progressosAula?: Prisma.ProgressoAulaUncheckedUpdateManyWithoutUsuarioNestedInput
+  tentativas?: Prisma.TentativaTesteUncheckedUpdateManyWithoutUsuarioNestedInput
+  movimentacoes?: Prisma.MovimentacaoRecompensaUncheckedUpdateManyWithoutUsuarioNestedInput
+  inventario?: Prisma.InventarioItemUncheckedUpdateManyWithoutUsuarioNestedInput
+  ativacoes?: Prisma.AtivacaoItemUncheckedUpdateManyWithoutUsuarioNestedInput
+  flashcards?: Prisma.FlashcardUncheckedUpdateManyWithoutUsuarioNestedInput
+}
+
+export type UsuarioCreateWithoutProgressosAulaInput = {
+  id?: string
+  nome: string
+  email: string
+  senha: string
+  tipo?: $Enums.TipoUsuario
+  status?: $Enums.StatusUsuario
+  criadoEm?: Date | string
+  atualizadoEm?: Date | string
+  senhaAtualizadaEm?: Date | string
+  perfil?: Prisma.PerfilCreateNestedOneWithoutUsuarioInput
+  codigosValidacao?: Prisma.CodigoValidacaoCreateNestedManyWithoutUsuarioInput
+  arquivos?: Prisma.ArquivoCreateNestedManyWithoutUsuarioInput
+  cursosResponsavel?: Prisma.CursoCreateNestedManyWithoutResponsavelInput
+  cursosAutorizados?: Prisma.CursoCreateNestedManyWithoutAdminAutorizadorInput
+  sessoesResponsavel?: Prisma.SessaoCreateNestedManyWithoutResponsavelInput
+  modulosResponsavel?: Prisma.ModuloCreateNestedManyWithoutResponsavelInput
+  aulasResponsavel?: Prisma.AulaCreateNestedManyWithoutResponsavelInput
+  testesResponsavel?: Prisma.TesteCreateNestedManyWithoutResponsavelInput
+  questoesResponsavel?: Prisma.QuestaoCreateNestedManyWithoutResponsavelInput
+  alternativasResponsavel?: Prisma.AlternativaCreateNestedManyWithoutResponsavelInput
+  inscricoes?: Prisma.InscricaoCreateNestedManyWithoutUsuarioInput
+  tentativas?: Prisma.TentativaTesteCreateNestedManyWithoutUsuarioInput
+  movimentacoes?: Prisma.MovimentacaoRecompensaCreateNestedManyWithoutUsuarioInput
+  inventario?: Prisma.InventarioItemCreateNestedManyWithoutUsuarioInput
+  ativacoes?: Prisma.AtivacaoItemCreateNestedManyWithoutUsuarioInput
+  flashcards?: Prisma.FlashcardCreateNestedManyWithoutUsuarioInput
+}
+
+export type UsuarioUncheckedCreateWithoutProgressosAulaInput = {
+  id?: string
+  nome: string
+  email: string
+  senha: string
+  tipo?: $Enums.TipoUsuario
+  status?: $Enums.StatusUsuario
+  criadoEm?: Date | string
+  atualizadoEm?: Date | string
+  senhaAtualizadaEm?: Date | string
+  perfil?: Prisma.PerfilUncheckedCreateNestedOneWithoutUsuarioInput
+  codigosValidacao?: Prisma.CodigoValidacaoUncheckedCreateNestedManyWithoutUsuarioInput
+  arquivos?: Prisma.ArquivoUncheckedCreateNestedManyWithoutUsuarioInput
+  cursosResponsavel?: Prisma.CursoUncheckedCreateNestedManyWithoutResponsavelInput
+  cursosAutorizados?: Prisma.CursoUncheckedCreateNestedManyWithoutAdminAutorizadorInput
+  sessoesResponsavel?: Prisma.SessaoUncheckedCreateNestedManyWithoutResponsavelInput
+  modulosResponsavel?: Prisma.ModuloUncheckedCreateNestedManyWithoutResponsavelInput
+  aulasResponsavel?: Prisma.AulaUncheckedCreateNestedManyWithoutResponsavelInput
+  testesResponsavel?: Prisma.TesteUncheckedCreateNestedManyWithoutResponsavelInput
+  questoesResponsavel?: Prisma.QuestaoUncheckedCreateNestedManyWithoutResponsavelInput
+  alternativasResponsavel?: Prisma.AlternativaUncheckedCreateNestedManyWithoutResponsavelInput
+  inscricoes?: Prisma.InscricaoUncheckedCreateNestedManyWithoutUsuarioInput
+  tentativas?: Prisma.TentativaTesteUncheckedCreateNestedManyWithoutUsuarioInput
+  movimentacoes?: Prisma.MovimentacaoRecompensaUncheckedCreateNestedManyWithoutUsuarioInput
+  inventario?: Prisma.InventarioItemUncheckedCreateNestedManyWithoutUsuarioInput
+  ativacoes?: Prisma.AtivacaoItemUncheckedCreateNestedManyWithoutUsuarioInput
+  flashcards?: Prisma.FlashcardUncheckedCreateNestedManyWithoutUsuarioInput
+}
+
+export type UsuarioCreateOrConnectWithoutProgressosAulaInput = {
+  where: Prisma.UsuarioWhereUniqueInput
+  create: Prisma.XOR<Prisma.UsuarioCreateWithoutProgressosAulaInput, Prisma.UsuarioUncheckedCreateWithoutProgressosAulaInput>
+}
+
+export type UsuarioUpsertWithoutProgressosAulaInput = {
+  update: Prisma.XOR<Prisma.UsuarioUpdateWithoutProgressosAulaInput, Prisma.UsuarioUncheckedUpdateWithoutProgressosAulaInput>
+  create: Prisma.XOR<Prisma.UsuarioCreateWithoutProgressosAulaInput, Prisma.UsuarioUncheckedCreateWithoutProgressosAulaInput>
+  where?: Prisma.UsuarioWhereInput
+}
+
+export type UsuarioUpdateToOneWithWhereWithoutProgressosAulaInput = {
+  where?: Prisma.UsuarioWhereInput
+  data: Prisma.XOR<Prisma.UsuarioUpdateWithoutProgressosAulaInput, Prisma.UsuarioUncheckedUpdateWithoutProgressosAulaInput>
+}
+
+export type UsuarioUpdateWithoutProgressosAulaInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  nome?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  senha?: Prisma.StringFieldUpdateOperationsInput | string
+  tipo?: Prisma.EnumTipoUsuarioFieldUpdateOperationsInput | $Enums.TipoUsuario
+  status?: Prisma.EnumStatusUsuarioFieldUpdateOperationsInput | $Enums.StatusUsuario
+  criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  senhaAtualizadaEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  perfil?: Prisma.PerfilUpdateOneWithoutUsuarioNestedInput
+  codigosValidacao?: Prisma.CodigoValidacaoUpdateManyWithoutUsuarioNestedInput
+  arquivos?: Prisma.ArquivoUpdateManyWithoutUsuarioNestedInput
+  cursosResponsavel?: Prisma.CursoUpdateManyWithoutResponsavelNestedInput
+  cursosAutorizados?: Prisma.CursoUpdateManyWithoutAdminAutorizadorNestedInput
+  sessoesResponsavel?: Prisma.SessaoUpdateManyWithoutResponsavelNestedInput
+  modulosResponsavel?: Prisma.ModuloUpdateManyWithoutResponsavelNestedInput
+  aulasResponsavel?: Prisma.AulaUpdateManyWithoutResponsavelNestedInput
+  testesResponsavel?: Prisma.TesteUpdateManyWithoutResponsavelNestedInput
+  questoesResponsavel?: Prisma.QuestaoUpdateManyWithoutResponsavelNestedInput
+  alternativasResponsavel?: Prisma.AlternativaUpdateManyWithoutResponsavelNestedInput
+  inscricoes?: Prisma.InscricaoUpdateManyWithoutUsuarioNestedInput
+  tentativas?: Prisma.TentativaTesteUpdateManyWithoutUsuarioNestedInput
+  movimentacoes?: Prisma.MovimentacaoRecompensaUpdateManyWithoutUsuarioNestedInput
+  inventario?: Prisma.InventarioItemUpdateManyWithoutUsuarioNestedInput
+  ativacoes?: Prisma.AtivacaoItemUpdateManyWithoutUsuarioNestedInput
+  flashcards?: Prisma.FlashcardUpdateManyWithoutUsuarioNestedInput
+}
+
+export type UsuarioUncheckedUpdateWithoutProgressosAulaInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  nome?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  senha?: Prisma.StringFieldUpdateOperationsInput | string
+  tipo?: Prisma.EnumTipoUsuarioFieldUpdateOperationsInput | $Enums.TipoUsuario
+  status?: Prisma.EnumStatusUsuarioFieldUpdateOperationsInput | $Enums.StatusUsuario
+  criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  senhaAtualizadaEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  perfil?: Prisma.PerfilUncheckedUpdateOneWithoutUsuarioNestedInput
+  codigosValidacao?: Prisma.CodigoValidacaoUncheckedUpdateManyWithoutUsuarioNestedInput
+  arquivos?: Prisma.ArquivoUncheckedUpdateManyWithoutUsuarioNestedInput
+  cursosResponsavel?: Prisma.CursoUncheckedUpdateManyWithoutResponsavelNestedInput
+  cursosAutorizados?: Prisma.CursoUncheckedUpdateManyWithoutAdminAutorizadorNestedInput
+  sessoesResponsavel?: Prisma.SessaoUncheckedUpdateManyWithoutResponsavelNestedInput
+  modulosResponsavel?: Prisma.ModuloUncheckedUpdateManyWithoutResponsavelNestedInput
+  aulasResponsavel?: Prisma.AulaUncheckedUpdateManyWithoutResponsavelNestedInput
+  testesResponsavel?: Prisma.TesteUncheckedUpdateManyWithoutResponsavelNestedInput
+  questoesResponsavel?: Prisma.QuestaoUncheckedUpdateManyWithoutResponsavelNestedInput
+  alternativasResponsavel?: Prisma.AlternativaUncheckedUpdateManyWithoutResponsavelNestedInput
+  inscricoes?: Prisma.InscricaoUncheckedUpdateManyWithoutUsuarioNestedInput
+  tentativas?: Prisma.TentativaTesteUncheckedUpdateManyWithoutUsuarioNestedInput
+  movimentacoes?: Prisma.MovimentacaoRecompensaUncheckedUpdateManyWithoutUsuarioNestedInput
+  inventario?: Prisma.InventarioItemUncheckedUpdateManyWithoutUsuarioNestedInput
+  ativacoes?: Prisma.AtivacaoItemUncheckedUpdateManyWithoutUsuarioNestedInput
+  flashcards?: Prisma.FlashcardUncheckedUpdateManyWithoutUsuarioNestedInput
+}
+
+export type UsuarioCreateWithoutTentativasInput = {
+  id?: string
+  nome: string
+  email: string
+  senha: string
+  tipo?: $Enums.TipoUsuario
+  status?: $Enums.StatusUsuario
+  criadoEm?: Date | string
+  atualizadoEm?: Date | string
+  senhaAtualizadaEm?: Date | string
+  perfil?: Prisma.PerfilCreateNestedOneWithoutUsuarioInput
+  codigosValidacao?: Prisma.CodigoValidacaoCreateNestedManyWithoutUsuarioInput
+  arquivos?: Prisma.ArquivoCreateNestedManyWithoutUsuarioInput
+  cursosResponsavel?: Prisma.CursoCreateNestedManyWithoutResponsavelInput
+  cursosAutorizados?: Prisma.CursoCreateNestedManyWithoutAdminAutorizadorInput
+  sessoesResponsavel?: Prisma.SessaoCreateNestedManyWithoutResponsavelInput
+  modulosResponsavel?: Prisma.ModuloCreateNestedManyWithoutResponsavelInput
+  aulasResponsavel?: Prisma.AulaCreateNestedManyWithoutResponsavelInput
+  testesResponsavel?: Prisma.TesteCreateNestedManyWithoutResponsavelInput
+  questoesResponsavel?: Prisma.QuestaoCreateNestedManyWithoutResponsavelInput
+  alternativasResponsavel?: Prisma.AlternativaCreateNestedManyWithoutResponsavelInput
+  inscricoes?: Prisma.InscricaoCreateNestedManyWithoutUsuarioInput
+  progressosAula?: Prisma.ProgressoAulaCreateNestedManyWithoutUsuarioInput
+  movimentacoes?: Prisma.MovimentacaoRecompensaCreateNestedManyWithoutUsuarioInput
+  inventario?: Prisma.InventarioItemCreateNestedManyWithoutUsuarioInput
+  ativacoes?: Prisma.AtivacaoItemCreateNestedManyWithoutUsuarioInput
+  flashcards?: Prisma.FlashcardCreateNestedManyWithoutUsuarioInput
+}
+
+export type UsuarioUncheckedCreateWithoutTentativasInput = {
+  id?: string
+  nome: string
+  email: string
+  senha: string
+  tipo?: $Enums.TipoUsuario
+  status?: $Enums.StatusUsuario
+  criadoEm?: Date | string
+  atualizadoEm?: Date | string
+  senhaAtualizadaEm?: Date | string
+  perfil?: Prisma.PerfilUncheckedCreateNestedOneWithoutUsuarioInput
+  codigosValidacao?: Prisma.CodigoValidacaoUncheckedCreateNestedManyWithoutUsuarioInput
+  arquivos?: Prisma.ArquivoUncheckedCreateNestedManyWithoutUsuarioInput
+  cursosResponsavel?: Prisma.CursoUncheckedCreateNestedManyWithoutResponsavelInput
+  cursosAutorizados?: Prisma.CursoUncheckedCreateNestedManyWithoutAdminAutorizadorInput
+  sessoesResponsavel?: Prisma.SessaoUncheckedCreateNestedManyWithoutResponsavelInput
+  modulosResponsavel?: Prisma.ModuloUncheckedCreateNestedManyWithoutResponsavelInput
+  aulasResponsavel?: Prisma.AulaUncheckedCreateNestedManyWithoutResponsavelInput
+  testesResponsavel?: Prisma.TesteUncheckedCreateNestedManyWithoutResponsavelInput
+  questoesResponsavel?: Prisma.QuestaoUncheckedCreateNestedManyWithoutResponsavelInput
+  alternativasResponsavel?: Prisma.AlternativaUncheckedCreateNestedManyWithoutResponsavelInput
+  inscricoes?: Prisma.InscricaoUncheckedCreateNestedManyWithoutUsuarioInput
+  progressosAula?: Prisma.ProgressoAulaUncheckedCreateNestedManyWithoutUsuarioInput
+  movimentacoes?: Prisma.MovimentacaoRecompensaUncheckedCreateNestedManyWithoutUsuarioInput
+  inventario?: Prisma.InventarioItemUncheckedCreateNestedManyWithoutUsuarioInput
+  ativacoes?: Prisma.AtivacaoItemUncheckedCreateNestedManyWithoutUsuarioInput
+  flashcards?: Prisma.FlashcardUncheckedCreateNestedManyWithoutUsuarioInput
+}
+
+export type UsuarioCreateOrConnectWithoutTentativasInput = {
+  where: Prisma.UsuarioWhereUniqueInput
+  create: Prisma.XOR<Prisma.UsuarioCreateWithoutTentativasInput, Prisma.UsuarioUncheckedCreateWithoutTentativasInput>
+}
+
+export type UsuarioUpsertWithoutTentativasInput = {
+  update: Prisma.XOR<Prisma.UsuarioUpdateWithoutTentativasInput, Prisma.UsuarioUncheckedUpdateWithoutTentativasInput>
+  create: Prisma.XOR<Prisma.UsuarioCreateWithoutTentativasInput, Prisma.UsuarioUncheckedCreateWithoutTentativasInput>
+  where?: Prisma.UsuarioWhereInput
+}
+
+export type UsuarioUpdateToOneWithWhereWithoutTentativasInput = {
+  where?: Prisma.UsuarioWhereInput
+  data: Prisma.XOR<Prisma.UsuarioUpdateWithoutTentativasInput, Prisma.UsuarioUncheckedUpdateWithoutTentativasInput>
+}
+
+export type UsuarioUpdateWithoutTentativasInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  nome?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  senha?: Prisma.StringFieldUpdateOperationsInput | string
+  tipo?: Prisma.EnumTipoUsuarioFieldUpdateOperationsInput | $Enums.TipoUsuario
+  status?: Prisma.EnumStatusUsuarioFieldUpdateOperationsInput | $Enums.StatusUsuario
+  criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  senhaAtualizadaEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  perfil?: Prisma.PerfilUpdateOneWithoutUsuarioNestedInput
+  codigosValidacao?: Prisma.CodigoValidacaoUpdateManyWithoutUsuarioNestedInput
+  arquivos?: Prisma.ArquivoUpdateManyWithoutUsuarioNestedInput
+  cursosResponsavel?: Prisma.CursoUpdateManyWithoutResponsavelNestedInput
+  cursosAutorizados?: Prisma.CursoUpdateManyWithoutAdminAutorizadorNestedInput
+  sessoesResponsavel?: Prisma.SessaoUpdateManyWithoutResponsavelNestedInput
+  modulosResponsavel?: Prisma.ModuloUpdateManyWithoutResponsavelNestedInput
+  aulasResponsavel?: Prisma.AulaUpdateManyWithoutResponsavelNestedInput
+  testesResponsavel?: Prisma.TesteUpdateManyWithoutResponsavelNestedInput
+  questoesResponsavel?: Prisma.QuestaoUpdateManyWithoutResponsavelNestedInput
+  alternativasResponsavel?: Prisma.AlternativaUpdateManyWithoutResponsavelNestedInput
+  inscricoes?: Prisma.InscricaoUpdateManyWithoutUsuarioNestedInput
+  progressosAula?: Prisma.ProgressoAulaUpdateManyWithoutUsuarioNestedInput
+  movimentacoes?: Prisma.MovimentacaoRecompensaUpdateManyWithoutUsuarioNestedInput
+  inventario?: Prisma.InventarioItemUpdateManyWithoutUsuarioNestedInput
+  ativacoes?: Prisma.AtivacaoItemUpdateManyWithoutUsuarioNestedInput
+  flashcards?: Prisma.FlashcardUpdateManyWithoutUsuarioNestedInput
+}
+
+export type UsuarioUncheckedUpdateWithoutTentativasInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  nome?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  senha?: Prisma.StringFieldUpdateOperationsInput | string
+  tipo?: Prisma.EnumTipoUsuarioFieldUpdateOperationsInput | $Enums.TipoUsuario
+  status?: Prisma.EnumStatusUsuarioFieldUpdateOperationsInput | $Enums.StatusUsuario
+  criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  senhaAtualizadaEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  perfil?: Prisma.PerfilUncheckedUpdateOneWithoutUsuarioNestedInput
+  codigosValidacao?: Prisma.CodigoValidacaoUncheckedUpdateManyWithoutUsuarioNestedInput
+  arquivos?: Prisma.ArquivoUncheckedUpdateManyWithoutUsuarioNestedInput
+  cursosResponsavel?: Prisma.CursoUncheckedUpdateManyWithoutResponsavelNestedInput
+  cursosAutorizados?: Prisma.CursoUncheckedUpdateManyWithoutAdminAutorizadorNestedInput
+  sessoesResponsavel?: Prisma.SessaoUncheckedUpdateManyWithoutResponsavelNestedInput
+  modulosResponsavel?: Prisma.ModuloUncheckedUpdateManyWithoutResponsavelNestedInput
+  aulasResponsavel?: Prisma.AulaUncheckedUpdateManyWithoutResponsavelNestedInput
+  testesResponsavel?: Prisma.TesteUncheckedUpdateManyWithoutResponsavelNestedInput
+  questoesResponsavel?: Prisma.QuestaoUncheckedUpdateManyWithoutResponsavelNestedInput
+  alternativasResponsavel?: Prisma.AlternativaUncheckedUpdateManyWithoutResponsavelNestedInput
+  inscricoes?: Prisma.InscricaoUncheckedUpdateManyWithoutUsuarioNestedInput
+  progressosAula?: Prisma.ProgressoAulaUncheckedUpdateManyWithoutUsuarioNestedInput
+  movimentacoes?: Prisma.MovimentacaoRecompensaUncheckedUpdateManyWithoutUsuarioNestedInput
+  inventario?: Prisma.InventarioItemUncheckedUpdateManyWithoutUsuarioNestedInput
+  ativacoes?: Prisma.AtivacaoItemUncheckedUpdateManyWithoutUsuarioNestedInput
+  flashcards?: Prisma.FlashcardUncheckedUpdateManyWithoutUsuarioNestedInput
+}
+
+export type UsuarioCreateWithoutMovimentacoesInput = {
+  id?: string
+  nome: string
+  email: string
+  senha: string
+  tipo?: $Enums.TipoUsuario
+  status?: $Enums.StatusUsuario
+  criadoEm?: Date | string
+  atualizadoEm?: Date | string
+  senhaAtualizadaEm?: Date | string
+  perfil?: Prisma.PerfilCreateNestedOneWithoutUsuarioInput
+  codigosValidacao?: Prisma.CodigoValidacaoCreateNestedManyWithoutUsuarioInput
+  arquivos?: Prisma.ArquivoCreateNestedManyWithoutUsuarioInput
+  cursosResponsavel?: Prisma.CursoCreateNestedManyWithoutResponsavelInput
+  cursosAutorizados?: Prisma.CursoCreateNestedManyWithoutAdminAutorizadorInput
+  sessoesResponsavel?: Prisma.SessaoCreateNestedManyWithoutResponsavelInput
+  modulosResponsavel?: Prisma.ModuloCreateNestedManyWithoutResponsavelInput
+  aulasResponsavel?: Prisma.AulaCreateNestedManyWithoutResponsavelInput
+  testesResponsavel?: Prisma.TesteCreateNestedManyWithoutResponsavelInput
+  questoesResponsavel?: Prisma.QuestaoCreateNestedManyWithoutResponsavelInput
+  alternativasResponsavel?: Prisma.AlternativaCreateNestedManyWithoutResponsavelInput
+  inscricoes?: Prisma.InscricaoCreateNestedManyWithoutUsuarioInput
+  progressosAula?: Prisma.ProgressoAulaCreateNestedManyWithoutUsuarioInput
+  tentativas?: Prisma.TentativaTesteCreateNestedManyWithoutUsuarioInput
+  inventario?: Prisma.InventarioItemCreateNestedManyWithoutUsuarioInput
+  ativacoes?: Prisma.AtivacaoItemCreateNestedManyWithoutUsuarioInput
+  flashcards?: Prisma.FlashcardCreateNestedManyWithoutUsuarioInput
+}
+
+export type UsuarioUncheckedCreateWithoutMovimentacoesInput = {
+  id?: string
+  nome: string
+  email: string
+  senha: string
+  tipo?: $Enums.TipoUsuario
+  status?: $Enums.StatusUsuario
+  criadoEm?: Date | string
+  atualizadoEm?: Date | string
+  senhaAtualizadaEm?: Date | string
+  perfil?: Prisma.PerfilUncheckedCreateNestedOneWithoutUsuarioInput
+  codigosValidacao?: Prisma.CodigoValidacaoUncheckedCreateNestedManyWithoutUsuarioInput
+  arquivos?: Prisma.ArquivoUncheckedCreateNestedManyWithoutUsuarioInput
+  cursosResponsavel?: Prisma.CursoUncheckedCreateNestedManyWithoutResponsavelInput
+  cursosAutorizados?: Prisma.CursoUncheckedCreateNestedManyWithoutAdminAutorizadorInput
+  sessoesResponsavel?: Prisma.SessaoUncheckedCreateNestedManyWithoutResponsavelInput
+  modulosResponsavel?: Prisma.ModuloUncheckedCreateNestedManyWithoutResponsavelInput
+  aulasResponsavel?: Prisma.AulaUncheckedCreateNestedManyWithoutResponsavelInput
+  testesResponsavel?: Prisma.TesteUncheckedCreateNestedManyWithoutResponsavelInput
+  questoesResponsavel?: Prisma.QuestaoUncheckedCreateNestedManyWithoutResponsavelInput
+  alternativasResponsavel?: Prisma.AlternativaUncheckedCreateNestedManyWithoutResponsavelInput
+  inscricoes?: Prisma.InscricaoUncheckedCreateNestedManyWithoutUsuarioInput
+  progressosAula?: Prisma.ProgressoAulaUncheckedCreateNestedManyWithoutUsuarioInput
+  tentativas?: Prisma.TentativaTesteUncheckedCreateNestedManyWithoutUsuarioInput
+  inventario?: Prisma.InventarioItemUncheckedCreateNestedManyWithoutUsuarioInput
+  ativacoes?: Prisma.AtivacaoItemUncheckedCreateNestedManyWithoutUsuarioInput
+  flashcards?: Prisma.FlashcardUncheckedCreateNestedManyWithoutUsuarioInput
+}
+
+export type UsuarioCreateOrConnectWithoutMovimentacoesInput = {
+  where: Prisma.UsuarioWhereUniqueInput
+  create: Prisma.XOR<Prisma.UsuarioCreateWithoutMovimentacoesInput, Prisma.UsuarioUncheckedCreateWithoutMovimentacoesInput>
+}
+
+export type UsuarioUpsertWithoutMovimentacoesInput = {
+  update: Prisma.XOR<Prisma.UsuarioUpdateWithoutMovimentacoesInput, Prisma.UsuarioUncheckedUpdateWithoutMovimentacoesInput>
+  create: Prisma.XOR<Prisma.UsuarioCreateWithoutMovimentacoesInput, Prisma.UsuarioUncheckedCreateWithoutMovimentacoesInput>
+  where?: Prisma.UsuarioWhereInput
+}
+
+export type UsuarioUpdateToOneWithWhereWithoutMovimentacoesInput = {
+  where?: Prisma.UsuarioWhereInput
+  data: Prisma.XOR<Prisma.UsuarioUpdateWithoutMovimentacoesInput, Prisma.UsuarioUncheckedUpdateWithoutMovimentacoesInput>
+}
+
+export type UsuarioUpdateWithoutMovimentacoesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  nome?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  senha?: Prisma.StringFieldUpdateOperationsInput | string
+  tipo?: Prisma.EnumTipoUsuarioFieldUpdateOperationsInput | $Enums.TipoUsuario
+  status?: Prisma.EnumStatusUsuarioFieldUpdateOperationsInput | $Enums.StatusUsuario
+  criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  senhaAtualizadaEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  perfil?: Prisma.PerfilUpdateOneWithoutUsuarioNestedInput
+  codigosValidacao?: Prisma.CodigoValidacaoUpdateManyWithoutUsuarioNestedInput
+  arquivos?: Prisma.ArquivoUpdateManyWithoutUsuarioNestedInput
+  cursosResponsavel?: Prisma.CursoUpdateManyWithoutResponsavelNestedInput
+  cursosAutorizados?: Prisma.CursoUpdateManyWithoutAdminAutorizadorNestedInput
+  sessoesResponsavel?: Prisma.SessaoUpdateManyWithoutResponsavelNestedInput
+  modulosResponsavel?: Prisma.ModuloUpdateManyWithoutResponsavelNestedInput
+  aulasResponsavel?: Prisma.AulaUpdateManyWithoutResponsavelNestedInput
+  testesResponsavel?: Prisma.TesteUpdateManyWithoutResponsavelNestedInput
+  questoesResponsavel?: Prisma.QuestaoUpdateManyWithoutResponsavelNestedInput
+  alternativasResponsavel?: Prisma.AlternativaUpdateManyWithoutResponsavelNestedInput
+  inscricoes?: Prisma.InscricaoUpdateManyWithoutUsuarioNestedInput
+  progressosAula?: Prisma.ProgressoAulaUpdateManyWithoutUsuarioNestedInput
+  tentativas?: Prisma.TentativaTesteUpdateManyWithoutUsuarioNestedInput
+  inventario?: Prisma.InventarioItemUpdateManyWithoutUsuarioNestedInput
+  ativacoes?: Prisma.AtivacaoItemUpdateManyWithoutUsuarioNestedInput
+  flashcards?: Prisma.FlashcardUpdateManyWithoutUsuarioNestedInput
+}
+
+export type UsuarioUncheckedUpdateWithoutMovimentacoesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  nome?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  senha?: Prisma.StringFieldUpdateOperationsInput | string
+  tipo?: Prisma.EnumTipoUsuarioFieldUpdateOperationsInput | $Enums.TipoUsuario
+  status?: Prisma.EnumStatusUsuarioFieldUpdateOperationsInput | $Enums.StatusUsuario
+  criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  senhaAtualizadaEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  perfil?: Prisma.PerfilUncheckedUpdateOneWithoutUsuarioNestedInput
+  codigosValidacao?: Prisma.CodigoValidacaoUncheckedUpdateManyWithoutUsuarioNestedInput
+  arquivos?: Prisma.ArquivoUncheckedUpdateManyWithoutUsuarioNestedInput
+  cursosResponsavel?: Prisma.CursoUncheckedUpdateManyWithoutResponsavelNestedInput
+  cursosAutorizados?: Prisma.CursoUncheckedUpdateManyWithoutAdminAutorizadorNestedInput
+  sessoesResponsavel?: Prisma.SessaoUncheckedUpdateManyWithoutResponsavelNestedInput
+  modulosResponsavel?: Prisma.ModuloUncheckedUpdateManyWithoutResponsavelNestedInput
+  aulasResponsavel?: Prisma.AulaUncheckedUpdateManyWithoutResponsavelNestedInput
+  testesResponsavel?: Prisma.TesteUncheckedUpdateManyWithoutResponsavelNestedInput
+  questoesResponsavel?: Prisma.QuestaoUncheckedUpdateManyWithoutResponsavelNestedInput
+  alternativasResponsavel?: Prisma.AlternativaUncheckedUpdateManyWithoutResponsavelNestedInput
+  inscricoes?: Prisma.InscricaoUncheckedUpdateManyWithoutUsuarioNestedInput
+  progressosAula?: Prisma.ProgressoAulaUncheckedUpdateManyWithoutUsuarioNestedInput
+  tentativas?: Prisma.TentativaTesteUncheckedUpdateManyWithoutUsuarioNestedInput
+  inventario?: Prisma.InventarioItemUncheckedUpdateManyWithoutUsuarioNestedInput
+  ativacoes?: Prisma.AtivacaoItemUncheckedUpdateManyWithoutUsuarioNestedInput
+  flashcards?: Prisma.FlashcardUncheckedUpdateManyWithoutUsuarioNestedInput
+}
+
+export type UsuarioCreateWithoutInventarioInput = {
+  id?: string
+  nome: string
+  email: string
+  senha: string
+  tipo?: $Enums.TipoUsuario
+  status?: $Enums.StatusUsuario
+  criadoEm?: Date | string
+  atualizadoEm?: Date | string
+  senhaAtualizadaEm?: Date | string
+  perfil?: Prisma.PerfilCreateNestedOneWithoutUsuarioInput
+  codigosValidacao?: Prisma.CodigoValidacaoCreateNestedManyWithoutUsuarioInput
+  arquivos?: Prisma.ArquivoCreateNestedManyWithoutUsuarioInput
+  cursosResponsavel?: Prisma.CursoCreateNestedManyWithoutResponsavelInput
+  cursosAutorizados?: Prisma.CursoCreateNestedManyWithoutAdminAutorizadorInput
+  sessoesResponsavel?: Prisma.SessaoCreateNestedManyWithoutResponsavelInput
+  modulosResponsavel?: Prisma.ModuloCreateNestedManyWithoutResponsavelInput
+  aulasResponsavel?: Prisma.AulaCreateNestedManyWithoutResponsavelInput
+  testesResponsavel?: Prisma.TesteCreateNestedManyWithoutResponsavelInput
+  questoesResponsavel?: Prisma.QuestaoCreateNestedManyWithoutResponsavelInput
+  alternativasResponsavel?: Prisma.AlternativaCreateNestedManyWithoutResponsavelInput
+  inscricoes?: Prisma.InscricaoCreateNestedManyWithoutUsuarioInput
+  progressosAula?: Prisma.ProgressoAulaCreateNestedManyWithoutUsuarioInput
+  tentativas?: Prisma.TentativaTesteCreateNestedManyWithoutUsuarioInput
+  movimentacoes?: Prisma.MovimentacaoRecompensaCreateNestedManyWithoutUsuarioInput
+  ativacoes?: Prisma.AtivacaoItemCreateNestedManyWithoutUsuarioInput
+  flashcards?: Prisma.FlashcardCreateNestedManyWithoutUsuarioInput
+}
+
+export type UsuarioUncheckedCreateWithoutInventarioInput = {
+  id?: string
+  nome: string
+  email: string
+  senha: string
+  tipo?: $Enums.TipoUsuario
+  status?: $Enums.StatusUsuario
+  criadoEm?: Date | string
+  atualizadoEm?: Date | string
+  senhaAtualizadaEm?: Date | string
+  perfil?: Prisma.PerfilUncheckedCreateNestedOneWithoutUsuarioInput
+  codigosValidacao?: Prisma.CodigoValidacaoUncheckedCreateNestedManyWithoutUsuarioInput
+  arquivos?: Prisma.ArquivoUncheckedCreateNestedManyWithoutUsuarioInput
+  cursosResponsavel?: Prisma.CursoUncheckedCreateNestedManyWithoutResponsavelInput
+  cursosAutorizados?: Prisma.CursoUncheckedCreateNestedManyWithoutAdminAutorizadorInput
+  sessoesResponsavel?: Prisma.SessaoUncheckedCreateNestedManyWithoutResponsavelInput
+  modulosResponsavel?: Prisma.ModuloUncheckedCreateNestedManyWithoutResponsavelInput
+  aulasResponsavel?: Prisma.AulaUncheckedCreateNestedManyWithoutResponsavelInput
+  testesResponsavel?: Prisma.TesteUncheckedCreateNestedManyWithoutResponsavelInput
+  questoesResponsavel?: Prisma.QuestaoUncheckedCreateNestedManyWithoutResponsavelInput
+  alternativasResponsavel?: Prisma.AlternativaUncheckedCreateNestedManyWithoutResponsavelInput
+  inscricoes?: Prisma.InscricaoUncheckedCreateNestedManyWithoutUsuarioInput
+  progressosAula?: Prisma.ProgressoAulaUncheckedCreateNestedManyWithoutUsuarioInput
+  tentativas?: Prisma.TentativaTesteUncheckedCreateNestedManyWithoutUsuarioInput
+  movimentacoes?: Prisma.MovimentacaoRecompensaUncheckedCreateNestedManyWithoutUsuarioInput
+  ativacoes?: Prisma.AtivacaoItemUncheckedCreateNestedManyWithoutUsuarioInput
+  flashcards?: Prisma.FlashcardUncheckedCreateNestedManyWithoutUsuarioInput
+}
+
+export type UsuarioCreateOrConnectWithoutInventarioInput = {
+  where: Prisma.UsuarioWhereUniqueInput
+  create: Prisma.XOR<Prisma.UsuarioCreateWithoutInventarioInput, Prisma.UsuarioUncheckedCreateWithoutInventarioInput>
+}
+
+export type UsuarioUpsertWithoutInventarioInput = {
+  update: Prisma.XOR<Prisma.UsuarioUpdateWithoutInventarioInput, Prisma.UsuarioUncheckedUpdateWithoutInventarioInput>
+  create: Prisma.XOR<Prisma.UsuarioCreateWithoutInventarioInput, Prisma.UsuarioUncheckedCreateWithoutInventarioInput>
+  where?: Prisma.UsuarioWhereInput
+}
+
+export type UsuarioUpdateToOneWithWhereWithoutInventarioInput = {
+  where?: Prisma.UsuarioWhereInput
+  data: Prisma.XOR<Prisma.UsuarioUpdateWithoutInventarioInput, Prisma.UsuarioUncheckedUpdateWithoutInventarioInput>
+}
+
+export type UsuarioUpdateWithoutInventarioInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  nome?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  senha?: Prisma.StringFieldUpdateOperationsInput | string
+  tipo?: Prisma.EnumTipoUsuarioFieldUpdateOperationsInput | $Enums.TipoUsuario
+  status?: Prisma.EnumStatusUsuarioFieldUpdateOperationsInput | $Enums.StatusUsuario
+  criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  senhaAtualizadaEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  perfil?: Prisma.PerfilUpdateOneWithoutUsuarioNestedInput
+  codigosValidacao?: Prisma.CodigoValidacaoUpdateManyWithoutUsuarioNestedInput
+  arquivos?: Prisma.ArquivoUpdateManyWithoutUsuarioNestedInput
+  cursosResponsavel?: Prisma.CursoUpdateManyWithoutResponsavelNestedInput
+  cursosAutorizados?: Prisma.CursoUpdateManyWithoutAdminAutorizadorNestedInput
+  sessoesResponsavel?: Prisma.SessaoUpdateManyWithoutResponsavelNestedInput
+  modulosResponsavel?: Prisma.ModuloUpdateManyWithoutResponsavelNestedInput
+  aulasResponsavel?: Prisma.AulaUpdateManyWithoutResponsavelNestedInput
+  testesResponsavel?: Prisma.TesteUpdateManyWithoutResponsavelNestedInput
+  questoesResponsavel?: Prisma.QuestaoUpdateManyWithoutResponsavelNestedInput
+  alternativasResponsavel?: Prisma.AlternativaUpdateManyWithoutResponsavelNestedInput
+  inscricoes?: Prisma.InscricaoUpdateManyWithoutUsuarioNestedInput
+  progressosAula?: Prisma.ProgressoAulaUpdateManyWithoutUsuarioNestedInput
+  tentativas?: Prisma.TentativaTesteUpdateManyWithoutUsuarioNestedInput
+  movimentacoes?: Prisma.MovimentacaoRecompensaUpdateManyWithoutUsuarioNestedInput
+  ativacoes?: Prisma.AtivacaoItemUpdateManyWithoutUsuarioNestedInput
+  flashcards?: Prisma.FlashcardUpdateManyWithoutUsuarioNestedInput
+}
+
+export type UsuarioUncheckedUpdateWithoutInventarioInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  nome?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  senha?: Prisma.StringFieldUpdateOperationsInput | string
+  tipo?: Prisma.EnumTipoUsuarioFieldUpdateOperationsInput | $Enums.TipoUsuario
+  status?: Prisma.EnumStatusUsuarioFieldUpdateOperationsInput | $Enums.StatusUsuario
+  criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  senhaAtualizadaEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  perfil?: Prisma.PerfilUncheckedUpdateOneWithoutUsuarioNestedInput
+  codigosValidacao?: Prisma.CodigoValidacaoUncheckedUpdateManyWithoutUsuarioNestedInput
+  arquivos?: Prisma.ArquivoUncheckedUpdateManyWithoutUsuarioNestedInput
+  cursosResponsavel?: Prisma.CursoUncheckedUpdateManyWithoutResponsavelNestedInput
+  cursosAutorizados?: Prisma.CursoUncheckedUpdateManyWithoutAdminAutorizadorNestedInput
+  sessoesResponsavel?: Prisma.SessaoUncheckedUpdateManyWithoutResponsavelNestedInput
+  modulosResponsavel?: Prisma.ModuloUncheckedUpdateManyWithoutResponsavelNestedInput
+  aulasResponsavel?: Prisma.AulaUncheckedUpdateManyWithoutResponsavelNestedInput
+  testesResponsavel?: Prisma.TesteUncheckedUpdateManyWithoutResponsavelNestedInput
+  questoesResponsavel?: Prisma.QuestaoUncheckedUpdateManyWithoutResponsavelNestedInput
+  alternativasResponsavel?: Prisma.AlternativaUncheckedUpdateManyWithoutResponsavelNestedInput
+  inscricoes?: Prisma.InscricaoUncheckedUpdateManyWithoutUsuarioNestedInput
+  progressosAula?: Prisma.ProgressoAulaUncheckedUpdateManyWithoutUsuarioNestedInput
+  tentativas?: Prisma.TentativaTesteUncheckedUpdateManyWithoutUsuarioNestedInput
+  movimentacoes?: Prisma.MovimentacaoRecompensaUncheckedUpdateManyWithoutUsuarioNestedInput
+  ativacoes?: Prisma.AtivacaoItemUncheckedUpdateManyWithoutUsuarioNestedInput
+  flashcards?: Prisma.FlashcardUncheckedUpdateManyWithoutUsuarioNestedInput
+}
+
+export type UsuarioCreateWithoutAtivacoesInput = {
+  id?: string
+  nome: string
+  email: string
+  senha: string
+  tipo?: $Enums.TipoUsuario
+  status?: $Enums.StatusUsuario
+  criadoEm?: Date | string
+  atualizadoEm?: Date | string
+  senhaAtualizadaEm?: Date | string
+  perfil?: Prisma.PerfilCreateNestedOneWithoutUsuarioInput
+  codigosValidacao?: Prisma.CodigoValidacaoCreateNestedManyWithoutUsuarioInput
+  arquivos?: Prisma.ArquivoCreateNestedManyWithoutUsuarioInput
+  cursosResponsavel?: Prisma.CursoCreateNestedManyWithoutResponsavelInput
+  cursosAutorizados?: Prisma.CursoCreateNestedManyWithoutAdminAutorizadorInput
+  sessoesResponsavel?: Prisma.SessaoCreateNestedManyWithoutResponsavelInput
+  modulosResponsavel?: Prisma.ModuloCreateNestedManyWithoutResponsavelInput
+  aulasResponsavel?: Prisma.AulaCreateNestedManyWithoutResponsavelInput
+  testesResponsavel?: Prisma.TesteCreateNestedManyWithoutResponsavelInput
+  questoesResponsavel?: Prisma.QuestaoCreateNestedManyWithoutResponsavelInput
+  alternativasResponsavel?: Prisma.AlternativaCreateNestedManyWithoutResponsavelInput
+  inscricoes?: Prisma.InscricaoCreateNestedManyWithoutUsuarioInput
+  progressosAula?: Prisma.ProgressoAulaCreateNestedManyWithoutUsuarioInput
+  tentativas?: Prisma.TentativaTesteCreateNestedManyWithoutUsuarioInput
+  movimentacoes?: Prisma.MovimentacaoRecompensaCreateNestedManyWithoutUsuarioInput
+  inventario?: Prisma.InventarioItemCreateNestedManyWithoutUsuarioInput
+  flashcards?: Prisma.FlashcardCreateNestedManyWithoutUsuarioInput
+}
+
+export type UsuarioUncheckedCreateWithoutAtivacoesInput = {
+  id?: string
+  nome: string
+  email: string
+  senha: string
+  tipo?: $Enums.TipoUsuario
+  status?: $Enums.StatusUsuario
+  criadoEm?: Date | string
+  atualizadoEm?: Date | string
+  senhaAtualizadaEm?: Date | string
+  perfil?: Prisma.PerfilUncheckedCreateNestedOneWithoutUsuarioInput
+  codigosValidacao?: Prisma.CodigoValidacaoUncheckedCreateNestedManyWithoutUsuarioInput
+  arquivos?: Prisma.ArquivoUncheckedCreateNestedManyWithoutUsuarioInput
+  cursosResponsavel?: Prisma.CursoUncheckedCreateNestedManyWithoutResponsavelInput
+  cursosAutorizados?: Prisma.CursoUncheckedCreateNestedManyWithoutAdminAutorizadorInput
+  sessoesResponsavel?: Prisma.SessaoUncheckedCreateNestedManyWithoutResponsavelInput
+  modulosResponsavel?: Prisma.ModuloUncheckedCreateNestedManyWithoutResponsavelInput
+  aulasResponsavel?: Prisma.AulaUncheckedCreateNestedManyWithoutResponsavelInput
+  testesResponsavel?: Prisma.TesteUncheckedCreateNestedManyWithoutResponsavelInput
+  questoesResponsavel?: Prisma.QuestaoUncheckedCreateNestedManyWithoutResponsavelInput
+  alternativasResponsavel?: Prisma.AlternativaUncheckedCreateNestedManyWithoutResponsavelInput
+  inscricoes?: Prisma.InscricaoUncheckedCreateNestedManyWithoutUsuarioInput
+  progressosAula?: Prisma.ProgressoAulaUncheckedCreateNestedManyWithoutUsuarioInput
+  tentativas?: Prisma.TentativaTesteUncheckedCreateNestedManyWithoutUsuarioInput
+  movimentacoes?: Prisma.MovimentacaoRecompensaUncheckedCreateNestedManyWithoutUsuarioInput
+  inventario?: Prisma.InventarioItemUncheckedCreateNestedManyWithoutUsuarioInput
+  flashcards?: Prisma.FlashcardUncheckedCreateNestedManyWithoutUsuarioInput
+}
+
+export type UsuarioCreateOrConnectWithoutAtivacoesInput = {
+  where: Prisma.UsuarioWhereUniqueInput
+  create: Prisma.XOR<Prisma.UsuarioCreateWithoutAtivacoesInput, Prisma.UsuarioUncheckedCreateWithoutAtivacoesInput>
+}
+
+export type UsuarioUpsertWithoutAtivacoesInput = {
+  update: Prisma.XOR<Prisma.UsuarioUpdateWithoutAtivacoesInput, Prisma.UsuarioUncheckedUpdateWithoutAtivacoesInput>
+  create: Prisma.XOR<Prisma.UsuarioCreateWithoutAtivacoesInput, Prisma.UsuarioUncheckedCreateWithoutAtivacoesInput>
+  where?: Prisma.UsuarioWhereInput
+}
+
+export type UsuarioUpdateToOneWithWhereWithoutAtivacoesInput = {
+  where?: Prisma.UsuarioWhereInput
+  data: Prisma.XOR<Prisma.UsuarioUpdateWithoutAtivacoesInput, Prisma.UsuarioUncheckedUpdateWithoutAtivacoesInput>
+}
+
+export type UsuarioUpdateWithoutAtivacoesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  nome?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  senha?: Prisma.StringFieldUpdateOperationsInput | string
+  tipo?: Prisma.EnumTipoUsuarioFieldUpdateOperationsInput | $Enums.TipoUsuario
+  status?: Prisma.EnumStatusUsuarioFieldUpdateOperationsInput | $Enums.StatusUsuario
+  criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  senhaAtualizadaEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  perfil?: Prisma.PerfilUpdateOneWithoutUsuarioNestedInput
+  codigosValidacao?: Prisma.CodigoValidacaoUpdateManyWithoutUsuarioNestedInput
+  arquivos?: Prisma.ArquivoUpdateManyWithoutUsuarioNestedInput
+  cursosResponsavel?: Prisma.CursoUpdateManyWithoutResponsavelNestedInput
+  cursosAutorizados?: Prisma.CursoUpdateManyWithoutAdminAutorizadorNestedInput
+  sessoesResponsavel?: Prisma.SessaoUpdateManyWithoutResponsavelNestedInput
+  modulosResponsavel?: Prisma.ModuloUpdateManyWithoutResponsavelNestedInput
+  aulasResponsavel?: Prisma.AulaUpdateManyWithoutResponsavelNestedInput
+  testesResponsavel?: Prisma.TesteUpdateManyWithoutResponsavelNestedInput
+  questoesResponsavel?: Prisma.QuestaoUpdateManyWithoutResponsavelNestedInput
+  alternativasResponsavel?: Prisma.AlternativaUpdateManyWithoutResponsavelNestedInput
+  inscricoes?: Prisma.InscricaoUpdateManyWithoutUsuarioNestedInput
+  progressosAula?: Prisma.ProgressoAulaUpdateManyWithoutUsuarioNestedInput
+  tentativas?: Prisma.TentativaTesteUpdateManyWithoutUsuarioNestedInput
+  movimentacoes?: Prisma.MovimentacaoRecompensaUpdateManyWithoutUsuarioNestedInput
+  inventario?: Prisma.InventarioItemUpdateManyWithoutUsuarioNestedInput
+  flashcards?: Prisma.FlashcardUpdateManyWithoutUsuarioNestedInput
+}
+
+export type UsuarioUncheckedUpdateWithoutAtivacoesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  nome?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  senha?: Prisma.StringFieldUpdateOperationsInput | string
+  tipo?: Prisma.EnumTipoUsuarioFieldUpdateOperationsInput | $Enums.TipoUsuario
+  status?: Prisma.EnumStatusUsuarioFieldUpdateOperationsInput | $Enums.StatusUsuario
+  criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  senhaAtualizadaEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  perfil?: Prisma.PerfilUncheckedUpdateOneWithoutUsuarioNestedInput
+  codigosValidacao?: Prisma.CodigoValidacaoUncheckedUpdateManyWithoutUsuarioNestedInput
+  arquivos?: Prisma.ArquivoUncheckedUpdateManyWithoutUsuarioNestedInput
+  cursosResponsavel?: Prisma.CursoUncheckedUpdateManyWithoutResponsavelNestedInput
+  cursosAutorizados?: Prisma.CursoUncheckedUpdateManyWithoutAdminAutorizadorNestedInput
+  sessoesResponsavel?: Prisma.SessaoUncheckedUpdateManyWithoutResponsavelNestedInput
+  modulosResponsavel?: Prisma.ModuloUncheckedUpdateManyWithoutResponsavelNestedInput
+  aulasResponsavel?: Prisma.AulaUncheckedUpdateManyWithoutResponsavelNestedInput
+  testesResponsavel?: Prisma.TesteUncheckedUpdateManyWithoutResponsavelNestedInput
+  questoesResponsavel?: Prisma.QuestaoUncheckedUpdateManyWithoutResponsavelNestedInput
+  alternativasResponsavel?: Prisma.AlternativaUncheckedUpdateManyWithoutResponsavelNestedInput
+  inscricoes?: Prisma.InscricaoUncheckedUpdateManyWithoutUsuarioNestedInput
+  progressosAula?: Prisma.ProgressoAulaUncheckedUpdateManyWithoutUsuarioNestedInput
+  tentativas?: Prisma.TentativaTesteUncheckedUpdateManyWithoutUsuarioNestedInput
+  movimentacoes?: Prisma.MovimentacaoRecompensaUncheckedUpdateManyWithoutUsuarioNestedInput
+  inventario?: Prisma.InventarioItemUncheckedUpdateManyWithoutUsuarioNestedInput
+  flashcards?: Prisma.FlashcardUncheckedUpdateManyWithoutUsuarioNestedInput
+}
+
+export type UsuarioCreateWithoutFlashcardsInput = {
+  id?: string
+  nome: string
+  email: string
+  senha: string
+  tipo?: $Enums.TipoUsuario
+  status?: $Enums.StatusUsuario
+  criadoEm?: Date | string
+  atualizadoEm?: Date | string
+  senhaAtualizadaEm?: Date | string
+  perfil?: Prisma.PerfilCreateNestedOneWithoutUsuarioInput
+  codigosValidacao?: Prisma.CodigoValidacaoCreateNestedManyWithoutUsuarioInput
+  arquivos?: Prisma.ArquivoCreateNestedManyWithoutUsuarioInput
+  cursosResponsavel?: Prisma.CursoCreateNestedManyWithoutResponsavelInput
+  cursosAutorizados?: Prisma.CursoCreateNestedManyWithoutAdminAutorizadorInput
+  sessoesResponsavel?: Prisma.SessaoCreateNestedManyWithoutResponsavelInput
+  modulosResponsavel?: Prisma.ModuloCreateNestedManyWithoutResponsavelInput
+  aulasResponsavel?: Prisma.AulaCreateNestedManyWithoutResponsavelInput
+  testesResponsavel?: Prisma.TesteCreateNestedManyWithoutResponsavelInput
+  questoesResponsavel?: Prisma.QuestaoCreateNestedManyWithoutResponsavelInput
+  alternativasResponsavel?: Prisma.AlternativaCreateNestedManyWithoutResponsavelInput
+  inscricoes?: Prisma.InscricaoCreateNestedManyWithoutUsuarioInput
+  progressosAula?: Prisma.ProgressoAulaCreateNestedManyWithoutUsuarioInput
+  tentativas?: Prisma.TentativaTesteCreateNestedManyWithoutUsuarioInput
+  movimentacoes?: Prisma.MovimentacaoRecompensaCreateNestedManyWithoutUsuarioInput
+  inventario?: Prisma.InventarioItemCreateNestedManyWithoutUsuarioInput
+  ativacoes?: Prisma.AtivacaoItemCreateNestedManyWithoutUsuarioInput
+}
+
+export type UsuarioUncheckedCreateWithoutFlashcardsInput = {
+  id?: string
+  nome: string
+  email: string
+  senha: string
+  tipo?: $Enums.TipoUsuario
+  status?: $Enums.StatusUsuario
+  criadoEm?: Date | string
+  atualizadoEm?: Date | string
+  senhaAtualizadaEm?: Date | string
+  perfil?: Prisma.PerfilUncheckedCreateNestedOneWithoutUsuarioInput
+  codigosValidacao?: Prisma.CodigoValidacaoUncheckedCreateNestedManyWithoutUsuarioInput
+  arquivos?: Prisma.ArquivoUncheckedCreateNestedManyWithoutUsuarioInput
+  cursosResponsavel?: Prisma.CursoUncheckedCreateNestedManyWithoutResponsavelInput
+  cursosAutorizados?: Prisma.CursoUncheckedCreateNestedManyWithoutAdminAutorizadorInput
+  sessoesResponsavel?: Prisma.SessaoUncheckedCreateNestedManyWithoutResponsavelInput
+  modulosResponsavel?: Prisma.ModuloUncheckedCreateNestedManyWithoutResponsavelInput
+  aulasResponsavel?: Prisma.AulaUncheckedCreateNestedManyWithoutResponsavelInput
+  testesResponsavel?: Prisma.TesteUncheckedCreateNestedManyWithoutResponsavelInput
+  questoesResponsavel?: Prisma.QuestaoUncheckedCreateNestedManyWithoutResponsavelInput
+  alternativasResponsavel?: Prisma.AlternativaUncheckedCreateNestedManyWithoutResponsavelInput
+  inscricoes?: Prisma.InscricaoUncheckedCreateNestedManyWithoutUsuarioInput
+  progressosAula?: Prisma.ProgressoAulaUncheckedCreateNestedManyWithoutUsuarioInput
+  tentativas?: Prisma.TentativaTesteUncheckedCreateNestedManyWithoutUsuarioInput
+  movimentacoes?: Prisma.MovimentacaoRecompensaUncheckedCreateNestedManyWithoutUsuarioInput
+  inventario?: Prisma.InventarioItemUncheckedCreateNestedManyWithoutUsuarioInput
+  ativacoes?: Prisma.AtivacaoItemUncheckedCreateNestedManyWithoutUsuarioInput
+}
+
+export type UsuarioCreateOrConnectWithoutFlashcardsInput = {
+  where: Prisma.UsuarioWhereUniqueInput
+  create: Prisma.XOR<Prisma.UsuarioCreateWithoutFlashcardsInput, Prisma.UsuarioUncheckedCreateWithoutFlashcardsInput>
+}
+
+export type UsuarioUpsertWithoutFlashcardsInput = {
+  update: Prisma.XOR<Prisma.UsuarioUpdateWithoutFlashcardsInput, Prisma.UsuarioUncheckedUpdateWithoutFlashcardsInput>
+  create: Prisma.XOR<Prisma.UsuarioCreateWithoutFlashcardsInput, Prisma.UsuarioUncheckedCreateWithoutFlashcardsInput>
+  where?: Prisma.UsuarioWhereInput
+}
+
+export type UsuarioUpdateToOneWithWhereWithoutFlashcardsInput = {
+  where?: Prisma.UsuarioWhereInput
+  data: Prisma.XOR<Prisma.UsuarioUpdateWithoutFlashcardsInput, Prisma.UsuarioUncheckedUpdateWithoutFlashcardsInput>
+}
+
+export type UsuarioUpdateWithoutFlashcardsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  nome?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  senha?: Prisma.StringFieldUpdateOperationsInput | string
+  tipo?: Prisma.EnumTipoUsuarioFieldUpdateOperationsInput | $Enums.TipoUsuario
+  status?: Prisma.EnumStatusUsuarioFieldUpdateOperationsInput | $Enums.StatusUsuario
+  criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  senhaAtualizadaEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  perfil?: Prisma.PerfilUpdateOneWithoutUsuarioNestedInput
+  codigosValidacao?: Prisma.CodigoValidacaoUpdateManyWithoutUsuarioNestedInput
+  arquivos?: Prisma.ArquivoUpdateManyWithoutUsuarioNestedInput
+  cursosResponsavel?: Prisma.CursoUpdateManyWithoutResponsavelNestedInput
+  cursosAutorizados?: Prisma.CursoUpdateManyWithoutAdminAutorizadorNestedInput
+  sessoesResponsavel?: Prisma.SessaoUpdateManyWithoutResponsavelNestedInput
+  modulosResponsavel?: Prisma.ModuloUpdateManyWithoutResponsavelNestedInput
+  aulasResponsavel?: Prisma.AulaUpdateManyWithoutResponsavelNestedInput
+  testesResponsavel?: Prisma.TesteUpdateManyWithoutResponsavelNestedInput
+  questoesResponsavel?: Prisma.QuestaoUpdateManyWithoutResponsavelNestedInput
+  alternativasResponsavel?: Prisma.AlternativaUpdateManyWithoutResponsavelNestedInput
+  inscricoes?: Prisma.InscricaoUpdateManyWithoutUsuarioNestedInput
+  progressosAula?: Prisma.ProgressoAulaUpdateManyWithoutUsuarioNestedInput
+  tentativas?: Prisma.TentativaTesteUpdateManyWithoutUsuarioNestedInput
+  movimentacoes?: Prisma.MovimentacaoRecompensaUpdateManyWithoutUsuarioNestedInput
+  inventario?: Prisma.InventarioItemUpdateManyWithoutUsuarioNestedInput
+  ativacoes?: Prisma.AtivacaoItemUpdateManyWithoutUsuarioNestedInput
+}
+
+export type UsuarioUncheckedUpdateWithoutFlashcardsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  nome?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  senha?: Prisma.StringFieldUpdateOperationsInput | string
+  tipo?: Prisma.EnumTipoUsuarioFieldUpdateOperationsInput | $Enums.TipoUsuario
+  status?: Prisma.EnumStatusUsuarioFieldUpdateOperationsInput | $Enums.StatusUsuario
+  criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  senhaAtualizadaEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  perfil?: Prisma.PerfilUncheckedUpdateOneWithoutUsuarioNestedInput
+  codigosValidacao?: Prisma.CodigoValidacaoUncheckedUpdateManyWithoutUsuarioNestedInput
+  arquivos?: Prisma.ArquivoUncheckedUpdateManyWithoutUsuarioNestedInput
+  cursosResponsavel?: Prisma.CursoUncheckedUpdateManyWithoutResponsavelNestedInput
+  cursosAutorizados?: Prisma.CursoUncheckedUpdateManyWithoutAdminAutorizadorNestedInput
+  sessoesResponsavel?: Prisma.SessaoUncheckedUpdateManyWithoutResponsavelNestedInput
+  modulosResponsavel?: Prisma.ModuloUncheckedUpdateManyWithoutResponsavelNestedInput
+  aulasResponsavel?: Prisma.AulaUncheckedUpdateManyWithoutResponsavelNestedInput
+  testesResponsavel?: Prisma.TesteUncheckedUpdateManyWithoutResponsavelNestedInput
+  questoesResponsavel?: Prisma.QuestaoUncheckedUpdateManyWithoutResponsavelNestedInput
+  alternativasResponsavel?: Prisma.AlternativaUncheckedUpdateManyWithoutResponsavelNestedInput
+  inscricoes?: Prisma.InscricaoUncheckedUpdateManyWithoutUsuarioNestedInput
+  progressosAula?: Prisma.ProgressoAulaUncheckedUpdateManyWithoutUsuarioNestedInput
+  tentativas?: Prisma.TentativaTesteUncheckedUpdateManyWithoutUsuarioNestedInput
+  movimentacoes?: Prisma.MovimentacaoRecompensaUncheckedUpdateManyWithoutUsuarioNestedInput
+  inventario?: Prisma.InventarioItemUncheckedUpdateManyWithoutUsuarioNestedInput
+  ativacoes?: Prisma.AtivacaoItemUncheckedUpdateManyWithoutUsuarioNestedInput
 }
 
 
@@ -1916,6 +3192,12 @@ export type UsuarioCountOutputType = {
   questoesResponsavel: number
   alternativasResponsavel: number
   inscricoes: number
+  progressosAula: number
+  tentativas: number
+  movimentacoes: number
+  inventario: number
+  ativacoes: number
+  flashcards: number
 }
 
 export type UsuarioCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1930,6 +3212,12 @@ export type UsuarioCountOutputTypeSelect<ExtArgs extends runtime.Types.Extension
   questoesResponsavel?: boolean | UsuarioCountOutputTypeCountQuestoesResponsavelArgs
   alternativasResponsavel?: boolean | UsuarioCountOutputTypeCountAlternativasResponsavelArgs
   inscricoes?: boolean | UsuarioCountOutputTypeCountInscricoesArgs
+  progressosAula?: boolean | UsuarioCountOutputTypeCountProgressosAulaArgs
+  tentativas?: boolean | UsuarioCountOutputTypeCountTentativasArgs
+  movimentacoes?: boolean | UsuarioCountOutputTypeCountMovimentacoesArgs
+  inventario?: boolean | UsuarioCountOutputTypeCountInventarioArgs
+  ativacoes?: boolean | UsuarioCountOutputTypeCountAtivacoesArgs
+  flashcards?: boolean | UsuarioCountOutputTypeCountFlashcardsArgs
 }
 
 /**
@@ -2019,6 +3307,48 @@ export type UsuarioCountOutputTypeCountInscricoesArgs<ExtArgs extends runtime.Ty
   where?: Prisma.InscricaoWhereInput
 }
 
+/**
+ * UsuarioCountOutputType without action
+ */
+export type UsuarioCountOutputTypeCountProgressosAulaArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ProgressoAulaWhereInput
+}
+
+/**
+ * UsuarioCountOutputType without action
+ */
+export type UsuarioCountOutputTypeCountTentativasArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.TentativaTesteWhereInput
+}
+
+/**
+ * UsuarioCountOutputType without action
+ */
+export type UsuarioCountOutputTypeCountMovimentacoesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.MovimentacaoRecompensaWhereInput
+}
+
+/**
+ * UsuarioCountOutputType without action
+ */
+export type UsuarioCountOutputTypeCountInventarioArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.InventarioItemWhereInput
+}
+
+/**
+ * UsuarioCountOutputType without action
+ */
+export type UsuarioCountOutputTypeCountAtivacoesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.AtivacaoItemWhereInput
+}
+
+/**
+ * UsuarioCountOutputType without action
+ */
+export type UsuarioCountOutputTypeCountFlashcardsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.FlashcardWhereInput
+}
+
 
 export type UsuarioSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -2029,6 +3359,7 @@ export type UsuarioSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   status?: boolean
   criadoEm?: boolean
   atualizadoEm?: boolean
+  senhaAtualizadaEm?: boolean
   perfil?: boolean | Prisma.Usuario$perfilArgs<ExtArgs>
   codigosValidacao?: boolean | Prisma.Usuario$codigosValidacaoArgs<ExtArgs>
   arquivos?: boolean | Prisma.Usuario$arquivosArgs<ExtArgs>
@@ -2041,6 +3372,12 @@ export type UsuarioSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   questoesResponsavel?: boolean | Prisma.Usuario$questoesResponsavelArgs<ExtArgs>
   alternativasResponsavel?: boolean | Prisma.Usuario$alternativasResponsavelArgs<ExtArgs>
   inscricoes?: boolean | Prisma.Usuario$inscricoesArgs<ExtArgs>
+  progressosAula?: boolean | Prisma.Usuario$progressosAulaArgs<ExtArgs>
+  tentativas?: boolean | Prisma.Usuario$tentativasArgs<ExtArgs>
+  movimentacoes?: boolean | Prisma.Usuario$movimentacoesArgs<ExtArgs>
+  inventario?: boolean | Prisma.Usuario$inventarioArgs<ExtArgs>
+  ativacoes?: boolean | Prisma.Usuario$ativacoesArgs<ExtArgs>
+  flashcards?: boolean | Prisma.Usuario$flashcardsArgs<ExtArgs>
   _count?: boolean | Prisma.UsuarioCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["usuario"]>
 
@@ -2053,6 +3390,7 @@ export type UsuarioSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exten
   status?: boolean
   criadoEm?: boolean
   atualizadoEm?: boolean
+  senhaAtualizadaEm?: boolean
 }, ExtArgs["result"]["usuario"]>
 
 export type UsuarioSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -2064,6 +3402,7 @@ export type UsuarioSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
   status?: boolean
   criadoEm?: boolean
   atualizadoEm?: boolean
+  senhaAtualizadaEm?: boolean
 }, ExtArgs["result"]["usuario"]>
 
 export type UsuarioSelectScalar = {
@@ -2075,9 +3414,10 @@ export type UsuarioSelectScalar = {
   status?: boolean
   criadoEm?: boolean
   atualizadoEm?: boolean
+  senhaAtualizadaEm?: boolean
 }
 
-export type UsuarioOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "nome" | "email" | "senha" | "tipo" | "status" | "criadoEm" | "atualizadoEm", ExtArgs["result"]["usuario"]>
+export type UsuarioOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "nome" | "email" | "senha" | "tipo" | "status" | "criadoEm" | "atualizadoEm" | "senhaAtualizadaEm", ExtArgs["result"]["usuario"]>
 export type UsuarioInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   perfil?: boolean | Prisma.Usuario$perfilArgs<ExtArgs>
   codigosValidacao?: boolean | Prisma.Usuario$codigosValidacaoArgs<ExtArgs>
@@ -2091,6 +3431,12 @@ export type UsuarioInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs
   questoesResponsavel?: boolean | Prisma.Usuario$questoesResponsavelArgs<ExtArgs>
   alternativasResponsavel?: boolean | Prisma.Usuario$alternativasResponsavelArgs<ExtArgs>
   inscricoes?: boolean | Prisma.Usuario$inscricoesArgs<ExtArgs>
+  progressosAula?: boolean | Prisma.Usuario$progressosAulaArgs<ExtArgs>
+  tentativas?: boolean | Prisma.Usuario$tentativasArgs<ExtArgs>
+  movimentacoes?: boolean | Prisma.Usuario$movimentacoesArgs<ExtArgs>
+  inventario?: boolean | Prisma.Usuario$inventarioArgs<ExtArgs>
+  ativacoes?: boolean | Prisma.Usuario$ativacoesArgs<ExtArgs>
+  flashcards?: boolean | Prisma.Usuario$flashcardsArgs<ExtArgs>
   _count?: boolean | Prisma.UsuarioCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UsuarioIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -2111,6 +3457,12 @@ export type $UsuarioPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     questoesResponsavel: Prisma.$QuestaoPayload<ExtArgs>[]
     alternativasResponsavel: Prisma.$AlternativaPayload<ExtArgs>[]
     inscricoes: Prisma.$InscricaoPayload<ExtArgs>[]
+    progressosAula: Prisma.$ProgressoAulaPayload<ExtArgs>[]
+    tentativas: Prisma.$TentativaTestePayload<ExtArgs>[]
+    movimentacoes: Prisma.$MovimentacaoRecompensaPayload<ExtArgs>[]
+    inventario: Prisma.$InventarioItemPayload<ExtArgs>[]
+    ativacoes: Prisma.$AtivacaoItemPayload<ExtArgs>[]
+    flashcards: Prisma.$FlashcardPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -2121,6 +3473,7 @@ export type $UsuarioPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     status: $Enums.StatusUsuario
     criadoEm: Date
     atualizadoEm: Date
+    senhaAtualizadaEm: Date
   }, ExtArgs["result"]["usuario"]>
   composites: {}
 }
@@ -2527,6 +3880,12 @@ export interface Prisma__UsuarioClient<T, Null = never, ExtArgs extends runtime.
   questoesResponsavel<T extends Prisma.Usuario$questoesResponsavelArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Usuario$questoesResponsavelArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$QuestaoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   alternativasResponsavel<T extends Prisma.Usuario$alternativasResponsavelArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Usuario$alternativasResponsavelArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AlternativaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   inscricoes<T extends Prisma.Usuario$inscricoesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Usuario$inscricoesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$InscricaoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  progressosAula<T extends Prisma.Usuario$progressosAulaArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Usuario$progressosAulaArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProgressoAulaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  tentativas<T extends Prisma.Usuario$tentativasArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Usuario$tentativasArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TentativaTestePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  movimentacoes<T extends Prisma.Usuario$movimentacoesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Usuario$movimentacoesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MovimentacaoRecompensaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  inventario<T extends Prisma.Usuario$inventarioArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Usuario$inventarioArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$InventarioItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  ativacoes<T extends Prisma.Usuario$ativacoesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Usuario$ativacoesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AtivacaoItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  flashcards<T extends Prisma.Usuario$flashcardsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Usuario$flashcardsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FlashcardPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2564,6 +3923,7 @@ export interface UsuarioFieldRefs {
   readonly status: Prisma.FieldRef<"Usuario", 'StatusUsuario'>
   readonly criadoEm: Prisma.FieldRef<"Usuario", 'DateTime'>
   readonly atualizadoEm: Prisma.FieldRef<"Usuario", 'DateTime'>
+  readonly senhaAtualizadaEm: Prisma.FieldRef<"Usuario", 'DateTime'>
 }
     
 
@@ -3237,6 +4597,150 @@ export type Usuario$inscricoesArgs<ExtArgs extends runtime.Types.Extensions.Inte
   take?: number
   skip?: number
   distinct?: Prisma.InscricaoScalarFieldEnum | Prisma.InscricaoScalarFieldEnum[]
+}
+
+/**
+ * Usuario.progressosAula
+ */
+export type Usuario$progressosAulaArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ProgressoAula
+   */
+  select?: Prisma.ProgressoAulaSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ProgressoAula
+   */
+  omit?: Prisma.ProgressoAulaOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ProgressoAulaInclude<ExtArgs> | null
+  where?: Prisma.ProgressoAulaWhereInput
+  orderBy?: Prisma.ProgressoAulaOrderByWithRelationInput | Prisma.ProgressoAulaOrderByWithRelationInput[]
+  cursor?: Prisma.ProgressoAulaWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ProgressoAulaScalarFieldEnum | Prisma.ProgressoAulaScalarFieldEnum[]
+}
+
+/**
+ * Usuario.tentativas
+ */
+export type Usuario$tentativasArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the TentativaTeste
+   */
+  select?: Prisma.TentativaTesteSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the TentativaTeste
+   */
+  omit?: Prisma.TentativaTesteOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TentativaTesteInclude<ExtArgs> | null
+  where?: Prisma.TentativaTesteWhereInput
+  orderBy?: Prisma.TentativaTesteOrderByWithRelationInput | Prisma.TentativaTesteOrderByWithRelationInput[]
+  cursor?: Prisma.TentativaTesteWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.TentativaTesteScalarFieldEnum | Prisma.TentativaTesteScalarFieldEnum[]
+}
+
+/**
+ * Usuario.movimentacoes
+ */
+export type Usuario$movimentacoesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the MovimentacaoRecompensa
+   */
+  select?: Prisma.MovimentacaoRecompensaSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the MovimentacaoRecompensa
+   */
+  omit?: Prisma.MovimentacaoRecompensaOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.MovimentacaoRecompensaInclude<ExtArgs> | null
+  where?: Prisma.MovimentacaoRecompensaWhereInput
+  orderBy?: Prisma.MovimentacaoRecompensaOrderByWithRelationInput | Prisma.MovimentacaoRecompensaOrderByWithRelationInput[]
+  cursor?: Prisma.MovimentacaoRecompensaWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.MovimentacaoRecompensaScalarFieldEnum | Prisma.MovimentacaoRecompensaScalarFieldEnum[]
+}
+
+/**
+ * Usuario.inventario
+ */
+export type Usuario$inventarioArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the InventarioItem
+   */
+  select?: Prisma.InventarioItemSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the InventarioItem
+   */
+  omit?: Prisma.InventarioItemOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.InventarioItemInclude<ExtArgs> | null
+  where?: Prisma.InventarioItemWhereInput
+  orderBy?: Prisma.InventarioItemOrderByWithRelationInput | Prisma.InventarioItemOrderByWithRelationInput[]
+  cursor?: Prisma.InventarioItemWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.InventarioItemScalarFieldEnum | Prisma.InventarioItemScalarFieldEnum[]
+}
+
+/**
+ * Usuario.ativacoes
+ */
+export type Usuario$ativacoesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the AtivacaoItem
+   */
+  select?: Prisma.AtivacaoItemSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the AtivacaoItem
+   */
+  omit?: Prisma.AtivacaoItemOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.AtivacaoItemInclude<ExtArgs> | null
+  where?: Prisma.AtivacaoItemWhereInput
+  orderBy?: Prisma.AtivacaoItemOrderByWithRelationInput | Prisma.AtivacaoItemOrderByWithRelationInput[]
+  cursor?: Prisma.AtivacaoItemWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.AtivacaoItemScalarFieldEnum | Prisma.AtivacaoItemScalarFieldEnum[]
+}
+
+/**
+ * Usuario.flashcards
+ */
+export type Usuario$flashcardsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Flashcard
+   */
+  select?: Prisma.FlashcardSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Flashcard
+   */
+  omit?: Prisma.FlashcardOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.FlashcardInclude<ExtArgs> | null
+  where?: Prisma.FlashcardWhereInput
+  orderBy?: Prisma.FlashcardOrderByWithRelationInput | Prisma.FlashcardOrderByWithRelationInput[]
+  cursor?: Prisma.FlashcardWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.FlashcardScalarFieldEnum | Prisma.FlashcardScalarFieldEnum[]
 }
 
 /**

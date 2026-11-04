@@ -28,6 +28,7 @@ export type InscricaoMinAggregateOutputType = {
   id: string | null
   idUsuario: string | null
   idCurso: string | null
+  turma: $Enums.TurmaInscricao | null
   criadoEm: Date | null
 }
 
@@ -35,6 +36,7 @@ export type InscricaoMaxAggregateOutputType = {
   id: string | null
   idUsuario: string | null
   idCurso: string | null
+  turma: $Enums.TurmaInscricao | null
   criadoEm: Date | null
 }
 
@@ -42,6 +44,7 @@ export type InscricaoCountAggregateOutputType = {
   id: number
   idUsuario: number
   idCurso: number
+  turma: number
   criadoEm: number
   _all: number
 }
@@ -51,6 +54,7 @@ export type InscricaoMinAggregateInputType = {
   id?: true
   idUsuario?: true
   idCurso?: true
+  turma?: true
   criadoEm?: true
 }
 
@@ -58,6 +62,7 @@ export type InscricaoMaxAggregateInputType = {
   id?: true
   idUsuario?: true
   idCurso?: true
+  turma?: true
   criadoEm?: true
 }
 
@@ -65,6 +70,7 @@ export type InscricaoCountAggregateInputType = {
   id?: true
   idUsuario?: true
   idCurso?: true
+  turma?: true
   criadoEm?: true
   _all?: true
 }
@@ -145,6 +151,7 @@ export type InscricaoGroupByOutputType = {
   id: string
   idUsuario: string
   idCurso: string
+  turma: $Enums.TurmaInscricao
   criadoEm: Date
   _count: InscricaoCountAggregateOutputType | null
   _min: InscricaoMinAggregateOutputType | null
@@ -173,6 +180,7 @@ export type InscricaoWhereInput = {
   id?: Prisma.UuidFilter<"Inscricao"> | string
   idUsuario?: Prisma.UuidFilter<"Inscricao"> | string
   idCurso?: Prisma.UuidFilter<"Inscricao"> | string
+  turma?: Prisma.EnumTurmaInscricaoFilter<"Inscricao"> | $Enums.TurmaInscricao
   criadoEm?: Prisma.DateTimeFilter<"Inscricao"> | Date | string
   usuario?: Prisma.XOR<Prisma.UsuarioScalarRelationFilter, Prisma.UsuarioWhereInput>
   curso?: Prisma.XOR<Prisma.CursoScalarRelationFilter, Prisma.CursoWhereInput>
@@ -182,6 +190,7 @@ export type InscricaoOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   idUsuario?: Prisma.SortOrder
   idCurso?: Prisma.SortOrder
+  turma?: Prisma.SortOrder
   criadoEm?: Prisma.SortOrder
   usuario?: Prisma.UsuarioOrderByWithRelationInput
   curso?: Prisma.CursoOrderByWithRelationInput
@@ -195,6 +204,7 @@ export type InscricaoWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.InscricaoWhereInput | Prisma.InscricaoWhereInput[]
   idUsuario?: Prisma.UuidFilter<"Inscricao"> | string
   idCurso?: Prisma.UuidFilter<"Inscricao"> | string
+  turma?: Prisma.EnumTurmaInscricaoFilter<"Inscricao"> | $Enums.TurmaInscricao
   criadoEm?: Prisma.DateTimeFilter<"Inscricao"> | Date | string
   usuario?: Prisma.XOR<Prisma.UsuarioScalarRelationFilter, Prisma.UsuarioWhereInput>
   curso?: Prisma.XOR<Prisma.CursoScalarRelationFilter, Prisma.CursoWhereInput>
@@ -204,6 +214,7 @@ export type InscricaoOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   idUsuario?: Prisma.SortOrder
   idCurso?: Prisma.SortOrder
+  turma?: Prisma.SortOrder
   criadoEm?: Prisma.SortOrder
   _count?: Prisma.InscricaoCountOrderByAggregateInput
   _max?: Prisma.InscricaoMaxOrderByAggregateInput
@@ -217,11 +228,13 @@ export type InscricaoScalarWhereWithAggregatesInput = {
   id?: Prisma.UuidWithAggregatesFilter<"Inscricao"> | string
   idUsuario?: Prisma.UuidWithAggregatesFilter<"Inscricao"> | string
   idCurso?: Prisma.UuidWithAggregatesFilter<"Inscricao"> | string
+  turma?: Prisma.EnumTurmaInscricaoWithAggregatesFilter<"Inscricao"> | $Enums.TurmaInscricao
   criadoEm?: Prisma.DateTimeWithAggregatesFilter<"Inscricao"> | Date | string
 }
 
 export type InscricaoCreateInput = {
   id?: string
+  turma?: $Enums.TurmaInscricao
   criadoEm?: Date | string
   usuario: Prisma.UsuarioCreateNestedOneWithoutInscricoesInput
   curso: Prisma.CursoCreateNestedOneWithoutInscricoesInput
@@ -231,11 +244,13 @@ export type InscricaoUncheckedCreateInput = {
   id?: string
   idUsuario: string
   idCurso: string
+  turma?: $Enums.TurmaInscricao
   criadoEm?: Date | string
 }
 
 export type InscricaoUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  turma?: Prisma.EnumTurmaInscricaoFieldUpdateOperationsInput | $Enums.TurmaInscricao
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   usuario?: Prisma.UsuarioUpdateOneRequiredWithoutInscricoesNestedInput
   curso?: Prisma.CursoUpdateOneRequiredWithoutInscricoesNestedInput
@@ -245,6 +260,7 @@ export type InscricaoUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   idUsuario?: Prisma.StringFieldUpdateOperationsInput | string
   idCurso?: Prisma.StringFieldUpdateOperationsInput | string
+  turma?: Prisma.EnumTurmaInscricaoFieldUpdateOperationsInput | $Enums.TurmaInscricao
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -252,11 +268,13 @@ export type InscricaoCreateManyInput = {
   id?: string
   idUsuario: string
   idCurso: string
+  turma?: $Enums.TurmaInscricao
   criadoEm?: Date | string
 }
 
 export type InscricaoUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  turma?: Prisma.EnumTurmaInscricaoFieldUpdateOperationsInput | $Enums.TurmaInscricao
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -264,6 +282,7 @@ export type InscricaoUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   idUsuario?: Prisma.StringFieldUpdateOperationsInput | string
   idCurso?: Prisma.StringFieldUpdateOperationsInput | string
+  turma?: Prisma.EnumTurmaInscricaoFieldUpdateOperationsInput | $Enums.TurmaInscricao
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -286,6 +305,7 @@ export type InscricaoCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   idUsuario?: Prisma.SortOrder
   idCurso?: Prisma.SortOrder
+  turma?: Prisma.SortOrder
   criadoEm?: Prisma.SortOrder
 }
 
@@ -293,6 +313,7 @@ export type InscricaoMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   idUsuario?: Prisma.SortOrder
   idCurso?: Prisma.SortOrder
+  turma?: Prisma.SortOrder
   criadoEm?: Prisma.SortOrder
 }
 
@@ -300,6 +321,7 @@ export type InscricaoMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   idUsuario?: Prisma.SortOrder
   idCurso?: Prisma.SortOrder
+  turma?: Prisma.SortOrder
   criadoEm?: Prisma.SortOrder
 }
 
@@ -387,8 +409,13 @@ export type InscricaoUncheckedUpdateManyWithoutCursoNestedInput = {
   deleteMany?: Prisma.InscricaoScalarWhereInput | Prisma.InscricaoScalarWhereInput[]
 }
 
+export type EnumTurmaInscricaoFieldUpdateOperationsInput = {
+  set?: $Enums.TurmaInscricao
+}
+
 export type InscricaoCreateWithoutUsuarioInput = {
   id?: string
+  turma?: $Enums.TurmaInscricao
   criadoEm?: Date | string
   curso: Prisma.CursoCreateNestedOneWithoutInscricoesInput
 }
@@ -396,6 +423,7 @@ export type InscricaoCreateWithoutUsuarioInput = {
 export type InscricaoUncheckedCreateWithoutUsuarioInput = {
   id?: string
   idCurso: string
+  turma?: $Enums.TurmaInscricao
   criadoEm?: Date | string
 }
 
@@ -432,11 +460,13 @@ export type InscricaoScalarWhereInput = {
   id?: Prisma.UuidFilter<"Inscricao"> | string
   idUsuario?: Prisma.UuidFilter<"Inscricao"> | string
   idCurso?: Prisma.UuidFilter<"Inscricao"> | string
+  turma?: Prisma.EnumTurmaInscricaoFilter<"Inscricao"> | $Enums.TurmaInscricao
   criadoEm?: Prisma.DateTimeFilter<"Inscricao"> | Date | string
 }
 
 export type InscricaoCreateWithoutCursoInput = {
   id?: string
+  turma?: $Enums.TurmaInscricao
   criadoEm?: Date | string
   usuario: Prisma.UsuarioCreateNestedOneWithoutInscricoesInput
 }
@@ -444,6 +474,7 @@ export type InscricaoCreateWithoutCursoInput = {
 export type InscricaoUncheckedCreateWithoutCursoInput = {
   id?: string
   idUsuario: string
+  turma?: $Enums.TurmaInscricao
   criadoEm?: Date | string
 }
 
@@ -476,11 +507,13 @@ export type InscricaoUpdateManyWithWhereWithoutCursoInput = {
 export type InscricaoCreateManyUsuarioInput = {
   id?: string
   idCurso: string
+  turma?: $Enums.TurmaInscricao
   criadoEm?: Date | string
 }
 
 export type InscricaoUpdateWithoutUsuarioInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  turma?: Prisma.EnumTurmaInscricaoFieldUpdateOperationsInput | $Enums.TurmaInscricao
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   curso?: Prisma.CursoUpdateOneRequiredWithoutInscricoesNestedInput
 }
@@ -488,23 +521,27 @@ export type InscricaoUpdateWithoutUsuarioInput = {
 export type InscricaoUncheckedUpdateWithoutUsuarioInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   idCurso?: Prisma.StringFieldUpdateOperationsInput | string
+  turma?: Prisma.EnumTurmaInscricaoFieldUpdateOperationsInput | $Enums.TurmaInscricao
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type InscricaoUncheckedUpdateManyWithoutUsuarioInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   idCurso?: Prisma.StringFieldUpdateOperationsInput | string
+  turma?: Prisma.EnumTurmaInscricaoFieldUpdateOperationsInput | $Enums.TurmaInscricao
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type InscricaoCreateManyCursoInput = {
   id?: string
   idUsuario: string
+  turma?: $Enums.TurmaInscricao
   criadoEm?: Date | string
 }
 
 export type InscricaoUpdateWithoutCursoInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  turma?: Prisma.EnumTurmaInscricaoFieldUpdateOperationsInput | $Enums.TurmaInscricao
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   usuario?: Prisma.UsuarioUpdateOneRequiredWithoutInscricoesNestedInput
 }
@@ -512,12 +549,14 @@ export type InscricaoUpdateWithoutCursoInput = {
 export type InscricaoUncheckedUpdateWithoutCursoInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   idUsuario?: Prisma.StringFieldUpdateOperationsInput | string
+  turma?: Prisma.EnumTurmaInscricaoFieldUpdateOperationsInput | $Enums.TurmaInscricao
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type InscricaoUncheckedUpdateManyWithoutCursoInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   idUsuario?: Prisma.StringFieldUpdateOperationsInput | string
+  turma?: Prisma.EnumTurmaInscricaoFieldUpdateOperationsInput | $Enums.TurmaInscricao
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -527,6 +566,7 @@ export type InscricaoSelect<ExtArgs extends runtime.Types.Extensions.InternalArg
   id?: boolean
   idUsuario?: boolean
   idCurso?: boolean
+  turma?: boolean
   criadoEm?: boolean
   usuario?: boolean | Prisma.UsuarioDefaultArgs<ExtArgs>
   curso?: boolean | Prisma.CursoDefaultArgs<ExtArgs>
@@ -536,6 +576,7 @@ export type InscricaoSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Ext
   id?: boolean
   idUsuario?: boolean
   idCurso?: boolean
+  turma?: boolean
   criadoEm?: boolean
   usuario?: boolean | Prisma.UsuarioDefaultArgs<ExtArgs>
   curso?: boolean | Prisma.CursoDefaultArgs<ExtArgs>
@@ -545,6 +586,7 @@ export type InscricaoSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Ext
   id?: boolean
   idUsuario?: boolean
   idCurso?: boolean
+  turma?: boolean
   criadoEm?: boolean
   usuario?: boolean | Prisma.UsuarioDefaultArgs<ExtArgs>
   curso?: boolean | Prisma.CursoDefaultArgs<ExtArgs>
@@ -554,10 +596,11 @@ export type InscricaoSelectScalar = {
   id?: boolean
   idUsuario?: boolean
   idCurso?: boolean
+  turma?: boolean
   criadoEm?: boolean
 }
 
-export type InscricaoOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "idUsuario" | "idCurso" | "criadoEm", ExtArgs["result"]["inscricao"]>
+export type InscricaoOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "idUsuario" | "idCurso" | "turma" | "criadoEm", ExtArgs["result"]["inscricao"]>
 export type InscricaoInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   usuario?: boolean | Prisma.UsuarioDefaultArgs<ExtArgs>
   curso?: boolean | Prisma.CursoDefaultArgs<ExtArgs>
@@ -581,6 +624,7 @@ export type $InscricaoPayload<ExtArgs extends runtime.Types.Extensions.InternalA
     id: string
     idUsuario: string
     idCurso: string
+    turma: $Enums.TurmaInscricao
     criadoEm: Date
   }, ExtArgs["result"]["inscricao"]>
   composites: {}
@@ -1010,6 +1054,7 @@ export interface InscricaoFieldRefs {
   readonly id: Prisma.FieldRef<"Inscricao", 'String'>
   readonly idUsuario: Prisma.FieldRef<"Inscricao", 'String'>
   readonly idCurso: Prisma.FieldRef<"Inscricao", 'String'>
+  readonly turma: Prisma.FieldRef<"Inscricao", 'TurmaInscricao'>
   readonly criadoEm: Prisma.FieldRef<"Inscricao", 'DateTime'>
 }
     

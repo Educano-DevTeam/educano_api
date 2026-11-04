@@ -306,28 +306,25 @@ export async function listarCursos(
 ) {
     const ehAdmin = tipoUsuario === "ADMIN";
 
+    // Além dos cursos ativos, quem cadastrou vê os próprios cursos.
+    const visiveis: Prisma.CursoWhereInput = ehAdmin
+        ? {}
+        : { OR: [{ status: "ATIVO" }, { idResponsavel: idUsuario }] };
+
     const where: Prisma.CursoWhereInput = {
-        ...(filtros.nome && {
-            nome: {
-                contains: filtros.nome,
-                mode: "insensitive",
-            },
-        }),
-
-        ...(filtros.categoria && {
-            categoria: filtros.categoria,
-        }),
-
-        ...(ehAdmin
-            ? filtros.status
-                ? { status: filtros.status }
-                : {}
-            : { status: "ATIVO" }),
+        AND: [
+            visiveis,
+            filtros.nome
+                ? { nome: { contains: filtros.nome, mode: "insensitive" } }
+                : {},
+            filtros.categoria ? { categoria: filtros.categoria } : {},
+            filtros.status ? { status: filtros.status } : {},
+        ],
     };
 
     const skip = (filtros.pagina - 1) * CURSOS_POR_PAGINA;
 
-    const [cursos, total] = await prisma.$transaction([
+    const [cursos, total, porStatus] = await prisma.$transaction([
         prisma.curso.findMany({
             where,
             skip,
@@ -357,16 +354,64 @@ export async function listarCursos(
                         nome: true,
                     },
                 },
+
+                _count: { select: { inscricoes: true } },
+
+                inscricoes: {
+                    where: { idUsuario },
+                    select: { turma: true },
+                },
+
+                sessoes: {
+                    select: {
+                        modulos: {
+                            select: {
+                                _count: { select: { aulas: true, testes: true } },
+                            },
+                        },
+                    },
+                },
             },
         }),
 
         prisma.curso.count({ where }),
+
+        prisma.curso.groupBy({
+            by: ["status"],
+            where: visiveis,
+            orderBy: { status: "asc" },
+            _count: { _all: true },
+        }),
     ]);
 
     const totalPaginas = Math.ceil(total / CURSOS_POR_PAGINA);
 
+    const contarStatus = (status: string) => {
+        const grupo = porStatus.find((g) => g.status === status);
+        return typeof grupo?._count === "object" ? grupo._count._all ?? 0 : 0;
+    };
+
     return {
-        dados: cursos,
+        dados: cursos.map(({ _count, inscricoes, sessoes, ...curso }) => ({
+            ...curso,
+            inscritos: _count.inscricoes,
+            inscrito: inscricoes.length > 0,
+            turma: inscricoes[0]?.turma ?? null,
+            podeEditar: ehAdmin || curso.responsavel.id === idUsuario,
+            conteudo: {
+                sessoes: sessoes.length,
+                modulos: sessoes.reduce((soma, s) => soma + s.modulos.length, 0),
+                aulas: sessoes.reduce(
+                    (soma, s) => soma + s.modulos.reduce((t, m) => t + m._count.aulas + m._count.testes, 0),
+                    0,
+                ),
+            },
+        })),
+        estatisticas: {
+            ativos: contarStatus("ATIVO"),
+            inativos: contarStatus("INATIVO"),
+            rascunhos: contarStatus("RASCUNHO"),
+        },
         paginacao: {
             pagina: filtros.pagina,
             porPagina: CURSOS_POR_PAGINA,

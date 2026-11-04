@@ -2,6 +2,13 @@
 import type { Request, Response } from "express";
 import { z } from "zod";
 import { editarPerfilSchema } from "../schemas/profile.schema.js";
+import multer from "multer";
+import { urlBaseApi } from "../../../shared/usuario.js";
+import { uploadArquivo } from "../../files/middleware/upload.middleware.js";
+import {
+  enviarArquivo,
+  excluirArquivo,
+} from "../../files/services/files.service.js";
 import {
   consultarPerfil,
   editarPerfil,
@@ -206,4 +213,57 @@ export async function removerPerfil(
   } catch (error) {
     return responderErro(res, error);
   }
+}
+
+// Endereço público das fotos enviadas pelo app (ver /api/media/:id).
+const PREFIXO_MEDIA = "/api/media/";
+
+const FORMATOS_FOTO = ["image/jpeg", "image/png", "image/webp"];
+
+export function enviarFotoPerfil(req: Request, res: Response) {
+  uploadArquivo.single("foto")(req, res, async (erro: unknown) => {
+    if (erro) {
+      const mensagem = erro instanceof multer.MulterError && erro.code === "LIMIT_FILE_SIZE"
+        ? "A imagem ultrapassa o tamanho máximo permitido."
+        : erro instanceof Error ? erro.message : "Não foi possível enviar a foto.";
+
+      return res.status(400).json({ message: mensagem });
+    }
+
+    if (!req.file || !FORMATOS_FOTO.includes(req.file.mimetype)) {
+      return res.status(400).json({
+        message: "Envie uma imagem JPG, PNG ou WEBP no campo \"foto\".",
+      });
+    }
+
+    try {
+      const id = req.usuarioAutenticado!.id;
+      const anterior = await consultarPerfil(id);
+
+      const arquivo = await enviarArquivo({
+        arquivo: req.file,
+        idOrigem: id,
+        tipo: "IMAGEM",
+        finalidade: "FOTO_PERFIL",
+      });
+
+      const url = `${urlBaseApi(req.protocol, req.get("host"))}${PREFIXO_MEDIA}${arquivo.id}`;
+      const perfil = await editarPerfil(id, { urlFotoPerfil: url });
+
+      // Remove a foto anterior enviada pelo app, se houver.
+      const posicao = anterior.urlFotoPerfil.indexOf(PREFIXO_MEDIA);
+
+      if (posicao >= 0) {
+        const idAnterior = anterior.urlFotoPerfil.slice(posicao + PREFIXO_MEDIA.length);
+        await excluirArquivo(idAnterior).catch(() => undefined);
+      }
+
+      return res.status(200).json({
+        message: "Foto de perfil atualizada.",
+        perfil,
+      });
+    } catch (error) {
+      return responderErro(res, error);
+    }
+  });
 }

@@ -31,6 +31,9 @@ export type QuestaoMinAggregateOutputType = {
   titulo: string | null
   enunciado: string | null
   dificuldade: $Enums.NivelDificuldade | null
+  materia: $Enums.CategoriaCurso | null
+  tema: string | null
+  explicacao: string | null
   criadoEm: Date | null
   atualizadoEm: Date | null
 }
@@ -42,6 +45,9 @@ export type QuestaoMaxAggregateOutputType = {
   titulo: string | null
   enunciado: string | null
   dificuldade: $Enums.NivelDificuldade | null
+  materia: $Enums.CategoriaCurso | null
+  tema: string | null
+  explicacao: string | null
   criadoEm: Date | null
   atualizadoEm: Date | null
 }
@@ -53,6 +59,9 @@ export type QuestaoCountAggregateOutputType = {
   titulo: number
   enunciado: number
   dificuldade: number
+  materia: number
+  tema: number
+  explicacao: number
   criadoEm: number
   atualizadoEm: number
   _all: number
@@ -66,6 +75,9 @@ export type QuestaoMinAggregateInputType = {
   titulo?: true
   enunciado?: true
   dificuldade?: true
+  materia?: true
+  tema?: true
+  explicacao?: true
   criadoEm?: true
   atualizadoEm?: true
 }
@@ -77,6 +89,9 @@ export type QuestaoMaxAggregateInputType = {
   titulo?: true
   enunciado?: true
   dificuldade?: true
+  materia?: true
+  tema?: true
+  explicacao?: true
   criadoEm?: true
   atualizadoEm?: true
 }
@@ -88,6 +103,9 @@ export type QuestaoCountAggregateInputType = {
   titulo?: true
   enunciado?: true
   dificuldade?: true
+  materia?: true
+  tema?: true
+  explicacao?: true
   criadoEm?: true
   atualizadoEm?: true
   _all?: true
@@ -172,6 +190,9 @@ export type QuestaoGroupByOutputType = {
   titulo: string | null
   enunciado: string
   dificuldade: $Enums.NivelDificuldade
+  materia: $Enums.CategoriaCurso | null
+  tema: string | null
+  explicacao: string | null
   criadoEm: Date
   atualizadoEm: Date
   _count: QuestaoCountAggregateOutputType | null
@@ -204,12 +225,16 @@ export type QuestaoWhereInput = {
   titulo?: Prisma.StringNullableFilter<"Questao"> | string | null
   enunciado?: Prisma.StringFilter<"Questao"> | string
   dificuldade?: Prisma.EnumNivelDificuldadeFilter<"Questao"> | $Enums.NivelDificuldade
+  materia?: Prisma.EnumCategoriaCursoNullableFilter<"Questao"> | $Enums.CategoriaCurso | null
+  tema?: Prisma.StringNullableFilter<"Questao"> | string | null
+  explicacao?: Prisma.StringNullableFilter<"Questao"> | string | null
   criadoEm?: Prisma.DateTimeFilter<"Questao"> | Date | string
   atualizadoEm?: Prisma.DateTimeFilter<"Questao"> | Date | string
   responsavel?: Prisma.XOR<Prisma.UsuarioScalarRelationFilter, Prisma.UsuarioWhereInput>
   alternativaCorreta?: Prisma.XOR<Prisma.AlternativaNullableScalarRelationFilter, Prisma.AlternativaWhereInput> | null
   alternativas?: Prisma.AlternativaListRelationFilter
   testes?: Prisma.TesteQuestaoListRelationFilter
+  respostas?: Prisma.RespostaTentativaListRelationFilter
 }
 
 export type QuestaoOrderByWithRelationInput = {
@@ -219,12 +244,16 @@ export type QuestaoOrderByWithRelationInput = {
   titulo?: Prisma.SortOrderInput | Prisma.SortOrder
   enunciado?: Prisma.SortOrder
   dificuldade?: Prisma.SortOrder
+  materia?: Prisma.SortOrderInput | Prisma.SortOrder
+  tema?: Prisma.SortOrderInput | Prisma.SortOrder
+  explicacao?: Prisma.SortOrderInput | Prisma.SortOrder
   criadoEm?: Prisma.SortOrder
   atualizadoEm?: Prisma.SortOrder
   responsavel?: Prisma.UsuarioOrderByWithRelationInput
   alternativaCorreta?: Prisma.AlternativaOrderByWithRelationInput
   alternativas?: Prisma.AlternativaOrderByRelationAggregateInput
   testes?: Prisma.TesteQuestaoOrderByRelationAggregateInput
+  respostas?: Prisma.RespostaTentativaOrderByRelationAggregateInput
 }
 
 export type QuestaoWhereUniqueInput = Prisma.AtLeast<{
@@ -237,12 +266,16 @@ export type QuestaoWhereUniqueInput = Prisma.AtLeast<{
   titulo?: Prisma.StringNullableFilter<"Questao"> | string | null
   enunciado?: Prisma.StringFilter<"Questao"> | string
   dificuldade?: Prisma.EnumNivelDificuldadeFilter<"Questao"> | $Enums.NivelDificuldade
+  materia?: Prisma.EnumCategoriaCursoNullableFilter<"Questao"> | $Enums.CategoriaCurso | null
+  tema?: Prisma.StringNullableFilter<"Questao"> | string | null
+  explicacao?: Prisma.StringNullableFilter<"Questao"> | string | null
   criadoEm?: Prisma.DateTimeFilter<"Questao"> | Date | string
   atualizadoEm?: Prisma.DateTimeFilter<"Questao"> | Date | string
   responsavel?: Prisma.XOR<Prisma.UsuarioScalarRelationFilter, Prisma.UsuarioWhereInput>
   alternativaCorreta?: Prisma.XOR<Prisma.AlternativaNullableScalarRelationFilter, Prisma.AlternativaWhereInput> | null
   alternativas?: Prisma.AlternativaListRelationFilter
   testes?: Prisma.TesteQuestaoListRelationFilter
+  respostas?: Prisma.RespostaTentativaListRelationFilter
 }, "id">
 
 export type QuestaoOrderByWithAggregationInput = {
@@ -252,6 +285,9 @@ export type QuestaoOrderByWithAggregationInput = {
   titulo?: Prisma.SortOrderInput | Prisma.SortOrder
   enunciado?: Prisma.SortOrder
   dificuldade?: Prisma.SortOrder
+  materia?: Prisma.SortOrderInput | Prisma.SortOrder
+  tema?: Prisma.SortOrderInput | Prisma.SortOrder
+  explicacao?: Prisma.SortOrderInput | Prisma.SortOrder
   criadoEm?: Prisma.SortOrder
   atualizadoEm?: Prisma.SortOrder
   _count?: Prisma.QuestaoCountOrderByAggregateInput
@@ -269,6 +305,9 @@ export type QuestaoScalarWhereWithAggregatesInput = {
   titulo?: Prisma.StringNullableWithAggregatesFilter<"Questao"> | string | null
   enunciado?: Prisma.StringWithAggregatesFilter<"Questao"> | string
   dificuldade?: Prisma.EnumNivelDificuldadeWithAggregatesFilter<"Questao"> | $Enums.NivelDificuldade
+  materia?: Prisma.EnumCategoriaCursoNullableWithAggregatesFilter<"Questao"> | $Enums.CategoriaCurso | null
+  tema?: Prisma.StringNullableWithAggregatesFilter<"Questao"> | string | null
+  explicacao?: Prisma.StringNullableWithAggregatesFilter<"Questao"> | string | null
   criadoEm?: Prisma.DateTimeWithAggregatesFilter<"Questao"> | Date | string
   atualizadoEm?: Prisma.DateTimeWithAggregatesFilter<"Questao"> | Date | string
 }
@@ -278,12 +317,16 @@ export type QuestaoCreateInput = {
   titulo?: string | null
   enunciado: string
   dificuldade?: $Enums.NivelDificuldade
+  materia?: $Enums.CategoriaCurso | null
+  tema?: string | null
+  explicacao?: string | null
   criadoEm?: Date | string
   atualizadoEm?: Date | string
   responsavel: Prisma.UsuarioCreateNestedOneWithoutQuestoesResponsavelInput
   alternativaCorreta?: Prisma.AlternativaCreateNestedOneWithoutQuestoesCorretasInput
   alternativas?: Prisma.AlternativaCreateNestedManyWithoutQuestaoInput
   testes?: Prisma.TesteQuestaoCreateNestedManyWithoutQuestaoInput
+  respostas?: Prisma.RespostaTentativaCreateNestedManyWithoutQuestaoInput
 }
 
 export type QuestaoUncheckedCreateInput = {
@@ -293,10 +336,14 @@ export type QuestaoUncheckedCreateInput = {
   titulo?: string | null
   enunciado: string
   dificuldade?: $Enums.NivelDificuldade
+  materia?: $Enums.CategoriaCurso | null
+  tema?: string | null
+  explicacao?: string | null
   criadoEm?: Date | string
   atualizadoEm?: Date | string
   alternativas?: Prisma.AlternativaUncheckedCreateNestedManyWithoutQuestaoInput
   testes?: Prisma.TesteQuestaoUncheckedCreateNestedManyWithoutQuestaoInput
+  respostas?: Prisma.RespostaTentativaUncheckedCreateNestedManyWithoutQuestaoInput
 }
 
 export type QuestaoUpdateInput = {
@@ -304,12 +351,16 @@ export type QuestaoUpdateInput = {
   titulo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   enunciado?: Prisma.StringFieldUpdateOperationsInput | string
   dificuldade?: Prisma.EnumNivelDificuldadeFieldUpdateOperationsInput | $Enums.NivelDificuldade
+  materia?: Prisma.NullableEnumCategoriaCursoFieldUpdateOperationsInput | $Enums.CategoriaCurso | null
+  tema?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  explicacao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   responsavel?: Prisma.UsuarioUpdateOneRequiredWithoutQuestoesResponsavelNestedInput
   alternativaCorreta?: Prisma.AlternativaUpdateOneWithoutQuestoesCorretasNestedInput
   alternativas?: Prisma.AlternativaUpdateManyWithoutQuestaoNestedInput
   testes?: Prisma.TesteQuestaoUpdateManyWithoutQuestaoNestedInput
+  respostas?: Prisma.RespostaTentativaUpdateManyWithoutQuestaoNestedInput
 }
 
 export type QuestaoUncheckedUpdateInput = {
@@ -319,10 +370,14 @@ export type QuestaoUncheckedUpdateInput = {
   titulo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   enunciado?: Prisma.StringFieldUpdateOperationsInput | string
   dificuldade?: Prisma.EnumNivelDificuldadeFieldUpdateOperationsInput | $Enums.NivelDificuldade
+  materia?: Prisma.NullableEnumCategoriaCursoFieldUpdateOperationsInput | $Enums.CategoriaCurso | null
+  tema?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  explicacao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   alternativas?: Prisma.AlternativaUncheckedUpdateManyWithoutQuestaoNestedInput
   testes?: Prisma.TesteQuestaoUncheckedUpdateManyWithoutQuestaoNestedInput
+  respostas?: Prisma.RespostaTentativaUncheckedUpdateManyWithoutQuestaoNestedInput
 }
 
 export type QuestaoCreateManyInput = {
@@ -332,6 +387,9 @@ export type QuestaoCreateManyInput = {
   titulo?: string | null
   enunciado: string
   dificuldade?: $Enums.NivelDificuldade
+  materia?: $Enums.CategoriaCurso | null
+  tema?: string | null
+  explicacao?: string | null
   criadoEm?: Date | string
   atualizadoEm?: Date | string
 }
@@ -341,6 +399,9 @@ export type QuestaoUpdateManyMutationInput = {
   titulo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   enunciado?: Prisma.StringFieldUpdateOperationsInput | string
   dificuldade?: Prisma.EnumNivelDificuldadeFieldUpdateOperationsInput | $Enums.NivelDificuldade
+  materia?: Prisma.NullableEnumCategoriaCursoFieldUpdateOperationsInput | $Enums.CategoriaCurso | null
+  tema?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  explicacao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -352,6 +413,9 @@ export type QuestaoUncheckedUpdateManyInput = {
   titulo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   enunciado?: Prisma.StringFieldUpdateOperationsInput | string
   dificuldade?: Prisma.EnumNivelDificuldadeFieldUpdateOperationsInput | $Enums.NivelDificuldade
+  materia?: Prisma.NullableEnumCategoriaCursoFieldUpdateOperationsInput | $Enums.CategoriaCurso | null
+  tema?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  explicacao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -373,6 +437,9 @@ export type QuestaoCountOrderByAggregateInput = {
   titulo?: Prisma.SortOrder
   enunciado?: Prisma.SortOrder
   dificuldade?: Prisma.SortOrder
+  materia?: Prisma.SortOrder
+  tema?: Prisma.SortOrder
+  explicacao?: Prisma.SortOrder
   criadoEm?: Prisma.SortOrder
   atualizadoEm?: Prisma.SortOrder
 }
@@ -384,6 +451,9 @@ export type QuestaoMaxOrderByAggregateInput = {
   titulo?: Prisma.SortOrder
   enunciado?: Prisma.SortOrder
   dificuldade?: Prisma.SortOrder
+  materia?: Prisma.SortOrder
+  tema?: Prisma.SortOrder
+  explicacao?: Prisma.SortOrder
   criadoEm?: Prisma.SortOrder
   atualizadoEm?: Prisma.SortOrder
 }
@@ -395,6 +465,9 @@ export type QuestaoMinOrderByAggregateInput = {
   titulo?: Prisma.SortOrder
   enunciado?: Prisma.SortOrder
   dificuldade?: Prisma.SortOrder
+  materia?: Prisma.SortOrder
+  tema?: Prisma.SortOrder
+  explicacao?: Prisma.SortOrder
   criadoEm?: Prisma.SortOrder
   atualizadoEm?: Prisma.SortOrder
 }
@@ -448,6 +521,10 @@ export type QuestaoUncheckedUpdateManyWithoutResponsavelNestedInput = {
 
 export type EnumNivelDificuldadeFieldUpdateOperationsInput = {
   set?: $Enums.NivelDificuldade
+}
+
+export type NullableEnumCategoriaCursoFieldUpdateOperationsInput = {
+  set?: $Enums.CategoriaCurso | null
 }
 
 export type QuestaoCreateNestedOneWithoutAlternativasInput = {
@@ -520,16 +597,34 @@ export type QuestaoUpdateOneRequiredWithoutTestesNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.QuestaoUpdateToOneWithWhereWithoutTestesInput, Prisma.QuestaoUpdateWithoutTestesInput>, Prisma.QuestaoUncheckedUpdateWithoutTestesInput>
 }
 
+export type QuestaoCreateNestedOneWithoutRespostasInput = {
+  create?: Prisma.XOR<Prisma.QuestaoCreateWithoutRespostasInput, Prisma.QuestaoUncheckedCreateWithoutRespostasInput>
+  connectOrCreate?: Prisma.QuestaoCreateOrConnectWithoutRespostasInput
+  connect?: Prisma.QuestaoWhereUniqueInput
+}
+
+export type QuestaoUpdateOneRequiredWithoutRespostasNestedInput = {
+  create?: Prisma.XOR<Prisma.QuestaoCreateWithoutRespostasInput, Prisma.QuestaoUncheckedCreateWithoutRespostasInput>
+  connectOrCreate?: Prisma.QuestaoCreateOrConnectWithoutRespostasInput
+  upsert?: Prisma.QuestaoUpsertWithoutRespostasInput
+  connect?: Prisma.QuestaoWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.QuestaoUpdateToOneWithWhereWithoutRespostasInput, Prisma.QuestaoUpdateWithoutRespostasInput>, Prisma.QuestaoUncheckedUpdateWithoutRespostasInput>
+}
+
 export type QuestaoCreateWithoutResponsavelInput = {
   id?: string
   titulo?: string | null
   enunciado: string
   dificuldade?: $Enums.NivelDificuldade
+  materia?: $Enums.CategoriaCurso | null
+  tema?: string | null
+  explicacao?: string | null
   criadoEm?: Date | string
   atualizadoEm?: Date | string
   alternativaCorreta?: Prisma.AlternativaCreateNestedOneWithoutQuestoesCorretasInput
   alternativas?: Prisma.AlternativaCreateNestedManyWithoutQuestaoInput
   testes?: Prisma.TesteQuestaoCreateNestedManyWithoutQuestaoInput
+  respostas?: Prisma.RespostaTentativaCreateNestedManyWithoutQuestaoInput
 }
 
 export type QuestaoUncheckedCreateWithoutResponsavelInput = {
@@ -538,10 +633,14 @@ export type QuestaoUncheckedCreateWithoutResponsavelInput = {
   titulo?: string | null
   enunciado: string
   dificuldade?: $Enums.NivelDificuldade
+  materia?: $Enums.CategoriaCurso | null
+  tema?: string | null
+  explicacao?: string | null
   criadoEm?: Date | string
   atualizadoEm?: Date | string
   alternativas?: Prisma.AlternativaUncheckedCreateNestedManyWithoutQuestaoInput
   testes?: Prisma.TesteQuestaoUncheckedCreateNestedManyWithoutQuestaoInput
+  respostas?: Prisma.RespostaTentativaUncheckedCreateNestedManyWithoutQuestaoInput
 }
 
 export type QuestaoCreateOrConnectWithoutResponsavelInput = {
@@ -580,6 +679,9 @@ export type QuestaoScalarWhereInput = {
   titulo?: Prisma.StringNullableFilter<"Questao"> | string | null
   enunciado?: Prisma.StringFilter<"Questao"> | string
   dificuldade?: Prisma.EnumNivelDificuldadeFilter<"Questao"> | $Enums.NivelDificuldade
+  materia?: Prisma.EnumCategoriaCursoNullableFilter<"Questao"> | $Enums.CategoriaCurso | null
+  tema?: Prisma.StringNullableFilter<"Questao"> | string | null
+  explicacao?: Prisma.StringNullableFilter<"Questao"> | string | null
   criadoEm?: Prisma.DateTimeFilter<"Questao"> | Date | string
   atualizadoEm?: Prisma.DateTimeFilter<"Questao"> | Date | string
 }
@@ -589,11 +691,15 @@ export type QuestaoCreateWithoutAlternativasInput = {
   titulo?: string | null
   enunciado: string
   dificuldade?: $Enums.NivelDificuldade
+  materia?: $Enums.CategoriaCurso | null
+  tema?: string | null
+  explicacao?: string | null
   criadoEm?: Date | string
   atualizadoEm?: Date | string
   responsavel: Prisma.UsuarioCreateNestedOneWithoutQuestoesResponsavelInput
   alternativaCorreta?: Prisma.AlternativaCreateNestedOneWithoutQuestoesCorretasInput
   testes?: Prisma.TesteQuestaoCreateNestedManyWithoutQuestaoInput
+  respostas?: Prisma.RespostaTentativaCreateNestedManyWithoutQuestaoInput
 }
 
 export type QuestaoUncheckedCreateWithoutAlternativasInput = {
@@ -603,9 +709,13 @@ export type QuestaoUncheckedCreateWithoutAlternativasInput = {
   titulo?: string | null
   enunciado: string
   dificuldade?: $Enums.NivelDificuldade
+  materia?: $Enums.CategoriaCurso | null
+  tema?: string | null
+  explicacao?: string | null
   criadoEm?: Date | string
   atualizadoEm?: Date | string
   testes?: Prisma.TesteQuestaoUncheckedCreateNestedManyWithoutQuestaoInput
+  respostas?: Prisma.RespostaTentativaUncheckedCreateNestedManyWithoutQuestaoInput
 }
 
 export type QuestaoCreateOrConnectWithoutAlternativasInput = {
@@ -618,11 +728,15 @@ export type QuestaoCreateWithoutAlternativaCorretaInput = {
   titulo?: string | null
   enunciado: string
   dificuldade?: $Enums.NivelDificuldade
+  materia?: $Enums.CategoriaCurso | null
+  tema?: string | null
+  explicacao?: string | null
   criadoEm?: Date | string
   atualizadoEm?: Date | string
   responsavel: Prisma.UsuarioCreateNestedOneWithoutQuestoesResponsavelInput
   alternativas?: Prisma.AlternativaCreateNestedManyWithoutQuestaoInput
   testes?: Prisma.TesteQuestaoCreateNestedManyWithoutQuestaoInput
+  respostas?: Prisma.RespostaTentativaCreateNestedManyWithoutQuestaoInput
 }
 
 export type QuestaoUncheckedCreateWithoutAlternativaCorretaInput = {
@@ -631,10 +745,14 @@ export type QuestaoUncheckedCreateWithoutAlternativaCorretaInput = {
   titulo?: string | null
   enunciado: string
   dificuldade?: $Enums.NivelDificuldade
+  materia?: $Enums.CategoriaCurso | null
+  tema?: string | null
+  explicacao?: string | null
   criadoEm?: Date | string
   atualizadoEm?: Date | string
   alternativas?: Prisma.AlternativaUncheckedCreateNestedManyWithoutQuestaoInput
   testes?: Prisma.TesteQuestaoUncheckedCreateNestedManyWithoutQuestaoInput
+  respostas?: Prisma.RespostaTentativaUncheckedCreateNestedManyWithoutQuestaoInput
 }
 
 export type QuestaoCreateOrConnectWithoutAlternativaCorretaInput = {
@@ -663,11 +781,15 @@ export type QuestaoUpdateWithoutAlternativasInput = {
   titulo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   enunciado?: Prisma.StringFieldUpdateOperationsInput | string
   dificuldade?: Prisma.EnumNivelDificuldadeFieldUpdateOperationsInput | $Enums.NivelDificuldade
+  materia?: Prisma.NullableEnumCategoriaCursoFieldUpdateOperationsInput | $Enums.CategoriaCurso | null
+  tema?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  explicacao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   responsavel?: Prisma.UsuarioUpdateOneRequiredWithoutQuestoesResponsavelNestedInput
   alternativaCorreta?: Prisma.AlternativaUpdateOneWithoutQuestoesCorretasNestedInput
   testes?: Prisma.TesteQuestaoUpdateManyWithoutQuestaoNestedInput
+  respostas?: Prisma.RespostaTentativaUpdateManyWithoutQuestaoNestedInput
 }
 
 export type QuestaoUncheckedUpdateWithoutAlternativasInput = {
@@ -677,9 +799,13 @@ export type QuestaoUncheckedUpdateWithoutAlternativasInput = {
   titulo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   enunciado?: Prisma.StringFieldUpdateOperationsInput | string
   dificuldade?: Prisma.EnumNivelDificuldadeFieldUpdateOperationsInput | $Enums.NivelDificuldade
+  materia?: Prisma.NullableEnumCategoriaCursoFieldUpdateOperationsInput | $Enums.CategoriaCurso | null
+  tema?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  explicacao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   testes?: Prisma.TesteQuestaoUncheckedUpdateManyWithoutQuestaoNestedInput
+  respostas?: Prisma.RespostaTentativaUncheckedUpdateManyWithoutQuestaoNestedInput
 }
 
 export type QuestaoUpsertWithWhereUniqueWithoutAlternativaCorretaInput = {
@@ -703,11 +829,15 @@ export type QuestaoCreateWithoutTestesInput = {
   titulo?: string | null
   enunciado: string
   dificuldade?: $Enums.NivelDificuldade
+  materia?: $Enums.CategoriaCurso | null
+  tema?: string | null
+  explicacao?: string | null
   criadoEm?: Date | string
   atualizadoEm?: Date | string
   responsavel: Prisma.UsuarioCreateNestedOneWithoutQuestoesResponsavelInput
   alternativaCorreta?: Prisma.AlternativaCreateNestedOneWithoutQuestoesCorretasInput
   alternativas?: Prisma.AlternativaCreateNestedManyWithoutQuestaoInput
+  respostas?: Prisma.RespostaTentativaCreateNestedManyWithoutQuestaoInput
 }
 
 export type QuestaoUncheckedCreateWithoutTestesInput = {
@@ -717,9 +847,13 @@ export type QuestaoUncheckedCreateWithoutTestesInput = {
   titulo?: string | null
   enunciado: string
   dificuldade?: $Enums.NivelDificuldade
+  materia?: $Enums.CategoriaCurso | null
+  tema?: string | null
+  explicacao?: string | null
   criadoEm?: Date | string
   atualizadoEm?: Date | string
   alternativas?: Prisma.AlternativaUncheckedCreateNestedManyWithoutQuestaoInput
+  respostas?: Prisma.RespostaTentativaUncheckedCreateNestedManyWithoutQuestaoInput
 }
 
 export type QuestaoCreateOrConnectWithoutTestesInput = {
@@ -743,11 +877,15 @@ export type QuestaoUpdateWithoutTestesInput = {
   titulo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   enunciado?: Prisma.StringFieldUpdateOperationsInput | string
   dificuldade?: Prisma.EnumNivelDificuldadeFieldUpdateOperationsInput | $Enums.NivelDificuldade
+  materia?: Prisma.NullableEnumCategoriaCursoFieldUpdateOperationsInput | $Enums.CategoriaCurso | null
+  tema?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  explicacao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   responsavel?: Prisma.UsuarioUpdateOneRequiredWithoutQuestoesResponsavelNestedInput
   alternativaCorreta?: Prisma.AlternativaUpdateOneWithoutQuestoesCorretasNestedInput
   alternativas?: Prisma.AlternativaUpdateManyWithoutQuestaoNestedInput
+  respostas?: Prisma.RespostaTentativaUpdateManyWithoutQuestaoNestedInput
 }
 
 export type QuestaoUncheckedUpdateWithoutTestesInput = {
@@ -757,9 +895,93 @@ export type QuestaoUncheckedUpdateWithoutTestesInput = {
   titulo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   enunciado?: Prisma.StringFieldUpdateOperationsInput | string
   dificuldade?: Prisma.EnumNivelDificuldadeFieldUpdateOperationsInput | $Enums.NivelDificuldade
+  materia?: Prisma.NullableEnumCategoriaCursoFieldUpdateOperationsInput | $Enums.CategoriaCurso | null
+  tema?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  explicacao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   alternativas?: Prisma.AlternativaUncheckedUpdateManyWithoutQuestaoNestedInput
+  respostas?: Prisma.RespostaTentativaUncheckedUpdateManyWithoutQuestaoNestedInput
+}
+
+export type QuestaoCreateWithoutRespostasInput = {
+  id?: string
+  titulo?: string | null
+  enunciado: string
+  dificuldade?: $Enums.NivelDificuldade
+  materia?: $Enums.CategoriaCurso | null
+  tema?: string | null
+  explicacao?: string | null
+  criadoEm?: Date | string
+  atualizadoEm?: Date | string
+  responsavel: Prisma.UsuarioCreateNestedOneWithoutQuestoesResponsavelInput
+  alternativaCorreta?: Prisma.AlternativaCreateNestedOneWithoutQuestoesCorretasInput
+  alternativas?: Prisma.AlternativaCreateNestedManyWithoutQuestaoInput
+  testes?: Prisma.TesteQuestaoCreateNestedManyWithoutQuestaoInput
+}
+
+export type QuestaoUncheckedCreateWithoutRespostasInput = {
+  id?: string
+  idResponsavel: string
+  idAlternativaCorreta?: string | null
+  titulo?: string | null
+  enunciado: string
+  dificuldade?: $Enums.NivelDificuldade
+  materia?: $Enums.CategoriaCurso | null
+  tema?: string | null
+  explicacao?: string | null
+  criadoEm?: Date | string
+  atualizadoEm?: Date | string
+  alternativas?: Prisma.AlternativaUncheckedCreateNestedManyWithoutQuestaoInput
+  testes?: Prisma.TesteQuestaoUncheckedCreateNestedManyWithoutQuestaoInput
+}
+
+export type QuestaoCreateOrConnectWithoutRespostasInput = {
+  where: Prisma.QuestaoWhereUniqueInput
+  create: Prisma.XOR<Prisma.QuestaoCreateWithoutRespostasInput, Prisma.QuestaoUncheckedCreateWithoutRespostasInput>
+}
+
+export type QuestaoUpsertWithoutRespostasInput = {
+  update: Prisma.XOR<Prisma.QuestaoUpdateWithoutRespostasInput, Prisma.QuestaoUncheckedUpdateWithoutRespostasInput>
+  create: Prisma.XOR<Prisma.QuestaoCreateWithoutRespostasInput, Prisma.QuestaoUncheckedCreateWithoutRespostasInput>
+  where?: Prisma.QuestaoWhereInput
+}
+
+export type QuestaoUpdateToOneWithWhereWithoutRespostasInput = {
+  where?: Prisma.QuestaoWhereInput
+  data: Prisma.XOR<Prisma.QuestaoUpdateWithoutRespostasInput, Prisma.QuestaoUncheckedUpdateWithoutRespostasInput>
+}
+
+export type QuestaoUpdateWithoutRespostasInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  titulo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  enunciado?: Prisma.StringFieldUpdateOperationsInput | string
+  dificuldade?: Prisma.EnumNivelDificuldadeFieldUpdateOperationsInput | $Enums.NivelDificuldade
+  materia?: Prisma.NullableEnumCategoriaCursoFieldUpdateOperationsInput | $Enums.CategoriaCurso | null
+  tema?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  explicacao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  responsavel?: Prisma.UsuarioUpdateOneRequiredWithoutQuestoesResponsavelNestedInput
+  alternativaCorreta?: Prisma.AlternativaUpdateOneWithoutQuestoesCorretasNestedInput
+  alternativas?: Prisma.AlternativaUpdateManyWithoutQuestaoNestedInput
+  testes?: Prisma.TesteQuestaoUpdateManyWithoutQuestaoNestedInput
+}
+
+export type QuestaoUncheckedUpdateWithoutRespostasInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  idResponsavel?: Prisma.StringFieldUpdateOperationsInput | string
+  idAlternativaCorreta?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  titulo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  enunciado?: Prisma.StringFieldUpdateOperationsInput | string
+  dificuldade?: Prisma.EnumNivelDificuldadeFieldUpdateOperationsInput | $Enums.NivelDificuldade
+  materia?: Prisma.NullableEnumCategoriaCursoFieldUpdateOperationsInput | $Enums.CategoriaCurso | null
+  tema?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  explicacao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  alternativas?: Prisma.AlternativaUncheckedUpdateManyWithoutQuestaoNestedInput
+  testes?: Prisma.TesteQuestaoUncheckedUpdateManyWithoutQuestaoNestedInput
 }
 
 export type QuestaoCreateManyResponsavelInput = {
@@ -768,6 +990,9 @@ export type QuestaoCreateManyResponsavelInput = {
   titulo?: string | null
   enunciado: string
   dificuldade?: $Enums.NivelDificuldade
+  materia?: $Enums.CategoriaCurso | null
+  tema?: string | null
+  explicacao?: string | null
   criadoEm?: Date | string
   atualizadoEm?: Date | string
 }
@@ -777,11 +1002,15 @@ export type QuestaoUpdateWithoutResponsavelInput = {
   titulo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   enunciado?: Prisma.StringFieldUpdateOperationsInput | string
   dificuldade?: Prisma.EnumNivelDificuldadeFieldUpdateOperationsInput | $Enums.NivelDificuldade
+  materia?: Prisma.NullableEnumCategoriaCursoFieldUpdateOperationsInput | $Enums.CategoriaCurso | null
+  tema?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  explicacao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   alternativaCorreta?: Prisma.AlternativaUpdateOneWithoutQuestoesCorretasNestedInput
   alternativas?: Prisma.AlternativaUpdateManyWithoutQuestaoNestedInput
   testes?: Prisma.TesteQuestaoUpdateManyWithoutQuestaoNestedInput
+  respostas?: Prisma.RespostaTentativaUpdateManyWithoutQuestaoNestedInput
 }
 
 export type QuestaoUncheckedUpdateWithoutResponsavelInput = {
@@ -790,10 +1019,14 @@ export type QuestaoUncheckedUpdateWithoutResponsavelInput = {
   titulo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   enunciado?: Prisma.StringFieldUpdateOperationsInput | string
   dificuldade?: Prisma.EnumNivelDificuldadeFieldUpdateOperationsInput | $Enums.NivelDificuldade
+  materia?: Prisma.NullableEnumCategoriaCursoFieldUpdateOperationsInput | $Enums.CategoriaCurso | null
+  tema?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  explicacao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   alternativas?: Prisma.AlternativaUncheckedUpdateManyWithoutQuestaoNestedInput
   testes?: Prisma.TesteQuestaoUncheckedUpdateManyWithoutQuestaoNestedInput
+  respostas?: Prisma.RespostaTentativaUncheckedUpdateManyWithoutQuestaoNestedInput
 }
 
 export type QuestaoUncheckedUpdateManyWithoutResponsavelInput = {
@@ -802,6 +1035,9 @@ export type QuestaoUncheckedUpdateManyWithoutResponsavelInput = {
   titulo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   enunciado?: Prisma.StringFieldUpdateOperationsInput | string
   dificuldade?: Prisma.EnumNivelDificuldadeFieldUpdateOperationsInput | $Enums.NivelDificuldade
+  materia?: Prisma.NullableEnumCategoriaCursoFieldUpdateOperationsInput | $Enums.CategoriaCurso | null
+  tema?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  explicacao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -812,6 +1048,9 @@ export type QuestaoCreateManyAlternativaCorretaInput = {
   titulo?: string | null
   enunciado: string
   dificuldade?: $Enums.NivelDificuldade
+  materia?: $Enums.CategoriaCurso | null
+  tema?: string | null
+  explicacao?: string | null
   criadoEm?: Date | string
   atualizadoEm?: Date | string
 }
@@ -821,11 +1060,15 @@ export type QuestaoUpdateWithoutAlternativaCorretaInput = {
   titulo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   enunciado?: Prisma.StringFieldUpdateOperationsInput | string
   dificuldade?: Prisma.EnumNivelDificuldadeFieldUpdateOperationsInput | $Enums.NivelDificuldade
+  materia?: Prisma.NullableEnumCategoriaCursoFieldUpdateOperationsInput | $Enums.CategoriaCurso | null
+  tema?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  explicacao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   responsavel?: Prisma.UsuarioUpdateOneRequiredWithoutQuestoesResponsavelNestedInput
   alternativas?: Prisma.AlternativaUpdateManyWithoutQuestaoNestedInput
   testes?: Prisma.TesteQuestaoUpdateManyWithoutQuestaoNestedInput
+  respostas?: Prisma.RespostaTentativaUpdateManyWithoutQuestaoNestedInput
 }
 
 export type QuestaoUncheckedUpdateWithoutAlternativaCorretaInput = {
@@ -834,10 +1077,14 @@ export type QuestaoUncheckedUpdateWithoutAlternativaCorretaInput = {
   titulo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   enunciado?: Prisma.StringFieldUpdateOperationsInput | string
   dificuldade?: Prisma.EnumNivelDificuldadeFieldUpdateOperationsInput | $Enums.NivelDificuldade
+  materia?: Prisma.NullableEnumCategoriaCursoFieldUpdateOperationsInput | $Enums.CategoriaCurso | null
+  tema?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  explicacao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   alternativas?: Prisma.AlternativaUncheckedUpdateManyWithoutQuestaoNestedInput
   testes?: Prisma.TesteQuestaoUncheckedUpdateManyWithoutQuestaoNestedInput
+  respostas?: Prisma.RespostaTentativaUncheckedUpdateManyWithoutQuestaoNestedInput
 }
 
 export type QuestaoUncheckedUpdateManyWithoutAlternativaCorretaInput = {
@@ -846,6 +1093,9 @@ export type QuestaoUncheckedUpdateManyWithoutAlternativaCorretaInput = {
   titulo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   enunciado?: Prisma.StringFieldUpdateOperationsInput | string
   dificuldade?: Prisma.EnumNivelDificuldadeFieldUpdateOperationsInput | $Enums.NivelDificuldade
+  materia?: Prisma.NullableEnumCategoriaCursoFieldUpdateOperationsInput | $Enums.CategoriaCurso | null
+  tema?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  explicacao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -858,11 +1108,13 @@ export type QuestaoUncheckedUpdateManyWithoutAlternativaCorretaInput = {
 export type QuestaoCountOutputType = {
   alternativas: number
   testes: number
+  respostas: number
 }
 
 export type QuestaoCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   alternativas?: boolean | QuestaoCountOutputTypeCountAlternativasArgs
   testes?: boolean | QuestaoCountOutputTypeCountTestesArgs
+  respostas?: boolean | QuestaoCountOutputTypeCountRespostasArgs
 }
 
 /**
@@ -889,6 +1141,13 @@ export type QuestaoCountOutputTypeCountTestesArgs<ExtArgs extends runtime.Types.
   where?: Prisma.TesteQuestaoWhereInput
 }
 
+/**
+ * QuestaoCountOutputType without action
+ */
+export type QuestaoCountOutputTypeCountRespostasArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.RespostaTentativaWhereInput
+}
+
 
 export type QuestaoSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -897,12 +1156,16 @@ export type QuestaoSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   titulo?: boolean
   enunciado?: boolean
   dificuldade?: boolean
+  materia?: boolean
+  tema?: boolean
+  explicacao?: boolean
   criadoEm?: boolean
   atualizadoEm?: boolean
   responsavel?: boolean | Prisma.UsuarioDefaultArgs<ExtArgs>
   alternativaCorreta?: boolean | Prisma.Questao$alternativaCorretaArgs<ExtArgs>
   alternativas?: boolean | Prisma.Questao$alternativasArgs<ExtArgs>
   testes?: boolean | Prisma.Questao$testesArgs<ExtArgs>
+  respostas?: boolean | Prisma.Questao$respostasArgs<ExtArgs>
   _count?: boolean | Prisma.QuestaoCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["questao"]>
 
@@ -913,6 +1176,9 @@ export type QuestaoSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exten
   titulo?: boolean
   enunciado?: boolean
   dificuldade?: boolean
+  materia?: boolean
+  tema?: boolean
+  explicacao?: boolean
   criadoEm?: boolean
   atualizadoEm?: boolean
   responsavel?: boolean | Prisma.UsuarioDefaultArgs<ExtArgs>
@@ -926,6 +1192,9 @@ export type QuestaoSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
   titulo?: boolean
   enunciado?: boolean
   dificuldade?: boolean
+  materia?: boolean
+  tema?: boolean
+  explicacao?: boolean
   criadoEm?: boolean
   atualizadoEm?: boolean
   responsavel?: boolean | Prisma.UsuarioDefaultArgs<ExtArgs>
@@ -939,16 +1208,20 @@ export type QuestaoSelectScalar = {
   titulo?: boolean
   enunciado?: boolean
   dificuldade?: boolean
+  materia?: boolean
+  tema?: boolean
+  explicacao?: boolean
   criadoEm?: boolean
   atualizadoEm?: boolean
 }
 
-export type QuestaoOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "idResponsavel" | "idAlternativaCorreta" | "titulo" | "enunciado" | "dificuldade" | "criadoEm" | "atualizadoEm", ExtArgs["result"]["questao"]>
+export type QuestaoOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "idResponsavel" | "idAlternativaCorreta" | "titulo" | "enunciado" | "dificuldade" | "materia" | "tema" | "explicacao" | "criadoEm" | "atualizadoEm", ExtArgs["result"]["questao"]>
 export type QuestaoInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   responsavel?: boolean | Prisma.UsuarioDefaultArgs<ExtArgs>
   alternativaCorreta?: boolean | Prisma.Questao$alternativaCorretaArgs<ExtArgs>
   alternativas?: boolean | Prisma.Questao$alternativasArgs<ExtArgs>
   testes?: boolean | Prisma.Questao$testesArgs<ExtArgs>
+  respostas?: boolean | Prisma.Questao$respostasArgs<ExtArgs>
   _count?: boolean | Prisma.QuestaoCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type QuestaoIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -967,6 +1240,7 @@ export type $QuestaoPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     alternativaCorreta: Prisma.$AlternativaPayload<ExtArgs> | null
     alternativas: Prisma.$AlternativaPayload<ExtArgs>[]
     testes: Prisma.$TesteQuestaoPayload<ExtArgs>[]
+    respostas: Prisma.$RespostaTentativaPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -975,6 +1249,9 @@ export type $QuestaoPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     titulo: string | null
     enunciado: string
     dificuldade: $Enums.NivelDificuldade
+    materia: $Enums.CategoriaCurso | null
+    tema: string | null
+    explicacao: string | null
     criadoEm: Date
     atualizadoEm: Date
   }, ExtArgs["result"]["questao"]>
@@ -1375,6 +1652,7 @@ export interface Prisma__QuestaoClient<T, Null = never, ExtArgs extends runtime.
   alternativaCorreta<T extends Prisma.Questao$alternativaCorretaArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Questao$alternativaCorretaArgs<ExtArgs>>): Prisma.Prisma__AlternativaClient<runtime.Types.Result.GetResult<Prisma.$AlternativaPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   alternativas<T extends Prisma.Questao$alternativasArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Questao$alternativasArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AlternativaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   testes<T extends Prisma.Questao$testesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Questao$testesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TesteQuestaoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  respostas<T extends Prisma.Questao$respostasArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Questao$respostasArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RespostaTentativaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1410,6 +1688,9 @@ export interface QuestaoFieldRefs {
   readonly titulo: Prisma.FieldRef<"Questao", 'String'>
   readonly enunciado: Prisma.FieldRef<"Questao", 'String'>
   readonly dificuldade: Prisma.FieldRef<"Questao", 'NivelDificuldade'>
+  readonly materia: Prisma.FieldRef<"Questao", 'CategoriaCurso'>
+  readonly tema: Prisma.FieldRef<"Questao", 'String'>
+  readonly explicacao: Prisma.FieldRef<"Questao", 'String'>
   readonly criadoEm: Prisma.FieldRef<"Questao", 'DateTime'>
   readonly atualizadoEm: Prisma.FieldRef<"Questao", 'DateTime'>
 }
@@ -1877,6 +2158,30 @@ export type Questao$testesArgs<ExtArgs extends runtime.Types.Extensions.Internal
   take?: number
   skip?: number
   distinct?: Prisma.TesteQuestaoScalarFieldEnum | Prisma.TesteQuestaoScalarFieldEnum[]
+}
+
+/**
+ * Questao.respostas
+ */
+export type Questao$respostasArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the RespostaTentativa
+   */
+  select?: Prisma.RespostaTentativaSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the RespostaTentativa
+   */
+  omit?: Prisma.RespostaTentativaOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.RespostaTentativaInclude<ExtArgs> | null
+  where?: Prisma.RespostaTentativaWhereInput
+  orderBy?: Prisma.RespostaTentativaOrderByWithRelationInput | Prisma.RespostaTentativaOrderByWithRelationInput[]
+  cursor?: Prisma.RespostaTentativaWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.RespostaTentativaScalarFieldEnum | Prisma.RespostaTentativaScalarFieldEnum[]
 }
 
 /**
