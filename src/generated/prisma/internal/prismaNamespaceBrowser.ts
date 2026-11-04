@@ -63,7 +63,16 @@ export const ModelName = {
   Questao: 'Questao',
   Alternativa: 'Alternativa',
   TesteQuestao: 'TesteQuestao',
-  Inscricao: 'Inscricao'
+  Inscricao: 'Inscricao',
+  PlanoConta: 'PlanoConta',
+  ProgressoAula: 'ProgressoAula',
+  TentativaTeste: 'TentativaTeste',
+  RespostaTentativa: 'RespostaTentativa',
+  MovimentacaoRecompensa: 'MovimentacaoRecompensa',
+  Item: 'Item',
+  InventarioItem: 'InventarioItem',
+  AtivacaoItem: 'AtivacaoItem',
+  Flashcard: 'Flashcard'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -90,7 +99,8 @@ export const UsuarioScalarFieldEnum = {
   tipo: 'tipo',
   status: 'status',
   criadoEm: 'criadoEm',
-  atualizadoEm: 'atualizadoEm'
+  atualizadoEm: 'atualizadoEm',
+  senhaAtualizadaEm: 'senhaAtualizadaEm'
 } as const
 
 export type UsuarioScalarFieldEnum = (typeof UsuarioScalarFieldEnum)[keyof typeof UsuarioScalarFieldEnum]
@@ -106,7 +116,9 @@ export const PerfilScalarFieldEnum = {
   cor: 'cor',
   decoracaoId: 'decoracaoId',
   urlFotoPerfil: 'urlFotoPerfil',
-  urlFotoBackground: 'urlFotoBackground'
+  urlFotoBackground: 'urlFotoBackground',
+  sequenciaDias: 'sequenciaDias',
+  ultimaAtividadeEm: 'ultimaAtividadeEm'
 } as const
 
 export type PerfilScalarFieldEnum = (typeof PerfilScalarFieldEnum)[keyof typeof PerfilScalarFieldEnum]
@@ -118,7 +130,8 @@ export const CodigoValidacaoScalarFieldEnum = {
   codigo: 'codigo',
   dataCriacao: 'dataCriacao',
   expiraEm: 'expiraEm',
-  status: 'status'
+  status: 'status',
+  finalidade: 'finalidade'
 } as const
 
 export type CodigoValidacaoScalarFieldEnum = (typeof CodigoValidacaoScalarFieldEnum)[keyof typeof CodigoValidacaoScalarFieldEnum]
@@ -183,6 +196,8 @@ export const ModuloScalarFieldEnum = {
   idSessao: 'idSessao',
   titulo: 'titulo',
   descricao: 'descricao',
+  licaoTitulo: 'licaoTitulo',
+  xp: 'xp',
   idResponsavel: 'idResponsavel',
   criadoEm: 'criadoEm',
   atualizadoEm: 'atualizadoEm'
@@ -230,6 +245,9 @@ export const QuestaoScalarFieldEnum = {
   titulo: 'titulo',
   enunciado: 'enunciado',
   dificuldade: 'dificuldade',
+  materia: 'materia',
+  tema: 'tema',
+  explicacao: 'explicacao',
   criadoEm: 'criadoEm',
   atualizadoEm: 'atualizadoEm'
 } as const
@@ -242,6 +260,7 @@ export const AlternativaScalarFieldEnum = {
   idQuestao: 'idQuestao',
   idResponsavel: 'idResponsavel',
   texto: 'texto',
+  ordem: 'ordem',
   criadoEm: 'criadoEm',
   atualizadoEm: 'atualizadoEm'
 } as const
@@ -263,10 +282,136 @@ export const InscricaoScalarFieldEnum = {
   id: 'id',
   idUsuario: 'idUsuario',
   idCurso: 'idCurso',
+  turma: 'turma',
   criadoEm: 'criadoEm'
 } as const
 
 export type InscricaoScalarFieldEnum = (typeof InscricaoScalarFieldEnum)[keyof typeof InscricaoScalarFieldEnum]
+
+
+export const PlanoContaScalarFieldEnum = {
+  id: 'id',
+  nome: 'nome',
+  precoCentavos: 'precoCentavos',
+  cor: 'cor',
+  icone: 'icone',
+  destaque: 'destaque',
+  beneficios: 'beneficios',
+  indisponiveis: 'indisponiveis',
+  limiteSimuladosMes: 'limiteSimuladosMes',
+  ordem: 'ordem'
+} as const
+
+export type PlanoContaScalarFieldEnum = (typeof PlanoContaScalarFieldEnum)[keyof typeof PlanoContaScalarFieldEnum]
+
+
+export const ProgressoAulaScalarFieldEnum = {
+  idUsuario: 'idUsuario',
+  idAula: 'idAula',
+  concluidoEm: 'concluidoEm'
+} as const
+
+export type ProgressoAulaScalarFieldEnum = (typeof ProgressoAulaScalarFieldEnum)[keyof typeof ProgressoAulaScalarFieldEnum]
+
+
+export const TentativaTesteScalarFieldEnum = {
+  id: 'id',
+  idTeste: 'idTeste',
+  idUsuario: 'idUsuario',
+  status: 'status',
+  materias: 'materias',
+  dificuldade: 'dificuldade',
+  tempoMinutos: 'tempoMinutos',
+  iniciadoEm: 'iniciadoEm',
+  finalizadoEm: 'finalizadoEm',
+  total: 'total',
+  acertos: 'acertos',
+  nota: 'nota',
+  xpGanho: 'xpGanho',
+  moedasGanhas: 'moedasGanhas'
+} as const
+
+export type TentativaTesteScalarFieldEnum = (typeof TentativaTesteScalarFieldEnum)[keyof typeof TentativaTesteScalarFieldEnum]
+
+
+export const RespostaTentativaScalarFieldEnum = {
+  idTentativa: 'idTentativa',
+  idQuestao: 'idQuestao',
+  ordem: 'ordem',
+  idAlternativa: 'idAlternativa',
+  respondidaEm: 'respondidaEm',
+  correta: 'correta',
+  dicaUsada: 'dicaUsada'
+} as const
+
+export type RespostaTentativaScalarFieldEnum = (typeof RespostaTentativaScalarFieldEnum)[keyof typeof RespostaTentativaScalarFieldEnum]
+
+
+export const MovimentacaoRecompensaScalarFieldEnum = {
+  id: 'id',
+  idUsuario: 'idUsuario',
+  origem: 'origem',
+  referencia: 'referencia',
+  xp: 'xp',
+  moedas: 'moedas',
+  criadoEm: 'criadoEm'
+} as const
+
+export type MovimentacaoRecompensaScalarFieldEnum = (typeof MovimentacaoRecompensaScalarFieldEnum)[keyof typeof MovimentacaoRecompensaScalarFieldEnum]
+
+
+export const ItemScalarFieldEnum = {
+  id: 'id',
+  nome: 'nome',
+  descricao: 'descricao',
+  preco: 'preco',
+  icone: 'icone',
+  cor: 'cor',
+  categoria: 'categoria',
+  efeito: 'efeito',
+  valorEfeito: 'valorEfeito',
+  duracaoMinutos: 'duracaoMinutos',
+  ativo: 'ativo',
+  criadoEm: 'criadoEm'
+} as const
+
+export type ItemScalarFieldEnum = (typeof ItemScalarFieldEnum)[keyof typeof ItemScalarFieldEnum]
+
+
+export const InventarioItemScalarFieldEnum = {
+  idUsuario: 'idUsuario',
+  idItem: 'idItem',
+  quantidade: 'quantidade'
+} as const
+
+export type InventarioItemScalarFieldEnum = (typeof InventarioItemScalarFieldEnum)[keyof typeof InventarioItemScalarFieldEnum]
+
+
+export const AtivacaoItemScalarFieldEnum = {
+  id: 'id',
+  idUsuario: 'idUsuario',
+  idItem: 'idItem',
+  status: 'status',
+  ativadoEm: 'ativadoEm',
+  expiraEm: 'expiraEm'
+} as const
+
+export type AtivacaoItemScalarFieldEnum = (typeof AtivacaoItemScalarFieldEnum)[keyof typeof AtivacaoItemScalarFieldEnum]
+
+
+export const FlashcardScalarFieldEnum = {
+  id: 'id',
+  idUsuario: 'idUsuario',
+  titulo: 'titulo',
+  pergunta: 'pergunta',
+  resposta: 'resposta',
+  repeticoesMensais: 'repeticoesMensais',
+  ultimaRevisaoEm: 'ultimaRevisaoEm',
+  proximaRevisaoEm: 'proximaRevisaoEm',
+  criadoEm: 'criadoEm'
+} as const
+
+export type FlashcardScalarFieldEnum = (typeof FlashcardScalarFieldEnum)[keyof typeof FlashcardScalarFieldEnum]
 
 
 export const SortOrder = {

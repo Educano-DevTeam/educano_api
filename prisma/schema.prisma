@@ -39,6 +39,13 @@ enum StatusCodigoValidacao {
   @@map("status_codigo_validacao")
 }
 
+enum FinalidadeCodigo {
+  VALIDACAO_CONTA   @map("validacao_conta")
+  REDEFINICAO_SENHA @map("redefinicao_senha")
+
+  @@map("finalidade_codigo")
+}
+
 enum TipoArquivo {
   IMAGEM
   VIDEO
@@ -127,6 +134,9 @@ model Usuario {
   criadoEm     DateTime      @default(now()) @map("criado_em") @db.Timestamptz(3)
   atualizadoEm DateTime      @default(now()) @map("atualizado_em") @db.Timestamptz(3)
 
+  // A senha vale por 90 dias a partir desta data.
+  senhaAtualizadaEm DateTime @default(now()) @map("senha_atualizada_em") @db.Timestamptz(3)
+
   perfil           Perfil?
   codigosValidacao CodigoValidacao[]
 
@@ -145,6 +155,13 @@ model Usuario {
 
   inscricoes Inscricao[]
 
+  progressosAula ProgressoAula[]
+  tentativas     TentativaTeste[]
+  movimentacoes  MovimentacaoRecompensa[]
+  inventario     InventarioItem[]
+  ativacoes      AtivacaoItem[]
+  flashcards     Flashcard[]
+
   @@map("usuario")
 }
 
@@ -160,7 +177,12 @@ model Perfil {
   urlFotoPerfil     String     @default("") @map("url_foto_perfil") @db.Text
   urlFotoBackground String     @default("") @map("url_foto_background") @db.Text
 
-  usuario Usuario @relation(fields: [idUsuario], references: [id], onDelete: Cascade)
+  // Sequência de dias seguidos com atividade de estudo.
+  sequenciaDias     Int       @default(0) @map("sequencia_dias")
+  ultimaAtividadeEm DateTime? @map("ultima_atividade_em") @db.Timestamptz(3)
+
+  usuario    Usuario     @relation(fields: [idUsuario], references: [id], onDelete: Cascade)
+  planoConta PlanoConta? @relation(fields: [planoContaId], references: [id], onDelete: SetNull)
 
   @@map("perfil")
 }
@@ -172,6 +194,7 @@ model CodigoValidacao {
   dataCriacao DateTime              @default(now()) @map("data_criacao") @db.Timestamptz(3)
   expiraEm    DateTime              @default(dbgenerated("(CURRENT_TIMESTAMP + INTERVAL '10 minutes')")) @map("expira_em") @db.Timestamptz(3)
   status      StatusCodigoValidacao @default(ATIVO)
+  finalidade  FinalidadeCodigo      @default(VALIDACAO_CONTA)
 
   usuario Usuario @relation(fields: [idUsuario], references: [id], onDelete: Cascade)
 
@@ -288,6 +311,10 @@ model Modulo {
   titulo    String  @db.VarChar(150)
   descricao String? @db.Text
 
+  // Lição do módulo: concede XP quando todo o conteúdo é concluído.
+  licaoTitulo String? @map("licao_titulo") @db.VarChar(150)
+  xp          Int     @default(0)
+
   idResponsavel String @map("id_responsavel") @db.Uuid
 
   criadoEm     DateTime @default(now()) @map("criado_em") @db.Timestamptz(3)
@@ -328,6 +355,8 @@ model Aula {
   arquivo     Arquivo? @relation("ArquivoAula", fields: [idArquivo], references: [id], onDelete: SetNull)
   responsavel Usuario  @relation(fields: [idResponsavel], references: [id], onDelete: Restrict)
 
+  progressos ProgressoAula[]
+
   @@index([idModulo])
   @@index([idResponsavel])
   @@map("aula")
@@ -353,7 +382,8 @@ model Teste {
   modulo      Modulo? @relation(fields: [idModulo], references: [id], onDelete: Cascade)
   responsavel Usuario @relation(fields: [idResponsavel], references: [id], onDelete: Restrict)
 
-  questoes TesteQuestao[]
+  questoes   TesteQuestao[]
+  tentativas TentativaTeste[]
 
   @@index([idModulo])
   @@index([idResponsavel])
@@ -370,6 +400,13 @@ model Questao {
   enunciado   String           @db.Text
   dificuldade NivelDificuldade @default(MEDIO)
 
+  // Classificação usada nos filtros e na geração de simulados.
+  materia CategoriaCurso?
+  tema    String?         @db.VarChar(150)
+
+  // Comentário exibido no gabarito.
+  explicacao String? @db.Text
+
   criadoEm     DateTime @default(now()) @map("criado_em") @db.Timestamptz(3)
   atualizadoEm DateTime @updatedAt @map("atualizado_em") @db.Timestamptz(3)
 
@@ -379,10 +416,12 @@ model Questao {
 
   alternativas Alternativa[]  @relation("AlternativasQuestao")
   testes       TesteQuestao[]
+  respostas    RespostaTentativa[]
 
   @@index([idResponsavel])
   @@index([idAlternativaCorreta])
   @@index([dificuldade])
+  @@index([materia])
   @@map("questao")
 }
 
@@ -392,6 +431,7 @@ model Alternativa {
   idResponsavel String @map("id_responsavel") @db.Uuid
 
   texto String @db.Text
+  ordem Int    @default(0)
 
   criadoEm     DateTime @default(now()) @map("criado_em") @db.Timestamptz(3)
   atualizadoEm DateTime @updatedAt @map("atualizado_em") @db.Timestamptz(3)
@@ -399,6 +439,7 @@ model Alternativa {
   questao Questao @relation("AlternativasQuestao", fields: [idQuestao], references: [id], onDelete: Cascade)
 
   questoesCorretas Questao[] @relation("AlternativaCorreta")
+  respostas        RespostaTentativa[]
 
   responsavel Usuario @relation(fields: [idResponsavel], references: [id], onDelete: Restrict)
 
@@ -429,6 +470,8 @@ model Inscricao {
   idUsuario String @map("id_usuario") @db.Uuid
   idCurso   String @map("id_curso") @db.Uuid
 
+  turma TurmaInscricao @default(EAD)
+
   criadoEm DateTime @default(now()) @map("criado_em") @db.Timestamptz(3)
 
   usuario Usuario @relation(fields: [idUsuario], references: [id], onDelete: Cascade)
@@ -437,4 +480,222 @@ model Inscricao {
   @@unique([idUsuario, idCurso])
   @@index([idCurso])
   @@map("inscricao")
+}
+
+enum TurmaInscricao {
+  MANHA
+  TARDE
+  NOITE
+  EAD
+
+  @@map("turma_inscricao")
+}
+
+// ---------------------------------------------------------------------------
+// Planos de conta
+// ---------------------------------------------------------------------------
+
+model PlanoConta {
+  id                  String   @id @default(uuid()) @db.Uuid
+  nome                String   @unique @db.VarChar(40)
+  precoCentavos       Int      @default(0) @map("preco_centavos")
+  cor                 String   @default("") @db.VarChar(30)
+  icone               String   @default("") @db.VarChar(40)
+  destaque            String?  @db.VarChar(40)
+  beneficios          String[]
+  indisponiveis       String[]
+  limiteSimuladosMes  Int?     @map("limite_simulados_mes")
+  ordem               Int      @default(0)
+
+  perfis Perfil[]
+
+  @@map("plano_conta")
+}
+
+// ---------------------------------------------------------------------------
+// Progresso e tentativas
+// ---------------------------------------------------------------------------
+
+model ProgressoAula {
+  idUsuario   String   @map("id_usuario") @db.Uuid
+  idAula      String   @map("id_aula") @db.Uuid
+  concluidoEm DateTime @default(now()) @map("concluido_em") @db.Timestamptz(3)
+
+  usuario Usuario @relation(fields: [idUsuario], references: [id], onDelete: Cascade)
+  aula    Aula    @relation(fields: [idAula], references: [id], onDelete: Cascade)
+
+  @@id([idUsuario, idAula])
+  @@map("progresso_aula")
+}
+
+enum StatusTentativa {
+  EM_ANDAMENTO
+  FINALIZADA
+
+  @@map("status_tentativa")
+}
+
+// Uma realização de simulado ou atividade por um usuário.
+model TentativaTeste {
+  id           String           @id @default(uuid()) @db.Uuid
+  idTeste      String           @map("id_teste") @db.Uuid
+  idUsuario    String           @map("id_usuario") @db.Uuid
+  status       StatusTentativa  @default(EM_ANDAMENTO)
+  materias     CategoriaCurso[]
+  dificuldade  NivelDificuldade?
+  tempoMinutos Int              @map("tempo_minutos")
+  iniciadoEm   DateTime         @default(now()) @map("iniciado_em") @db.Timestamptz(3)
+  finalizadoEm DateTime?        @map("finalizado_em") @db.Timestamptz(3)
+  total        Int
+  acertos      Int?
+  nota         Int?
+  xpGanho      Int              @default(0) @map("xp_ganho")
+  moedasGanhas Int              @default(0) @map("moedas_ganhas")
+
+  teste     Teste               @relation(fields: [idTeste], references: [id], onDelete: Cascade)
+  usuario   Usuario             @relation(fields: [idUsuario], references: [id], onDelete: Cascade)
+  respostas RespostaTentativa[]
+
+  @@index([idUsuario, iniciadoEm])
+  @@index([idTeste])
+  @@map("tentativa_teste")
+}
+
+model RespostaTentativa {
+  idTentativa   String    @map("id_tentativa") @db.Uuid
+  idQuestao     String    @map("id_questao") @db.Uuid
+  ordem         Int
+  idAlternativa String?   @map("id_alternativa") @db.Uuid
+  respondidaEm  DateTime? @map("respondida_em") @db.Timestamptz(3)
+  correta       Boolean?
+  dicaUsada     Boolean   @default(false) @map("dica_usada")
+
+  tentativa   TentativaTeste @relation(fields: [idTentativa], references: [id], onDelete: Cascade)
+  questao     Questao        @relation(fields: [idQuestao], references: [id], onDelete: Cascade)
+  alternativa Alternativa?   @relation(fields: [idAlternativa], references: [id], onDelete: SetNull)
+
+  @@id([idTentativa, idQuestao])
+  @@map("resposta_tentativa")
+}
+
+// ---------------------------------------------------------------------------
+// Recompensas (XP e moedas)
+// ---------------------------------------------------------------------------
+
+enum OrigemRecompensa {
+  AULA
+  MODULO
+  ATIVIDADE
+  SIMULADO
+  COMPRA
+  AJUSTE
+
+  @@map("origem_recompensa")
+}
+
+model MovimentacaoRecompensa {
+  id         String           @id @default(uuid()) @db.Uuid
+  idUsuario  String           @map("id_usuario") @db.Uuid
+  origem     OrigemRecompensa
+  referencia String?          @db.VarChar(64)
+  xp         Int              @default(0)
+  moedas     Int              @default(0)
+  criadoEm   DateTime         @default(now()) @map("criado_em") @db.Timestamptz(3)
+
+  usuario Usuario @relation(fields: [idUsuario], references: [id], onDelete: Cascade)
+
+  @@index([idUsuario, criadoEm])
+  @@map("movimentacao_recompensa")
+}
+
+// ---------------------------------------------------------------------------
+// Loja e inventário
+// ---------------------------------------------------------------------------
+
+enum EfeitoItem {
+  BOOST_XP
+  ESCUDO_SEQUENCIA
+  DICA_EXTRA
+  TEMPO_EXTRA
+  REVIVER_TENTATIVA
+  COSMETICO
+
+  @@map("efeito_item")
+}
+
+enum StatusAtivacao {
+  ATIVO
+  EXPIRADO
+  CONSUMIDO
+
+  @@map("status_ativacao")
+}
+
+model Item {
+  id             String     @id @default(uuid()) @db.Uuid
+  nome           String     @unique @db.VarChar(80)
+  descricao      String     @default("") @db.Text
+  preco          Int
+  icone          String     @default("star") @db.VarChar(40)
+  cor            String     @default("#425BC2") @db.VarChar(30)
+  categoria      String     @db.VarChar(40)
+  efeito         EfeitoItem
+  valorEfeito    Int        @default(0) @map("valor_efeito")
+  duracaoMinutos Int?       @map("duracao_minutos")
+  ativo          Boolean    @default(true)
+  criadoEm       DateTime   @default(now()) @map("criado_em") @db.Timestamptz(3)
+
+  inventario InventarioItem[]
+  ativacoes  AtivacaoItem[]
+
+  @@map("item")
+}
+
+model InventarioItem {
+  idUsuario  String @map("id_usuario") @db.Uuid
+  idItem     String @map("id_item") @db.Uuid
+  quantidade Int    @default(0)
+
+  usuario Usuario @relation(fields: [idUsuario], references: [id], onDelete: Cascade)
+  item    Item    @relation(fields: [idItem], references: [id], onDelete: Cascade)
+
+  @@id([idUsuario, idItem])
+  @@map("inventario_item")
+}
+
+model AtivacaoItem {
+  id        String         @id @default(uuid()) @db.Uuid
+  idUsuario String         @map("id_usuario") @db.Uuid
+  idItem    String         @map("id_item") @db.Uuid
+  status    StatusAtivacao @default(ATIVO)
+  ativadoEm DateTime       @default(now()) @map("ativado_em") @db.Timestamptz(3)
+  expiraEm  DateTime?      @map("expira_em") @db.Timestamptz(3)
+
+  usuario Usuario @relation(fields: [idUsuario], references: [id], onDelete: Cascade)
+  item    Item    @relation(fields: [idItem], references: [id], onDelete: Cascade)
+
+  @@index([idUsuario, status])
+  @@index([status, expiraEm])
+  @@map("ativacao_item")
+}
+
+// ---------------------------------------------------------------------------
+// Flashcards
+// ---------------------------------------------------------------------------
+
+model Flashcard {
+  id                String    @id @default(uuid()) @db.Uuid
+  idUsuario         String    @map("id_usuario") @db.Uuid
+  titulo            String    @db.VarChar(120)
+  pergunta          String    @db.Text
+  resposta          String    @db.Text
+  repeticoesMensais Int       @default(4) @map("repeticoes_mensais")
+  ultimaRevisaoEm   DateTime? @map("ultima_revisao_em") @db.Timestamptz(3)
+  proximaRevisaoEm  DateTime? @map("proxima_revisao_em") @db.Timestamptz(3)
+  criadoEm          DateTime  @default(now()) @map("criado_em") @db.Timestamptz(3)
+
+  usuario Usuario @relation(fields: [idUsuario], references: [id], onDelete: Cascade)
+
+  @@index([idUsuario])
+  @@map("flashcard")
 }

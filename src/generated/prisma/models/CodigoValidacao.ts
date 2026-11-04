@@ -31,6 +31,7 @@ export type CodigoValidacaoMinAggregateOutputType = {
   dataCriacao: Date | null
   expiraEm: Date | null
   status: $Enums.StatusCodigoValidacao | null
+  finalidade: $Enums.FinalidadeCodigo | null
 }
 
 export type CodigoValidacaoMaxAggregateOutputType = {
@@ -40,6 +41,7 @@ export type CodigoValidacaoMaxAggregateOutputType = {
   dataCriacao: Date | null
   expiraEm: Date | null
   status: $Enums.StatusCodigoValidacao | null
+  finalidade: $Enums.FinalidadeCodigo | null
 }
 
 export type CodigoValidacaoCountAggregateOutputType = {
@@ -49,6 +51,7 @@ export type CodigoValidacaoCountAggregateOutputType = {
   dataCriacao: number
   expiraEm: number
   status: number
+  finalidade: number
   _all: number
 }
 
@@ -60,6 +63,7 @@ export type CodigoValidacaoMinAggregateInputType = {
   dataCriacao?: true
   expiraEm?: true
   status?: true
+  finalidade?: true
 }
 
 export type CodigoValidacaoMaxAggregateInputType = {
@@ -69,6 +73,7 @@ export type CodigoValidacaoMaxAggregateInputType = {
   dataCriacao?: true
   expiraEm?: true
   status?: true
+  finalidade?: true
 }
 
 export type CodigoValidacaoCountAggregateInputType = {
@@ -78,6 +83,7 @@ export type CodigoValidacaoCountAggregateInputType = {
   dataCriacao?: true
   expiraEm?: true
   status?: true
+  finalidade?: true
   _all?: true
 }
 
@@ -160,6 +166,7 @@ export type CodigoValidacaoGroupByOutputType = {
   dataCriacao: Date
   expiraEm: Date
   status: $Enums.StatusCodigoValidacao
+  finalidade: $Enums.FinalidadeCodigo
   _count: CodigoValidacaoCountAggregateOutputType | null
   _min: CodigoValidacaoMinAggregateOutputType | null
   _max: CodigoValidacaoMaxAggregateOutputType | null
@@ -190,6 +197,7 @@ export type CodigoValidacaoWhereInput = {
   dataCriacao?: Prisma.DateTimeFilter<"CodigoValidacao"> | Date | string
   expiraEm?: Prisma.DateTimeFilter<"CodigoValidacao"> | Date | string
   status?: Prisma.EnumStatusCodigoValidacaoFilter<"CodigoValidacao"> | $Enums.StatusCodigoValidacao
+  finalidade?: Prisma.EnumFinalidadeCodigoFilter<"CodigoValidacao"> | $Enums.FinalidadeCodigo
   usuario?: Prisma.XOR<Prisma.UsuarioScalarRelationFilter, Prisma.UsuarioWhereInput>
 }
 
@@ -200,6 +208,7 @@ export type CodigoValidacaoOrderByWithRelationInput = {
   dataCriacao?: Prisma.SortOrder
   expiraEm?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  finalidade?: Prisma.SortOrder
   usuario?: Prisma.UsuarioOrderByWithRelationInput
 }
 
@@ -213,6 +222,7 @@ export type CodigoValidacaoWhereUniqueInput = Prisma.AtLeast<{
   dataCriacao?: Prisma.DateTimeFilter<"CodigoValidacao"> | Date | string
   expiraEm?: Prisma.DateTimeFilter<"CodigoValidacao"> | Date | string
   status?: Prisma.EnumStatusCodigoValidacaoFilter<"CodigoValidacao"> | $Enums.StatusCodigoValidacao
+  finalidade?: Prisma.EnumFinalidadeCodigoFilter<"CodigoValidacao"> | $Enums.FinalidadeCodigo
   usuario?: Prisma.XOR<Prisma.UsuarioScalarRelationFilter, Prisma.UsuarioWhereInput>
 }, "id">
 
@@ -223,6 +233,7 @@ export type CodigoValidacaoOrderByWithAggregationInput = {
   dataCriacao?: Prisma.SortOrder
   expiraEm?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  finalidade?: Prisma.SortOrder
   _count?: Prisma.CodigoValidacaoCountOrderByAggregateInput
   _max?: Prisma.CodigoValidacaoMaxOrderByAggregateInput
   _min?: Prisma.CodigoValidacaoMinOrderByAggregateInput
@@ -238,6 +249,7 @@ export type CodigoValidacaoScalarWhereWithAggregatesInput = {
   dataCriacao?: Prisma.DateTimeWithAggregatesFilter<"CodigoValidacao"> | Date | string
   expiraEm?: Prisma.DateTimeWithAggregatesFilter<"CodigoValidacao"> | Date | string
   status?: Prisma.EnumStatusCodigoValidacaoWithAggregatesFilter<"CodigoValidacao"> | $Enums.StatusCodigoValidacao
+  finalidade?: Prisma.EnumFinalidadeCodigoWithAggregatesFilter<"CodigoValidacao"> | $Enums.FinalidadeCodigo
 }
 
 export type CodigoValidacaoCreateInput = {
@@ -246,6 +258,7 @@ export type CodigoValidacaoCreateInput = {
   dataCriacao?: Date | string
   expiraEm?: Date | string
   status?: $Enums.StatusCodigoValidacao
+  finalidade?: $Enums.FinalidadeCodigo
   usuario: Prisma.UsuarioCreateNestedOneWithoutCodigosValidacaoInput
 }
 
@@ -256,6 +269,7 @@ export type CodigoValidacaoUncheckedCreateInput = {
   dataCriacao?: Date | string
   expiraEm?: Date | string
   status?: $Enums.StatusCodigoValidacao
+  finalidade?: $Enums.FinalidadeCodigo
 }
 
 export type CodigoValidacaoUpdateInput = {
@@ -264,6 +278,7 @@ export type CodigoValidacaoUpdateInput = {
   dataCriacao?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   expiraEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumStatusCodigoValidacaoFieldUpdateOperationsInput | $Enums.StatusCodigoValidacao
+  finalidade?: Prisma.EnumFinalidadeCodigoFieldUpdateOperationsInput | $Enums.FinalidadeCodigo
   usuario?: Prisma.UsuarioUpdateOneRequiredWithoutCodigosValidacaoNestedInput
 }
 
@@ -274,6 +289,7 @@ export type CodigoValidacaoUncheckedUpdateInput = {
   dataCriacao?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   expiraEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumStatusCodigoValidacaoFieldUpdateOperationsInput | $Enums.StatusCodigoValidacao
+  finalidade?: Prisma.EnumFinalidadeCodigoFieldUpdateOperationsInput | $Enums.FinalidadeCodigo
 }
 
 export type CodigoValidacaoCreateManyInput = {
@@ -283,6 +299,7 @@ export type CodigoValidacaoCreateManyInput = {
   dataCriacao?: Date | string
   expiraEm?: Date | string
   status?: $Enums.StatusCodigoValidacao
+  finalidade?: $Enums.FinalidadeCodigo
 }
 
 export type CodigoValidacaoUpdateManyMutationInput = {
@@ -291,6 +308,7 @@ export type CodigoValidacaoUpdateManyMutationInput = {
   dataCriacao?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   expiraEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumStatusCodigoValidacaoFieldUpdateOperationsInput | $Enums.StatusCodigoValidacao
+  finalidade?: Prisma.EnumFinalidadeCodigoFieldUpdateOperationsInput | $Enums.FinalidadeCodigo
 }
 
 export type CodigoValidacaoUncheckedUpdateManyInput = {
@@ -300,6 +318,7 @@ export type CodigoValidacaoUncheckedUpdateManyInput = {
   dataCriacao?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   expiraEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumStatusCodigoValidacaoFieldUpdateOperationsInput | $Enums.StatusCodigoValidacao
+  finalidade?: Prisma.EnumFinalidadeCodigoFieldUpdateOperationsInput | $Enums.FinalidadeCodigo
 }
 
 export type CodigoValidacaoListRelationFilter = {
@@ -319,6 +338,7 @@ export type CodigoValidacaoCountOrderByAggregateInput = {
   dataCriacao?: Prisma.SortOrder
   expiraEm?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  finalidade?: Prisma.SortOrder
 }
 
 export type CodigoValidacaoMaxOrderByAggregateInput = {
@@ -328,6 +348,7 @@ export type CodigoValidacaoMaxOrderByAggregateInput = {
   dataCriacao?: Prisma.SortOrder
   expiraEm?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  finalidade?: Prisma.SortOrder
 }
 
 export type CodigoValidacaoMinOrderByAggregateInput = {
@@ -337,6 +358,7 @@ export type CodigoValidacaoMinOrderByAggregateInput = {
   dataCriacao?: Prisma.SortOrder
   expiraEm?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  finalidade?: Prisma.SortOrder
 }
 
 export type CodigoValidacaoCreateNestedManyWithoutUsuarioInput = {
@@ -385,12 +407,17 @@ export type EnumStatusCodigoValidacaoFieldUpdateOperationsInput = {
   set?: $Enums.StatusCodigoValidacao
 }
 
+export type EnumFinalidadeCodigoFieldUpdateOperationsInput = {
+  set?: $Enums.FinalidadeCodigo
+}
+
 export type CodigoValidacaoCreateWithoutUsuarioInput = {
   id?: string
   codigo: string
   dataCriacao?: Date | string
   expiraEm?: Date | string
   status?: $Enums.StatusCodigoValidacao
+  finalidade?: $Enums.FinalidadeCodigo
 }
 
 export type CodigoValidacaoUncheckedCreateWithoutUsuarioInput = {
@@ -399,6 +426,7 @@ export type CodigoValidacaoUncheckedCreateWithoutUsuarioInput = {
   dataCriacao?: Date | string
   expiraEm?: Date | string
   status?: $Enums.StatusCodigoValidacao
+  finalidade?: $Enums.FinalidadeCodigo
 }
 
 export type CodigoValidacaoCreateOrConnectWithoutUsuarioInput = {
@@ -437,6 +465,7 @@ export type CodigoValidacaoScalarWhereInput = {
   dataCriacao?: Prisma.DateTimeFilter<"CodigoValidacao"> | Date | string
   expiraEm?: Prisma.DateTimeFilter<"CodigoValidacao"> | Date | string
   status?: Prisma.EnumStatusCodigoValidacaoFilter<"CodigoValidacao"> | $Enums.StatusCodigoValidacao
+  finalidade?: Prisma.EnumFinalidadeCodigoFilter<"CodigoValidacao"> | $Enums.FinalidadeCodigo
 }
 
 export type CodigoValidacaoCreateManyUsuarioInput = {
@@ -445,6 +474,7 @@ export type CodigoValidacaoCreateManyUsuarioInput = {
   dataCriacao?: Date | string
   expiraEm?: Date | string
   status?: $Enums.StatusCodigoValidacao
+  finalidade?: $Enums.FinalidadeCodigo
 }
 
 export type CodigoValidacaoUpdateWithoutUsuarioInput = {
@@ -453,6 +483,7 @@ export type CodigoValidacaoUpdateWithoutUsuarioInput = {
   dataCriacao?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   expiraEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumStatusCodigoValidacaoFieldUpdateOperationsInput | $Enums.StatusCodigoValidacao
+  finalidade?: Prisma.EnumFinalidadeCodigoFieldUpdateOperationsInput | $Enums.FinalidadeCodigo
 }
 
 export type CodigoValidacaoUncheckedUpdateWithoutUsuarioInput = {
@@ -461,6 +492,7 @@ export type CodigoValidacaoUncheckedUpdateWithoutUsuarioInput = {
   dataCriacao?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   expiraEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumStatusCodigoValidacaoFieldUpdateOperationsInput | $Enums.StatusCodigoValidacao
+  finalidade?: Prisma.EnumFinalidadeCodigoFieldUpdateOperationsInput | $Enums.FinalidadeCodigo
 }
 
 export type CodigoValidacaoUncheckedUpdateManyWithoutUsuarioInput = {
@@ -469,6 +501,7 @@ export type CodigoValidacaoUncheckedUpdateManyWithoutUsuarioInput = {
   dataCriacao?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   expiraEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumStatusCodigoValidacaoFieldUpdateOperationsInput | $Enums.StatusCodigoValidacao
+  finalidade?: Prisma.EnumFinalidadeCodigoFieldUpdateOperationsInput | $Enums.FinalidadeCodigo
 }
 
 
@@ -480,6 +513,7 @@ export type CodigoValidacaoSelect<ExtArgs extends runtime.Types.Extensions.Inter
   dataCriacao?: boolean
   expiraEm?: boolean
   status?: boolean
+  finalidade?: boolean
   usuario?: boolean | Prisma.UsuarioDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["codigoValidacao"]>
 
@@ -490,6 +524,7 @@ export type CodigoValidacaoSelectCreateManyAndReturn<ExtArgs extends runtime.Typ
   dataCriacao?: boolean
   expiraEm?: boolean
   status?: boolean
+  finalidade?: boolean
   usuario?: boolean | Prisma.UsuarioDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["codigoValidacao"]>
 
@@ -500,6 +535,7 @@ export type CodigoValidacaoSelectUpdateManyAndReturn<ExtArgs extends runtime.Typ
   dataCriacao?: boolean
   expiraEm?: boolean
   status?: boolean
+  finalidade?: boolean
   usuario?: boolean | Prisma.UsuarioDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["codigoValidacao"]>
 
@@ -510,9 +546,10 @@ export type CodigoValidacaoSelectScalar = {
   dataCriacao?: boolean
   expiraEm?: boolean
   status?: boolean
+  finalidade?: boolean
 }
 
-export type CodigoValidacaoOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "idUsuario" | "codigo" | "dataCriacao" | "expiraEm" | "status", ExtArgs["result"]["codigoValidacao"]>
+export type CodigoValidacaoOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "idUsuario" | "codigo" | "dataCriacao" | "expiraEm" | "status" | "finalidade", ExtArgs["result"]["codigoValidacao"]>
 export type CodigoValidacaoInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   usuario?: boolean | Prisma.UsuarioDefaultArgs<ExtArgs>
 }
@@ -535,6 +572,7 @@ export type $CodigoValidacaoPayload<ExtArgs extends runtime.Types.Extensions.Int
     dataCriacao: Date
     expiraEm: Date
     status: $Enums.StatusCodigoValidacao
+    finalidade: $Enums.FinalidadeCodigo
   }, ExtArgs["result"]["codigoValidacao"]>
   composites: {}
 }
@@ -965,6 +1003,7 @@ export interface CodigoValidacaoFieldRefs {
   readonly dataCriacao: Prisma.FieldRef<"CodigoValidacao", 'DateTime'>
   readonly expiraEm: Prisma.FieldRef<"CodigoValidacao", 'DateTime'>
   readonly status: Prisma.FieldRef<"CodigoValidacao", 'StatusCodigoValidacao'>
+  readonly finalidade: Prisma.FieldRef<"CodigoValidacao", 'FinalidadeCodigo'>
 }
     
 

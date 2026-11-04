@@ -20,8 +20,18 @@ export type ModuloModel = runtime.Types.Result.DefaultSelection<Prisma.$ModuloPa
 
 export type AggregateModulo = {
   _count: ModuloCountAggregateOutputType | null
+  _avg: ModuloAvgAggregateOutputType | null
+  _sum: ModuloSumAggregateOutputType | null
   _min: ModuloMinAggregateOutputType | null
   _max: ModuloMaxAggregateOutputType | null
+}
+
+export type ModuloAvgAggregateOutputType = {
+  xp: number | null
+}
+
+export type ModuloSumAggregateOutputType = {
+  xp: number | null
 }
 
 export type ModuloMinAggregateOutputType = {
@@ -29,6 +39,8 @@ export type ModuloMinAggregateOutputType = {
   idSessao: string | null
   titulo: string | null
   descricao: string | null
+  licaoTitulo: string | null
+  xp: number | null
   idResponsavel: string | null
   criadoEm: Date | null
   atualizadoEm: Date | null
@@ -39,6 +51,8 @@ export type ModuloMaxAggregateOutputType = {
   idSessao: string | null
   titulo: string | null
   descricao: string | null
+  licaoTitulo: string | null
+  xp: number | null
   idResponsavel: string | null
   criadoEm: Date | null
   atualizadoEm: Date | null
@@ -49,6 +63,8 @@ export type ModuloCountAggregateOutputType = {
   idSessao: number
   titulo: number
   descricao: number
+  licaoTitulo: number
+  xp: number
   idResponsavel: number
   criadoEm: number
   atualizadoEm: number
@@ -56,11 +72,21 @@ export type ModuloCountAggregateOutputType = {
 }
 
 
+export type ModuloAvgAggregateInputType = {
+  xp?: true
+}
+
+export type ModuloSumAggregateInputType = {
+  xp?: true
+}
+
 export type ModuloMinAggregateInputType = {
   id?: true
   idSessao?: true
   titulo?: true
   descricao?: true
+  licaoTitulo?: true
+  xp?: true
   idResponsavel?: true
   criadoEm?: true
   atualizadoEm?: true
@@ -71,6 +97,8 @@ export type ModuloMaxAggregateInputType = {
   idSessao?: true
   titulo?: true
   descricao?: true
+  licaoTitulo?: true
+  xp?: true
   idResponsavel?: true
   criadoEm?: true
   atualizadoEm?: true
@@ -81,6 +109,8 @@ export type ModuloCountAggregateInputType = {
   idSessao?: true
   titulo?: true
   descricao?: true
+  licaoTitulo?: true
+  xp?: true
   idResponsavel?: true
   criadoEm?: true
   atualizadoEm?: true
@@ -125,6 +155,18 @@ export type ModuloAggregateArgs<ExtArgs extends runtime.Types.Extensions.Interna
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
    * 
+   * Select which fields to average
+  **/
+  _avg?: ModuloAvgAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
+   * Select which fields to sum
+  **/
+  _sum?: ModuloSumAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
    * Select which fields to find the minimum value
   **/
   _min?: ModuloMinAggregateInputType
@@ -155,6 +197,8 @@ export type ModuloGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalA
   take?: number
   skip?: number
   _count?: ModuloCountAggregateInputType | true
+  _avg?: ModuloAvgAggregateInputType
+  _sum?: ModuloSumAggregateInputType
   _min?: ModuloMinAggregateInputType
   _max?: ModuloMaxAggregateInputType
 }
@@ -164,10 +208,14 @@ export type ModuloGroupByOutputType = {
   idSessao: string
   titulo: string
   descricao: string | null
+  licaoTitulo: string | null
+  xp: number
   idResponsavel: string
   criadoEm: Date
   atualizadoEm: Date
   _count: ModuloCountAggregateOutputType | null
+  _avg: ModuloAvgAggregateOutputType | null
+  _sum: ModuloSumAggregateOutputType | null
   _min: ModuloMinAggregateOutputType | null
   _max: ModuloMaxAggregateOutputType | null
 }
@@ -195,6 +243,8 @@ export type ModuloWhereInput = {
   idSessao?: Prisma.UuidFilter<"Modulo"> | string
   titulo?: Prisma.StringFilter<"Modulo"> | string
   descricao?: Prisma.StringNullableFilter<"Modulo"> | string | null
+  licaoTitulo?: Prisma.StringNullableFilter<"Modulo"> | string | null
+  xp?: Prisma.IntFilter<"Modulo"> | number
   idResponsavel?: Prisma.UuidFilter<"Modulo"> | string
   criadoEm?: Prisma.DateTimeFilter<"Modulo"> | Date | string
   atualizadoEm?: Prisma.DateTimeFilter<"Modulo"> | Date | string
@@ -209,6 +259,8 @@ export type ModuloOrderByWithRelationInput = {
   idSessao?: Prisma.SortOrder
   titulo?: Prisma.SortOrder
   descricao?: Prisma.SortOrderInput | Prisma.SortOrder
+  licaoTitulo?: Prisma.SortOrderInput | Prisma.SortOrder
+  xp?: Prisma.SortOrder
   idResponsavel?: Prisma.SortOrder
   criadoEm?: Prisma.SortOrder
   atualizadoEm?: Prisma.SortOrder
@@ -226,6 +278,8 @@ export type ModuloWhereUniqueInput = Prisma.AtLeast<{
   idSessao?: Prisma.UuidFilter<"Modulo"> | string
   titulo?: Prisma.StringFilter<"Modulo"> | string
   descricao?: Prisma.StringNullableFilter<"Modulo"> | string | null
+  licaoTitulo?: Prisma.StringNullableFilter<"Modulo"> | string | null
+  xp?: Prisma.IntFilter<"Modulo"> | number
   idResponsavel?: Prisma.UuidFilter<"Modulo"> | string
   criadoEm?: Prisma.DateTimeFilter<"Modulo"> | Date | string
   atualizadoEm?: Prisma.DateTimeFilter<"Modulo"> | Date | string
@@ -240,12 +294,16 @@ export type ModuloOrderByWithAggregationInput = {
   idSessao?: Prisma.SortOrder
   titulo?: Prisma.SortOrder
   descricao?: Prisma.SortOrderInput | Prisma.SortOrder
+  licaoTitulo?: Prisma.SortOrderInput | Prisma.SortOrder
+  xp?: Prisma.SortOrder
   idResponsavel?: Prisma.SortOrder
   criadoEm?: Prisma.SortOrder
   atualizadoEm?: Prisma.SortOrder
   _count?: Prisma.ModuloCountOrderByAggregateInput
+  _avg?: Prisma.ModuloAvgOrderByAggregateInput
   _max?: Prisma.ModuloMaxOrderByAggregateInput
   _min?: Prisma.ModuloMinOrderByAggregateInput
+  _sum?: Prisma.ModuloSumOrderByAggregateInput
 }
 
 export type ModuloScalarWhereWithAggregatesInput = {
@@ -256,6 +314,8 @@ export type ModuloScalarWhereWithAggregatesInput = {
   idSessao?: Prisma.UuidWithAggregatesFilter<"Modulo"> | string
   titulo?: Prisma.StringWithAggregatesFilter<"Modulo"> | string
   descricao?: Prisma.StringNullableWithAggregatesFilter<"Modulo"> | string | null
+  licaoTitulo?: Prisma.StringNullableWithAggregatesFilter<"Modulo"> | string | null
+  xp?: Prisma.IntWithAggregatesFilter<"Modulo"> | number
   idResponsavel?: Prisma.UuidWithAggregatesFilter<"Modulo"> | string
   criadoEm?: Prisma.DateTimeWithAggregatesFilter<"Modulo"> | Date | string
   atualizadoEm?: Prisma.DateTimeWithAggregatesFilter<"Modulo"> | Date | string
@@ -265,6 +325,8 @@ export type ModuloCreateInput = {
   id?: string
   titulo: string
   descricao?: string | null
+  licaoTitulo?: string | null
+  xp?: number
   criadoEm?: Date | string
   atualizadoEm?: Date | string
   sessao: Prisma.SessaoCreateNestedOneWithoutModulosInput
@@ -278,6 +340,8 @@ export type ModuloUncheckedCreateInput = {
   idSessao: string
   titulo: string
   descricao?: string | null
+  licaoTitulo?: string | null
+  xp?: number
   idResponsavel: string
   criadoEm?: Date | string
   atualizadoEm?: Date | string
@@ -289,6 +353,8 @@ export type ModuloUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   titulo?: Prisma.StringFieldUpdateOperationsInput | string
   descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  licaoTitulo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  xp?: Prisma.IntFieldUpdateOperationsInput | number
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   sessao?: Prisma.SessaoUpdateOneRequiredWithoutModulosNestedInput
@@ -302,6 +368,8 @@ export type ModuloUncheckedUpdateInput = {
   idSessao?: Prisma.StringFieldUpdateOperationsInput | string
   titulo?: Prisma.StringFieldUpdateOperationsInput | string
   descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  licaoTitulo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  xp?: Prisma.IntFieldUpdateOperationsInput | number
   idResponsavel?: Prisma.StringFieldUpdateOperationsInput | string
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -314,6 +382,8 @@ export type ModuloCreateManyInput = {
   idSessao: string
   titulo: string
   descricao?: string | null
+  licaoTitulo?: string | null
+  xp?: number
   idResponsavel: string
   criadoEm?: Date | string
   atualizadoEm?: Date | string
@@ -323,6 +393,8 @@ export type ModuloUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   titulo?: Prisma.StringFieldUpdateOperationsInput | string
   descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  licaoTitulo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  xp?: Prisma.IntFieldUpdateOperationsInput | number
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -332,6 +404,8 @@ export type ModuloUncheckedUpdateManyInput = {
   idSessao?: Prisma.StringFieldUpdateOperationsInput | string
   titulo?: Prisma.StringFieldUpdateOperationsInput | string
   descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  licaoTitulo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  xp?: Prisma.IntFieldUpdateOperationsInput | number
   idResponsavel?: Prisma.StringFieldUpdateOperationsInput | string
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -352,9 +426,15 @@ export type ModuloCountOrderByAggregateInput = {
   idSessao?: Prisma.SortOrder
   titulo?: Prisma.SortOrder
   descricao?: Prisma.SortOrder
+  licaoTitulo?: Prisma.SortOrder
+  xp?: Prisma.SortOrder
   idResponsavel?: Prisma.SortOrder
   criadoEm?: Prisma.SortOrder
   atualizadoEm?: Prisma.SortOrder
+}
+
+export type ModuloAvgOrderByAggregateInput = {
+  xp?: Prisma.SortOrder
 }
 
 export type ModuloMaxOrderByAggregateInput = {
@@ -362,6 +442,8 @@ export type ModuloMaxOrderByAggregateInput = {
   idSessao?: Prisma.SortOrder
   titulo?: Prisma.SortOrder
   descricao?: Prisma.SortOrder
+  licaoTitulo?: Prisma.SortOrder
+  xp?: Prisma.SortOrder
   idResponsavel?: Prisma.SortOrder
   criadoEm?: Prisma.SortOrder
   atualizadoEm?: Prisma.SortOrder
@@ -372,9 +454,15 @@ export type ModuloMinOrderByAggregateInput = {
   idSessao?: Prisma.SortOrder
   titulo?: Prisma.SortOrder
   descricao?: Prisma.SortOrder
+  licaoTitulo?: Prisma.SortOrder
+  xp?: Prisma.SortOrder
   idResponsavel?: Prisma.SortOrder
   criadoEm?: Prisma.SortOrder
   atualizadoEm?: Prisma.SortOrder
+}
+
+export type ModuloSumOrderByAggregateInput = {
+  xp?: Prisma.SortOrder
 }
 
 export type ModuloScalarRelationFilter = {
@@ -505,6 +593,8 @@ export type ModuloCreateWithoutResponsavelInput = {
   id?: string
   titulo: string
   descricao?: string | null
+  licaoTitulo?: string | null
+  xp?: number
   criadoEm?: Date | string
   atualizadoEm?: Date | string
   sessao: Prisma.SessaoCreateNestedOneWithoutModulosInput
@@ -517,6 +607,8 @@ export type ModuloUncheckedCreateWithoutResponsavelInput = {
   idSessao: string
   titulo: string
   descricao?: string | null
+  licaoTitulo?: string | null
+  xp?: number
   criadoEm?: Date | string
   atualizadoEm?: Date | string
   aulas?: Prisma.AulaUncheckedCreateNestedManyWithoutModuloInput
@@ -557,6 +649,8 @@ export type ModuloScalarWhereInput = {
   idSessao?: Prisma.UuidFilter<"Modulo"> | string
   titulo?: Prisma.StringFilter<"Modulo"> | string
   descricao?: Prisma.StringNullableFilter<"Modulo"> | string | null
+  licaoTitulo?: Prisma.StringNullableFilter<"Modulo"> | string | null
+  xp?: Prisma.IntFilter<"Modulo"> | number
   idResponsavel?: Prisma.UuidFilter<"Modulo"> | string
   criadoEm?: Prisma.DateTimeFilter<"Modulo"> | Date | string
   atualizadoEm?: Prisma.DateTimeFilter<"Modulo"> | Date | string
@@ -566,6 +660,8 @@ export type ModuloCreateWithoutSessaoInput = {
   id?: string
   titulo: string
   descricao?: string | null
+  licaoTitulo?: string | null
+  xp?: number
   criadoEm?: Date | string
   atualizadoEm?: Date | string
   responsavel: Prisma.UsuarioCreateNestedOneWithoutModulosResponsavelInput
@@ -577,6 +673,8 @@ export type ModuloUncheckedCreateWithoutSessaoInput = {
   id?: string
   titulo: string
   descricao?: string | null
+  licaoTitulo?: string | null
+  xp?: number
   idResponsavel: string
   criadoEm?: Date | string
   atualizadoEm?: Date | string
@@ -614,6 +712,8 @@ export type ModuloCreateWithoutAulasInput = {
   id?: string
   titulo: string
   descricao?: string | null
+  licaoTitulo?: string | null
+  xp?: number
   criadoEm?: Date | string
   atualizadoEm?: Date | string
   sessao: Prisma.SessaoCreateNestedOneWithoutModulosInput
@@ -626,6 +726,8 @@ export type ModuloUncheckedCreateWithoutAulasInput = {
   idSessao: string
   titulo: string
   descricao?: string | null
+  licaoTitulo?: string | null
+  xp?: number
   idResponsavel: string
   criadoEm?: Date | string
   atualizadoEm?: Date | string
@@ -652,6 +754,8 @@ export type ModuloUpdateWithoutAulasInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   titulo?: Prisma.StringFieldUpdateOperationsInput | string
   descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  licaoTitulo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  xp?: Prisma.IntFieldUpdateOperationsInput | number
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   sessao?: Prisma.SessaoUpdateOneRequiredWithoutModulosNestedInput
@@ -664,6 +768,8 @@ export type ModuloUncheckedUpdateWithoutAulasInput = {
   idSessao?: Prisma.StringFieldUpdateOperationsInput | string
   titulo?: Prisma.StringFieldUpdateOperationsInput | string
   descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  licaoTitulo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  xp?: Prisma.IntFieldUpdateOperationsInput | number
   idResponsavel?: Prisma.StringFieldUpdateOperationsInput | string
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -674,6 +780,8 @@ export type ModuloCreateWithoutTestesInput = {
   id?: string
   titulo: string
   descricao?: string | null
+  licaoTitulo?: string | null
+  xp?: number
   criadoEm?: Date | string
   atualizadoEm?: Date | string
   sessao: Prisma.SessaoCreateNestedOneWithoutModulosInput
@@ -686,6 +794,8 @@ export type ModuloUncheckedCreateWithoutTestesInput = {
   idSessao: string
   titulo: string
   descricao?: string | null
+  licaoTitulo?: string | null
+  xp?: number
   idResponsavel: string
   criadoEm?: Date | string
   atualizadoEm?: Date | string
@@ -712,6 +822,8 @@ export type ModuloUpdateWithoutTestesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   titulo?: Prisma.StringFieldUpdateOperationsInput | string
   descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  licaoTitulo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  xp?: Prisma.IntFieldUpdateOperationsInput | number
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   sessao?: Prisma.SessaoUpdateOneRequiredWithoutModulosNestedInput
@@ -724,6 +836,8 @@ export type ModuloUncheckedUpdateWithoutTestesInput = {
   idSessao?: Prisma.StringFieldUpdateOperationsInput | string
   titulo?: Prisma.StringFieldUpdateOperationsInput | string
   descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  licaoTitulo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  xp?: Prisma.IntFieldUpdateOperationsInput | number
   idResponsavel?: Prisma.StringFieldUpdateOperationsInput | string
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -735,6 +849,8 @@ export type ModuloCreateManyResponsavelInput = {
   idSessao: string
   titulo: string
   descricao?: string | null
+  licaoTitulo?: string | null
+  xp?: number
   criadoEm?: Date | string
   atualizadoEm?: Date | string
 }
@@ -743,6 +859,8 @@ export type ModuloUpdateWithoutResponsavelInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   titulo?: Prisma.StringFieldUpdateOperationsInput | string
   descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  licaoTitulo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  xp?: Prisma.IntFieldUpdateOperationsInput | number
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   sessao?: Prisma.SessaoUpdateOneRequiredWithoutModulosNestedInput
@@ -755,6 +873,8 @@ export type ModuloUncheckedUpdateWithoutResponsavelInput = {
   idSessao?: Prisma.StringFieldUpdateOperationsInput | string
   titulo?: Prisma.StringFieldUpdateOperationsInput | string
   descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  licaoTitulo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  xp?: Prisma.IntFieldUpdateOperationsInput | number
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   aulas?: Prisma.AulaUncheckedUpdateManyWithoutModuloNestedInput
@@ -766,6 +886,8 @@ export type ModuloUncheckedUpdateManyWithoutResponsavelInput = {
   idSessao?: Prisma.StringFieldUpdateOperationsInput | string
   titulo?: Prisma.StringFieldUpdateOperationsInput | string
   descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  licaoTitulo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  xp?: Prisma.IntFieldUpdateOperationsInput | number
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -774,6 +896,8 @@ export type ModuloCreateManySessaoInput = {
   id?: string
   titulo: string
   descricao?: string | null
+  licaoTitulo?: string | null
+  xp?: number
   idResponsavel: string
   criadoEm?: Date | string
   atualizadoEm?: Date | string
@@ -783,6 +907,8 @@ export type ModuloUpdateWithoutSessaoInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   titulo?: Prisma.StringFieldUpdateOperationsInput | string
   descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  licaoTitulo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  xp?: Prisma.IntFieldUpdateOperationsInput | number
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   responsavel?: Prisma.UsuarioUpdateOneRequiredWithoutModulosResponsavelNestedInput
@@ -794,6 +920,8 @@ export type ModuloUncheckedUpdateWithoutSessaoInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   titulo?: Prisma.StringFieldUpdateOperationsInput | string
   descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  licaoTitulo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  xp?: Prisma.IntFieldUpdateOperationsInput | number
   idResponsavel?: Prisma.StringFieldUpdateOperationsInput | string
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -805,6 +933,8 @@ export type ModuloUncheckedUpdateManyWithoutSessaoInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   titulo?: Prisma.StringFieldUpdateOperationsInput | string
   descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  licaoTitulo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  xp?: Prisma.IntFieldUpdateOperationsInput | number
   idResponsavel?: Prisma.StringFieldUpdateOperationsInput | string
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -855,6 +985,8 @@ export type ModuloSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   idSessao?: boolean
   titulo?: boolean
   descricao?: boolean
+  licaoTitulo?: boolean
+  xp?: boolean
   idResponsavel?: boolean
   criadoEm?: boolean
   atualizadoEm?: boolean
@@ -870,6 +1002,8 @@ export type ModuloSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extens
   idSessao?: boolean
   titulo?: boolean
   descricao?: boolean
+  licaoTitulo?: boolean
+  xp?: boolean
   idResponsavel?: boolean
   criadoEm?: boolean
   atualizadoEm?: boolean
@@ -882,6 +1016,8 @@ export type ModuloSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extens
   idSessao?: boolean
   titulo?: boolean
   descricao?: boolean
+  licaoTitulo?: boolean
+  xp?: boolean
   idResponsavel?: boolean
   criadoEm?: boolean
   atualizadoEm?: boolean
@@ -894,12 +1030,14 @@ export type ModuloSelectScalar = {
   idSessao?: boolean
   titulo?: boolean
   descricao?: boolean
+  licaoTitulo?: boolean
+  xp?: boolean
   idResponsavel?: boolean
   criadoEm?: boolean
   atualizadoEm?: boolean
 }
 
-export type ModuloOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "idSessao" | "titulo" | "descricao" | "idResponsavel" | "criadoEm" | "atualizadoEm", ExtArgs["result"]["modulo"]>
+export type ModuloOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "idSessao" | "titulo" | "descricao" | "licaoTitulo" | "xp" | "idResponsavel" | "criadoEm" | "atualizadoEm", ExtArgs["result"]["modulo"]>
 export type ModuloInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   sessao?: boolean | Prisma.SessaoDefaultArgs<ExtArgs>
   responsavel?: boolean | Prisma.UsuarioDefaultArgs<ExtArgs>
@@ -929,6 +1067,8 @@ export type $ModuloPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
     idSessao: string
     titulo: string
     descricao: string | null
+    licaoTitulo: string | null
+    xp: number
     idResponsavel: string
     criadoEm: Date
     atualizadoEm: Date
@@ -1363,6 +1503,8 @@ export interface ModuloFieldRefs {
   readonly idSessao: Prisma.FieldRef<"Modulo", 'String'>
   readonly titulo: Prisma.FieldRef<"Modulo", 'String'>
   readonly descricao: Prisma.FieldRef<"Modulo", 'String'>
+  readonly licaoTitulo: Prisma.FieldRef<"Modulo", 'String'>
+  readonly xp: Prisma.FieldRef<"Modulo", 'Int'>
   readonly idResponsavel: Prisma.FieldRef<"Modulo", 'String'>
   readonly criadoEm: Prisma.FieldRef<"Modulo", 'DateTime'>
   readonly atualizadoEm: Prisma.FieldRef<"Modulo", 'DateTime'>

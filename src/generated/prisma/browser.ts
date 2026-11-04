@@ -82,3 +82,48 @@ export type TesteQuestao = Prisma.TesteQuestaoModel
  * 
  */
 export type Inscricao = Prisma.InscricaoModel
+/**
+ * Model PlanoConta
+ * 
+ */
+export type PlanoConta = Prisma.PlanoContaModel
+/**
+ * Model ProgressoAula
+ * 
+ */
+export type ProgressoAula = Prisma.ProgressoAulaModel
+/**
+ * Model TentativaTeste
+ * 
+ */
+export type TentativaTeste = Prisma.TentativaTesteModel
+/**
+ * Model RespostaTentativa
+ * 
+ */
+export type RespostaTentativa = Prisma.RespostaTentativaModel
+/**
+ * Model MovimentacaoRecompensa
+ * 
+ */
+export type MovimentacaoRecompensa = Prisma.MovimentacaoRecompensaModel
+/**
+ * Model Item
+ * 
+ */
+export type Item = Prisma.ItemModel
+/**
+ * Model InventarioItem
+ * 
+ */
+export type InventarioItem = Prisma.InventarioItemModel
+/**
+ * Model AtivacaoItem
+ * 
+ */
+export type AtivacaoItem = Prisma.AtivacaoItemModel
+/**
+ * Model Flashcard
+ * 
+ */
+export type Flashcard = Prisma.FlashcardModel

@@ -30,12 +30,14 @@ export type PerfilAvgAggregateOutputType = {
   xp: number | null
   moedas: number | null
   nivel: number | null
+  sequenciaDias: number | null
 }
 
 export type PerfilSumAggregateOutputType = {
   xp: number | null
   moedas: number | null
   nivel: number | null
+  sequenciaDias: number | null
 }
 
 export type PerfilMinAggregateOutputType = {
@@ -49,6 +51,8 @@ export type PerfilMinAggregateOutputType = {
   decoracaoId: string | null
   urlFotoPerfil: string | null
   urlFotoBackground: string | null
+  sequenciaDias: number | null
+  ultimaAtividadeEm: Date | null
 }
 
 export type PerfilMaxAggregateOutputType = {
@@ -62,6 +66,8 @@ export type PerfilMaxAggregateOutputType = {
   decoracaoId: string | null
   urlFotoPerfil: string | null
   urlFotoBackground: string | null
+  sequenciaDias: number | null
+  ultimaAtividadeEm: Date | null
 }
 
 export type PerfilCountAggregateOutputType = {
@@ -75,6 +81,8 @@ export type PerfilCountAggregateOutputType = {
   decoracaoId: number
   urlFotoPerfil: number
   urlFotoBackground: number
+  sequenciaDias: number
+  ultimaAtividadeEm: number
   _all: number
 }
 
@@ -83,12 +91,14 @@ export type PerfilAvgAggregateInputType = {
   xp?: true
   moedas?: true
   nivel?: true
+  sequenciaDias?: true
 }
 
 export type PerfilSumAggregateInputType = {
   xp?: true
   moedas?: true
   nivel?: true
+  sequenciaDias?: true
 }
 
 export type PerfilMinAggregateInputType = {
@@ -102,6 +112,8 @@ export type PerfilMinAggregateInputType = {
   decoracaoId?: true
   urlFotoPerfil?: true
   urlFotoBackground?: true
+  sequenciaDias?: true
+  ultimaAtividadeEm?: true
 }
 
 export type PerfilMaxAggregateInputType = {
@@ -115,6 +127,8 @@ export type PerfilMaxAggregateInputType = {
   decoracaoId?: true
   urlFotoPerfil?: true
   urlFotoBackground?: true
+  sequenciaDias?: true
+  ultimaAtividadeEm?: true
 }
 
 export type PerfilCountAggregateInputType = {
@@ -128,6 +142,8 @@ export type PerfilCountAggregateInputType = {
   decoracaoId?: true
   urlFotoPerfil?: true
   urlFotoBackground?: true
+  sequenciaDias?: true
+  ultimaAtividadeEm?: true
   _all?: true
 }
 
@@ -228,6 +244,8 @@ export type PerfilGroupByOutputType = {
   decoracaoId: string | null
   urlFotoPerfil: string
   urlFotoBackground: string
+  sequenciaDias: number
+  ultimaAtividadeEm: Date | null
   _count: PerfilCountAggregateOutputType | null
   _avg: PerfilAvgAggregateOutputType | null
   _sum: PerfilSumAggregateOutputType | null
@@ -264,7 +282,10 @@ export type PerfilWhereInput = {
   decoracaoId?: Prisma.UuidNullableFilter<"Perfil"> | string | null
   urlFotoPerfil?: Prisma.StringFilter<"Perfil"> | string
   urlFotoBackground?: Prisma.StringFilter<"Perfil"> | string
+  sequenciaDias?: Prisma.IntFilter<"Perfil"> | number
+  ultimaAtividadeEm?: Prisma.DateTimeNullableFilter<"Perfil"> | Date | string | null
   usuario?: Prisma.XOR<Prisma.UsuarioScalarRelationFilter, Prisma.UsuarioWhereInput>
+  planoConta?: Prisma.XOR<Prisma.PlanoContaNullableScalarRelationFilter, Prisma.PlanoContaWhereInput> | null
 }
 
 export type PerfilOrderByWithRelationInput = {
@@ -278,7 +299,10 @@ export type PerfilOrderByWithRelationInput = {
   decoracaoId?: Prisma.SortOrderInput | Prisma.SortOrder
   urlFotoPerfil?: Prisma.SortOrder
   urlFotoBackground?: Prisma.SortOrder
+  sequenciaDias?: Prisma.SortOrder
+  ultimaAtividadeEm?: Prisma.SortOrderInput | Prisma.SortOrder
   usuario?: Prisma.UsuarioOrderByWithRelationInput
+  planoConta?: Prisma.PlanoContaOrderByWithRelationInput
 }
 
 export type PerfilWhereUniqueInput = Prisma.AtLeast<{
@@ -295,7 +319,10 @@ export type PerfilWhereUniqueInput = Prisma.AtLeast<{
   decoracaoId?: Prisma.UuidNullableFilter<"Perfil"> | string | null
   urlFotoPerfil?: Prisma.StringFilter<"Perfil"> | string
   urlFotoBackground?: Prisma.StringFilter<"Perfil"> | string
+  sequenciaDias?: Prisma.IntFilter<"Perfil"> | number
+  ultimaAtividadeEm?: Prisma.DateTimeNullableFilter<"Perfil"> | Date | string | null
   usuario?: Prisma.XOR<Prisma.UsuarioScalarRelationFilter, Prisma.UsuarioWhereInput>
+  planoConta?: Prisma.XOR<Prisma.PlanoContaNullableScalarRelationFilter, Prisma.PlanoContaWhereInput> | null
 }, "idUsuario">
 
 export type PerfilOrderByWithAggregationInput = {
@@ -309,6 +336,8 @@ export type PerfilOrderByWithAggregationInput = {
   decoracaoId?: Prisma.SortOrderInput | Prisma.SortOrder
   urlFotoPerfil?: Prisma.SortOrder
   urlFotoBackground?: Prisma.SortOrder
+  sequenciaDias?: Prisma.SortOrder
+  ultimaAtividadeEm?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.PerfilCountOrderByAggregateInput
   _avg?: Prisma.PerfilAvgOrderByAggregateInput
   _max?: Prisma.PerfilMaxOrderByAggregateInput
@@ -330,11 +359,12 @@ export type PerfilScalarWhereWithAggregatesInput = {
   decoracaoId?: Prisma.UuidNullableWithAggregatesFilter<"Perfil"> | string | null
   urlFotoPerfil?: Prisma.StringWithAggregatesFilter<"Perfil"> | string
   urlFotoBackground?: Prisma.StringWithAggregatesFilter<"Perfil"> | string
+  sequenciaDias?: Prisma.IntWithAggregatesFilter<"Perfil"> | number
+  ultimaAtividadeEm?: Prisma.DateTimeNullableWithAggregatesFilter<"Perfil"> | Date | string | null
 }
 
 export type PerfilCreateInput = {
   tipoPerfil?: $Enums.TipoPerfil
-  planoContaId?: string | null
   xp?: number
   moedas?: number
   nivel?: number
@@ -342,7 +372,10 @@ export type PerfilCreateInput = {
   decoracaoId?: string | null
   urlFotoPerfil?: string
   urlFotoBackground?: string
+  sequenciaDias?: number
+  ultimaAtividadeEm?: Date | string | null
   usuario: Prisma.UsuarioCreateNestedOneWithoutPerfilInput
+  planoConta?: Prisma.PlanoContaCreateNestedOneWithoutPerfisInput
 }
 
 export type PerfilUncheckedCreateInput = {
@@ -356,11 +389,12 @@ export type PerfilUncheckedCreateInput = {
   decoracaoId?: string | null
   urlFotoPerfil?: string
   urlFotoBackground?: string
+  sequenciaDias?: number
+  ultimaAtividadeEm?: Date | string | null
 }
 
 export type PerfilUpdateInput = {
   tipoPerfil?: Prisma.EnumTipoPerfilFieldUpdateOperationsInput | $Enums.TipoPerfil
-  planoContaId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   xp?: Prisma.IntFieldUpdateOperationsInput | number
   moedas?: Prisma.IntFieldUpdateOperationsInput | number
   nivel?: Prisma.IntFieldUpdateOperationsInput | number
@@ -368,7 +402,10 @@ export type PerfilUpdateInput = {
   decoracaoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   urlFotoPerfil?: Prisma.StringFieldUpdateOperationsInput | string
   urlFotoBackground?: Prisma.StringFieldUpdateOperationsInput | string
+  sequenciaDias?: Prisma.IntFieldUpdateOperationsInput | number
+  ultimaAtividadeEm?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   usuario?: Prisma.UsuarioUpdateOneRequiredWithoutPerfilNestedInput
+  planoConta?: Prisma.PlanoContaUpdateOneWithoutPerfisNestedInput
 }
 
 export type PerfilUncheckedUpdateInput = {
@@ -382,6 +419,8 @@ export type PerfilUncheckedUpdateInput = {
   decoracaoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   urlFotoPerfil?: Prisma.StringFieldUpdateOperationsInput | string
   urlFotoBackground?: Prisma.StringFieldUpdateOperationsInput | string
+  sequenciaDias?: Prisma.IntFieldUpdateOperationsInput | number
+  ultimaAtividadeEm?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type PerfilCreateManyInput = {
@@ -395,11 +434,12 @@ export type PerfilCreateManyInput = {
   decoracaoId?: string | null
   urlFotoPerfil?: string
   urlFotoBackground?: string
+  sequenciaDias?: number
+  ultimaAtividadeEm?: Date | string | null
 }
 
 export type PerfilUpdateManyMutationInput = {
   tipoPerfil?: Prisma.EnumTipoPerfilFieldUpdateOperationsInput | $Enums.TipoPerfil
-  planoContaId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   xp?: Prisma.IntFieldUpdateOperationsInput | number
   moedas?: Prisma.IntFieldUpdateOperationsInput | number
   nivel?: Prisma.IntFieldUpdateOperationsInput | number
@@ -407,6 +447,8 @@ export type PerfilUpdateManyMutationInput = {
   decoracaoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   urlFotoPerfil?: Prisma.StringFieldUpdateOperationsInput | string
   urlFotoBackground?: Prisma.StringFieldUpdateOperationsInput | string
+  sequenciaDias?: Prisma.IntFieldUpdateOperationsInput | number
+  ultimaAtividadeEm?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type PerfilUncheckedUpdateManyInput = {
@@ -420,6 +462,8 @@ export type PerfilUncheckedUpdateManyInput = {
   decoracaoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   urlFotoPerfil?: Prisma.StringFieldUpdateOperationsInput | string
   urlFotoBackground?: Prisma.StringFieldUpdateOperationsInput | string
+  sequenciaDias?: Prisma.IntFieldUpdateOperationsInput | number
+  ultimaAtividadeEm?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type PerfilNullableScalarRelationFilter = {
@@ -438,12 +482,15 @@ export type PerfilCountOrderByAggregateInput = {
   decoracaoId?: Prisma.SortOrder
   urlFotoPerfil?: Prisma.SortOrder
   urlFotoBackground?: Prisma.SortOrder
+  sequenciaDias?: Prisma.SortOrder
+  ultimaAtividadeEm?: Prisma.SortOrder
 }
 
 export type PerfilAvgOrderByAggregateInput = {
   xp?: Prisma.SortOrder
   moedas?: Prisma.SortOrder
   nivel?: Prisma.SortOrder
+  sequenciaDias?: Prisma.SortOrder
 }
 
 export type PerfilMaxOrderByAggregateInput = {
@@ -457,6 +504,8 @@ export type PerfilMaxOrderByAggregateInput = {
   decoracaoId?: Prisma.SortOrder
   urlFotoPerfil?: Prisma.SortOrder
   urlFotoBackground?: Prisma.SortOrder
+  sequenciaDias?: Prisma.SortOrder
+  ultimaAtividadeEm?: Prisma.SortOrder
 }
 
 export type PerfilMinOrderByAggregateInput = {
@@ -470,12 +519,25 @@ export type PerfilMinOrderByAggregateInput = {
   decoracaoId?: Prisma.SortOrder
   urlFotoPerfil?: Prisma.SortOrder
   urlFotoBackground?: Prisma.SortOrder
+  sequenciaDias?: Prisma.SortOrder
+  ultimaAtividadeEm?: Prisma.SortOrder
 }
 
 export type PerfilSumOrderByAggregateInput = {
   xp?: Prisma.SortOrder
   moedas?: Prisma.SortOrder
   nivel?: Prisma.SortOrder
+  sequenciaDias?: Prisma.SortOrder
+}
+
+export type PerfilListRelationFilter = {
+  every?: Prisma.PerfilWhereInput
+  some?: Prisma.PerfilWhereInput
+  none?: Prisma.PerfilWhereInput
+}
+
+export type PerfilOrderByRelationAggregateInput = {
+  _count?: Prisma.SortOrder
 }
 
 export type PerfilCreateNestedOneWithoutUsuarioInput = {
@@ -514,10 +576,6 @@ export type EnumTipoPerfilFieldUpdateOperationsInput = {
   set?: $Enums.TipoPerfil
 }
 
-export type NullableStringFieldUpdateOperationsInput = {
-  set?: string | null
-}
-
 export type IntFieldUpdateOperationsInput = {
   set?: number
   increment?: number
@@ -526,9 +584,58 @@ export type IntFieldUpdateOperationsInput = {
   divide?: number
 }
 
+export type NullableStringFieldUpdateOperationsInput = {
+  set?: string | null
+}
+
+export type NullableDateTimeFieldUpdateOperationsInput = {
+  set?: Date | string | null
+}
+
+export type PerfilCreateNestedManyWithoutPlanoContaInput = {
+  create?: Prisma.XOR<Prisma.PerfilCreateWithoutPlanoContaInput, Prisma.PerfilUncheckedCreateWithoutPlanoContaInput> | Prisma.PerfilCreateWithoutPlanoContaInput[] | Prisma.PerfilUncheckedCreateWithoutPlanoContaInput[]
+  connectOrCreate?: Prisma.PerfilCreateOrConnectWithoutPlanoContaInput | Prisma.PerfilCreateOrConnectWithoutPlanoContaInput[]
+  createMany?: Prisma.PerfilCreateManyPlanoContaInputEnvelope
+  connect?: Prisma.PerfilWhereUniqueInput | Prisma.PerfilWhereUniqueInput[]
+}
+
+export type PerfilUncheckedCreateNestedManyWithoutPlanoContaInput = {
+  create?: Prisma.XOR<Prisma.PerfilCreateWithoutPlanoContaInput, Prisma.PerfilUncheckedCreateWithoutPlanoContaInput> | Prisma.PerfilCreateWithoutPlanoContaInput[] | Prisma.PerfilUncheckedCreateWithoutPlanoContaInput[]
+  connectOrCreate?: Prisma.PerfilCreateOrConnectWithoutPlanoContaInput | Prisma.PerfilCreateOrConnectWithoutPlanoContaInput[]
+  createMany?: Prisma.PerfilCreateManyPlanoContaInputEnvelope
+  connect?: Prisma.PerfilWhereUniqueInput | Prisma.PerfilWhereUniqueInput[]
+}
+
+export type PerfilUpdateManyWithoutPlanoContaNestedInput = {
+  create?: Prisma.XOR<Prisma.PerfilCreateWithoutPlanoContaInput, Prisma.PerfilUncheckedCreateWithoutPlanoContaInput> | Prisma.PerfilCreateWithoutPlanoContaInput[] | Prisma.PerfilUncheckedCreateWithoutPlanoContaInput[]
+  connectOrCreate?: Prisma.PerfilCreateOrConnectWithoutPlanoContaInput | Prisma.PerfilCreateOrConnectWithoutPlanoContaInput[]
+  upsert?: Prisma.PerfilUpsertWithWhereUniqueWithoutPlanoContaInput | Prisma.PerfilUpsertWithWhereUniqueWithoutPlanoContaInput[]
+  createMany?: Prisma.PerfilCreateManyPlanoContaInputEnvelope
+  set?: Prisma.PerfilWhereUniqueInput | Prisma.PerfilWhereUniqueInput[]
+  disconnect?: Prisma.PerfilWhereUniqueInput | Prisma.PerfilWhereUniqueInput[]
+  delete?: Prisma.PerfilWhereUniqueInput | Prisma.PerfilWhereUniqueInput[]
+  connect?: Prisma.PerfilWhereUniqueInput | Prisma.PerfilWhereUniqueInput[]
+  update?: Prisma.PerfilUpdateWithWhereUniqueWithoutPlanoContaInput | Prisma.PerfilUpdateWithWhereUniqueWithoutPlanoContaInput[]
+  updateMany?: Prisma.PerfilUpdateManyWithWhereWithoutPlanoContaInput | Prisma.PerfilUpdateManyWithWhereWithoutPlanoContaInput[]
+  deleteMany?: Prisma.PerfilScalarWhereInput | Prisma.PerfilScalarWhereInput[]
+}
+
+export type PerfilUncheckedUpdateManyWithoutPlanoContaNestedInput = {
+  create?: Prisma.XOR<Prisma.PerfilCreateWithoutPlanoContaInput, Prisma.PerfilUncheckedCreateWithoutPlanoContaInput> | Prisma.PerfilCreateWithoutPlanoContaInput[] | Prisma.PerfilUncheckedCreateWithoutPlanoContaInput[]
+  connectOrCreate?: Prisma.PerfilCreateOrConnectWithoutPlanoContaInput | Prisma.PerfilCreateOrConnectWithoutPlanoContaInput[]
+  upsert?: Prisma.PerfilUpsertWithWhereUniqueWithoutPlanoContaInput | Prisma.PerfilUpsertWithWhereUniqueWithoutPlanoContaInput[]
+  createMany?: Prisma.PerfilCreateManyPlanoContaInputEnvelope
+  set?: Prisma.PerfilWhereUniqueInput | Prisma.PerfilWhereUniqueInput[]
+  disconnect?: Prisma.PerfilWhereUniqueInput | Prisma.PerfilWhereUniqueInput[]
+  delete?: Prisma.PerfilWhereUniqueInput | Prisma.PerfilWhereUniqueInput[]
+  connect?: Prisma.PerfilWhereUniqueInput | Prisma.PerfilWhereUniqueInput[]
+  update?: Prisma.PerfilUpdateWithWhereUniqueWithoutPlanoContaInput | Prisma.PerfilUpdateWithWhereUniqueWithoutPlanoContaInput[]
+  updateMany?: Prisma.PerfilUpdateManyWithWhereWithoutPlanoContaInput | Prisma.PerfilUpdateManyWithWhereWithoutPlanoContaInput[]
+  deleteMany?: Prisma.PerfilScalarWhereInput | Prisma.PerfilScalarWhereInput[]
+}
+
 export type PerfilCreateWithoutUsuarioInput = {
   tipoPerfil?: $Enums.TipoPerfil
-  planoContaId?: string | null
   xp?: number
   moedas?: number
   nivel?: number
@@ -536,6 +643,9 @@ export type PerfilCreateWithoutUsuarioInput = {
   decoracaoId?: string | null
   urlFotoPerfil?: string
   urlFotoBackground?: string
+  sequenciaDias?: number
+  ultimaAtividadeEm?: Date | string | null
+  planoConta?: Prisma.PlanoContaCreateNestedOneWithoutPerfisInput
 }
 
 export type PerfilUncheckedCreateWithoutUsuarioInput = {
@@ -548,6 +658,8 @@ export type PerfilUncheckedCreateWithoutUsuarioInput = {
   decoracaoId?: string | null
   urlFotoPerfil?: string
   urlFotoBackground?: string
+  sequenciaDias?: number
+  ultimaAtividadeEm?: Date | string | null
 }
 
 export type PerfilCreateOrConnectWithoutUsuarioInput = {
@@ -568,7 +680,6 @@ export type PerfilUpdateToOneWithWhereWithoutUsuarioInput = {
 
 export type PerfilUpdateWithoutUsuarioInput = {
   tipoPerfil?: Prisma.EnumTipoPerfilFieldUpdateOperationsInput | $Enums.TipoPerfil
-  planoContaId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   xp?: Prisma.IntFieldUpdateOperationsInput | number
   moedas?: Prisma.IntFieldUpdateOperationsInput | number
   nivel?: Prisma.IntFieldUpdateOperationsInput | number
@@ -576,6 +687,9 @@ export type PerfilUpdateWithoutUsuarioInput = {
   decoracaoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   urlFotoPerfil?: Prisma.StringFieldUpdateOperationsInput | string
   urlFotoBackground?: Prisma.StringFieldUpdateOperationsInput | string
+  sequenciaDias?: Prisma.IntFieldUpdateOperationsInput | number
+  ultimaAtividadeEm?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  planoConta?: Prisma.PlanoContaUpdateOneWithoutPerfisNestedInput
 }
 
 export type PerfilUncheckedUpdateWithoutUsuarioInput = {
@@ -588,6 +702,136 @@ export type PerfilUncheckedUpdateWithoutUsuarioInput = {
   decoracaoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   urlFotoPerfil?: Prisma.StringFieldUpdateOperationsInput | string
   urlFotoBackground?: Prisma.StringFieldUpdateOperationsInput | string
+  sequenciaDias?: Prisma.IntFieldUpdateOperationsInput | number
+  ultimaAtividadeEm?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+}
+
+export type PerfilCreateWithoutPlanoContaInput = {
+  tipoPerfil?: $Enums.TipoPerfil
+  xp?: number
+  moedas?: number
+  nivel?: number
+  cor?: string
+  decoracaoId?: string | null
+  urlFotoPerfil?: string
+  urlFotoBackground?: string
+  sequenciaDias?: number
+  ultimaAtividadeEm?: Date | string | null
+  usuario: Prisma.UsuarioCreateNestedOneWithoutPerfilInput
+}
+
+export type PerfilUncheckedCreateWithoutPlanoContaInput = {
+  idUsuario: string
+  tipoPerfil?: $Enums.TipoPerfil
+  xp?: number
+  moedas?: number
+  nivel?: number
+  cor?: string
+  decoracaoId?: string | null
+  urlFotoPerfil?: string
+  urlFotoBackground?: string
+  sequenciaDias?: number
+  ultimaAtividadeEm?: Date | string | null
+}
+
+export type PerfilCreateOrConnectWithoutPlanoContaInput = {
+  where: Prisma.PerfilWhereUniqueInput
+  create: Prisma.XOR<Prisma.PerfilCreateWithoutPlanoContaInput, Prisma.PerfilUncheckedCreateWithoutPlanoContaInput>
+}
+
+export type PerfilCreateManyPlanoContaInputEnvelope = {
+  data: Prisma.PerfilCreateManyPlanoContaInput | Prisma.PerfilCreateManyPlanoContaInput[]
+  skipDuplicates?: boolean
+}
+
+export type PerfilUpsertWithWhereUniqueWithoutPlanoContaInput = {
+  where: Prisma.PerfilWhereUniqueInput
+  update: Prisma.XOR<Prisma.PerfilUpdateWithoutPlanoContaInput, Prisma.PerfilUncheckedUpdateWithoutPlanoContaInput>
+  create: Prisma.XOR<Prisma.PerfilCreateWithoutPlanoContaInput, Prisma.PerfilUncheckedCreateWithoutPlanoContaInput>
+}
+
+export type PerfilUpdateWithWhereUniqueWithoutPlanoContaInput = {
+  where: Prisma.PerfilWhereUniqueInput
+  data: Prisma.XOR<Prisma.PerfilUpdateWithoutPlanoContaInput, Prisma.PerfilUncheckedUpdateWithoutPlanoContaInput>
+}
+
+export type PerfilUpdateManyWithWhereWithoutPlanoContaInput = {
+  where: Prisma.PerfilScalarWhereInput
+  data: Prisma.XOR<Prisma.PerfilUpdateManyMutationInput, Prisma.PerfilUncheckedUpdateManyWithoutPlanoContaInput>
+}
+
+export type PerfilScalarWhereInput = {
+  AND?: Prisma.PerfilScalarWhereInput | Prisma.PerfilScalarWhereInput[]
+  OR?: Prisma.PerfilScalarWhereInput[]
+  NOT?: Prisma.PerfilScalarWhereInput | Prisma.PerfilScalarWhereInput[]
+  idUsuario?: Prisma.UuidFilter<"Perfil"> | string
+  tipoPerfil?: Prisma.EnumTipoPerfilFilter<"Perfil"> | $Enums.TipoPerfil
+  planoContaId?: Prisma.UuidNullableFilter<"Perfil"> | string | null
+  xp?: Prisma.IntFilter<"Perfil"> | number
+  moedas?: Prisma.IntFilter<"Perfil"> | number
+  nivel?: Prisma.IntFilter<"Perfil"> | number
+  cor?: Prisma.StringFilter<"Perfil"> | string
+  decoracaoId?: Prisma.UuidNullableFilter<"Perfil"> | string | null
+  urlFotoPerfil?: Prisma.StringFilter<"Perfil"> | string
+  urlFotoBackground?: Prisma.StringFilter<"Perfil"> | string
+  sequenciaDias?: Prisma.IntFilter<"Perfil"> | number
+  ultimaAtividadeEm?: Prisma.DateTimeNullableFilter<"Perfil"> | Date | string | null
+}
+
+export type PerfilCreateManyPlanoContaInput = {
+  idUsuario: string
+  tipoPerfil?: $Enums.TipoPerfil
+  xp?: number
+  moedas?: number
+  nivel?: number
+  cor?: string
+  decoracaoId?: string | null
+  urlFotoPerfil?: string
+  urlFotoBackground?: string
+  sequenciaDias?: number
+  ultimaAtividadeEm?: Date | string | null
+}
+
+export type PerfilUpdateWithoutPlanoContaInput = {
+  tipoPerfil?: Prisma.EnumTipoPerfilFieldUpdateOperationsInput | $Enums.TipoPerfil
+  xp?: Prisma.IntFieldUpdateOperationsInput | number
+  moedas?: Prisma.IntFieldUpdateOperationsInput | number
+  nivel?: Prisma.IntFieldUpdateOperationsInput | number
+  cor?: Prisma.StringFieldUpdateOperationsInput | string
+  decoracaoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  urlFotoPerfil?: Prisma.StringFieldUpdateOperationsInput | string
+  urlFotoBackground?: Prisma.StringFieldUpdateOperationsInput | string
+  sequenciaDias?: Prisma.IntFieldUpdateOperationsInput | number
+  ultimaAtividadeEm?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  usuario?: Prisma.UsuarioUpdateOneRequiredWithoutPerfilNestedInput
+}
+
+export type PerfilUncheckedUpdateWithoutPlanoContaInput = {
+  idUsuario?: Prisma.StringFieldUpdateOperationsInput | string
+  tipoPerfil?: Prisma.EnumTipoPerfilFieldUpdateOperationsInput | $Enums.TipoPerfil
+  xp?: Prisma.IntFieldUpdateOperationsInput | number
+  moedas?: Prisma.IntFieldUpdateOperationsInput | number
+  nivel?: Prisma.IntFieldUpdateOperationsInput | number
+  cor?: Prisma.StringFieldUpdateOperationsInput | string
+  decoracaoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  urlFotoPerfil?: Prisma.StringFieldUpdateOperationsInput | string
+  urlFotoBackground?: Prisma.StringFieldUpdateOperationsInput | string
+  sequenciaDias?: Prisma.IntFieldUpdateOperationsInput | number
+  ultimaAtividadeEm?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+}
+
+export type PerfilUncheckedUpdateManyWithoutPlanoContaInput = {
+  idUsuario?: Prisma.StringFieldUpdateOperationsInput | string
+  tipoPerfil?: Prisma.EnumTipoPerfilFieldUpdateOperationsInput | $Enums.TipoPerfil
+  xp?: Prisma.IntFieldUpdateOperationsInput | number
+  moedas?: Prisma.IntFieldUpdateOperationsInput | number
+  nivel?: Prisma.IntFieldUpdateOperationsInput | number
+  cor?: Prisma.StringFieldUpdateOperationsInput | string
+  decoracaoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  urlFotoPerfil?: Prisma.StringFieldUpdateOperationsInput | string
+  urlFotoBackground?: Prisma.StringFieldUpdateOperationsInput | string
+  sequenciaDias?: Prisma.IntFieldUpdateOperationsInput | number
+  ultimaAtividadeEm?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 
@@ -603,7 +847,10 @@ export type PerfilSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   decoracaoId?: boolean
   urlFotoPerfil?: boolean
   urlFotoBackground?: boolean
+  sequenciaDias?: boolean
+  ultimaAtividadeEm?: boolean
   usuario?: boolean | Prisma.UsuarioDefaultArgs<ExtArgs>
+  planoConta?: boolean | Prisma.Perfil$planoContaArgs<ExtArgs>
 }, ExtArgs["result"]["perfil"]>
 
 export type PerfilSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -617,7 +864,10 @@ export type PerfilSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extens
   decoracaoId?: boolean
   urlFotoPerfil?: boolean
   urlFotoBackground?: boolean
+  sequenciaDias?: boolean
+  ultimaAtividadeEm?: boolean
   usuario?: boolean | Prisma.UsuarioDefaultArgs<ExtArgs>
+  planoConta?: boolean | Prisma.Perfil$planoContaArgs<ExtArgs>
 }, ExtArgs["result"]["perfil"]>
 
 export type PerfilSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -631,7 +881,10 @@ export type PerfilSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extens
   decoracaoId?: boolean
   urlFotoPerfil?: boolean
   urlFotoBackground?: boolean
+  sequenciaDias?: boolean
+  ultimaAtividadeEm?: boolean
   usuario?: boolean | Prisma.UsuarioDefaultArgs<ExtArgs>
+  planoConta?: boolean | Prisma.Perfil$planoContaArgs<ExtArgs>
 }, ExtArgs["result"]["perfil"]>
 
 export type PerfilSelectScalar = {
@@ -645,23 +898,29 @@ export type PerfilSelectScalar = {
   decoracaoId?: boolean
   urlFotoPerfil?: boolean
   urlFotoBackground?: boolean
+  sequenciaDias?: boolean
+  ultimaAtividadeEm?: boolean
 }
 
-export type PerfilOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"idUsuario" | "tipoPerfil" | "planoContaId" | "xp" | "moedas" | "nivel" | "cor" | "decoracaoId" | "urlFotoPerfil" | "urlFotoBackground", ExtArgs["result"]["perfil"]>
+export type PerfilOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"idUsuario" | "tipoPerfil" | "planoContaId" | "xp" | "moedas" | "nivel" | "cor" | "decoracaoId" | "urlFotoPerfil" | "urlFotoBackground" | "sequenciaDias" | "ultimaAtividadeEm", ExtArgs["result"]["perfil"]>
 export type PerfilInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   usuario?: boolean | Prisma.UsuarioDefaultArgs<ExtArgs>
+  planoConta?: boolean | Prisma.Perfil$planoContaArgs<ExtArgs>
 }
 export type PerfilIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   usuario?: boolean | Prisma.UsuarioDefaultArgs<ExtArgs>
+  planoConta?: boolean | Prisma.Perfil$planoContaArgs<ExtArgs>
 }
 export type PerfilIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   usuario?: boolean | Prisma.UsuarioDefaultArgs<ExtArgs>
+  planoConta?: boolean | Prisma.Perfil$planoContaArgs<ExtArgs>
 }
 
 export type $PerfilPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Perfil"
   objects: {
     usuario: Prisma.$UsuarioPayload<ExtArgs>
+    planoConta: Prisma.$PlanoContaPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     idUsuario: string
@@ -674,6 +933,8 @@ export type $PerfilPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
     decoracaoId: string | null
     urlFotoPerfil: string
     urlFotoBackground: string
+    sequenciaDias: number
+    ultimaAtividadeEm: Date | null
   }, ExtArgs["result"]["perfil"]>
   composites: {}
 }
@@ -1069,6 +1330,7 @@ readonly fields: PerfilFieldRefs;
 export interface Prisma__PerfilClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   usuario<T extends Prisma.UsuarioDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UsuarioDefaultArgs<ExtArgs>>): Prisma.Prisma__UsuarioClient<runtime.Types.Result.GetResult<Prisma.$UsuarioPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  planoConta<T extends Prisma.Perfil$planoContaArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Perfil$planoContaArgs<ExtArgs>>): Prisma.Prisma__PlanoContaClient<runtime.Types.Result.GetResult<Prisma.$PlanoContaPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1108,6 +1370,8 @@ export interface PerfilFieldRefs {
   readonly decoracaoId: Prisma.FieldRef<"Perfil", 'String'>
   readonly urlFotoPerfil: Prisma.FieldRef<"Perfil", 'String'>
   readonly urlFotoBackground: Prisma.FieldRef<"Perfil", 'String'>
+  readonly sequenciaDias: Prisma.FieldRef<"Perfil", 'Int'>
+  readonly ultimaAtividadeEm: Prisma.FieldRef<"Perfil", 'DateTime'>
 }
     
 
@@ -1506,6 +1770,25 @@ export type PerfilDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Intern
    * Limit how many Perfils to delete.
    */
   limit?: number
+}
+
+/**
+ * Perfil.planoConta
+ */
+export type Perfil$planoContaArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the PlanoConta
+   */
+  select?: Prisma.PlanoContaSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the PlanoConta
+   */
+  omit?: Prisma.PlanoContaOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PlanoContaInclude<ExtArgs> | null
+  where?: Prisma.PlanoContaWhereInput
 }
 
 /**

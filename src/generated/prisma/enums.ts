@@ -45,6 +45,14 @@ export const StatusCodigoValidacao = {
 export type StatusCodigoValidacao = (typeof StatusCodigoValidacao)[keyof typeof StatusCodigoValidacao]
 
 
+export const FinalidadeCodigo = {
+  VALIDACAO_CONTA: 'VALIDACAO_CONTA',
+  REDEFINICAO_SENHA: 'REDEFINICAO_SENHA'
+} as const
+
+export type FinalidadeCodigo = (typeof FinalidadeCodigo)[keyof typeof FinalidadeCodigo]
+
+
 export const TipoArquivo = {
   IMAGEM: 'IMAGEM',
   VIDEO: 'VIDEO',
@@ -129,3 +137,54 @@ export const NivelDificuldade = {
 } as const
 
 export type NivelDificuldade = (typeof NivelDificuldade)[keyof typeof NivelDificuldade]
+
+
+export const TurmaInscricao = {
+  MANHA: 'MANHA',
+  TARDE: 'TARDE',
+  NOITE: 'NOITE',
+  EAD: 'EAD'
+} as const
+
+export type TurmaInscricao = (typeof TurmaInscricao)[keyof typeof TurmaInscricao]
+
+
+export const StatusTentativa = {
+  EM_ANDAMENTO: 'EM_ANDAMENTO',
+  FINALIZADA: 'FINALIZADA'
+} as const
+
+export type StatusTentativa = (typeof StatusTentativa)[keyof typeof StatusTentativa]
+
+
+export const OrigemRecompensa = {
+  AULA: 'AULA',
+  MODULO: 'MODULO',
+  ATIVIDADE: 'ATIVIDADE',
+  SIMULADO: 'SIMULADO',
+  COMPRA: 'COMPRA',
+  AJUSTE: 'AJUSTE'
+} as const
+
+export type OrigemRecompensa = (typeof OrigemRecompensa)[keyof typeof OrigemRecompensa]
+
+
+export const EfeitoItem = {
+  BOOST_XP: 'BOOST_XP',
+  ESCUDO_SEQUENCIA: 'ESCUDO_SEQUENCIA',
+  DICA_EXTRA: 'DICA_EXTRA',
+  TEMPO_EXTRA: 'TEMPO_EXTRA',
+  REVIVER_TENTATIVA: 'REVIVER_TENTATIVA',
+  COSMETICO: 'COSMETICO'
+} as const
+
+export type EfeitoItem = (typeof EfeitoItem)[keyof typeof EfeitoItem]
+
+
+export const StatusAtivacao = {
+  ATIVO: 'ATIVO',
+  EXPIRADO: 'EXPIRADO',
+  CONSUMIDO: 'CONSUMIDO'
+} as const
+
+export type StatusAtivacao = (typeof StatusAtivacao)[keyof typeof StatusAtivacao]
