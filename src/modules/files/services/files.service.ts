@@ -103,7 +103,8 @@ function gerarChaveObjeto(
     return `educano/${pasta}/${idOrigem}/${randomUUID()}-${nomeSeguro}`;
 }
 
-async function gerarUrlAssinada(chaveObjeto: string) {
+// Por padrão o link vale 15 minutos; aulas longas pedem mais tempo.
+async function gerarUrlAssinada(chaveObjeto: string, expiraEmSegundos = 60 * 15) {
     return getSignedUrl(
         r2Client,
         new GetObjectCommand({
@@ -111,7 +112,7 @@ async function gerarUrlAssinada(chaveObjeto: string) {
             Key: chaveObjeto,
         }),
         {
-            expiresIn: 60 * 15,
+            expiresIn: expiraEmSegundos,
         },
     );
 }
@@ -222,7 +223,7 @@ export async function enviarArquivo({
     }
 }
 
-export async function consultarArquivo(id: string) {
+export async function consultarArquivo(id: string, expiraEmSegundos?: number) {
     const arquivo = await prisma.arquivo.findUnique({
         where: { id },
     });
@@ -231,7 +232,7 @@ export async function consultarArquivo(id: string) {
         return null;
     }
 
-    const url = await gerarUrlAssinada(arquivo.chaveObjeto);
+    const url = await gerarUrlAssinada(arquivo.chaveObjeto, expiraEmSegundos);
 
     return {
         ...arquivo,

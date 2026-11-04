@@ -1,6 +1,13 @@
 
+import bcrypt from "bcryptjs";
 import { prisma } from "../../../config/prisma.js";
-import type { EditarUsuarioInput } from "../schemas/users.schema.js";
+import { excluirArquivo } from "../../files/services/files.service.js";
+import type { Prisma } from "../../../generated/prisma/client.js";
+import type {
+  AlterarSenhaInput,
+  EditarUsuarioInput,
+  ListarUsuariosQuery,
+} from "../schemas/users.schema.js";
 
 export class UsersServiceError extends Error {
   constructor(
@@ -66,10 +73,20 @@ export async function consultarUsuario(identifier: string) {
 
 const USUARIOS_POR_PAGINA = 30;
 
-export async function listarUsuarios(page: number) {
+export async function listarUsuarios(filtros: ListarUsuariosQuery) {
+  const page = filtros.page;
   const skip = (page - 1) * USUARIOS_POR_PAGINA;
 
-  const where = {};
+  const where: Prisma.UsuarioWhereInput = {
+    ...(filtros.tipo && { tipo: filtros.tipo }),
+    ...(filtros.status && { status: filtros.status }),
+    ...(filtros.busca && {
+      OR: [
+        { nome: { contains: filtros.busca, mode: "insensitive" } },
+        { email: { contains: filtros.busca, mode: "insensitive" } },
+      ],
+    }),
+  };
 
   const [usuarios, total] = await prisma.$transaction([
     prisma.usuario.findMany({
@@ -175,10 +192,131 @@ export async function editarUsuario(
 export async function excluirUsuario(identifier: string) {
   const usuario = await consultarUsuario(identifier);
 
-  // As relações configuradas no schema excluem perfil e códigos associados.
-  await prisma.usuario.delete({
-    where: { id: usuario.id },
+  // Simulados gerados para o usuário e fotos de perfil pertencem só a ele.
+  const fotos = await prisma.arquivo.findMany({
+    where: {
+      idOrigem: usuario.id,
+      finalidade: { in: ["FOTO_PERFIL", "BACKGROUND_PERFIL"] },
+    },
+    select: { id: true },
   });
 
+  for (const foto of fotos) {
+    await excluirArquivo(foto.id).catch(() => undefined);
+  }
+
+  try {
+    await prisma.$transaction([
+      prisma.teste.deleteMany({
+        where: { idResponsavel: usuario.id, tipo: "SIMULADO", idModulo: null },
+      }),
+      // As relações configuradas no schema excluem perfil e códigos associados.
+      prisma.usuario.delete({ where: { id: usuario.id } }),
+    ]);
+  } catch (error) {
+    // Cursos, aulas e questões criados pelo usuário impedem a exclusão.
+    if (
+      typeof error === "object" &&
+      error !== null &&
+      "code" in error &&
+      error.code === "P2003"
+    ) {
+      throw new UsersServiceError(
+        "CONTEUDO_VINCULADO",
+        "O usuário é responsável por cursos ou questões. Transfira ou exclua esse conteúdo antes.",
+      );
+    }
+
+    throw error;
+  }
+
   return { id: usuario.id };
+}
+
+const camposUsuario = {
+  id: true,
+  nome: true,
+  email: true,
+  tipo: true,
+  status: true,
+  criadoEm: true,
+  atualizadoEm: true,
+} as const;
+
+export async function alterarStatusUsuario(
+  identifier: string,
+  status: "ATIVO" | "INATIVO",
+  idSolicitante: string,
+) {
+  const usuario = await consultarUsuario(identifier);
+
+  if (usuario.id === idSolicitante) {
+    throw new UsersServiceError(
+      "OPERACAO_NAO_PERMITIDA",
+      "Você não pode alterar o status da sua própria conta.",
+    );
+  }
+
+  // Contas pendentes só são ativadas pela validação do e-mail.
+  if (usuario.status === "PENDENTE" && status === "ATIVO") {
+    throw new UsersServiceError(
+      "OPERACAO_NAO_PERMITIDA",
+      "A conta ainda não validou o e-mail e não pode ser ativada manualmente.",
+    );
+  }
+
+  return prisma.usuario.update({
+    where: { id: usuario.id },
+    data: { status, atualizadoEm: new Date() },
+    select: camposUsuario,
+  });
+}
+
+export async function editarMeuUsuario(id: string, nome: string) {
+  return prisma.usuario.update({
+    where: { id },
+    data: { nome, atualizadoEm: new Date() },
+    select: camposUsuario,
+  });
+}
+
+export async function alterarSenha(id: string, dados: AlterarSenhaInput) {
+  const usuario = await prisma.usuario.findUnique({
+    where: { id },
+    select: { senha: true },
+  });
+
+  if (!usuario) {
+    throw new UsersServiceError(
+      "USUARIO_NAO_ENCONTRADO",
+      "Usuário não encontrado.",
+    );
+  }
+
+  const senhaValida = await bcrypt.compare(dados.senhaAtual, usuario.senha);
+
+  if (!senhaValida) {
+    throw new UsersServiceError(
+      "SENHA_INCORRETA",
+      "A senha atual está incorreta.",
+    );
+  }
+
+  if (dados.senhaAtual === dados.novaSenha) {
+    throw new UsersServiceError(
+      "DADOS_INVALIDOS",
+      "A nova senha deve ser diferente da atual.",
+    );
+  }
+
+  const agora = new Date();
+
+  await prisma.usuario.update({
+    where: { id },
+    data: {
+      senha: await bcrypt.hash(dados.novaSenha, 12),
+      senhaAtualizadaEm: agora,
+      atualizadoEm: agora,
+    },
+  });
 }

@@ -4,6 +4,9 @@ import {
   identificadorParamsSchema,
   listarUsuariosQuerySchema,
   editarUsuarioSchema,
+  alterarStatusSchema,
+  editarMeuUsuarioSchema,
+  alterarSenhaSchema,
 } from "../schemas/users.schema.js";
 import {
   UsersServiceError,
@@ -11,6 +14,9 @@ import {
   listarUsuarios,
   editarUsuario,
   excluirUsuario,
+  alterarStatusUsuario,
+  editarMeuUsuario,
+  alterarSenha,
 } from "../services/users.service.js";
 
 function responderErro(res: Response, error: unknown) {
@@ -19,9 +25,13 @@ function responderErro(res: Response, error: unknown) {
       USUARIO_NAO_ENCONTRADO: 404,
       EMAIL_JA_CADASTRADO: 409,
       DADOS_INVALIDOS: 400,
+      OPERACAO_NAO_PERMITIDA: 403,
+      CONTEUDO_VINCULADO: 409,
+      SENHA_INCORRETA: 400,
     };
 
     return res.status(status[error.code] ?? 400).json({
+      code: error.code,
       message: error.message,
     });
   }
@@ -102,13 +112,13 @@ export async function listar(req: Request, res: Response) {
 
   if (!validacao.success) {
     return res.status(400).json({
-      message: "Número de página inválido.",
+      message: "Filtros ou número de página inválidos.",
       errors: validacao.error.issues,
     });
   }
 
   try {
-    const resultado = await listarUsuarios(validacao.data.page);
+    const resultado = await listarUsuarios(validacao.data);
 
     return res.status(200).json(resultado);
   } catch (error) {
@@ -165,6 +175,84 @@ export async function removerUsuario(
 
     return res.status(200).json({
       message: "Usuário excluído com sucesso.",
+    });
+  } catch (error) {
+    return responderErro(res, error);
+  }
+}
+
+export async function atualizarStatus(req: Request, res: Response) {
+  const params = identificadorParamsSchema.safeParse(req.params);
+  const body = alterarStatusSchema.safeParse(req.body);
+
+  if (!params.success || !body.success) {
+    return res.status(400).json({
+      message: "Informe um status válido (ATIVO ou INATIVO).",
+      errors: [
+        ...(!params.success ? params.error.issues : []),
+        ...(!body.success ? body.error.issues : []),
+      ],
+    });
+  }
+
+  try {
+    const usuario = await alterarStatusUsuario(
+      params.data.identifier,
+      body.data.status,
+      req.usuarioAutenticado!.id,
+    );
+
+    return res.status(200).json({
+      message: body.data.status === "ATIVO"
+        ? "Usuário reativado com sucesso."
+        : "Usuário desativado com sucesso.",
+      usuario,
+    });
+  } catch (error) {
+    return responderErro(res, error);
+  }
+}
+
+export async function atualizarMeuUsuario(req: Request, res: Response) {
+  const validacao = editarMeuUsuarioSchema.safeParse(req.body);
+
+  if (!validacao.success) {
+    return res.status(400).json({
+      message: "Informe um nome válido.",
+      errors: validacao.error.issues,
+    });
+  }
+
+  try {
+    const usuario = await editarMeuUsuario(
+      req.usuarioAutenticado!.id,
+      validacao.data.nome,
+    );
+
+    return res.status(200).json({
+      message: "Dados atualizados com sucesso.",
+      usuario,
+    });
+  } catch (error) {
+    return responderErro(res, error);
+  }
+}
+
+export async function atualizarMinhaSenha(req: Request, res: Response) {
+  const validacao = alterarSenhaSchema.safeParse(req.body);
+
+  if (!validacao.success) {
+    return res.status(400).json({
+      message: "A nova senha não atende aos requisitos.",
+      errors: validacao.error.issues,
+    });
+  }
+
+  try {
+    await alterarSenha(req.usuarioAutenticado!.id, validacao.data);
+
+    return res.status(200).json({
+      message: "Senha alterada com sucesso.",
     });
   } catch (error) {
     return responderErro(res, error);
