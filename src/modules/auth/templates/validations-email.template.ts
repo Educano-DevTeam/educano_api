@@ -8,9 +8,51 @@ function escaparHtml(valor: string): string {
     .replace(/'/g, "&#039;");
 }
 
+interface ConteudoEmailCodigo {
+  tituloPagina: string;
+  titulo: string;
+  paragrafo: string;
+  rotuloCodigo: string;
+  aviso: string;
+}
+
 export function gerarEmailValidacao(
   nome: string,
   codigo: string,
+): string {
+  return montarEmailCodigo(nome, codigo, {
+    tituloPagina: "Confirme sua conta - Educano",
+    titulo: "Vamos confirmar sua conta?",
+    paragrafo:
+      "Falta apenas mais uma etapa para começar sua jornada " +
+      "de aprendizagem com o Educano. Utilize o código abaixo " +
+      "para confirmar seu endereço de e-mail.",
+    rotuloCodigo: "Seu código de confirmação",
+    aviso: "Se você não solicitou este cadastro, ignore esta mensagem.",
+  });
+}
+
+export function gerarEmailRedefinicaoSenha(
+  nome: string,
+  codigo: string,
+): string {
+  return montarEmailCodigo(nome, codigo, {
+    tituloPagina: "Redefinição de senha - Educano",
+    titulo: "Vamos redefinir sua senha?",
+    paragrafo:
+      "Recebemos um pedido para redefinir a senha da sua conta. " +
+      "Utilize o código abaixo no aplicativo para cadastrar uma nova senha.",
+    rotuloCodigo: "Seu código de redefinição",
+    aviso:
+      "Se você não pediu a redefinição, ignore esta mensagem. " +
+      "Sua senha atual continua válida.",
+  });
+}
+
+function montarEmailCodigo(
+  nome: string,
+  codigo: string,
+  conteudo: ConteudoEmailCodigo,
 ): string {
   const nomeSeguro = escaparHtml(nome);
   const codigoSeguro = escaparHtml(codigo);
@@ -21,7 +63,7 @@ export function gerarEmailValidacao(
       <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Confirme sua conta - Educano</title>
+        <title>${conteudo.tituloPagina}</title>
       </head>
       <body style="
         margin: 0;
@@ -61,7 +103,7 @@ export function gerarEmailValidacao(
                 line-height: 1.3;
                 color: #24304a;
               ">
-                Vamos confirmar sua conta?
+                ${conteudo.titulo}
               </h1>
 
               <p style="font-size: 15px; line-height: 1.7;">
@@ -69,9 +111,7 @@ export function gerarEmailValidacao(
               </p>
 
               <p style="font-size: 15px; line-height: 1.7;">
-                Falta apenas mais uma etapa para começar sua jornada
-                de aprendizagem com o Educano. Utilize o código abaixo
-                para confirmar seu endereço de e-mail.
+                ${conteudo.paragrafo}
               </p>
 
               <div style="
@@ -89,7 +129,7 @@ export function gerarEmailValidacao(
                   color: #5b6680;
                   text-transform: uppercase;
                 ">
-                  Seu código de confirmação
+                  ${conteudo.rotuloCodigo}
                 </p>
 
                 <p style="
@@ -105,7 +145,7 @@ export function gerarEmailValidacao(
 
               <p style="font-size: 14px; line-height: 1.7;">
                 O código expira em <strong>10 minutos</strong>.
-                Se você não solicitou este cadastro, ignore esta mensagem.
+                ${conteudo.aviso}
               </p>
 
               <p style="

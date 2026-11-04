@@ -106,3 +106,25 @@ export function exigirAdmin(
 
   return next();
 }
+
+/**
+ * Permite a rota somente para os tipos informados.
+ * Deve ser usado depois de autenticar.
+ */
+export function exigirTipos(...tipos: TipoUsuarioAutenticado[]) {
+  return (req: Request, res: Response, next: NextFunction) => {
+    if (!req.usuarioAutenticado) {
+      return res.status(401).json({
+        message: "Autenticação necessária.",
+      });
+    }
+
+    if (!tipos.includes(req.usuarioAutenticado.tipo)) {
+      return res.status(403).json({
+        message: "Você não tem permissão para executar esta ação.",
+      });
+    }
+
+    return next();
+  };
+}

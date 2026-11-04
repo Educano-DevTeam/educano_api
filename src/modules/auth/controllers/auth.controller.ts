@@ -1,15 +1,21 @@
 
 import type { Request, Response } from "express";
 import {
+  emailSchema,
   loginSchema,
   registerSchema,
+  resetPasswordSchema,
   verifyCodeSchema,
 } from "../schemas/auth.schema.js";
 import {
   AuthServiceError,
   autenticarUsuario,
   autorizarTipoCadastro,
+  redefinirSenha,
+  reenviarCodigo,
   registrarUsuario,
+  renovarToken,
+  solicitarRedefinicaoSenha,
   validarCodigo,
 } from "../services/auth.service.js";
 
@@ -26,9 +32,12 @@ function responderErro(res: Response, error: unknown) {
       CREDENCIAIS_INVALIDAS: 401,
       TOKEN_INVALIDO: 401,
       CADASTRO_NAO_AUTORIZADO: 403,
+      SENHA_EXPIRADA: 403,
+      AGUARDE_REENVIO: 429,
     };
 
     return res.status(statusPorCodigo[error.code] ?? 400).json({
+      code: error.code,
       message: error.message,
     });
   }
@@ -65,8 +74,9 @@ export async function registrar(req: Request, res: Response) {
 
   try {
     // Primeiro autoriza o tipo solicitado.
+    // Usa o tipo validado, que vale ALUNO quando não é informado.
     const tipoAutorizado = await autorizarTipoCadastro(
-      req.body.tipo,
+      validacao.data.tipo,
       req.get("authorization"),
     );
 
@@ -123,6 +133,83 @@ export async function login(req: Request, res: Response) {
       message: "Login realizado com sucesso.",
       ...resultado,
     });
+  } catch (error) {
+    return responderErro(res, error);
+  }
+}
+export async function reenviar(req: Request, res: Response) {
+  const validacao = emailSchema.safeParse(req.body);
+
+  if (!validacao.success) {
+    return res.status(400).json({
+      message: "Informe um e-mail válido.",
+      errors: validacao.error.issues,
+    });
+  }
+
+  try {
+    await reenviarCodigo(validacao.data.email);
+
+    return res.status(200).json({
+      message:
+        "Se houver uma validação pendente para esse e-mail, " +
+        "enviamos um novo código.",
+    });
+  } catch (error) {
+    return responderErro(res, error);
+  }
+}
+
+export async function esqueciSenha(req: Request, res: Response) {
+  const validacao = emailSchema.safeParse(req.body);
+
+  if (!validacao.success) {
+    return res.status(400).json({
+      message: "Informe um e-mail válido.",
+      errors: validacao.error.issues,
+    });
+  }
+
+  try {
+    await solicitarRedefinicaoSenha(validacao.data.email);
+
+    return res.status(200).json({
+      message:
+        "Se o e-mail estiver cadastrado, você receberá um código " +
+        "para redefinir a senha.",
+    });
+  } catch (error) {
+    return responderErro(res, error);
+  }
+}
+
+export async function redefinir(req: Request, res: Response) {
+  const validacao = resetPasswordSchema.safeParse(req.body);
+
+  if (!validacao.success) {
+    return res.status(400).json({
+      message: "Os dados para redefinir a senha são inválidos.",
+      errors: validacao.error.issues,
+    });
+  }
+
+  try {
+    await redefinirSenha(validacao.data);
+
+    return res.status(200).json({
+      message: "Senha redefinida com sucesso. Faça login novamente.",
+    });
+  } catch (error) {
+    return responderErro(res, error);
+  }
+}
+
+export function renovar(req: Request, res: Response) {
+  // O middleware autenticar já validou o token atual e a conta.
+  try {
+    const token = renovarToken(req.usuarioAutenticado!.id);
+
+    return res.status(200).json({ token });
   } catch (error) {
     return responderErro(res, error);
   }

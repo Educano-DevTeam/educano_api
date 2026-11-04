@@ -8,9 +8,13 @@ import {
 
 import { prisma } from "../../../config/prisma.js";
 import { enviarEmail } from "../../../services/email.service.js";
-import { gerarEmailValidacao } from "../templates/validations-email.template.js";
+import {
+  gerarEmailRedefinicaoSenha,
+  gerarEmailValidacao,
+} from "../templates/validations-email.template.js";
 import type {
   RegisterInput,
+  ResetPasswordInput,
   VerifyCodeInput,
   TipoUsuarioCadastro,
 } from "../schemas/auth.schema.js";
@@ -25,6 +29,11 @@ const CORES_PERFIL = [
   "#9FBEED",
   "#79B425",
 ];
+
+const DIAS_VALIDADE_SENHA = 90;
+
+// Intervalo mínimo entre dois envios de código para o mesmo e-mail.
+const INTERVALO_REENVIO_SEGUNDOS = 60;
 
 function gerarCodigo(): string {
   const caracteres = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
@@ -248,6 +257,7 @@ export async function validarCodigo(dados: VerifyCodeInput): Promise<void> {
     where: {
       idUsuario: usuario.id,
       status: "ATIVO",
+      finalidade: "VALIDACAO_CONTA",
     },
     orderBy: { dataCriacao: "desc" },
   });
@@ -334,6 +344,7 @@ export async function autenticarUsuario(dados: LoginInput) {
       senha: true,
       tipo: true,
       status: true,
+      senhaAtualizadaEm: true,
     },
   });
 
@@ -358,6 +369,17 @@ export async function autenticarUsuario(dados: LoginInput) {
     );
   }
 
+  // A senha vale por 90 dias; depois disso precisa ser redefinida.
+  const validadeSenha = usuario.senhaAtualizadaEm.getTime() +
+    DIAS_VALIDADE_SENHA * 24 * 60 * 60 * 1000;
+
+  if (validadeSenha <= Date.now()) {
+    throw new AuthServiceError(
+      "SENHA_EXPIRADA",
+      "Sua senha expirou. Redefina a senha para continuar.",
+    );
+  }
+
   const token = emitirToken(usuario.id);
 
   // Nunca devolvemos o hash da senha na resposta.
@@ -371,4 +393,171 @@ export async function autenticarUsuario(dados: LoginInput) {
       status: usuario.status,
     },
   };
+}
+
+type FinalidadeCodigo = "VALIDACAO_CONTA" | "REDEFINICAO_SENHA";
+
+/**
+ * Gera um novo código para a finalidade informada, inativando os anteriores,
+ * e envia o código por e-mail.
+ */
+async function emitirNovoCodigo(
+  usuario: { id: string; nome: string; email: string },
+  finalidade: FinalidadeCodigo,
+) {
+  const ultimo = await prisma.codigoValidacao.findFirst({
+    where: { idUsuario: usuario.id, finalidade },
+    orderBy: { dataCriacao: "desc" },
+    select: { dataCriacao: true },
+  });
+
+  if (
+    ultimo &&
+    Date.now() - ultimo.dataCriacao.getTime() <
+      INTERVALO_REENVIO_SEGUNDOS * 1000
+  ) {
+    throw new AuthServiceError(
+      "AGUARDE_REENVIO",
+      "Aguarde um minuto antes de solicitar um novo código.",
+    );
+  }
+
+  const codigo = gerarCodigo();
+
+  await prisma.$transaction([
+    prisma.codigoValidacao.updateMany({
+      where: { idUsuario: usuario.id, status: "ATIVO", finalidade },
+      data: { status: "INATIVO" },
+    }),
+    prisma.codigoValidacao.create({
+      data: {
+        idUsuario: usuario.id,
+        codigo: hashCodigo(codigo),
+        status: "ATIVO",
+        finalidade,
+      },
+    }),
+  ]);
+
+  try {
+    await enviarEmail({
+      destinatario: usuario.email,
+      assunto: finalidade === "VALIDACAO_CONTA"
+        ? "Confirme seu e-mail | Educano"
+        : "Redefinição de senha | Educano",
+      html: finalidade === "VALIDACAO_CONTA"
+        ? gerarEmailValidacao(usuario.nome, codigo)
+        : gerarEmailRedefinicaoSenha(usuario.nome, codigo),
+    });
+  } catch (error) {
+    await prisma.codigoValidacao.updateMany({
+      where: { idUsuario: usuario.id, status: "ATIVO", finalidade },
+      data: { status: "INATIVO" },
+    });
+
+    console.error("Falha ao enviar e-mail com código:", error);
+
+    throw new AuthServiceError(
+      "FALHA_ENVIO_EMAIL",
+      "Não foi possível enviar o e-mail. Tente novamente mais tarde.",
+    );
+  }
+}
+
+export async function reenviarCodigo(email: string): Promise<void> {
+  const usuario = await prisma.usuario.findUnique({
+    where: { email: email.toLowerCase() },
+    select: { id: true, nome: true, email: true, status: true },
+  });
+
+  // A resposta é a mesma quando a conta não existe ou já foi validada,
+  // para não revelar quais e-mails estão cadastrados.
+  if (!usuario || usuario.status !== "PENDENTE") return;
+
+  await emitirNovoCodigo(usuario, "VALIDACAO_CONTA");
+}
+
+export async function solicitarRedefinicaoSenha(
+  email: string,
+): Promise<void> {
+  const usuario = await prisma.usuario.findUnique({
+    where: { email: email.toLowerCase() },
+    select: { id: true, nome: true, email: true, status: true },
+  });
+
+  if (!usuario || usuario.status !== "ATIVO") return;
+
+  await emitirNovoCodigo(usuario, "REDEFINICAO_SENHA");
+}
+
+export async function redefinirSenha(dados: ResetPasswordInput) {
+  const usuario = await prisma.usuario.findUnique({
+    where: { email: dados.email.toLowerCase() },
+    select: { id: true, status: true },
+  });
+
+  if (!usuario || usuario.status !== "ATIVO") {
+    throw new AuthServiceError(
+      "CODIGO_INCORRETO",
+      "Código de redefinição incorreto ou expirado.",
+    );
+  }
+
+  const codigoSalvo = await prisma.codigoValidacao.findFirst({
+    where: {
+      idUsuario: usuario.id,
+      status: "ATIVO",
+      finalidade: "REDEFINICAO_SENHA",
+    },
+    orderBy: { dataCriacao: "desc" },
+  });
+
+  if (
+    !codigoSalvo ||
+    !compararHashes(codigoSalvo.codigo, hashCodigo(dados.codigo))
+  ) {
+    throw new AuthServiceError(
+      "CODIGO_INCORRETO",
+      "Código de redefinição incorreto ou expirado.",
+    );
+  }
+
+  const senhaHash = await bcrypt.hash(dados.novaSenha, 12);
+
+  await prisma.$transaction(async (tx) => {
+    const [relogio] = await tx.$queryRaw<Array<{ agora: Date }>>`
+      SELECT CURRENT_TIMESTAMP AS agora
+    `;
+
+    // A atualização condicional impede reutilização e uso após expirar.
+    const resultado = await tx.codigoValidacao.updateMany({
+      where: {
+        id: codigoSalvo.id,
+        status: "ATIVO",
+        expiraEm: { gt: relogio.agora },
+      },
+      data: { status: "USADO" },
+    });
+
+    if (resultado.count !== 1) {
+      throw new AuthServiceError(
+        "CODIGO_EXPIRADO_OU_UTILIZADO",
+        "O código expirou ou já foi utilizado. Solicite outro.",
+      );
+    }
+
+    await tx.usuario.update({
+      where: { id: usuario.id },
+      data: {
+        senha: senhaHash,
+        senhaAtualizadaEm: relogio.agora,
+        atualizadoEm: relogio.agora,
+      },
+    });
+  });
+}
+
+/** Emite um novo token para uma sessão que ainda é válida. */
+export function renovarToken(idUsuario: string): string {
+  return emitirToken(idUsuario);
 }
