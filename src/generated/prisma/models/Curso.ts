@@ -27,11 +27,13 @@ export type AggregateCurso = {
 }
 
 export type CursoAvgAggregateOutputType = {
+  cargaHoraria: number | null
   vagas: number | null
   preco: runtime.Decimal | null
 }
 
 export type CursoSumAggregateOutputType = {
+  cargaHoraria: number | null
   vagas: number | null
   preco: runtime.Decimal | null
 }
@@ -41,6 +43,7 @@ export type CursoMinAggregateOutputType = {
   nome: string | null
   categoria: $Enums.CategoriaCurso | null
   status: $Enums.StatusCurso | null
+  cargaHoraria: number | null
   vagas: number | null
   preco: runtime.Decimal | null
   descricao: string | null
@@ -59,6 +62,7 @@ export type CursoMaxAggregateOutputType = {
   nome: string | null
   categoria: $Enums.CategoriaCurso | null
   status: $Enums.StatusCurso | null
+  cargaHoraria: number | null
   vagas: number | null
   preco: runtime.Decimal | null
   descricao: string | null
@@ -77,6 +81,7 @@ export type CursoCountAggregateOutputType = {
   nome: number
   categoria: number
   status: number
+  cargaHoraria: number
   vagas: number
   preco: number
   descricao: number
@@ -93,11 +98,13 @@ export type CursoCountAggregateOutputType = {
 
 
 export type CursoAvgAggregateInputType = {
+  cargaHoraria?: true
   vagas?: true
   preco?: true
 }
 
 export type CursoSumAggregateInputType = {
+  cargaHoraria?: true
   vagas?: true
   preco?: true
 }
@@ -107,6 +114,7 @@ export type CursoMinAggregateInputType = {
   nome?: true
   categoria?: true
   status?: true
+  cargaHoraria?: true
   vagas?: true
   preco?: true
   descricao?: true
@@ -125,6 +133,7 @@ export type CursoMaxAggregateInputType = {
   nome?: true
   categoria?: true
   status?: true
+  cargaHoraria?: true
   vagas?: true
   preco?: true
   descricao?: true
@@ -143,6 +152,7 @@ export type CursoCountAggregateInputType = {
   nome?: true
   categoria?: true
   status?: true
+  cargaHoraria?: true
   vagas?: true
   preco?: true
   descricao?: true
@@ -248,6 +258,7 @@ export type CursoGroupByOutputType = {
   nome: string
   categoria: $Enums.CategoriaCurso
   status: $Enums.StatusCurso
+  cargaHoraria: number | null
   vagas: number | null
   preco: runtime.Decimal | null
   descricao: string | null
@@ -289,6 +300,7 @@ export type CursoWhereInput = {
   nome?: Prisma.StringFilter<"Curso"> | string
   categoria?: Prisma.EnumCategoriaCursoFilter<"Curso"> | $Enums.CategoriaCurso
   status?: Prisma.EnumStatusCursoFilter<"Curso"> | $Enums.StatusCurso
+  cargaHoraria?: Prisma.IntNullableFilter<"Curso"> | number | null
   vagas?: Prisma.IntNullableFilter<"Curso"> | number | null
   preco?: Prisma.DecimalNullableFilter<"Curso"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   descricao?: Prisma.StringNullableFilter<"Curso"> | string | null
@@ -312,6 +324,7 @@ export type CursoOrderByWithRelationInput = {
   nome?: Prisma.SortOrder
   categoria?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  cargaHoraria?: Prisma.SortOrderInput | Prisma.SortOrder
   vagas?: Prisma.SortOrderInput | Prisma.SortOrder
   preco?: Prisma.SortOrderInput | Prisma.SortOrder
   descricao?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -339,6 +352,7 @@ export type CursoWhereUniqueInput = Prisma.AtLeast<{
   nome?: Prisma.StringFilter<"Curso"> | string
   categoria?: Prisma.EnumCategoriaCursoFilter<"Curso"> | $Enums.CategoriaCurso
   status?: Prisma.EnumStatusCursoFilter<"Curso"> | $Enums.StatusCurso
+  cargaHoraria?: Prisma.IntNullableFilter<"Curso"> | number | null
   vagas?: Prisma.IntNullableFilter<"Curso"> | number | null
   preco?: Prisma.DecimalNullableFilter<"Curso"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   descricao?: Prisma.StringNullableFilter<"Curso"> | string | null
@@ -361,6 +375,7 @@ export type CursoOrderByWithAggregationInput = {
   nome?: Prisma.SortOrder
   categoria?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  cargaHoraria?: Prisma.SortOrderInput | Prisma.SortOrder
   vagas?: Prisma.SortOrderInput | Prisma.SortOrder
   preco?: Prisma.SortOrderInput | Prisma.SortOrder
   descricao?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -387,6 +402,7 @@ export type CursoScalarWhereWithAggregatesInput = {
   nome?: Prisma.StringWithAggregatesFilter<"Curso"> | string
   categoria?: Prisma.EnumCategoriaCursoWithAggregatesFilter<"Curso"> | $Enums.CategoriaCurso
   status?: Prisma.EnumStatusCursoWithAggregatesFilter<"Curso"> | $Enums.StatusCurso
+  cargaHoraria?: Prisma.IntNullableWithAggregatesFilter<"Curso"> | number | null
   vagas?: Prisma.IntNullableWithAggregatesFilter<"Curso"> | number | null
   preco?: Prisma.DecimalNullableWithAggregatesFilter<"Curso"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   descricao?: Prisma.StringNullableWithAggregatesFilter<"Curso"> | string | null
@@ -405,6 +421,7 @@ export type CursoCreateInput = {
   nome: string
   categoria: $Enums.CategoriaCurso
   status?: $Enums.StatusCurso
+  cargaHoraria?: number | null
   vagas?: number | null
   preco?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   descricao?: string | null
@@ -425,6 +442,7 @@ export type CursoUncheckedCreateInput = {
   nome: string
   categoria: $Enums.CategoriaCurso
   status?: $Enums.StatusCurso
+  cargaHoraria?: number | null
   vagas?: number | null
   preco?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   descricao?: string | null
@@ -445,6 +463,7 @@ export type CursoUpdateInput = {
   nome?: Prisma.StringFieldUpdateOperationsInput | string
   categoria?: Prisma.EnumCategoriaCursoFieldUpdateOperationsInput | $Enums.CategoriaCurso
   status?: Prisma.EnumStatusCursoFieldUpdateOperationsInput | $Enums.StatusCurso
+  cargaHoraria?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   vagas?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   preco?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -465,6 +484,7 @@ export type CursoUncheckedUpdateInput = {
   nome?: Prisma.StringFieldUpdateOperationsInput | string
   categoria?: Prisma.EnumCategoriaCursoFieldUpdateOperationsInput | $Enums.CategoriaCurso
   status?: Prisma.EnumStatusCursoFieldUpdateOperationsInput | $Enums.StatusCurso
+  cargaHoraria?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   vagas?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   preco?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -485,6 +505,7 @@ export type CursoCreateManyInput = {
   nome: string
   categoria: $Enums.CategoriaCurso
   status?: $Enums.StatusCurso
+  cargaHoraria?: number | null
   vagas?: number | null
   preco?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   descricao?: string | null
@@ -503,6 +524,7 @@ export type CursoUpdateManyMutationInput = {
   nome?: Prisma.StringFieldUpdateOperationsInput | string
   categoria?: Prisma.EnumCategoriaCursoFieldUpdateOperationsInput | $Enums.CategoriaCurso
   status?: Prisma.EnumStatusCursoFieldUpdateOperationsInput | $Enums.StatusCurso
+  cargaHoraria?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   vagas?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   preco?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -518,6 +540,7 @@ export type CursoUncheckedUpdateManyInput = {
   nome?: Prisma.StringFieldUpdateOperationsInput | string
   categoria?: Prisma.EnumCategoriaCursoFieldUpdateOperationsInput | $Enums.CategoriaCurso
   status?: Prisma.EnumStatusCursoFieldUpdateOperationsInput | $Enums.StatusCurso
+  cargaHoraria?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   vagas?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   preco?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -551,6 +574,7 @@ export type CursoCountOrderByAggregateInput = {
   nome?: Prisma.SortOrder
   categoria?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  cargaHoraria?: Prisma.SortOrder
   vagas?: Prisma.SortOrder
   preco?: Prisma.SortOrder
   descricao?: Prisma.SortOrder
@@ -565,6 +589,7 @@ export type CursoCountOrderByAggregateInput = {
 }
 
 export type CursoAvgOrderByAggregateInput = {
+  cargaHoraria?: Prisma.SortOrder
   vagas?: Prisma.SortOrder
   preco?: Prisma.SortOrder
 }
@@ -574,6 +599,7 @@ export type CursoMaxOrderByAggregateInput = {
   nome?: Prisma.SortOrder
   categoria?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  cargaHoraria?: Prisma.SortOrder
   vagas?: Prisma.SortOrder
   preco?: Prisma.SortOrder
   descricao?: Prisma.SortOrder
@@ -592,6 +618,7 @@ export type CursoMinOrderByAggregateInput = {
   nome?: Prisma.SortOrder
   categoria?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  cargaHoraria?: Prisma.SortOrder
   vagas?: Prisma.SortOrder
   preco?: Prisma.SortOrder
   descricao?: Prisma.SortOrder
@@ -606,6 +633,7 @@ export type CursoMinOrderByAggregateInput = {
 }
 
 export type CursoSumOrderByAggregateInput = {
+  cargaHoraria?: Prisma.SortOrder
   vagas?: Prisma.SortOrder
   preco?: Prisma.SortOrder
 }
@@ -792,6 +820,7 @@ export type CursoCreateWithoutResponsavelInput = {
   nome: string
   categoria: $Enums.CategoriaCurso
   status?: $Enums.StatusCurso
+  cargaHoraria?: number | null
   vagas?: number | null
   preco?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   descricao?: string | null
@@ -811,6 +840,7 @@ export type CursoUncheckedCreateWithoutResponsavelInput = {
   nome: string
   categoria: $Enums.CategoriaCurso
   status?: $Enums.StatusCurso
+  cargaHoraria?: number | null
   vagas?: number | null
   preco?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   descricao?: string | null
@@ -840,6 +870,7 @@ export type CursoCreateWithoutAdminAutorizadorInput = {
   nome: string
   categoria: $Enums.CategoriaCurso
   status?: $Enums.StatusCurso
+  cargaHoraria?: number | null
   vagas?: number | null
   preco?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   descricao?: string | null
@@ -859,6 +890,7 @@ export type CursoUncheckedCreateWithoutAdminAutorizadorInput = {
   nome: string
   categoria: $Enums.CategoriaCurso
   status?: $Enums.StatusCurso
+  cargaHoraria?: number | null
   vagas?: number | null
   preco?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   descricao?: string | null
@@ -907,6 +939,7 @@ export type CursoScalarWhereInput = {
   nome?: Prisma.StringFilter<"Curso"> | string
   categoria?: Prisma.EnumCategoriaCursoFilter<"Curso"> | $Enums.CategoriaCurso
   status?: Prisma.EnumStatusCursoFilter<"Curso"> | $Enums.StatusCurso
+  cargaHoraria?: Prisma.IntNullableFilter<"Curso"> | number | null
   vagas?: Prisma.IntNullableFilter<"Curso"> | number | null
   preco?: Prisma.DecimalNullableFilter<"Curso"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   descricao?: Prisma.StringNullableFilter<"Curso"> | string | null
@@ -941,6 +974,7 @@ export type CursoCreateWithoutArquivoCapaInput = {
   nome: string
   categoria: $Enums.CategoriaCurso
   status?: $Enums.StatusCurso
+  cargaHoraria?: number | null
   vagas?: number | null
   preco?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   descricao?: string | null
@@ -960,6 +994,7 @@ export type CursoUncheckedCreateWithoutArquivoCapaInput = {
   nome: string
   categoria: $Enums.CategoriaCurso
   status?: $Enums.StatusCurso
+  cargaHoraria?: number | null
   vagas?: number | null
   preco?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   descricao?: string | null
@@ -995,6 +1030,7 @@ export type CursoUpdateWithoutArquivoCapaInput = {
   nome?: Prisma.StringFieldUpdateOperationsInput | string
   categoria?: Prisma.EnumCategoriaCursoFieldUpdateOperationsInput | $Enums.CategoriaCurso
   status?: Prisma.EnumStatusCursoFieldUpdateOperationsInput | $Enums.StatusCurso
+  cargaHoraria?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   vagas?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   preco?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1014,6 +1050,7 @@ export type CursoUncheckedUpdateWithoutArquivoCapaInput = {
   nome?: Prisma.StringFieldUpdateOperationsInput | string
   categoria?: Prisma.EnumCategoriaCursoFieldUpdateOperationsInput | $Enums.CategoriaCurso
   status?: Prisma.EnumStatusCursoFieldUpdateOperationsInput | $Enums.StatusCurso
+  cargaHoraria?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   vagas?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   preco?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1033,6 +1070,7 @@ export type CursoCreateWithoutSessoesInput = {
   nome: string
   categoria: $Enums.CategoriaCurso
   status?: $Enums.StatusCurso
+  cargaHoraria?: number | null
   vagas?: number | null
   preco?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   descricao?: string | null
@@ -1052,6 +1090,7 @@ export type CursoUncheckedCreateWithoutSessoesInput = {
   nome: string
   categoria: $Enums.CategoriaCurso
   status?: $Enums.StatusCurso
+  cargaHoraria?: number | null
   vagas?: number | null
   preco?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   descricao?: string | null
@@ -1087,6 +1126,7 @@ export type CursoUpdateWithoutSessoesInput = {
   nome?: Prisma.StringFieldUpdateOperationsInput | string
   categoria?: Prisma.EnumCategoriaCursoFieldUpdateOperationsInput | $Enums.CategoriaCurso
   status?: Prisma.EnumStatusCursoFieldUpdateOperationsInput | $Enums.StatusCurso
+  cargaHoraria?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   vagas?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   preco?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1106,6 +1146,7 @@ export type CursoUncheckedUpdateWithoutSessoesInput = {
   nome?: Prisma.StringFieldUpdateOperationsInput | string
   categoria?: Prisma.EnumCategoriaCursoFieldUpdateOperationsInput | $Enums.CategoriaCurso
   status?: Prisma.EnumStatusCursoFieldUpdateOperationsInput | $Enums.StatusCurso
+  cargaHoraria?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   vagas?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   preco?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1125,6 +1166,7 @@ export type CursoCreateWithoutInscricoesInput = {
   nome: string
   categoria: $Enums.CategoriaCurso
   status?: $Enums.StatusCurso
+  cargaHoraria?: number | null
   vagas?: number | null
   preco?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   descricao?: string | null
@@ -1144,6 +1186,7 @@ export type CursoUncheckedCreateWithoutInscricoesInput = {
   nome: string
   categoria: $Enums.CategoriaCurso
   status?: $Enums.StatusCurso
+  cargaHoraria?: number | null
   vagas?: number | null
   preco?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   descricao?: string | null
@@ -1179,6 +1222,7 @@ export type CursoUpdateWithoutInscricoesInput = {
   nome?: Prisma.StringFieldUpdateOperationsInput | string
   categoria?: Prisma.EnumCategoriaCursoFieldUpdateOperationsInput | $Enums.CategoriaCurso
   status?: Prisma.EnumStatusCursoFieldUpdateOperationsInput | $Enums.StatusCurso
+  cargaHoraria?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   vagas?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   preco?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1198,6 +1242,7 @@ export type CursoUncheckedUpdateWithoutInscricoesInput = {
   nome?: Prisma.StringFieldUpdateOperationsInput | string
   categoria?: Prisma.EnumCategoriaCursoFieldUpdateOperationsInput | $Enums.CategoriaCurso
   status?: Prisma.EnumStatusCursoFieldUpdateOperationsInput | $Enums.StatusCurso
+  cargaHoraria?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   vagas?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   preco?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1217,6 +1262,7 @@ export type CursoCreateManyResponsavelInput = {
   nome: string
   categoria: $Enums.CategoriaCurso
   status?: $Enums.StatusCurso
+  cargaHoraria?: number | null
   vagas?: number | null
   preco?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   descricao?: string | null
@@ -1234,6 +1280,7 @@ export type CursoCreateManyAdminAutorizadorInput = {
   nome: string
   categoria: $Enums.CategoriaCurso
   status?: $Enums.StatusCurso
+  cargaHoraria?: number | null
   vagas?: number | null
   preco?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   descricao?: string | null
@@ -1251,6 +1298,7 @@ export type CursoUpdateWithoutResponsavelInput = {
   nome?: Prisma.StringFieldUpdateOperationsInput | string
   categoria?: Prisma.EnumCategoriaCursoFieldUpdateOperationsInput | $Enums.CategoriaCurso
   status?: Prisma.EnumStatusCursoFieldUpdateOperationsInput | $Enums.StatusCurso
+  cargaHoraria?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   vagas?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   preco?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1270,6 +1318,7 @@ export type CursoUncheckedUpdateWithoutResponsavelInput = {
   nome?: Prisma.StringFieldUpdateOperationsInput | string
   categoria?: Prisma.EnumCategoriaCursoFieldUpdateOperationsInput | $Enums.CategoriaCurso
   status?: Prisma.EnumStatusCursoFieldUpdateOperationsInput | $Enums.StatusCurso
+  cargaHoraria?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   vagas?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   preco?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1289,6 +1338,7 @@ export type CursoUncheckedUpdateManyWithoutResponsavelInput = {
   nome?: Prisma.StringFieldUpdateOperationsInput | string
   categoria?: Prisma.EnumCategoriaCursoFieldUpdateOperationsInput | $Enums.CategoriaCurso
   status?: Prisma.EnumStatusCursoFieldUpdateOperationsInput | $Enums.StatusCurso
+  cargaHoraria?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   vagas?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   preco?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1306,6 +1356,7 @@ export type CursoUpdateWithoutAdminAutorizadorInput = {
   nome?: Prisma.StringFieldUpdateOperationsInput | string
   categoria?: Prisma.EnumCategoriaCursoFieldUpdateOperationsInput | $Enums.CategoriaCurso
   status?: Prisma.EnumStatusCursoFieldUpdateOperationsInput | $Enums.StatusCurso
+  cargaHoraria?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   vagas?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   preco?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1325,6 +1376,7 @@ export type CursoUncheckedUpdateWithoutAdminAutorizadorInput = {
   nome?: Prisma.StringFieldUpdateOperationsInput | string
   categoria?: Prisma.EnumCategoriaCursoFieldUpdateOperationsInput | $Enums.CategoriaCurso
   status?: Prisma.EnumStatusCursoFieldUpdateOperationsInput | $Enums.StatusCurso
+  cargaHoraria?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   vagas?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   preco?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1344,6 +1396,7 @@ export type CursoUncheckedUpdateManyWithoutAdminAutorizadorInput = {
   nome?: Prisma.StringFieldUpdateOperationsInput | string
   categoria?: Prisma.EnumCategoriaCursoFieldUpdateOperationsInput | $Enums.CategoriaCurso
   status?: Prisma.EnumStatusCursoFieldUpdateOperationsInput | $Enums.StatusCurso
+  cargaHoraria?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   vagas?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   preco?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1401,6 +1454,7 @@ export type CursoSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   nome?: boolean
   categoria?: boolean
   status?: boolean
+  cargaHoraria?: boolean
   vagas?: boolean
   preco?: boolean
   descricao?: boolean
@@ -1425,6 +1479,7 @@ export type CursoSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   nome?: boolean
   categoria?: boolean
   status?: boolean
+  cargaHoraria?: boolean
   vagas?: boolean
   preco?: boolean
   descricao?: boolean
@@ -1446,6 +1501,7 @@ export type CursoSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   nome?: boolean
   categoria?: boolean
   status?: boolean
+  cargaHoraria?: boolean
   vagas?: boolean
   preco?: boolean
   descricao?: boolean
@@ -1467,6 +1523,7 @@ export type CursoSelectScalar = {
   nome?: boolean
   categoria?: boolean
   status?: boolean
+  cargaHoraria?: boolean
   vagas?: boolean
   preco?: boolean
   descricao?: boolean
@@ -1480,7 +1537,7 @@ export type CursoSelectScalar = {
   autorizadoEm?: boolean
 }
 
-export type CursoOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "nome" | "categoria" | "status" | "vagas" | "preco" | "descricao" | "cor" | "idCapa" | "iconeCapa" | "idResponsavel" | "idAdminAutorizador" | "criadoEm" | "atualizadoEm" | "autorizadoEm", ExtArgs["result"]["curso"]>
+export type CursoOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "nome" | "categoria" | "status" | "cargaHoraria" | "vagas" | "preco" | "descricao" | "cor" | "idCapa" | "iconeCapa" | "idResponsavel" | "idAdminAutorizador" | "criadoEm" | "atualizadoEm" | "autorizadoEm", ExtArgs["result"]["curso"]>
 export type CursoInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   arquivoCapa?: boolean | Prisma.Curso$arquivoCapaArgs<ExtArgs>
   responsavel?: boolean | Prisma.UsuarioDefaultArgs<ExtArgs>
@@ -1514,6 +1571,7 @@ export type $CursoPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
     nome: string
     categoria: $Enums.CategoriaCurso
     status: $Enums.StatusCurso
+    cargaHoraria: number | null
     vagas: number | null
     preco: runtime.Decimal | null
     descricao: string | null
@@ -1957,6 +2015,7 @@ export interface CursoFieldRefs {
   readonly nome: Prisma.FieldRef<"Curso", 'String'>
   readonly categoria: Prisma.FieldRef<"Curso", 'CategoriaCurso'>
   readonly status: Prisma.FieldRef<"Curso", 'StatusCurso'>
+  readonly cargaHoraria: Prisma.FieldRef<"Curso", 'Int'>
   readonly vagas: Prisma.FieldRef<"Curso", 'Int'>
   readonly preco: Prisma.FieldRef<"Curso", 'Decimal'>
   readonly descricao: Prisma.FieldRef<"Curso", 'String'>

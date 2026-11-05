@@ -52,35 +52,36 @@ const precoSchema = z.preprocess(
   z.number().min(0).nullable().optional(),
 );
 
+const cargaHorariaSchema = z.preprocess(
+  (valor) => {
+    if (valor === "" || valor === undefined) return undefined;
+    if (valor === "null") return null;
+    if (typeof valor === "string") return Number(valor);
+    return valor;
+  },
+  z.number().int().positive().nullable().optional(),
+);
+
 export const criarCursoSchema = z.object({
   nome: z.string().trim().min(3).max(150),
   categoria: categoriaSchema,
-
+  cargaHoraria: cargaHorariaSchema,
   descricao: z.string().trim().max(10000).optional(),
-
   vagas: vagasSchema,
-
   preco: precoSchema,
-
   cor: z.string().trim().max(30).nullable().optional(),
-
   // Ícone opcional. O id do arquivo nunca é recebido pelo cliente.
   capa: iconeCapaSchema.optional(),
 }).strict();
 
 export const atualizarCursoSchema = z.object({
   nome: z.string().trim().min(3).max(150).optional(),
-
   categoria: categoriaSchema.optional(),
-
+  cargaHoraria: cargaHorariaSchema,
   descricao: z.string().trim().max(10000).nullable().optional(),
-
   vagas: vagasSchema,
-
   preco: precoSchema,
-
   cor: z.string().trim().max(30).nullable().optional(),
-
   // null ou string vazia permitem remover a capa atual.
   capa: z.union([iconeCapaSchema, z.literal(""), z.null()]).optional(),
 

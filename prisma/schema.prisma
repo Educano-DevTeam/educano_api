@@ -223,6 +223,7 @@ model Curso {
   nome      String         @db.VarChar(150)
   categoria CategoriaCurso
   status    StatusCurso    @default(INATIVO)
+  cargaHoraria Int? @map("carga_horaria")
   vagas     Int?
   preco     Decimal?       @db.Decimal(10, 2)
   descricao String?        @db.Text

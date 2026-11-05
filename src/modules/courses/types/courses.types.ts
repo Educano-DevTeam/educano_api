@@ -16,6 +16,7 @@ export type IconeCapaCurso =
 export interface CriarCursoInput {
   nome: string;
   categoria: CategoriaCurso;
+  cargaHoraria?: number | null;
   descricao?: string;
   vagas?: number | null;
   preco?: number | null;
@@ -26,6 +27,7 @@ export interface CriarCursoInput {
 export interface AtualizarCursoInput {
   nome?: string;
   categoria?: CategoriaCurso;
+  cargaHoraria?: number | null;
   descricao?: string | null;
   vagas?: number | null;
   preco?: number | null;

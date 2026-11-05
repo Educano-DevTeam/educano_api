@@ -108,6 +108,7 @@ function selecionarDadosCurso() {
         id: true,
         nome: true,
         categoria: true,
+        cargaHoraria: true,
         status: true,
         vagas: true,
         preco: true,
@@ -199,6 +200,7 @@ export async function criarCurso(
                 data: {
                     nome: dados.nome,
                     categoria: dados.categoria,
+                    cargaHoraria: dados.cargaHoraria ?? null,
                     descricao: dados.descricao?.trim() || null,
                     vagas: dados.vagas ?? null,
                     preco: dados.preco ?? null,
@@ -342,6 +344,7 @@ export async function listarCursos(
                 id: true,
                 nome: true,
                 categoria: true,
+                cargaHoraria: true,
                 status: true,
                 vagas: true,
                 preco: true,
@@ -485,6 +488,10 @@ export async function atualizarCurso(
 
         ...(dados.categoria !== undefined && {
           categoria: dados.categoria,
+        }),
+
+        ...(dados.cargaHoraria !== undefined && {
+            cargaHoraria: dados.cargaHoraria,
         }),
 
         ...(dados.descricao !== undefined && {

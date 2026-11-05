@@ -148,6 +148,7 @@ export const CursoScalarFieldEnum = {
   nome: 'nome',
   categoria: 'categoria',
   status: 'status',
+  cargaHoraria: 'cargaHoraria',
   vagas: 'vagas',
   preco: 'preco',
   descricao: 'descricao',
