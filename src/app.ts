@@ -7,6 +7,8 @@ import usersRouter from "./modules/users/routes/users.routes.js";
 import rankingRouter from "./modules/ranking/routes/ranking,route.js";
 import filesRouter from "./modules/files/routes/files.routes.js";
 import coursesRouter from "./modules/courses/routes/courses.routes.js";
+import sessionsRouter from "./modules/sessions/routes/sessions.routes.js";
+import courseModulesRouter from "./modules/course-modules/routes/modules.routes.js";
 
 const app = express();
 
@@ -19,6 +21,8 @@ app.use("/api/users", usersRouter);
 app.use("/api/ranking", rankingRouter);
 app.use("/api/files", filesRouter);
 app.use("/api/courses", coursesRouter);
+app.use("/api/sessions", sessionsRouter);
+app.use("/api/course-modules", courseModulesRouter);
 
 app.get("/api/health", (_req, res) => {
   res.status(200).json({
