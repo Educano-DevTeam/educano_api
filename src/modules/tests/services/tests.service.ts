@@ -223,17 +223,8 @@ export async function criarSimulado(
     tipoUsuario: string,
     dados: CriarSimuladoInput,
 ) {
-    // Simulados personalizados são criados por alunos.
-    // Administradores também podem criar para fins administrativos/testes.
-    if (
-        tipoUsuario !== "ALUNO" &&
-        tipoUsuario !== "ADMIN"
-    ) {
-        throw new TestsServiceError(
-            "SEM_PERMISSAO",
-            "Somente alunos podem criar simulados personalizados.",
-        );
-    }
+    // Todos os tipos de usuário autenticados podem
+    // criar simulados personalizados.
 
     // Verifica se existe quantidade suficiente de questões
     // com a dificuldade solicitada.
