@@ -139,9 +139,12 @@ model Usuario {
   modulosResponsavel Modulo[]
   aulasResponsavel   Aula[]
 
-  testesResponsavel       Teste[]
-  questoesResponsavel     Questao[]
-  alternativasResponsavel Alternativa[]
+  testesResponsavel         Teste[]
+  tentativasTeste           TentativaTeste[]
+  tentativasQuestoes        TentativaQuestao[]
+  testesQuestoesResponsavel TesteQuestao[]
+  questoesResponsavel       Questao[]
+  alternativasResponsavel   Alternativa[]
 
   inscricoes Inscricao[]
 
@@ -219,15 +222,15 @@ model Arquivo {
 }
 
 model Curso {
-  id        String         @id @default(uuid()) @db.Uuid
-  nome      String         @db.VarChar(150)
-  categoria CategoriaCurso
-  status    StatusCurso    @default(INATIVO)
-  cargaHoraria Int? @map("carga_horaria")
-  vagas     Int?
-  preco     Decimal?       @db.Decimal(10, 2)
-  descricao String?        @db.Text
-  cor       String?        @db.VarChar(30)
+  id           String         @id @default(uuid()) @db.Uuid
+  nome         String         @db.VarChar(150)
+  categoria    CategoriaCurso
+  status       StatusCurso    @default(INATIVO)
+  cargaHoraria Int?           @map("carga_horaria")
+  vagas        Int?
+  preco        Decimal?       @db.Decimal(10, 2)
+  descricao    String?        @db.Text
+  cor          String?        @db.VarChar(30)
 
   // Capa do curso: arquivo enviado ou ícone selecionado
   idCapa    String? @unique @map("id_capa") @db.Uuid
@@ -346,6 +349,8 @@ model Teste {
 
   tempoMinutos Int @default(5) @map("tempo_minutos")
 
+  dificuldade NivelDificuldade?
+
   quantidadeQuestoes Int @default(0) @map("quantidade_questoes")
 
   criadoEm     DateTime @default(now()) @map("criado_em") @db.Timestamptz(3)
@@ -354,7 +359,8 @@ model Teste {
   modulo      Modulo? @relation(fields: [idModulo], references: [id], onDelete: Cascade)
   responsavel Usuario @relation(fields: [idResponsavel], references: [id], onDelete: Restrict)
 
-  questoes TesteQuestao[]
+  questoes   TesteQuestao[]
+  tentativas TentativaTeste[]
 
   @@index([idModulo])
   @@index([idResponsavel])
@@ -378,8 +384,9 @@ model Questao {
 
   alternativaCorreta Alternativa? @relation("AlternativaCorreta", fields: [idAlternativaCorreta], references: [id], onDelete: SetNull)
 
-  alternativas Alternativa[]  @relation("AlternativasQuestao")
+  alternativas Alternativa[]      @relation("AlternativasQuestao")
   testes       TesteQuestao[]
+  tentativas   TentativaQuestao[]
 
   @@index([idResponsavel])
   @@index([idAlternativaCorreta])
@@ -393,6 +400,7 @@ model Alternativa {
   idResponsavel String @map("id_responsavel") @db.Uuid
 
   texto String @db.Text
+  letra String @db.VarChar(1)
 
   criadoEm     DateTime @default(now()) @map("criado_em") @db.Timestamptz(3)
   atualizadoEm DateTime @updatedAt @map("atualizado_em") @db.Timestamptz(3)
@@ -403,6 +411,7 @@ model Alternativa {
 
   responsavel Usuario @relation(fields: [idResponsavel], references: [id], onDelete: Restrict)
 
+  @@unique([idQuestao, letra])
   @@index([idQuestao])
   @@index([idResponsavel])
   @@map("alternativa")
@@ -416,12 +425,71 @@ model TesteQuestao {
 
   ordem Int @default(0)
 
+  idResponsavel String   @map("id_responsavel") @db.Uuid
+  criadoEm      DateTime @default(now()) @map("criado_em") @db.Timestamptz(3)
+
+  responsavel Usuario @relation(fields: [idResponsavel], references: [id], onDelete: Restrict)
+
   teste   Teste   @relation(fields: [idTeste], references: [id], onDelete: Cascade)
   questao Questao @relation(fields: [idQuestao], references: [id], onDelete: Cascade)
 
   @@unique([idTeste, idQuestao])
   @@index([idQuestao])
   @@map("teste_questao")
+}
+
+model TentativaTeste {
+  id String @id @default(uuid()) @db.Uuid
+
+  idUsuario String @map("id_usuario") @db.Uuid
+  idTeste   String @map("id_teste") @db.Uuid
+
+  tempoConsumido Int?     @map("tempo_consumido")
+  notaFinal      Decimal? @map("nota_final") @db.Decimal(5, 2)
+
+  iniciadoEm DateTime  @default(now()) @map("iniciado_em") @db.Timestamptz(3)
+  enviadoEm  DateTime? @map("enviado_em") @db.Timestamptz(3)
+
+  usuario Usuario @relation(fields: [idUsuario], references: [id], onDelete: Restrict)
+  teste   Teste   @relation(fields: [idTeste], references: [id], onDelete: Restrict)
+
+  questoes TentativaQuestao[]
+
+  @@index([idUsuario])
+  @@index([idTeste])
+  @@index([enviadoEm])
+  @@map("tentativa_teste")
+}
+
+model TentativaQuestao {
+  id String @id @default(uuid()) @db.Uuid
+
+  idTentativa String @map("id_tentativa") @db.Uuid
+  idQuestao   String @map("id_questao") @db.Uuid
+
+  // Snapshot do conteúdo apresentado ao aluno
+  enunciado    String  @db.Text
+  alternativaA String? @map("alternativa_a") @db.Text
+  alternativaB String? @map("alternativa_b") @db.Text
+  alternativaC String? @map("alternativa_c") @db.Text
+  alternativaD String? @map("alternativa_d") @db.Text
+  alternativaE String? @map("alternativa_e") @db.Text
+
+  respostaCorreta String  @map("resposta_correta") @db.VarChar(1)
+  respostaUsuario String? @map("resposta_usuario") @db.VarChar(1)
+
+  acertou Boolean?
+
+  criadoEm DateTime @default(now()) @map("criado_em") @db.Timestamptz(3)
+
+  tentativa TentativaTeste @relation(fields: [idTentativa], references: [id], onDelete: Cascade)
+  questao   Questao        @relation(fields: [idQuestao], references: [id], onDelete: Restrict)
+  usuario   Usuario?       @relation(fields: [usuarioId], references: [id])
+  usuarioId String?        @db.Uuid
+
+  @@unique([idTentativa, idQuestao])
+  @@index([idQuestao])
+  @@map("tentativa_questao")
 }
 
 model Inscricao {

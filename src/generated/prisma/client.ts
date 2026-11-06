@@ -102,6 +102,16 @@ export type Alternativa = Prisma.AlternativaModel
  */
 export type TesteQuestao = Prisma.TesteQuestaoModel
 /**
+ * Model TentativaTeste
+ * 
+ */
+export type TentativaTeste = Prisma.TentativaTesteModel
+/**
+ * Model TentativaQuestao
+ * 
+ */
+export type TentativaQuestao = Prisma.TentativaQuestaoModel
+/**
  * Model Inscricao
  * 
  */

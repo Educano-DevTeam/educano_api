@@ -29,6 +29,7 @@ export type AlternativaMinAggregateOutputType = {
   idQuestao: string | null
   idResponsavel: string | null
   texto: string | null
+  letra: string | null
   criadoEm: Date | null
   atualizadoEm: Date | null
 }
@@ -38,6 +39,7 @@ export type AlternativaMaxAggregateOutputType = {
   idQuestao: string | null
   idResponsavel: string | null
   texto: string | null
+  letra: string | null
   criadoEm: Date | null
   atualizadoEm: Date | null
 }
@@ -47,6 +49,7 @@ export type AlternativaCountAggregateOutputType = {
   idQuestao: number
   idResponsavel: number
   texto: number
+  letra: number
   criadoEm: number
   atualizadoEm: number
   _all: number
@@ -58,6 +61,7 @@ export type AlternativaMinAggregateInputType = {
   idQuestao?: true
   idResponsavel?: true
   texto?: true
+  letra?: true
   criadoEm?: true
   atualizadoEm?: true
 }
@@ -67,6 +71,7 @@ export type AlternativaMaxAggregateInputType = {
   idQuestao?: true
   idResponsavel?: true
   texto?: true
+  letra?: true
   criadoEm?: true
   atualizadoEm?: true
 }
@@ -76,6 +81,7 @@ export type AlternativaCountAggregateInputType = {
   idQuestao?: true
   idResponsavel?: true
   texto?: true
+  letra?: true
   criadoEm?: true
   atualizadoEm?: true
   _all?: true
@@ -158,6 +164,7 @@ export type AlternativaGroupByOutputType = {
   idQuestao: string
   idResponsavel: string
   texto: string
+  letra: string
   criadoEm: Date
   atualizadoEm: Date
   _count: AlternativaCountAggregateOutputType | null
@@ -188,6 +195,7 @@ export type AlternativaWhereInput = {
   idQuestao?: Prisma.UuidFilter<"Alternativa"> | string
   idResponsavel?: Prisma.UuidFilter<"Alternativa"> | string
   texto?: Prisma.StringFilter<"Alternativa"> | string
+  letra?: Prisma.StringFilter<"Alternativa"> | string
   criadoEm?: Prisma.DateTimeFilter<"Alternativa"> | Date | string
   atualizadoEm?: Prisma.DateTimeFilter<"Alternativa"> | Date | string
   questao?: Prisma.XOR<Prisma.QuestaoScalarRelationFilter, Prisma.QuestaoWhereInput>
@@ -200,6 +208,7 @@ export type AlternativaOrderByWithRelationInput = {
   idQuestao?: Prisma.SortOrder
   idResponsavel?: Prisma.SortOrder
   texto?: Prisma.SortOrder
+  letra?: Prisma.SortOrder
   criadoEm?: Prisma.SortOrder
   atualizadoEm?: Prisma.SortOrder
   questao?: Prisma.QuestaoOrderByWithRelationInput
@@ -209,24 +218,27 @@ export type AlternativaOrderByWithRelationInput = {
 
 export type AlternativaWhereUniqueInput = Prisma.AtLeast<{
   id?: string
+  idQuestao_letra?: Prisma.AlternativaIdQuestaoLetraCompoundUniqueInput
   AND?: Prisma.AlternativaWhereInput | Prisma.AlternativaWhereInput[]
   OR?: Prisma.AlternativaWhereInput[]
   NOT?: Prisma.AlternativaWhereInput | Prisma.AlternativaWhereInput[]
   idQuestao?: Prisma.UuidFilter<"Alternativa"> | string
   idResponsavel?: Prisma.UuidFilter<"Alternativa"> | string
   texto?: Prisma.StringFilter<"Alternativa"> | string
+  letra?: Prisma.StringFilter<"Alternativa"> | string
   criadoEm?: Prisma.DateTimeFilter<"Alternativa"> | Date | string
   atualizadoEm?: Prisma.DateTimeFilter<"Alternativa"> | Date | string
   questao?: Prisma.XOR<Prisma.QuestaoScalarRelationFilter, Prisma.QuestaoWhereInput>
   questoesCorretas?: Prisma.QuestaoListRelationFilter
   responsavel?: Prisma.XOR<Prisma.UsuarioScalarRelationFilter, Prisma.UsuarioWhereInput>
-}, "id">
+}, "id" | "idQuestao_letra">
 
 export type AlternativaOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   idQuestao?: Prisma.SortOrder
   idResponsavel?: Prisma.SortOrder
   texto?: Prisma.SortOrder
+  letra?: Prisma.SortOrder
   criadoEm?: Prisma.SortOrder
   atualizadoEm?: Prisma.SortOrder
   _count?: Prisma.AlternativaCountOrderByAggregateInput
@@ -242,6 +254,7 @@ export type AlternativaScalarWhereWithAggregatesInput = {
   idQuestao?: Prisma.UuidWithAggregatesFilter<"Alternativa"> | string
   idResponsavel?: Prisma.UuidWithAggregatesFilter<"Alternativa"> | string
   texto?: Prisma.StringWithAggregatesFilter<"Alternativa"> | string
+  letra?: Prisma.StringWithAggregatesFilter<"Alternativa"> | string
   criadoEm?: Prisma.DateTimeWithAggregatesFilter<"Alternativa"> | Date | string
   atualizadoEm?: Prisma.DateTimeWithAggregatesFilter<"Alternativa"> | Date | string
 }
@@ -249,6 +262,7 @@ export type AlternativaScalarWhereWithAggregatesInput = {
 export type AlternativaCreateInput = {
   id?: string
   texto: string
+  letra: string
   criadoEm?: Date | string
   atualizadoEm?: Date | string
   questao: Prisma.QuestaoCreateNestedOneWithoutAlternativasInput
@@ -261,6 +275,7 @@ export type AlternativaUncheckedCreateInput = {
   idQuestao: string
   idResponsavel: string
   texto: string
+  letra: string
   criadoEm?: Date | string
   atualizadoEm?: Date | string
   questoesCorretas?: Prisma.QuestaoUncheckedCreateNestedManyWithoutAlternativaCorretaInput
@@ -269,6 +284,7 @@ export type AlternativaUncheckedCreateInput = {
 export type AlternativaUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   texto?: Prisma.StringFieldUpdateOperationsInput | string
+  letra?: Prisma.StringFieldUpdateOperationsInput | string
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   questao?: Prisma.QuestaoUpdateOneRequiredWithoutAlternativasNestedInput
@@ -281,6 +297,7 @@ export type AlternativaUncheckedUpdateInput = {
   idQuestao?: Prisma.StringFieldUpdateOperationsInput | string
   idResponsavel?: Prisma.StringFieldUpdateOperationsInput | string
   texto?: Prisma.StringFieldUpdateOperationsInput | string
+  letra?: Prisma.StringFieldUpdateOperationsInput | string
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   questoesCorretas?: Prisma.QuestaoUncheckedUpdateManyWithoutAlternativaCorretaNestedInput
@@ -291,6 +308,7 @@ export type AlternativaCreateManyInput = {
   idQuestao: string
   idResponsavel: string
   texto: string
+  letra: string
   criadoEm?: Date | string
   atualizadoEm?: Date | string
 }
@@ -298,6 +316,7 @@ export type AlternativaCreateManyInput = {
 export type AlternativaUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   texto?: Prisma.StringFieldUpdateOperationsInput | string
+  letra?: Prisma.StringFieldUpdateOperationsInput | string
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -307,6 +326,7 @@ export type AlternativaUncheckedUpdateManyInput = {
   idQuestao?: Prisma.StringFieldUpdateOperationsInput | string
   idResponsavel?: Prisma.StringFieldUpdateOperationsInput | string
   texto?: Prisma.StringFieldUpdateOperationsInput | string
+  letra?: Prisma.StringFieldUpdateOperationsInput | string
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -326,11 +346,17 @@ export type AlternativaNullableScalarRelationFilter = {
   isNot?: Prisma.AlternativaWhereInput | null
 }
 
+export type AlternativaIdQuestaoLetraCompoundUniqueInput = {
+  idQuestao: string
+  letra: string
+}
+
 export type AlternativaCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   idQuestao?: Prisma.SortOrder
   idResponsavel?: Prisma.SortOrder
   texto?: Prisma.SortOrder
+  letra?: Prisma.SortOrder
   criadoEm?: Prisma.SortOrder
   atualizadoEm?: Prisma.SortOrder
 }
@@ -340,6 +366,7 @@ export type AlternativaMaxOrderByAggregateInput = {
   idQuestao?: Prisma.SortOrder
   idResponsavel?: Prisma.SortOrder
   texto?: Prisma.SortOrder
+  letra?: Prisma.SortOrder
   criadoEm?: Prisma.SortOrder
   atualizadoEm?: Prisma.SortOrder
 }
@@ -349,6 +376,7 @@ export type AlternativaMinOrderByAggregateInput = {
   idQuestao?: Prisma.SortOrder
   idResponsavel?: Prisma.SortOrder
   texto?: Prisma.SortOrder
+  letra?: Prisma.SortOrder
   criadoEm?: Prisma.SortOrder
   atualizadoEm?: Prisma.SortOrder
 }
@@ -456,6 +484,7 @@ export type AlternativaUncheckedUpdateManyWithoutQuestaoNestedInput = {
 export type AlternativaCreateWithoutResponsavelInput = {
   id?: string
   texto: string
+  letra: string
   criadoEm?: Date | string
   atualizadoEm?: Date | string
   questao: Prisma.QuestaoCreateNestedOneWithoutAlternativasInput
@@ -466,6 +495,7 @@ export type AlternativaUncheckedCreateWithoutResponsavelInput = {
   id?: string
   idQuestao: string
   texto: string
+  letra: string
   criadoEm?: Date | string
   atualizadoEm?: Date | string
   questoesCorretas?: Prisma.QuestaoUncheckedCreateNestedManyWithoutAlternativaCorretaInput
@@ -505,6 +535,7 @@ export type AlternativaScalarWhereInput = {
   idQuestao?: Prisma.UuidFilter<"Alternativa"> | string
   idResponsavel?: Prisma.UuidFilter<"Alternativa"> | string
   texto?: Prisma.StringFilter<"Alternativa"> | string
+  letra?: Prisma.StringFilter<"Alternativa"> | string
   criadoEm?: Prisma.DateTimeFilter<"Alternativa"> | Date | string
   atualizadoEm?: Prisma.DateTimeFilter<"Alternativa"> | Date | string
 }
@@ -512,6 +543,7 @@ export type AlternativaScalarWhereInput = {
 export type AlternativaCreateWithoutQuestoesCorretasInput = {
   id?: string
   texto: string
+  letra: string
   criadoEm?: Date | string
   atualizadoEm?: Date | string
   questao: Prisma.QuestaoCreateNestedOneWithoutAlternativasInput
@@ -523,6 +555,7 @@ export type AlternativaUncheckedCreateWithoutQuestoesCorretasInput = {
   idQuestao: string
   idResponsavel: string
   texto: string
+  letra: string
   criadoEm?: Date | string
   atualizadoEm?: Date | string
 }
@@ -535,6 +568,7 @@ export type AlternativaCreateOrConnectWithoutQuestoesCorretasInput = {
 export type AlternativaCreateWithoutQuestaoInput = {
   id?: string
   texto: string
+  letra: string
   criadoEm?: Date | string
   atualizadoEm?: Date | string
   questoesCorretas?: Prisma.QuestaoCreateNestedManyWithoutAlternativaCorretaInput
@@ -545,6 +579,7 @@ export type AlternativaUncheckedCreateWithoutQuestaoInput = {
   id?: string
   idResponsavel: string
   texto: string
+  letra: string
   criadoEm?: Date | string
   atualizadoEm?: Date | string
   questoesCorretas?: Prisma.QuestaoUncheckedCreateNestedManyWithoutAlternativaCorretaInput
@@ -574,6 +609,7 @@ export type AlternativaUpdateToOneWithWhereWithoutQuestoesCorretasInput = {
 export type AlternativaUpdateWithoutQuestoesCorretasInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   texto?: Prisma.StringFieldUpdateOperationsInput | string
+  letra?: Prisma.StringFieldUpdateOperationsInput | string
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   questao?: Prisma.QuestaoUpdateOneRequiredWithoutAlternativasNestedInput
@@ -585,6 +621,7 @@ export type AlternativaUncheckedUpdateWithoutQuestoesCorretasInput = {
   idQuestao?: Prisma.StringFieldUpdateOperationsInput | string
   idResponsavel?: Prisma.StringFieldUpdateOperationsInput | string
   texto?: Prisma.StringFieldUpdateOperationsInput | string
+  letra?: Prisma.StringFieldUpdateOperationsInput | string
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -609,6 +646,7 @@ export type AlternativaCreateManyResponsavelInput = {
   id?: string
   idQuestao: string
   texto: string
+  letra: string
   criadoEm?: Date | string
   atualizadoEm?: Date | string
 }
@@ -616,6 +654,7 @@ export type AlternativaCreateManyResponsavelInput = {
 export type AlternativaUpdateWithoutResponsavelInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   texto?: Prisma.StringFieldUpdateOperationsInput | string
+  letra?: Prisma.StringFieldUpdateOperationsInput | string
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   questao?: Prisma.QuestaoUpdateOneRequiredWithoutAlternativasNestedInput
@@ -626,6 +665,7 @@ export type AlternativaUncheckedUpdateWithoutResponsavelInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   idQuestao?: Prisma.StringFieldUpdateOperationsInput | string
   texto?: Prisma.StringFieldUpdateOperationsInput | string
+  letra?: Prisma.StringFieldUpdateOperationsInput | string
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   questoesCorretas?: Prisma.QuestaoUncheckedUpdateManyWithoutAlternativaCorretaNestedInput
@@ -635,6 +675,7 @@ export type AlternativaUncheckedUpdateManyWithoutResponsavelInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   idQuestao?: Prisma.StringFieldUpdateOperationsInput | string
   texto?: Prisma.StringFieldUpdateOperationsInput | string
+  letra?: Prisma.StringFieldUpdateOperationsInput | string
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -643,6 +684,7 @@ export type AlternativaCreateManyQuestaoInput = {
   id?: string
   idResponsavel: string
   texto: string
+  letra: string
   criadoEm?: Date | string
   atualizadoEm?: Date | string
 }
@@ -650,6 +692,7 @@ export type AlternativaCreateManyQuestaoInput = {
 export type AlternativaUpdateWithoutQuestaoInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   texto?: Prisma.StringFieldUpdateOperationsInput | string
+  letra?: Prisma.StringFieldUpdateOperationsInput | string
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   questoesCorretas?: Prisma.QuestaoUpdateManyWithoutAlternativaCorretaNestedInput
@@ -660,6 +703,7 @@ export type AlternativaUncheckedUpdateWithoutQuestaoInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   idResponsavel?: Prisma.StringFieldUpdateOperationsInput | string
   texto?: Prisma.StringFieldUpdateOperationsInput | string
+  letra?: Prisma.StringFieldUpdateOperationsInput | string
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   questoesCorretas?: Prisma.QuestaoUncheckedUpdateManyWithoutAlternativaCorretaNestedInput
@@ -669,6 +713,7 @@ export type AlternativaUncheckedUpdateManyWithoutQuestaoInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   idResponsavel?: Prisma.StringFieldUpdateOperationsInput | string
   texto?: Prisma.StringFieldUpdateOperationsInput | string
+  letra?: Prisma.StringFieldUpdateOperationsInput | string
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -709,6 +754,7 @@ export type AlternativaSelect<ExtArgs extends runtime.Types.Extensions.InternalA
   idQuestao?: boolean
   idResponsavel?: boolean
   texto?: boolean
+  letra?: boolean
   criadoEm?: boolean
   atualizadoEm?: boolean
   questao?: boolean | Prisma.QuestaoDefaultArgs<ExtArgs>
@@ -722,6 +768,7 @@ export type AlternativaSelectCreateManyAndReturn<ExtArgs extends runtime.Types.E
   idQuestao?: boolean
   idResponsavel?: boolean
   texto?: boolean
+  letra?: boolean
   criadoEm?: boolean
   atualizadoEm?: boolean
   questao?: boolean | Prisma.QuestaoDefaultArgs<ExtArgs>
@@ -733,6 +780,7 @@ export type AlternativaSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.E
   idQuestao?: boolean
   idResponsavel?: boolean
   texto?: boolean
+  letra?: boolean
   criadoEm?: boolean
   atualizadoEm?: boolean
   questao?: boolean | Prisma.QuestaoDefaultArgs<ExtArgs>
@@ -744,11 +792,12 @@ export type AlternativaSelectScalar = {
   idQuestao?: boolean
   idResponsavel?: boolean
   texto?: boolean
+  letra?: boolean
   criadoEm?: boolean
   atualizadoEm?: boolean
 }
 
-export type AlternativaOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "idQuestao" | "idResponsavel" | "texto" | "criadoEm" | "atualizadoEm", ExtArgs["result"]["alternativa"]>
+export type AlternativaOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "idQuestao" | "idResponsavel" | "texto" | "letra" | "criadoEm" | "atualizadoEm", ExtArgs["result"]["alternativa"]>
 export type AlternativaInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   questao?: boolean | Prisma.QuestaoDefaultArgs<ExtArgs>
   questoesCorretas?: boolean | Prisma.Alternativa$questoesCorretasArgs<ExtArgs>
@@ -776,6 +825,7 @@ export type $AlternativaPayload<ExtArgs extends runtime.Types.Extensions.Interna
     idQuestao: string
     idResponsavel: string
     texto: string
+    letra: string
     criadoEm: Date
     atualizadoEm: Date
   }, ExtArgs["result"]["alternativa"]>
@@ -1208,6 +1258,7 @@ export interface AlternativaFieldRefs {
   readonly idQuestao: Prisma.FieldRef<"Alternativa", 'String'>
   readonly idResponsavel: Prisma.FieldRef<"Alternativa", 'String'>
   readonly texto: Prisma.FieldRef<"Alternativa", 'String'>
+  readonly letra: Prisma.FieldRef<"Alternativa", 'String'>
   readonly criadoEm: Prisma.FieldRef<"Alternativa", 'DateTime'>
   readonly atualizadoEm: Prisma.FieldRef<"Alternativa", 'DateTime'>
 }

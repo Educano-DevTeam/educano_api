@@ -63,6 +63,8 @@ export const ModelName = {
   Questao: 'Questao',
   Alternativa: 'Alternativa',
   TesteQuestao: 'TesteQuestao',
+  TentativaTeste: 'TentativaTeste',
+  TentativaQuestao: 'TentativaQuestao',
   Inscricao: 'Inscricao'
 } as const
 
@@ -216,6 +218,7 @@ export const TesteScalarFieldEnum = {
   tipo: 'tipo',
   tema: 'tema',
   tempoMinutos: 'tempoMinutos',
+  dificuldade: 'dificuldade',
   quantidadeQuestoes: 'quantidadeQuestoes',
   criadoEm: 'criadoEm',
   atualizadoEm: 'atualizadoEm'
@@ -243,6 +246,7 @@ export const AlternativaScalarFieldEnum = {
   idQuestao: 'idQuestao',
   idResponsavel: 'idResponsavel',
   texto: 'texto',
+  letra: 'letra',
   criadoEm: 'criadoEm',
   atualizadoEm: 'atualizadoEm'
 } as const
@@ -254,10 +258,45 @@ export const TesteQuestaoScalarFieldEnum = {
   id: 'id',
   idTeste: 'idTeste',
   idQuestao: 'idQuestao',
-  ordem: 'ordem'
+  ordem: 'ordem',
+  idResponsavel: 'idResponsavel',
+  criadoEm: 'criadoEm'
 } as const
 
 export type TesteQuestaoScalarFieldEnum = (typeof TesteQuestaoScalarFieldEnum)[keyof typeof TesteQuestaoScalarFieldEnum]
+
+
+export const TentativaTesteScalarFieldEnum = {
+  id: 'id',
+  idUsuario: 'idUsuario',
+  idTeste: 'idTeste',
+  tempoConsumido: 'tempoConsumido',
+  notaFinal: 'notaFinal',
+  iniciadoEm: 'iniciadoEm',
+  enviadoEm: 'enviadoEm'
+} as const
+
+export type TentativaTesteScalarFieldEnum = (typeof TentativaTesteScalarFieldEnum)[keyof typeof TentativaTesteScalarFieldEnum]
+
+
+export const TentativaQuestaoScalarFieldEnum = {
+  id: 'id',
+  idTentativa: 'idTentativa',
+  idQuestao: 'idQuestao',
+  enunciado: 'enunciado',
+  alternativaA: 'alternativaA',
+  alternativaB: 'alternativaB',
+  alternativaC: 'alternativaC',
+  alternativaD: 'alternativaD',
+  alternativaE: 'alternativaE',
+  respostaCorreta: 'respostaCorreta',
+  respostaUsuario: 'respostaUsuario',
+  acertou: 'acertou',
+  criadoEm: 'criadoEm',
+  usuarioId: 'usuarioId'
+} as const
+
+export type TentativaQuestaoScalarFieldEnum = (typeof TentativaQuestaoScalarFieldEnum)[keyof typeof TentativaQuestaoScalarFieldEnum]
 
 
 export const InscricaoScalarFieldEnum = {

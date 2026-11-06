@@ -210,6 +210,7 @@ export type QuestaoWhereInput = {
   alternativaCorreta?: Prisma.XOR<Prisma.AlternativaNullableScalarRelationFilter, Prisma.AlternativaWhereInput> | null
   alternativas?: Prisma.AlternativaListRelationFilter
   testes?: Prisma.TesteQuestaoListRelationFilter
+  tentativas?: Prisma.TentativaQuestaoListRelationFilter
 }
 
 export type QuestaoOrderByWithRelationInput = {
@@ -225,6 +226,7 @@ export type QuestaoOrderByWithRelationInput = {
   alternativaCorreta?: Prisma.AlternativaOrderByWithRelationInput
   alternativas?: Prisma.AlternativaOrderByRelationAggregateInput
   testes?: Prisma.TesteQuestaoOrderByRelationAggregateInput
+  tentativas?: Prisma.TentativaQuestaoOrderByRelationAggregateInput
 }
 
 export type QuestaoWhereUniqueInput = Prisma.AtLeast<{
@@ -243,6 +245,7 @@ export type QuestaoWhereUniqueInput = Prisma.AtLeast<{
   alternativaCorreta?: Prisma.XOR<Prisma.AlternativaNullableScalarRelationFilter, Prisma.AlternativaWhereInput> | null
   alternativas?: Prisma.AlternativaListRelationFilter
   testes?: Prisma.TesteQuestaoListRelationFilter
+  tentativas?: Prisma.TentativaQuestaoListRelationFilter
 }, "id">
 
 export type QuestaoOrderByWithAggregationInput = {
@@ -284,6 +287,7 @@ export type QuestaoCreateInput = {
   alternativaCorreta?: Prisma.AlternativaCreateNestedOneWithoutQuestoesCorretasInput
   alternativas?: Prisma.AlternativaCreateNestedManyWithoutQuestaoInput
   testes?: Prisma.TesteQuestaoCreateNestedManyWithoutQuestaoInput
+  tentativas?: Prisma.TentativaQuestaoCreateNestedManyWithoutQuestaoInput
 }
 
 export type QuestaoUncheckedCreateInput = {
@@ -297,6 +301,7 @@ export type QuestaoUncheckedCreateInput = {
   atualizadoEm?: Date | string
   alternativas?: Prisma.AlternativaUncheckedCreateNestedManyWithoutQuestaoInput
   testes?: Prisma.TesteQuestaoUncheckedCreateNestedManyWithoutQuestaoInput
+  tentativas?: Prisma.TentativaQuestaoUncheckedCreateNestedManyWithoutQuestaoInput
 }
 
 export type QuestaoUpdateInput = {
@@ -310,6 +315,7 @@ export type QuestaoUpdateInput = {
   alternativaCorreta?: Prisma.AlternativaUpdateOneWithoutQuestoesCorretasNestedInput
   alternativas?: Prisma.AlternativaUpdateManyWithoutQuestaoNestedInput
   testes?: Prisma.TesteQuestaoUpdateManyWithoutQuestaoNestedInput
+  tentativas?: Prisma.TentativaQuestaoUpdateManyWithoutQuestaoNestedInput
 }
 
 export type QuestaoUncheckedUpdateInput = {
@@ -323,6 +329,7 @@ export type QuestaoUncheckedUpdateInput = {
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   alternativas?: Prisma.AlternativaUncheckedUpdateManyWithoutQuestaoNestedInput
   testes?: Prisma.TesteQuestaoUncheckedUpdateManyWithoutQuestaoNestedInput
+  tentativas?: Prisma.TentativaQuestaoUncheckedUpdateManyWithoutQuestaoNestedInput
 }
 
 export type QuestaoCreateManyInput = {
@@ -520,6 +527,20 @@ export type QuestaoUpdateOneRequiredWithoutTestesNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.QuestaoUpdateToOneWithWhereWithoutTestesInput, Prisma.QuestaoUpdateWithoutTestesInput>, Prisma.QuestaoUncheckedUpdateWithoutTestesInput>
 }
 
+export type QuestaoCreateNestedOneWithoutTentativasInput = {
+  create?: Prisma.XOR<Prisma.QuestaoCreateWithoutTentativasInput, Prisma.QuestaoUncheckedCreateWithoutTentativasInput>
+  connectOrCreate?: Prisma.QuestaoCreateOrConnectWithoutTentativasInput
+  connect?: Prisma.QuestaoWhereUniqueInput
+}
+
+export type QuestaoUpdateOneRequiredWithoutTentativasNestedInput = {
+  create?: Prisma.XOR<Prisma.QuestaoCreateWithoutTentativasInput, Prisma.QuestaoUncheckedCreateWithoutTentativasInput>
+  connectOrCreate?: Prisma.QuestaoCreateOrConnectWithoutTentativasInput
+  upsert?: Prisma.QuestaoUpsertWithoutTentativasInput
+  connect?: Prisma.QuestaoWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.QuestaoUpdateToOneWithWhereWithoutTentativasInput, Prisma.QuestaoUpdateWithoutTentativasInput>, Prisma.QuestaoUncheckedUpdateWithoutTentativasInput>
+}
+
 export type QuestaoCreateWithoutResponsavelInput = {
   id?: string
   titulo?: string | null
@@ -530,6 +551,7 @@ export type QuestaoCreateWithoutResponsavelInput = {
   alternativaCorreta?: Prisma.AlternativaCreateNestedOneWithoutQuestoesCorretasInput
   alternativas?: Prisma.AlternativaCreateNestedManyWithoutQuestaoInput
   testes?: Prisma.TesteQuestaoCreateNestedManyWithoutQuestaoInput
+  tentativas?: Prisma.TentativaQuestaoCreateNestedManyWithoutQuestaoInput
 }
 
 export type QuestaoUncheckedCreateWithoutResponsavelInput = {
@@ -542,6 +564,7 @@ export type QuestaoUncheckedCreateWithoutResponsavelInput = {
   atualizadoEm?: Date | string
   alternativas?: Prisma.AlternativaUncheckedCreateNestedManyWithoutQuestaoInput
   testes?: Prisma.TesteQuestaoUncheckedCreateNestedManyWithoutQuestaoInput
+  tentativas?: Prisma.TentativaQuestaoUncheckedCreateNestedManyWithoutQuestaoInput
 }
 
 export type QuestaoCreateOrConnectWithoutResponsavelInput = {
@@ -594,6 +617,7 @@ export type QuestaoCreateWithoutAlternativasInput = {
   responsavel: Prisma.UsuarioCreateNestedOneWithoutQuestoesResponsavelInput
   alternativaCorreta?: Prisma.AlternativaCreateNestedOneWithoutQuestoesCorretasInput
   testes?: Prisma.TesteQuestaoCreateNestedManyWithoutQuestaoInput
+  tentativas?: Prisma.TentativaQuestaoCreateNestedManyWithoutQuestaoInput
 }
 
 export type QuestaoUncheckedCreateWithoutAlternativasInput = {
@@ -606,6 +630,7 @@ export type QuestaoUncheckedCreateWithoutAlternativasInput = {
   criadoEm?: Date | string
   atualizadoEm?: Date | string
   testes?: Prisma.TesteQuestaoUncheckedCreateNestedManyWithoutQuestaoInput
+  tentativas?: Prisma.TentativaQuestaoUncheckedCreateNestedManyWithoutQuestaoInput
 }
 
 export type QuestaoCreateOrConnectWithoutAlternativasInput = {
@@ -623,6 +648,7 @@ export type QuestaoCreateWithoutAlternativaCorretaInput = {
   responsavel: Prisma.UsuarioCreateNestedOneWithoutQuestoesResponsavelInput
   alternativas?: Prisma.AlternativaCreateNestedManyWithoutQuestaoInput
   testes?: Prisma.TesteQuestaoCreateNestedManyWithoutQuestaoInput
+  tentativas?: Prisma.TentativaQuestaoCreateNestedManyWithoutQuestaoInput
 }
 
 export type QuestaoUncheckedCreateWithoutAlternativaCorretaInput = {
@@ -635,6 +661,7 @@ export type QuestaoUncheckedCreateWithoutAlternativaCorretaInput = {
   atualizadoEm?: Date | string
   alternativas?: Prisma.AlternativaUncheckedCreateNestedManyWithoutQuestaoInput
   testes?: Prisma.TesteQuestaoUncheckedCreateNestedManyWithoutQuestaoInput
+  tentativas?: Prisma.TentativaQuestaoUncheckedCreateNestedManyWithoutQuestaoInput
 }
 
 export type QuestaoCreateOrConnectWithoutAlternativaCorretaInput = {
@@ -668,6 +695,7 @@ export type QuestaoUpdateWithoutAlternativasInput = {
   responsavel?: Prisma.UsuarioUpdateOneRequiredWithoutQuestoesResponsavelNestedInput
   alternativaCorreta?: Prisma.AlternativaUpdateOneWithoutQuestoesCorretasNestedInput
   testes?: Prisma.TesteQuestaoUpdateManyWithoutQuestaoNestedInput
+  tentativas?: Prisma.TentativaQuestaoUpdateManyWithoutQuestaoNestedInput
 }
 
 export type QuestaoUncheckedUpdateWithoutAlternativasInput = {
@@ -680,6 +708,7 @@ export type QuestaoUncheckedUpdateWithoutAlternativasInput = {
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   testes?: Prisma.TesteQuestaoUncheckedUpdateManyWithoutQuestaoNestedInput
+  tentativas?: Prisma.TentativaQuestaoUncheckedUpdateManyWithoutQuestaoNestedInput
 }
 
 export type QuestaoUpsertWithWhereUniqueWithoutAlternativaCorretaInput = {
@@ -708,6 +737,7 @@ export type QuestaoCreateWithoutTestesInput = {
   responsavel: Prisma.UsuarioCreateNestedOneWithoutQuestoesResponsavelInput
   alternativaCorreta?: Prisma.AlternativaCreateNestedOneWithoutQuestoesCorretasInput
   alternativas?: Prisma.AlternativaCreateNestedManyWithoutQuestaoInput
+  tentativas?: Prisma.TentativaQuestaoCreateNestedManyWithoutQuestaoInput
 }
 
 export type QuestaoUncheckedCreateWithoutTestesInput = {
@@ -720,6 +750,7 @@ export type QuestaoUncheckedCreateWithoutTestesInput = {
   criadoEm?: Date | string
   atualizadoEm?: Date | string
   alternativas?: Prisma.AlternativaUncheckedCreateNestedManyWithoutQuestaoInput
+  tentativas?: Prisma.TentativaQuestaoUncheckedCreateNestedManyWithoutQuestaoInput
 }
 
 export type QuestaoCreateOrConnectWithoutTestesInput = {
@@ -748,6 +779,7 @@ export type QuestaoUpdateWithoutTestesInput = {
   responsavel?: Prisma.UsuarioUpdateOneRequiredWithoutQuestoesResponsavelNestedInput
   alternativaCorreta?: Prisma.AlternativaUpdateOneWithoutQuestoesCorretasNestedInput
   alternativas?: Prisma.AlternativaUpdateManyWithoutQuestaoNestedInput
+  tentativas?: Prisma.TentativaQuestaoUpdateManyWithoutQuestaoNestedInput
 }
 
 export type QuestaoUncheckedUpdateWithoutTestesInput = {
@@ -760,6 +792,75 @@ export type QuestaoUncheckedUpdateWithoutTestesInput = {
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   alternativas?: Prisma.AlternativaUncheckedUpdateManyWithoutQuestaoNestedInput
+  tentativas?: Prisma.TentativaQuestaoUncheckedUpdateManyWithoutQuestaoNestedInput
+}
+
+export type QuestaoCreateWithoutTentativasInput = {
+  id?: string
+  titulo?: string | null
+  enunciado: string
+  dificuldade?: $Enums.NivelDificuldade
+  criadoEm?: Date | string
+  atualizadoEm?: Date | string
+  responsavel: Prisma.UsuarioCreateNestedOneWithoutQuestoesResponsavelInput
+  alternativaCorreta?: Prisma.AlternativaCreateNestedOneWithoutQuestoesCorretasInput
+  alternativas?: Prisma.AlternativaCreateNestedManyWithoutQuestaoInput
+  testes?: Prisma.TesteQuestaoCreateNestedManyWithoutQuestaoInput
+}
+
+export type QuestaoUncheckedCreateWithoutTentativasInput = {
+  id?: string
+  idResponsavel: string
+  idAlternativaCorreta?: string | null
+  titulo?: string | null
+  enunciado: string
+  dificuldade?: $Enums.NivelDificuldade
+  criadoEm?: Date | string
+  atualizadoEm?: Date | string
+  alternativas?: Prisma.AlternativaUncheckedCreateNestedManyWithoutQuestaoInput
+  testes?: Prisma.TesteQuestaoUncheckedCreateNestedManyWithoutQuestaoInput
+}
+
+export type QuestaoCreateOrConnectWithoutTentativasInput = {
+  where: Prisma.QuestaoWhereUniqueInput
+  create: Prisma.XOR<Prisma.QuestaoCreateWithoutTentativasInput, Prisma.QuestaoUncheckedCreateWithoutTentativasInput>
+}
+
+export type QuestaoUpsertWithoutTentativasInput = {
+  update: Prisma.XOR<Prisma.QuestaoUpdateWithoutTentativasInput, Prisma.QuestaoUncheckedUpdateWithoutTentativasInput>
+  create: Prisma.XOR<Prisma.QuestaoCreateWithoutTentativasInput, Prisma.QuestaoUncheckedCreateWithoutTentativasInput>
+  where?: Prisma.QuestaoWhereInput
+}
+
+export type QuestaoUpdateToOneWithWhereWithoutTentativasInput = {
+  where?: Prisma.QuestaoWhereInput
+  data: Prisma.XOR<Prisma.QuestaoUpdateWithoutTentativasInput, Prisma.QuestaoUncheckedUpdateWithoutTentativasInput>
+}
+
+export type QuestaoUpdateWithoutTentativasInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  titulo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  enunciado?: Prisma.StringFieldUpdateOperationsInput | string
+  dificuldade?: Prisma.EnumNivelDificuldadeFieldUpdateOperationsInput | $Enums.NivelDificuldade
+  criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  responsavel?: Prisma.UsuarioUpdateOneRequiredWithoutQuestoesResponsavelNestedInput
+  alternativaCorreta?: Prisma.AlternativaUpdateOneWithoutQuestoesCorretasNestedInput
+  alternativas?: Prisma.AlternativaUpdateManyWithoutQuestaoNestedInput
+  testes?: Prisma.TesteQuestaoUpdateManyWithoutQuestaoNestedInput
+}
+
+export type QuestaoUncheckedUpdateWithoutTentativasInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  idResponsavel?: Prisma.StringFieldUpdateOperationsInput | string
+  idAlternativaCorreta?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  titulo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  enunciado?: Prisma.StringFieldUpdateOperationsInput | string
+  dificuldade?: Prisma.EnumNivelDificuldadeFieldUpdateOperationsInput | $Enums.NivelDificuldade
+  criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  alternativas?: Prisma.AlternativaUncheckedUpdateManyWithoutQuestaoNestedInput
+  testes?: Prisma.TesteQuestaoUncheckedUpdateManyWithoutQuestaoNestedInput
 }
 
 export type QuestaoCreateManyResponsavelInput = {
@@ -782,6 +883,7 @@ export type QuestaoUpdateWithoutResponsavelInput = {
   alternativaCorreta?: Prisma.AlternativaUpdateOneWithoutQuestoesCorretasNestedInput
   alternativas?: Prisma.AlternativaUpdateManyWithoutQuestaoNestedInput
   testes?: Prisma.TesteQuestaoUpdateManyWithoutQuestaoNestedInput
+  tentativas?: Prisma.TentativaQuestaoUpdateManyWithoutQuestaoNestedInput
 }
 
 export type QuestaoUncheckedUpdateWithoutResponsavelInput = {
@@ -794,6 +896,7 @@ export type QuestaoUncheckedUpdateWithoutResponsavelInput = {
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   alternativas?: Prisma.AlternativaUncheckedUpdateManyWithoutQuestaoNestedInput
   testes?: Prisma.TesteQuestaoUncheckedUpdateManyWithoutQuestaoNestedInput
+  tentativas?: Prisma.TentativaQuestaoUncheckedUpdateManyWithoutQuestaoNestedInput
 }
 
 export type QuestaoUncheckedUpdateManyWithoutResponsavelInput = {
@@ -826,6 +929,7 @@ export type QuestaoUpdateWithoutAlternativaCorretaInput = {
   responsavel?: Prisma.UsuarioUpdateOneRequiredWithoutQuestoesResponsavelNestedInput
   alternativas?: Prisma.AlternativaUpdateManyWithoutQuestaoNestedInput
   testes?: Prisma.TesteQuestaoUpdateManyWithoutQuestaoNestedInput
+  tentativas?: Prisma.TentativaQuestaoUpdateManyWithoutQuestaoNestedInput
 }
 
 export type QuestaoUncheckedUpdateWithoutAlternativaCorretaInput = {
@@ -838,6 +942,7 @@ export type QuestaoUncheckedUpdateWithoutAlternativaCorretaInput = {
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   alternativas?: Prisma.AlternativaUncheckedUpdateManyWithoutQuestaoNestedInput
   testes?: Prisma.TesteQuestaoUncheckedUpdateManyWithoutQuestaoNestedInput
+  tentativas?: Prisma.TentativaQuestaoUncheckedUpdateManyWithoutQuestaoNestedInput
 }
 
 export type QuestaoUncheckedUpdateManyWithoutAlternativaCorretaInput = {
@@ -858,11 +963,13 @@ export type QuestaoUncheckedUpdateManyWithoutAlternativaCorretaInput = {
 export type QuestaoCountOutputType = {
   alternativas: number
   testes: number
+  tentativas: number
 }
 
 export type QuestaoCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   alternativas?: boolean | QuestaoCountOutputTypeCountAlternativasArgs
   testes?: boolean | QuestaoCountOutputTypeCountTestesArgs
+  tentativas?: boolean | QuestaoCountOutputTypeCountTentativasArgs
 }
 
 /**
@@ -889,6 +996,13 @@ export type QuestaoCountOutputTypeCountTestesArgs<ExtArgs extends runtime.Types.
   where?: Prisma.TesteQuestaoWhereInput
 }
 
+/**
+ * QuestaoCountOutputType without action
+ */
+export type QuestaoCountOutputTypeCountTentativasArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.TentativaQuestaoWhereInput
+}
+
 
 export type QuestaoSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -903,6 +1017,7 @@ export type QuestaoSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   alternativaCorreta?: boolean | Prisma.Questao$alternativaCorretaArgs<ExtArgs>
   alternativas?: boolean | Prisma.Questao$alternativasArgs<ExtArgs>
   testes?: boolean | Prisma.Questao$testesArgs<ExtArgs>
+  tentativas?: boolean | Prisma.Questao$tentativasArgs<ExtArgs>
   _count?: boolean | Prisma.QuestaoCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["questao"]>
 
@@ -949,6 +1064,7 @@ export type QuestaoInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs
   alternativaCorreta?: boolean | Prisma.Questao$alternativaCorretaArgs<ExtArgs>
   alternativas?: boolean | Prisma.Questao$alternativasArgs<ExtArgs>
   testes?: boolean | Prisma.Questao$testesArgs<ExtArgs>
+  tentativas?: boolean | Prisma.Questao$tentativasArgs<ExtArgs>
   _count?: boolean | Prisma.QuestaoCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type QuestaoIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -967,6 +1083,7 @@ export type $QuestaoPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     alternativaCorreta: Prisma.$AlternativaPayload<ExtArgs> | null
     alternativas: Prisma.$AlternativaPayload<ExtArgs>[]
     testes: Prisma.$TesteQuestaoPayload<ExtArgs>[]
+    tentativas: Prisma.$TentativaQuestaoPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1375,6 +1492,7 @@ export interface Prisma__QuestaoClient<T, Null = never, ExtArgs extends runtime.
   alternativaCorreta<T extends Prisma.Questao$alternativaCorretaArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Questao$alternativaCorretaArgs<ExtArgs>>): Prisma.Prisma__AlternativaClient<runtime.Types.Result.GetResult<Prisma.$AlternativaPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   alternativas<T extends Prisma.Questao$alternativasArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Questao$alternativasArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AlternativaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   testes<T extends Prisma.Questao$testesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Questao$testesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TesteQuestaoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  tentativas<T extends Prisma.Questao$tentativasArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Questao$tentativasArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TentativaQuestaoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1877,6 +1995,30 @@ export type Questao$testesArgs<ExtArgs extends runtime.Types.Extensions.Internal
   take?: number
   skip?: number
   distinct?: Prisma.TesteQuestaoScalarFieldEnum | Prisma.TesteQuestaoScalarFieldEnum[]
+}
+
+/**
+ * Questao.tentativas
+ */
+export type Questao$tentativasArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the TentativaQuestao
+   */
+  select?: Prisma.TentativaQuestaoSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the TentativaQuestao
+   */
+  omit?: Prisma.TentativaQuestaoOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TentativaQuestaoInclude<ExtArgs> | null
+  where?: Prisma.TentativaQuestaoWhereInput
+  orderBy?: Prisma.TentativaQuestaoOrderByWithRelationInput | Prisma.TentativaQuestaoOrderByWithRelationInput[]
+  cursor?: Prisma.TentativaQuestaoWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.TentativaQuestaoScalarFieldEnum | Prisma.TentativaQuestaoScalarFieldEnum[]
 }
 
 /**

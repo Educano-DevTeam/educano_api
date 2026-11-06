@@ -39,6 +39,8 @@ export type TesteQuestaoMinAggregateOutputType = {
   idTeste: string | null
   idQuestao: string | null
   ordem: number | null
+  idResponsavel: string | null
+  criadoEm: Date | null
 }
 
 export type TesteQuestaoMaxAggregateOutputType = {
@@ -46,6 +48,8 @@ export type TesteQuestaoMaxAggregateOutputType = {
   idTeste: string | null
   idQuestao: string | null
   ordem: number | null
+  idResponsavel: string | null
+  criadoEm: Date | null
 }
 
 export type TesteQuestaoCountAggregateOutputType = {
@@ -53,6 +57,8 @@ export type TesteQuestaoCountAggregateOutputType = {
   idTeste: number
   idQuestao: number
   ordem: number
+  idResponsavel: number
+  criadoEm: number
   _all: number
 }
 
@@ -70,6 +76,8 @@ export type TesteQuestaoMinAggregateInputType = {
   idTeste?: true
   idQuestao?: true
   ordem?: true
+  idResponsavel?: true
+  criadoEm?: true
 }
 
 export type TesteQuestaoMaxAggregateInputType = {
@@ -77,6 +85,8 @@ export type TesteQuestaoMaxAggregateInputType = {
   idTeste?: true
   idQuestao?: true
   ordem?: true
+  idResponsavel?: true
+  criadoEm?: true
 }
 
 export type TesteQuestaoCountAggregateInputType = {
@@ -84,6 +94,8 @@ export type TesteQuestaoCountAggregateInputType = {
   idTeste?: true
   idQuestao?: true
   ordem?: true
+  idResponsavel?: true
+  criadoEm?: true
   _all?: true
 }
 
@@ -178,6 +190,8 @@ export type TesteQuestaoGroupByOutputType = {
   idTeste: string
   idQuestao: string
   ordem: number
+  idResponsavel: string
+  criadoEm: Date
   _count: TesteQuestaoCountAggregateOutputType | null
   _avg: TesteQuestaoAvgAggregateOutputType | null
   _sum: TesteQuestaoSumAggregateOutputType | null
@@ -208,6 +222,9 @@ export type TesteQuestaoWhereInput = {
   idTeste?: Prisma.UuidFilter<"TesteQuestao"> | string
   idQuestao?: Prisma.UuidFilter<"TesteQuestao"> | string
   ordem?: Prisma.IntFilter<"TesteQuestao"> | number
+  idResponsavel?: Prisma.UuidFilter<"TesteQuestao"> | string
+  criadoEm?: Prisma.DateTimeFilter<"TesteQuestao"> | Date | string
+  responsavel?: Prisma.XOR<Prisma.UsuarioScalarRelationFilter, Prisma.UsuarioWhereInput>
   teste?: Prisma.XOR<Prisma.TesteScalarRelationFilter, Prisma.TesteWhereInput>
   questao?: Prisma.XOR<Prisma.QuestaoScalarRelationFilter, Prisma.QuestaoWhereInput>
 }
@@ -217,6 +234,9 @@ export type TesteQuestaoOrderByWithRelationInput = {
   idTeste?: Prisma.SortOrder
   idQuestao?: Prisma.SortOrder
   ordem?: Prisma.SortOrder
+  idResponsavel?: Prisma.SortOrder
+  criadoEm?: Prisma.SortOrder
+  responsavel?: Prisma.UsuarioOrderByWithRelationInput
   teste?: Prisma.TesteOrderByWithRelationInput
   questao?: Prisma.QuestaoOrderByWithRelationInput
 }
@@ -230,6 +250,9 @@ export type TesteQuestaoWhereUniqueInput = Prisma.AtLeast<{
   idTeste?: Prisma.UuidFilter<"TesteQuestao"> | string
   idQuestao?: Prisma.UuidFilter<"TesteQuestao"> | string
   ordem?: Prisma.IntFilter<"TesteQuestao"> | number
+  idResponsavel?: Prisma.UuidFilter<"TesteQuestao"> | string
+  criadoEm?: Prisma.DateTimeFilter<"TesteQuestao"> | Date | string
+  responsavel?: Prisma.XOR<Prisma.UsuarioScalarRelationFilter, Prisma.UsuarioWhereInput>
   teste?: Prisma.XOR<Prisma.TesteScalarRelationFilter, Prisma.TesteWhereInput>
   questao?: Prisma.XOR<Prisma.QuestaoScalarRelationFilter, Prisma.QuestaoWhereInput>
 }, "id" | "idTeste_idQuestao">
@@ -239,6 +262,8 @@ export type TesteQuestaoOrderByWithAggregationInput = {
   idTeste?: Prisma.SortOrder
   idQuestao?: Prisma.SortOrder
   ordem?: Prisma.SortOrder
+  idResponsavel?: Prisma.SortOrder
+  criadoEm?: Prisma.SortOrder
   _count?: Prisma.TesteQuestaoCountOrderByAggregateInput
   _avg?: Prisma.TesteQuestaoAvgOrderByAggregateInput
   _max?: Prisma.TesteQuestaoMaxOrderByAggregateInput
@@ -254,11 +279,15 @@ export type TesteQuestaoScalarWhereWithAggregatesInput = {
   idTeste?: Prisma.UuidWithAggregatesFilter<"TesteQuestao"> | string
   idQuestao?: Prisma.UuidWithAggregatesFilter<"TesteQuestao"> | string
   ordem?: Prisma.IntWithAggregatesFilter<"TesteQuestao"> | number
+  idResponsavel?: Prisma.UuidWithAggregatesFilter<"TesteQuestao"> | string
+  criadoEm?: Prisma.DateTimeWithAggregatesFilter<"TesteQuestao"> | Date | string
 }
 
 export type TesteQuestaoCreateInput = {
   id?: string
   ordem?: number
+  criadoEm?: Date | string
+  responsavel: Prisma.UsuarioCreateNestedOneWithoutTestesQuestoesResponsavelInput
   teste: Prisma.TesteCreateNestedOneWithoutQuestoesInput
   questao: Prisma.QuestaoCreateNestedOneWithoutTestesInput
 }
@@ -268,11 +297,15 @@ export type TesteQuestaoUncheckedCreateInput = {
   idTeste: string
   idQuestao: string
   ordem?: number
+  idResponsavel: string
+  criadoEm?: Date | string
 }
 
 export type TesteQuestaoUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   ordem?: Prisma.IntFieldUpdateOperationsInput | number
+  criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  responsavel?: Prisma.UsuarioUpdateOneRequiredWithoutTestesQuestoesResponsavelNestedInput
   teste?: Prisma.TesteUpdateOneRequiredWithoutQuestoesNestedInput
   questao?: Prisma.QuestaoUpdateOneRequiredWithoutTestesNestedInput
 }
@@ -282,6 +315,8 @@ export type TesteQuestaoUncheckedUpdateInput = {
   idTeste?: Prisma.StringFieldUpdateOperationsInput | string
   idQuestao?: Prisma.StringFieldUpdateOperationsInput | string
   ordem?: Prisma.IntFieldUpdateOperationsInput | number
+  idResponsavel?: Prisma.StringFieldUpdateOperationsInput | string
+  criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type TesteQuestaoCreateManyInput = {
@@ -289,11 +324,14 @@ export type TesteQuestaoCreateManyInput = {
   idTeste: string
   idQuestao: string
   ordem?: number
+  idResponsavel: string
+  criadoEm?: Date | string
 }
 
 export type TesteQuestaoUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   ordem?: Prisma.IntFieldUpdateOperationsInput | number
+  criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type TesteQuestaoUncheckedUpdateManyInput = {
@@ -301,6 +339,8 @@ export type TesteQuestaoUncheckedUpdateManyInput = {
   idTeste?: Prisma.StringFieldUpdateOperationsInput | string
   idQuestao?: Prisma.StringFieldUpdateOperationsInput | string
   ordem?: Prisma.IntFieldUpdateOperationsInput | number
+  idResponsavel?: Prisma.StringFieldUpdateOperationsInput | string
+  criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type TesteQuestaoListRelationFilter = {
@@ -323,6 +363,8 @@ export type TesteQuestaoCountOrderByAggregateInput = {
   idTeste?: Prisma.SortOrder
   idQuestao?: Prisma.SortOrder
   ordem?: Prisma.SortOrder
+  idResponsavel?: Prisma.SortOrder
+  criadoEm?: Prisma.SortOrder
 }
 
 export type TesteQuestaoAvgOrderByAggregateInput = {
@@ -334,6 +376,8 @@ export type TesteQuestaoMaxOrderByAggregateInput = {
   idTeste?: Prisma.SortOrder
   idQuestao?: Prisma.SortOrder
   ordem?: Prisma.SortOrder
+  idResponsavel?: Prisma.SortOrder
+  criadoEm?: Prisma.SortOrder
 }
 
 export type TesteQuestaoMinOrderByAggregateInput = {
@@ -341,10 +385,54 @@ export type TesteQuestaoMinOrderByAggregateInput = {
   idTeste?: Prisma.SortOrder
   idQuestao?: Prisma.SortOrder
   ordem?: Prisma.SortOrder
+  idResponsavel?: Prisma.SortOrder
+  criadoEm?: Prisma.SortOrder
 }
 
 export type TesteQuestaoSumOrderByAggregateInput = {
   ordem?: Prisma.SortOrder
+}
+
+export type TesteQuestaoCreateNestedManyWithoutResponsavelInput = {
+  create?: Prisma.XOR<Prisma.TesteQuestaoCreateWithoutResponsavelInput, Prisma.TesteQuestaoUncheckedCreateWithoutResponsavelInput> | Prisma.TesteQuestaoCreateWithoutResponsavelInput[] | Prisma.TesteQuestaoUncheckedCreateWithoutResponsavelInput[]
+  connectOrCreate?: Prisma.TesteQuestaoCreateOrConnectWithoutResponsavelInput | Prisma.TesteQuestaoCreateOrConnectWithoutResponsavelInput[]
+  createMany?: Prisma.TesteQuestaoCreateManyResponsavelInputEnvelope
+  connect?: Prisma.TesteQuestaoWhereUniqueInput | Prisma.TesteQuestaoWhereUniqueInput[]
+}
+
+export type TesteQuestaoUncheckedCreateNestedManyWithoutResponsavelInput = {
+  create?: Prisma.XOR<Prisma.TesteQuestaoCreateWithoutResponsavelInput, Prisma.TesteQuestaoUncheckedCreateWithoutResponsavelInput> | Prisma.TesteQuestaoCreateWithoutResponsavelInput[] | Prisma.TesteQuestaoUncheckedCreateWithoutResponsavelInput[]
+  connectOrCreate?: Prisma.TesteQuestaoCreateOrConnectWithoutResponsavelInput | Prisma.TesteQuestaoCreateOrConnectWithoutResponsavelInput[]
+  createMany?: Prisma.TesteQuestaoCreateManyResponsavelInputEnvelope
+  connect?: Prisma.TesteQuestaoWhereUniqueInput | Prisma.TesteQuestaoWhereUniqueInput[]
+}
+
+export type TesteQuestaoUpdateManyWithoutResponsavelNestedInput = {
+  create?: Prisma.XOR<Prisma.TesteQuestaoCreateWithoutResponsavelInput, Prisma.TesteQuestaoUncheckedCreateWithoutResponsavelInput> | Prisma.TesteQuestaoCreateWithoutResponsavelInput[] | Prisma.TesteQuestaoUncheckedCreateWithoutResponsavelInput[]
+  connectOrCreate?: Prisma.TesteQuestaoCreateOrConnectWithoutResponsavelInput | Prisma.TesteQuestaoCreateOrConnectWithoutResponsavelInput[]
+  upsert?: Prisma.TesteQuestaoUpsertWithWhereUniqueWithoutResponsavelInput | Prisma.TesteQuestaoUpsertWithWhereUniqueWithoutResponsavelInput[]
+  createMany?: Prisma.TesteQuestaoCreateManyResponsavelInputEnvelope
+  set?: Prisma.TesteQuestaoWhereUniqueInput | Prisma.TesteQuestaoWhereUniqueInput[]
+  disconnect?: Prisma.TesteQuestaoWhereUniqueInput | Prisma.TesteQuestaoWhereUniqueInput[]
+  delete?: Prisma.TesteQuestaoWhereUniqueInput | Prisma.TesteQuestaoWhereUniqueInput[]
+  connect?: Prisma.TesteQuestaoWhereUniqueInput | Prisma.TesteQuestaoWhereUniqueInput[]
+  update?: Prisma.TesteQuestaoUpdateWithWhereUniqueWithoutResponsavelInput | Prisma.TesteQuestaoUpdateWithWhereUniqueWithoutResponsavelInput[]
+  updateMany?: Prisma.TesteQuestaoUpdateManyWithWhereWithoutResponsavelInput | Prisma.TesteQuestaoUpdateManyWithWhereWithoutResponsavelInput[]
+  deleteMany?: Prisma.TesteQuestaoScalarWhereInput | Prisma.TesteQuestaoScalarWhereInput[]
+}
+
+export type TesteQuestaoUncheckedUpdateManyWithoutResponsavelNestedInput = {
+  create?: Prisma.XOR<Prisma.TesteQuestaoCreateWithoutResponsavelInput, Prisma.TesteQuestaoUncheckedCreateWithoutResponsavelInput> | Prisma.TesteQuestaoCreateWithoutResponsavelInput[] | Prisma.TesteQuestaoUncheckedCreateWithoutResponsavelInput[]
+  connectOrCreate?: Prisma.TesteQuestaoCreateOrConnectWithoutResponsavelInput | Prisma.TesteQuestaoCreateOrConnectWithoutResponsavelInput[]
+  upsert?: Prisma.TesteQuestaoUpsertWithWhereUniqueWithoutResponsavelInput | Prisma.TesteQuestaoUpsertWithWhereUniqueWithoutResponsavelInput[]
+  createMany?: Prisma.TesteQuestaoCreateManyResponsavelInputEnvelope
+  set?: Prisma.TesteQuestaoWhereUniqueInput | Prisma.TesteQuestaoWhereUniqueInput[]
+  disconnect?: Prisma.TesteQuestaoWhereUniqueInput | Prisma.TesteQuestaoWhereUniqueInput[]
+  delete?: Prisma.TesteQuestaoWhereUniqueInput | Prisma.TesteQuestaoWhereUniqueInput[]
+  connect?: Prisma.TesteQuestaoWhereUniqueInput | Prisma.TesteQuestaoWhereUniqueInput[]
+  update?: Prisma.TesteQuestaoUpdateWithWhereUniqueWithoutResponsavelInput | Prisma.TesteQuestaoUpdateWithWhereUniqueWithoutResponsavelInput[]
+  updateMany?: Prisma.TesteQuestaoUpdateManyWithWhereWithoutResponsavelInput | Prisma.TesteQuestaoUpdateManyWithWhereWithoutResponsavelInput[]
+  deleteMany?: Prisma.TesteQuestaoScalarWhereInput | Prisma.TesteQuestaoScalarWhereInput[]
 }
 
 export type TesteQuestaoCreateNestedManyWithoutTesteInput = {
@@ -431,9 +519,65 @@ export type TesteQuestaoUncheckedUpdateManyWithoutQuestaoNestedInput = {
   deleteMany?: Prisma.TesteQuestaoScalarWhereInput | Prisma.TesteQuestaoScalarWhereInput[]
 }
 
+export type TesteQuestaoCreateWithoutResponsavelInput = {
+  id?: string
+  ordem?: number
+  criadoEm?: Date | string
+  teste: Prisma.TesteCreateNestedOneWithoutQuestoesInput
+  questao: Prisma.QuestaoCreateNestedOneWithoutTestesInput
+}
+
+export type TesteQuestaoUncheckedCreateWithoutResponsavelInput = {
+  id?: string
+  idTeste: string
+  idQuestao: string
+  ordem?: number
+  criadoEm?: Date | string
+}
+
+export type TesteQuestaoCreateOrConnectWithoutResponsavelInput = {
+  where: Prisma.TesteQuestaoWhereUniqueInput
+  create: Prisma.XOR<Prisma.TesteQuestaoCreateWithoutResponsavelInput, Prisma.TesteQuestaoUncheckedCreateWithoutResponsavelInput>
+}
+
+export type TesteQuestaoCreateManyResponsavelInputEnvelope = {
+  data: Prisma.TesteQuestaoCreateManyResponsavelInput | Prisma.TesteQuestaoCreateManyResponsavelInput[]
+  skipDuplicates?: boolean
+}
+
+export type TesteQuestaoUpsertWithWhereUniqueWithoutResponsavelInput = {
+  where: Prisma.TesteQuestaoWhereUniqueInput
+  update: Prisma.XOR<Prisma.TesteQuestaoUpdateWithoutResponsavelInput, Prisma.TesteQuestaoUncheckedUpdateWithoutResponsavelInput>
+  create: Prisma.XOR<Prisma.TesteQuestaoCreateWithoutResponsavelInput, Prisma.TesteQuestaoUncheckedCreateWithoutResponsavelInput>
+}
+
+export type TesteQuestaoUpdateWithWhereUniqueWithoutResponsavelInput = {
+  where: Prisma.TesteQuestaoWhereUniqueInput
+  data: Prisma.XOR<Prisma.TesteQuestaoUpdateWithoutResponsavelInput, Prisma.TesteQuestaoUncheckedUpdateWithoutResponsavelInput>
+}
+
+export type TesteQuestaoUpdateManyWithWhereWithoutResponsavelInput = {
+  where: Prisma.TesteQuestaoScalarWhereInput
+  data: Prisma.XOR<Prisma.TesteQuestaoUpdateManyMutationInput, Prisma.TesteQuestaoUncheckedUpdateManyWithoutResponsavelInput>
+}
+
+export type TesteQuestaoScalarWhereInput = {
+  AND?: Prisma.TesteQuestaoScalarWhereInput | Prisma.TesteQuestaoScalarWhereInput[]
+  OR?: Prisma.TesteQuestaoScalarWhereInput[]
+  NOT?: Prisma.TesteQuestaoScalarWhereInput | Prisma.TesteQuestaoScalarWhereInput[]
+  id?: Prisma.UuidFilter<"TesteQuestao"> | string
+  idTeste?: Prisma.UuidFilter<"TesteQuestao"> | string
+  idQuestao?: Prisma.UuidFilter<"TesteQuestao"> | string
+  ordem?: Prisma.IntFilter<"TesteQuestao"> | number
+  idResponsavel?: Prisma.UuidFilter<"TesteQuestao"> | string
+  criadoEm?: Prisma.DateTimeFilter<"TesteQuestao"> | Date | string
+}
+
 export type TesteQuestaoCreateWithoutTesteInput = {
   id?: string
   ordem?: number
+  criadoEm?: Date | string
+  responsavel: Prisma.UsuarioCreateNestedOneWithoutTestesQuestoesResponsavelInput
   questao: Prisma.QuestaoCreateNestedOneWithoutTestesInput
 }
 
@@ -441,6 +585,8 @@ export type TesteQuestaoUncheckedCreateWithoutTesteInput = {
   id?: string
   idQuestao: string
   ordem?: number
+  idResponsavel: string
+  criadoEm?: Date | string
 }
 
 export type TesteQuestaoCreateOrConnectWithoutTesteInput = {
@@ -469,19 +615,11 @@ export type TesteQuestaoUpdateManyWithWhereWithoutTesteInput = {
   data: Prisma.XOR<Prisma.TesteQuestaoUpdateManyMutationInput, Prisma.TesteQuestaoUncheckedUpdateManyWithoutTesteInput>
 }
 
-export type TesteQuestaoScalarWhereInput = {
-  AND?: Prisma.TesteQuestaoScalarWhereInput | Prisma.TesteQuestaoScalarWhereInput[]
-  OR?: Prisma.TesteQuestaoScalarWhereInput[]
-  NOT?: Prisma.TesteQuestaoScalarWhereInput | Prisma.TesteQuestaoScalarWhereInput[]
-  id?: Prisma.UuidFilter<"TesteQuestao"> | string
-  idTeste?: Prisma.UuidFilter<"TesteQuestao"> | string
-  idQuestao?: Prisma.UuidFilter<"TesteQuestao"> | string
-  ordem?: Prisma.IntFilter<"TesteQuestao"> | number
-}
-
 export type TesteQuestaoCreateWithoutQuestaoInput = {
   id?: string
   ordem?: number
+  criadoEm?: Date | string
+  responsavel: Prisma.UsuarioCreateNestedOneWithoutTestesQuestoesResponsavelInput
   teste: Prisma.TesteCreateNestedOneWithoutQuestoesInput
 }
 
@@ -489,6 +627,8 @@ export type TesteQuestaoUncheckedCreateWithoutQuestaoInput = {
   id?: string
   idTeste: string
   ordem?: number
+  idResponsavel: string
+  criadoEm?: Date | string
 }
 
 export type TesteQuestaoCreateOrConnectWithoutQuestaoInput = {
@@ -517,15 +657,51 @@ export type TesteQuestaoUpdateManyWithWhereWithoutQuestaoInput = {
   data: Prisma.XOR<Prisma.TesteQuestaoUpdateManyMutationInput, Prisma.TesteQuestaoUncheckedUpdateManyWithoutQuestaoInput>
 }
 
+export type TesteQuestaoCreateManyResponsavelInput = {
+  id?: string
+  idTeste: string
+  idQuestao: string
+  ordem?: number
+  criadoEm?: Date | string
+}
+
+export type TesteQuestaoUpdateWithoutResponsavelInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  ordem?: Prisma.IntFieldUpdateOperationsInput | number
+  criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  teste?: Prisma.TesteUpdateOneRequiredWithoutQuestoesNestedInput
+  questao?: Prisma.QuestaoUpdateOneRequiredWithoutTestesNestedInput
+}
+
+export type TesteQuestaoUncheckedUpdateWithoutResponsavelInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  idTeste?: Prisma.StringFieldUpdateOperationsInput | string
+  idQuestao?: Prisma.StringFieldUpdateOperationsInput | string
+  ordem?: Prisma.IntFieldUpdateOperationsInput | number
+  criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type TesteQuestaoUncheckedUpdateManyWithoutResponsavelInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  idTeste?: Prisma.StringFieldUpdateOperationsInput | string
+  idQuestao?: Prisma.StringFieldUpdateOperationsInput | string
+  ordem?: Prisma.IntFieldUpdateOperationsInput | number
+  criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
 export type TesteQuestaoCreateManyTesteInput = {
   id?: string
   idQuestao: string
   ordem?: number
+  idResponsavel: string
+  criadoEm?: Date | string
 }
 
 export type TesteQuestaoUpdateWithoutTesteInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   ordem?: Prisma.IntFieldUpdateOperationsInput | number
+  criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  responsavel?: Prisma.UsuarioUpdateOneRequiredWithoutTestesQuestoesResponsavelNestedInput
   questao?: Prisma.QuestaoUpdateOneRequiredWithoutTestesNestedInput
 }
 
@@ -533,23 +709,31 @@ export type TesteQuestaoUncheckedUpdateWithoutTesteInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   idQuestao?: Prisma.StringFieldUpdateOperationsInput | string
   ordem?: Prisma.IntFieldUpdateOperationsInput | number
+  idResponsavel?: Prisma.StringFieldUpdateOperationsInput | string
+  criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type TesteQuestaoUncheckedUpdateManyWithoutTesteInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   idQuestao?: Prisma.StringFieldUpdateOperationsInput | string
   ordem?: Prisma.IntFieldUpdateOperationsInput | number
+  idResponsavel?: Prisma.StringFieldUpdateOperationsInput | string
+  criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type TesteQuestaoCreateManyQuestaoInput = {
   id?: string
   idTeste: string
   ordem?: number
+  idResponsavel: string
+  criadoEm?: Date | string
 }
 
 export type TesteQuestaoUpdateWithoutQuestaoInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   ordem?: Prisma.IntFieldUpdateOperationsInput | number
+  criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  responsavel?: Prisma.UsuarioUpdateOneRequiredWithoutTestesQuestoesResponsavelNestedInput
   teste?: Prisma.TesteUpdateOneRequiredWithoutQuestoesNestedInput
 }
 
@@ -557,12 +741,16 @@ export type TesteQuestaoUncheckedUpdateWithoutQuestaoInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   idTeste?: Prisma.StringFieldUpdateOperationsInput | string
   ordem?: Prisma.IntFieldUpdateOperationsInput | number
+  idResponsavel?: Prisma.StringFieldUpdateOperationsInput | string
+  criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type TesteQuestaoUncheckedUpdateManyWithoutQuestaoInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   idTeste?: Prisma.StringFieldUpdateOperationsInput | string
   ordem?: Prisma.IntFieldUpdateOperationsInput | number
+  idResponsavel?: Prisma.StringFieldUpdateOperationsInput | string
+  criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 
@@ -572,6 +760,9 @@ export type TesteQuestaoSelect<ExtArgs extends runtime.Types.Extensions.Internal
   idTeste?: boolean
   idQuestao?: boolean
   ordem?: boolean
+  idResponsavel?: boolean
+  criadoEm?: boolean
+  responsavel?: boolean | Prisma.UsuarioDefaultArgs<ExtArgs>
   teste?: boolean | Prisma.TesteDefaultArgs<ExtArgs>
   questao?: boolean | Prisma.QuestaoDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["testeQuestao"]>
@@ -581,6 +772,9 @@ export type TesteQuestaoSelectCreateManyAndReturn<ExtArgs extends runtime.Types.
   idTeste?: boolean
   idQuestao?: boolean
   ordem?: boolean
+  idResponsavel?: boolean
+  criadoEm?: boolean
+  responsavel?: boolean | Prisma.UsuarioDefaultArgs<ExtArgs>
   teste?: boolean | Prisma.TesteDefaultArgs<ExtArgs>
   questao?: boolean | Prisma.QuestaoDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["testeQuestao"]>
@@ -590,6 +784,9 @@ export type TesteQuestaoSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.
   idTeste?: boolean
   idQuestao?: boolean
   ordem?: boolean
+  idResponsavel?: boolean
+  criadoEm?: boolean
+  responsavel?: boolean | Prisma.UsuarioDefaultArgs<ExtArgs>
   teste?: boolean | Prisma.TesteDefaultArgs<ExtArgs>
   questao?: boolean | Prisma.QuestaoDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["testeQuestao"]>
@@ -599,18 +796,23 @@ export type TesteQuestaoSelectScalar = {
   idTeste?: boolean
   idQuestao?: boolean
   ordem?: boolean
+  idResponsavel?: boolean
+  criadoEm?: boolean
 }
 
-export type TesteQuestaoOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "idTeste" | "idQuestao" | "ordem", ExtArgs["result"]["testeQuestao"]>
+export type TesteQuestaoOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "idTeste" | "idQuestao" | "ordem" | "idResponsavel" | "criadoEm", ExtArgs["result"]["testeQuestao"]>
 export type TesteQuestaoInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  responsavel?: boolean | Prisma.UsuarioDefaultArgs<ExtArgs>
   teste?: boolean | Prisma.TesteDefaultArgs<ExtArgs>
   questao?: boolean | Prisma.QuestaoDefaultArgs<ExtArgs>
 }
 export type TesteQuestaoIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  responsavel?: boolean | Prisma.UsuarioDefaultArgs<ExtArgs>
   teste?: boolean | Prisma.TesteDefaultArgs<ExtArgs>
   questao?: boolean | Prisma.QuestaoDefaultArgs<ExtArgs>
 }
 export type TesteQuestaoIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  responsavel?: boolean | Prisma.UsuarioDefaultArgs<ExtArgs>
   teste?: boolean | Prisma.TesteDefaultArgs<ExtArgs>
   questao?: boolean | Prisma.QuestaoDefaultArgs<ExtArgs>
 }
@@ -618,6 +820,7 @@ export type TesteQuestaoIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types
 export type $TesteQuestaoPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "TesteQuestao"
   objects: {
+    responsavel: Prisma.$UsuarioPayload<ExtArgs>
     teste: Prisma.$TestePayload<ExtArgs>
     questao: Prisma.$QuestaoPayload<ExtArgs>
   }
@@ -626,6 +829,8 @@ export type $TesteQuestaoPayload<ExtArgs extends runtime.Types.Extensions.Intern
     idTeste: string
     idQuestao: string
     ordem: number
+    idResponsavel: string
+    criadoEm: Date
   }, ExtArgs["result"]["testeQuestao"]>
   composites: {}
 }
@@ -1020,6 +1225,7 @@ readonly fields: TesteQuestaoFieldRefs;
  */
 export interface Prisma__TesteQuestaoClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  responsavel<T extends Prisma.UsuarioDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UsuarioDefaultArgs<ExtArgs>>): Prisma.Prisma__UsuarioClient<runtime.Types.Result.GetResult<Prisma.$UsuarioPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   teste<T extends Prisma.TesteDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.TesteDefaultArgs<ExtArgs>>): Prisma.Prisma__TesteClient<runtime.Types.Result.GetResult<Prisma.$TestePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   questao<T extends Prisma.QuestaoDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.QuestaoDefaultArgs<ExtArgs>>): Prisma.Prisma__QuestaoClient<runtime.Types.Result.GetResult<Prisma.$QuestaoPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
@@ -1055,6 +1261,8 @@ export interface TesteQuestaoFieldRefs {
   readonly idTeste: Prisma.FieldRef<"TesteQuestao", 'String'>
   readonly idQuestao: Prisma.FieldRef<"TesteQuestao", 'String'>
   readonly ordem: Prisma.FieldRef<"TesteQuestao", 'Int'>
+  readonly idResponsavel: Prisma.FieldRef<"TesteQuestao", 'String'>
+  readonly criadoEm: Prisma.FieldRef<"TesteQuestao", 'DateTime'>
 }
     
 

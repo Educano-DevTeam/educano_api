@@ -43,6 +43,7 @@ export type TesteMinAggregateOutputType = {
   tipo: $Enums.TipoTeste | null
   tema: string | null
   tempoMinutos: number | null
+  dificuldade: $Enums.NivelDificuldade | null
   quantidadeQuestoes: number | null
   criadoEm: Date | null
   atualizadoEm: Date | null
@@ -55,6 +56,7 @@ export type TesteMaxAggregateOutputType = {
   tipo: $Enums.TipoTeste | null
   tema: string | null
   tempoMinutos: number | null
+  dificuldade: $Enums.NivelDificuldade | null
   quantidadeQuestoes: number | null
   criadoEm: Date | null
   atualizadoEm: Date | null
@@ -67,6 +69,7 @@ export type TesteCountAggregateOutputType = {
   tipo: number
   tema: number
   tempoMinutos: number
+  dificuldade: number
   quantidadeQuestoes: number
   criadoEm: number
   atualizadoEm: number
@@ -91,6 +94,7 @@ export type TesteMinAggregateInputType = {
   tipo?: true
   tema?: true
   tempoMinutos?: true
+  dificuldade?: true
   quantidadeQuestoes?: true
   criadoEm?: true
   atualizadoEm?: true
@@ -103,6 +107,7 @@ export type TesteMaxAggregateInputType = {
   tipo?: true
   tema?: true
   tempoMinutos?: true
+  dificuldade?: true
   quantidadeQuestoes?: true
   criadoEm?: true
   atualizadoEm?: true
@@ -115,6 +120,7 @@ export type TesteCountAggregateInputType = {
   tipo?: true
   tema?: true
   tempoMinutos?: true
+  dificuldade?: true
   quantidadeQuestoes?: true
   criadoEm?: true
   atualizadoEm?: true
@@ -214,6 +220,7 @@ export type TesteGroupByOutputType = {
   tipo: $Enums.TipoTeste
   tema: string | null
   tempoMinutos: number
+  dificuldade: $Enums.NivelDificuldade | null
   quantidadeQuestoes: number
   criadoEm: Date
   atualizadoEm: Date
@@ -249,12 +256,14 @@ export type TesteWhereInput = {
   tipo?: Prisma.EnumTipoTesteFilter<"Teste"> | $Enums.TipoTeste
   tema?: Prisma.StringNullableFilter<"Teste"> | string | null
   tempoMinutos?: Prisma.IntFilter<"Teste"> | number
+  dificuldade?: Prisma.EnumNivelDificuldadeNullableFilter<"Teste"> | $Enums.NivelDificuldade | null
   quantidadeQuestoes?: Prisma.IntFilter<"Teste"> | number
   criadoEm?: Prisma.DateTimeFilter<"Teste"> | Date | string
   atualizadoEm?: Prisma.DateTimeFilter<"Teste"> | Date | string
   modulo?: Prisma.XOR<Prisma.ModuloNullableScalarRelationFilter, Prisma.ModuloWhereInput> | null
   responsavel?: Prisma.XOR<Prisma.UsuarioScalarRelationFilter, Prisma.UsuarioWhereInput>
   questoes?: Prisma.TesteQuestaoListRelationFilter
+  tentativas?: Prisma.TentativaTesteListRelationFilter
 }
 
 export type TesteOrderByWithRelationInput = {
@@ -264,12 +273,14 @@ export type TesteOrderByWithRelationInput = {
   tipo?: Prisma.SortOrder
   tema?: Prisma.SortOrderInput | Prisma.SortOrder
   tempoMinutos?: Prisma.SortOrder
+  dificuldade?: Prisma.SortOrderInput | Prisma.SortOrder
   quantidadeQuestoes?: Prisma.SortOrder
   criadoEm?: Prisma.SortOrder
   atualizadoEm?: Prisma.SortOrder
   modulo?: Prisma.ModuloOrderByWithRelationInput
   responsavel?: Prisma.UsuarioOrderByWithRelationInput
   questoes?: Prisma.TesteQuestaoOrderByRelationAggregateInput
+  tentativas?: Prisma.TentativaTesteOrderByRelationAggregateInput
 }
 
 export type TesteWhereUniqueInput = Prisma.AtLeast<{
@@ -282,12 +293,14 @@ export type TesteWhereUniqueInput = Prisma.AtLeast<{
   tipo?: Prisma.EnumTipoTesteFilter<"Teste"> | $Enums.TipoTeste
   tema?: Prisma.StringNullableFilter<"Teste"> | string | null
   tempoMinutos?: Prisma.IntFilter<"Teste"> | number
+  dificuldade?: Prisma.EnumNivelDificuldadeNullableFilter<"Teste"> | $Enums.NivelDificuldade | null
   quantidadeQuestoes?: Prisma.IntFilter<"Teste"> | number
   criadoEm?: Prisma.DateTimeFilter<"Teste"> | Date | string
   atualizadoEm?: Prisma.DateTimeFilter<"Teste"> | Date | string
   modulo?: Prisma.XOR<Prisma.ModuloNullableScalarRelationFilter, Prisma.ModuloWhereInput> | null
   responsavel?: Prisma.XOR<Prisma.UsuarioScalarRelationFilter, Prisma.UsuarioWhereInput>
   questoes?: Prisma.TesteQuestaoListRelationFilter
+  tentativas?: Prisma.TentativaTesteListRelationFilter
 }, "id">
 
 export type TesteOrderByWithAggregationInput = {
@@ -297,6 +310,7 @@ export type TesteOrderByWithAggregationInput = {
   tipo?: Prisma.SortOrder
   tema?: Prisma.SortOrderInput | Prisma.SortOrder
   tempoMinutos?: Prisma.SortOrder
+  dificuldade?: Prisma.SortOrderInput | Prisma.SortOrder
   quantidadeQuestoes?: Prisma.SortOrder
   criadoEm?: Prisma.SortOrder
   atualizadoEm?: Prisma.SortOrder
@@ -317,6 +331,7 @@ export type TesteScalarWhereWithAggregatesInput = {
   tipo?: Prisma.EnumTipoTesteWithAggregatesFilter<"Teste"> | $Enums.TipoTeste
   tema?: Prisma.StringNullableWithAggregatesFilter<"Teste"> | string | null
   tempoMinutos?: Prisma.IntWithAggregatesFilter<"Teste"> | number
+  dificuldade?: Prisma.EnumNivelDificuldadeNullableWithAggregatesFilter<"Teste"> | $Enums.NivelDificuldade | null
   quantidadeQuestoes?: Prisma.IntWithAggregatesFilter<"Teste"> | number
   criadoEm?: Prisma.DateTimeWithAggregatesFilter<"Teste"> | Date | string
   atualizadoEm?: Prisma.DateTimeWithAggregatesFilter<"Teste"> | Date | string
@@ -327,12 +342,14 @@ export type TesteCreateInput = {
   tipo: $Enums.TipoTeste
   tema?: string | null
   tempoMinutos?: number
+  dificuldade?: $Enums.NivelDificuldade | null
   quantidadeQuestoes?: number
   criadoEm?: Date | string
   atualizadoEm?: Date | string
   modulo?: Prisma.ModuloCreateNestedOneWithoutTestesInput
   responsavel: Prisma.UsuarioCreateNestedOneWithoutTestesResponsavelInput
   questoes?: Prisma.TesteQuestaoCreateNestedManyWithoutTesteInput
+  tentativas?: Prisma.TentativaTesteCreateNestedManyWithoutTesteInput
 }
 
 export type TesteUncheckedCreateInput = {
@@ -342,10 +359,12 @@ export type TesteUncheckedCreateInput = {
   tipo: $Enums.TipoTeste
   tema?: string | null
   tempoMinutos?: number
+  dificuldade?: $Enums.NivelDificuldade | null
   quantidadeQuestoes?: number
   criadoEm?: Date | string
   atualizadoEm?: Date | string
   questoes?: Prisma.TesteQuestaoUncheckedCreateNestedManyWithoutTesteInput
+  tentativas?: Prisma.TentativaTesteUncheckedCreateNestedManyWithoutTesteInput
 }
 
 export type TesteUpdateInput = {
@@ -353,12 +372,14 @@ export type TesteUpdateInput = {
   tipo?: Prisma.EnumTipoTesteFieldUpdateOperationsInput | $Enums.TipoTeste
   tema?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tempoMinutos?: Prisma.IntFieldUpdateOperationsInput | number
+  dificuldade?: Prisma.NullableEnumNivelDificuldadeFieldUpdateOperationsInput | $Enums.NivelDificuldade | null
   quantidadeQuestoes?: Prisma.IntFieldUpdateOperationsInput | number
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   modulo?: Prisma.ModuloUpdateOneWithoutTestesNestedInput
   responsavel?: Prisma.UsuarioUpdateOneRequiredWithoutTestesResponsavelNestedInput
   questoes?: Prisma.TesteQuestaoUpdateManyWithoutTesteNestedInput
+  tentativas?: Prisma.TentativaTesteUpdateManyWithoutTesteNestedInput
 }
 
 export type TesteUncheckedUpdateInput = {
@@ -368,10 +389,12 @@ export type TesteUncheckedUpdateInput = {
   tipo?: Prisma.EnumTipoTesteFieldUpdateOperationsInput | $Enums.TipoTeste
   tema?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tempoMinutos?: Prisma.IntFieldUpdateOperationsInput | number
+  dificuldade?: Prisma.NullableEnumNivelDificuldadeFieldUpdateOperationsInput | $Enums.NivelDificuldade | null
   quantidadeQuestoes?: Prisma.IntFieldUpdateOperationsInput | number
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   questoes?: Prisma.TesteQuestaoUncheckedUpdateManyWithoutTesteNestedInput
+  tentativas?: Prisma.TentativaTesteUncheckedUpdateManyWithoutTesteNestedInput
 }
 
 export type TesteCreateManyInput = {
@@ -381,6 +404,7 @@ export type TesteCreateManyInput = {
   tipo: $Enums.TipoTeste
   tema?: string | null
   tempoMinutos?: number
+  dificuldade?: $Enums.NivelDificuldade | null
   quantidadeQuestoes?: number
   criadoEm?: Date | string
   atualizadoEm?: Date | string
@@ -391,6 +415,7 @@ export type TesteUpdateManyMutationInput = {
   tipo?: Prisma.EnumTipoTesteFieldUpdateOperationsInput | $Enums.TipoTeste
   tema?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tempoMinutos?: Prisma.IntFieldUpdateOperationsInput | number
+  dificuldade?: Prisma.NullableEnumNivelDificuldadeFieldUpdateOperationsInput | $Enums.NivelDificuldade | null
   quantidadeQuestoes?: Prisma.IntFieldUpdateOperationsInput | number
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -403,6 +428,7 @@ export type TesteUncheckedUpdateManyInput = {
   tipo?: Prisma.EnumTipoTesteFieldUpdateOperationsInput | $Enums.TipoTeste
   tema?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tempoMinutos?: Prisma.IntFieldUpdateOperationsInput | number
+  dificuldade?: Prisma.NullableEnumNivelDificuldadeFieldUpdateOperationsInput | $Enums.NivelDificuldade | null
   quantidadeQuestoes?: Prisma.IntFieldUpdateOperationsInput | number
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -425,6 +451,7 @@ export type TesteCountOrderByAggregateInput = {
   tipo?: Prisma.SortOrder
   tema?: Prisma.SortOrder
   tempoMinutos?: Prisma.SortOrder
+  dificuldade?: Prisma.SortOrder
   quantidadeQuestoes?: Prisma.SortOrder
   criadoEm?: Prisma.SortOrder
   atualizadoEm?: Prisma.SortOrder
@@ -442,6 +469,7 @@ export type TesteMaxOrderByAggregateInput = {
   tipo?: Prisma.SortOrder
   tema?: Prisma.SortOrder
   tempoMinutos?: Prisma.SortOrder
+  dificuldade?: Prisma.SortOrder
   quantidadeQuestoes?: Prisma.SortOrder
   criadoEm?: Prisma.SortOrder
   atualizadoEm?: Prisma.SortOrder
@@ -454,6 +482,7 @@ export type TesteMinOrderByAggregateInput = {
   tipo?: Prisma.SortOrder
   tema?: Prisma.SortOrder
   tempoMinutos?: Prisma.SortOrder
+  dificuldade?: Prisma.SortOrder
   quantidadeQuestoes?: Prisma.SortOrder
   criadoEm?: Prisma.SortOrder
   atualizadoEm?: Prisma.SortOrder
@@ -557,6 +586,10 @@ export type EnumTipoTesteFieldUpdateOperationsInput = {
   set?: $Enums.TipoTeste
 }
 
+export type NullableEnumNivelDificuldadeFieldUpdateOperationsInput = {
+  set?: $Enums.NivelDificuldade | null
+}
+
 export type TesteCreateNestedOneWithoutQuestoesInput = {
   create?: Prisma.XOR<Prisma.TesteCreateWithoutQuestoesInput, Prisma.TesteUncheckedCreateWithoutQuestoesInput>
   connectOrCreate?: Prisma.TesteCreateOrConnectWithoutQuestoesInput
@@ -571,16 +604,32 @@ export type TesteUpdateOneRequiredWithoutQuestoesNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.TesteUpdateToOneWithWhereWithoutQuestoesInput, Prisma.TesteUpdateWithoutQuestoesInput>, Prisma.TesteUncheckedUpdateWithoutQuestoesInput>
 }
 
+export type TesteCreateNestedOneWithoutTentativasInput = {
+  create?: Prisma.XOR<Prisma.TesteCreateWithoutTentativasInput, Prisma.TesteUncheckedCreateWithoutTentativasInput>
+  connectOrCreate?: Prisma.TesteCreateOrConnectWithoutTentativasInput
+  connect?: Prisma.TesteWhereUniqueInput
+}
+
+export type TesteUpdateOneRequiredWithoutTentativasNestedInput = {
+  create?: Prisma.XOR<Prisma.TesteCreateWithoutTentativasInput, Prisma.TesteUncheckedCreateWithoutTentativasInput>
+  connectOrCreate?: Prisma.TesteCreateOrConnectWithoutTentativasInput
+  upsert?: Prisma.TesteUpsertWithoutTentativasInput
+  connect?: Prisma.TesteWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.TesteUpdateToOneWithWhereWithoutTentativasInput, Prisma.TesteUpdateWithoutTentativasInput>, Prisma.TesteUncheckedUpdateWithoutTentativasInput>
+}
+
 export type TesteCreateWithoutResponsavelInput = {
   id?: string
   tipo: $Enums.TipoTeste
   tema?: string | null
   tempoMinutos?: number
+  dificuldade?: $Enums.NivelDificuldade | null
   quantidadeQuestoes?: number
   criadoEm?: Date | string
   atualizadoEm?: Date | string
   modulo?: Prisma.ModuloCreateNestedOneWithoutTestesInput
   questoes?: Prisma.TesteQuestaoCreateNestedManyWithoutTesteInput
+  tentativas?: Prisma.TentativaTesteCreateNestedManyWithoutTesteInput
 }
 
 export type TesteUncheckedCreateWithoutResponsavelInput = {
@@ -589,10 +638,12 @@ export type TesteUncheckedCreateWithoutResponsavelInput = {
   tipo: $Enums.TipoTeste
   tema?: string | null
   tempoMinutos?: number
+  dificuldade?: $Enums.NivelDificuldade | null
   quantidadeQuestoes?: number
   criadoEm?: Date | string
   atualizadoEm?: Date | string
   questoes?: Prisma.TesteQuestaoUncheckedCreateNestedManyWithoutTesteInput
+  tentativas?: Prisma.TentativaTesteUncheckedCreateNestedManyWithoutTesteInput
 }
 
 export type TesteCreateOrConnectWithoutResponsavelInput = {
@@ -631,6 +682,7 @@ export type TesteScalarWhereInput = {
   tipo?: Prisma.EnumTipoTesteFilter<"Teste"> | $Enums.TipoTeste
   tema?: Prisma.StringNullableFilter<"Teste"> | string | null
   tempoMinutos?: Prisma.IntFilter<"Teste"> | number
+  dificuldade?: Prisma.EnumNivelDificuldadeNullableFilter<"Teste"> | $Enums.NivelDificuldade | null
   quantidadeQuestoes?: Prisma.IntFilter<"Teste"> | number
   criadoEm?: Prisma.DateTimeFilter<"Teste"> | Date | string
   atualizadoEm?: Prisma.DateTimeFilter<"Teste"> | Date | string
@@ -641,11 +693,13 @@ export type TesteCreateWithoutModuloInput = {
   tipo: $Enums.TipoTeste
   tema?: string | null
   tempoMinutos?: number
+  dificuldade?: $Enums.NivelDificuldade | null
   quantidadeQuestoes?: number
   criadoEm?: Date | string
   atualizadoEm?: Date | string
   responsavel: Prisma.UsuarioCreateNestedOneWithoutTestesResponsavelInput
   questoes?: Prisma.TesteQuestaoCreateNestedManyWithoutTesteInput
+  tentativas?: Prisma.TentativaTesteCreateNestedManyWithoutTesteInput
 }
 
 export type TesteUncheckedCreateWithoutModuloInput = {
@@ -654,10 +708,12 @@ export type TesteUncheckedCreateWithoutModuloInput = {
   tipo: $Enums.TipoTeste
   tema?: string | null
   tempoMinutos?: number
+  dificuldade?: $Enums.NivelDificuldade | null
   quantidadeQuestoes?: number
   criadoEm?: Date | string
   atualizadoEm?: Date | string
   questoes?: Prisma.TesteQuestaoUncheckedCreateNestedManyWithoutTesteInput
+  tentativas?: Prisma.TentativaTesteUncheckedCreateNestedManyWithoutTesteInput
 }
 
 export type TesteCreateOrConnectWithoutModuloInput = {
@@ -691,11 +747,13 @@ export type TesteCreateWithoutQuestoesInput = {
   tipo: $Enums.TipoTeste
   tema?: string | null
   tempoMinutos?: number
+  dificuldade?: $Enums.NivelDificuldade | null
   quantidadeQuestoes?: number
   criadoEm?: Date | string
   atualizadoEm?: Date | string
   modulo?: Prisma.ModuloCreateNestedOneWithoutTestesInput
   responsavel: Prisma.UsuarioCreateNestedOneWithoutTestesResponsavelInput
+  tentativas?: Prisma.TentativaTesteCreateNestedManyWithoutTesteInput
 }
 
 export type TesteUncheckedCreateWithoutQuestoesInput = {
@@ -705,9 +763,11 @@ export type TesteUncheckedCreateWithoutQuestoesInput = {
   tipo: $Enums.TipoTeste
   tema?: string | null
   tempoMinutos?: number
+  dificuldade?: $Enums.NivelDificuldade | null
   quantidadeQuestoes?: number
   criadoEm?: Date | string
   atualizadoEm?: Date | string
+  tentativas?: Prisma.TentativaTesteUncheckedCreateNestedManyWithoutTesteInput
 }
 
 export type TesteCreateOrConnectWithoutQuestoesInput = {
@@ -731,11 +791,13 @@ export type TesteUpdateWithoutQuestoesInput = {
   tipo?: Prisma.EnumTipoTesteFieldUpdateOperationsInput | $Enums.TipoTeste
   tema?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tempoMinutos?: Prisma.IntFieldUpdateOperationsInput | number
+  dificuldade?: Prisma.NullableEnumNivelDificuldadeFieldUpdateOperationsInput | $Enums.NivelDificuldade | null
   quantidadeQuestoes?: Prisma.IntFieldUpdateOperationsInput | number
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   modulo?: Prisma.ModuloUpdateOneWithoutTestesNestedInput
   responsavel?: Prisma.UsuarioUpdateOneRequiredWithoutTestesResponsavelNestedInput
+  tentativas?: Prisma.TentativaTesteUpdateManyWithoutTesteNestedInput
 }
 
 export type TesteUncheckedUpdateWithoutQuestoesInput = {
@@ -745,9 +807,83 @@ export type TesteUncheckedUpdateWithoutQuestoesInput = {
   tipo?: Prisma.EnumTipoTesteFieldUpdateOperationsInput | $Enums.TipoTeste
   tema?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tempoMinutos?: Prisma.IntFieldUpdateOperationsInput | number
+  dificuldade?: Prisma.NullableEnumNivelDificuldadeFieldUpdateOperationsInput | $Enums.NivelDificuldade | null
   quantidadeQuestoes?: Prisma.IntFieldUpdateOperationsInput | number
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tentativas?: Prisma.TentativaTesteUncheckedUpdateManyWithoutTesteNestedInput
+}
+
+export type TesteCreateWithoutTentativasInput = {
+  id?: string
+  tipo: $Enums.TipoTeste
+  tema?: string | null
+  tempoMinutos?: number
+  dificuldade?: $Enums.NivelDificuldade | null
+  quantidadeQuestoes?: number
+  criadoEm?: Date | string
+  atualizadoEm?: Date | string
+  modulo?: Prisma.ModuloCreateNestedOneWithoutTestesInput
+  responsavel: Prisma.UsuarioCreateNestedOneWithoutTestesResponsavelInput
+  questoes?: Prisma.TesteQuestaoCreateNestedManyWithoutTesteInput
+}
+
+export type TesteUncheckedCreateWithoutTentativasInput = {
+  id?: string
+  idModulo?: string | null
+  idResponsavel: string
+  tipo: $Enums.TipoTeste
+  tema?: string | null
+  tempoMinutos?: number
+  dificuldade?: $Enums.NivelDificuldade | null
+  quantidadeQuestoes?: number
+  criadoEm?: Date | string
+  atualizadoEm?: Date | string
+  questoes?: Prisma.TesteQuestaoUncheckedCreateNestedManyWithoutTesteInput
+}
+
+export type TesteCreateOrConnectWithoutTentativasInput = {
+  where: Prisma.TesteWhereUniqueInput
+  create: Prisma.XOR<Prisma.TesteCreateWithoutTentativasInput, Prisma.TesteUncheckedCreateWithoutTentativasInput>
+}
+
+export type TesteUpsertWithoutTentativasInput = {
+  update: Prisma.XOR<Prisma.TesteUpdateWithoutTentativasInput, Prisma.TesteUncheckedUpdateWithoutTentativasInput>
+  create: Prisma.XOR<Prisma.TesteCreateWithoutTentativasInput, Prisma.TesteUncheckedCreateWithoutTentativasInput>
+  where?: Prisma.TesteWhereInput
+}
+
+export type TesteUpdateToOneWithWhereWithoutTentativasInput = {
+  where?: Prisma.TesteWhereInput
+  data: Prisma.XOR<Prisma.TesteUpdateWithoutTentativasInput, Prisma.TesteUncheckedUpdateWithoutTentativasInput>
+}
+
+export type TesteUpdateWithoutTentativasInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  tipo?: Prisma.EnumTipoTesteFieldUpdateOperationsInput | $Enums.TipoTeste
+  tema?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tempoMinutos?: Prisma.IntFieldUpdateOperationsInput | number
+  dificuldade?: Prisma.NullableEnumNivelDificuldadeFieldUpdateOperationsInput | $Enums.NivelDificuldade | null
+  quantidadeQuestoes?: Prisma.IntFieldUpdateOperationsInput | number
+  criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  modulo?: Prisma.ModuloUpdateOneWithoutTestesNestedInput
+  responsavel?: Prisma.UsuarioUpdateOneRequiredWithoutTestesResponsavelNestedInput
+  questoes?: Prisma.TesteQuestaoUpdateManyWithoutTesteNestedInput
+}
+
+export type TesteUncheckedUpdateWithoutTentativasInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  idModulo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idResponsavel?: Prisma.StringFieldUpdateOperationsInput | string
+  tipo?: Prisma.EnumTipoTesteFieldUpdateOperationsInput | $Enums.TipoTeste
+  tema?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tempoMinutos?: Prisma.IntFieldUpdateOperationsInput | number
+  dificuldade?: Prisma.NullableEnumNivelDificuldadeFieldUpdateOperationsInput | $Enums.NivelDificuldade | null
+  quantidadeQuestoes?: Prisma.IntFieldUpdateOperationsInput | number
+  criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  questoes?: Prisma.TesteQuestaoUncheckedUpdateManyWithoutTesteNestedInput
 }
 
 export type TesteCreateManyResponsavelInput = {
@@ -756,6 +892,7 @@ export type TesteCreateManyResponsavelInput = {
   tipo: $Enums.TipoTeste
   tema?: string | null
   tempoMinutos?: number
+  dificuldade?: $Enums.NivelDificuldade | null
   quantidadeQuestoes?: number
   criadoEm?: Date | string
   atualizadoEm?: Date | string
@@ -766,11 +903,13 @@ export type TesteUpdateWithoutResponsavelInput = {
   tipo?: Prisma.EnumTipoTesteFieldUpdateOperationsInput | $Enums.TipoTeste
   tema?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tempoMinutos?: Prisma.IntFieldUpdateOperationsInput | number
+  dificuldade?: Prisma.NullableEnumNivelDificuldadeFieldUpdateOperationsInput | $Enums.NivelDificuldade | null
   quantidadeQuestoes?: Prisma.IntFieldUpdateOperationsInput | number
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   modulo?: Prisma.ModuloUpdateOneWithoutTestesNestedInput
   questoes?: Prisma.TesteQuestaoUpdateManyWithoutTesteNestedInput
+  tentativas?: Prisma.TentativaTesteUpdateManyWithoutTesteNestedInput
 }
 
 export type TesteUncheckedUpdateWithoutResponsavelInput = {
@@ -779,10 +918,12 @@ export type TesteUncheckedUpdateWithoutResponsavelInput = {
   tipo?: Prisma.EnumTipoTesteFieldUpdateOperationsInput | $Enums.TipoTeste
   tema?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tempoMinutos?: Prisma.IntFieldUpdateOperationsInput | number
+  dificuldade?: Prisma.NullableEnumNivelDificuldadeFieldUpdateOperationsInput | $Enums.NivelDificuldade | null
   quantidadeQuestoes?: Prisma.IntFieldUpdateOperationsInput | number
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   questoes?: Prisma.TesteQuestaoUncheckedUpdateManyWithoutTesteNestedInput
+  tentativas?: Prisma.TentativaTesteUncheckedUpdateManyWithoutTesteNestedInput
 }
 
 export type TesteUncheckedUpdateManyWithoutResponsavelInput = {
@@ -791,6 +932,7 @@ export type TesteUncheckedUpdateManyWithoutResponsavelInput = {
   tipo?: Prisma.EnumTipoTesteFieldUpdateOperationsInput | $Enums.TipoTeste
   tema?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tempoMinutos?: Prisma.IntFieldUpdateOperationsInput | number
+  dificuldade?: Prisma.NullableEnumNivelDificuldadeFieldUpdateOperationsInput | $Enums.NivelDificuldade | null
   quantidadeQuestoes?: Prisma.IntFieldUpdateOperationsInput | number
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -802,6 +944,7 @@ export type TesteCreateManyModuloInput = {
   tipo: $Enums.TipoTeste
   tema?: string | null
   tempoMinutos?: number
+  dificuldade?: $Enums.NivelDificuldade | null
   quantidadeQuestoes?: number
   criadoEm?: Date | string
   atualizadoEm?: Date | string
@@ -812,11 +955,13 @@ export type TesteUpdateWithoutModuloInput = {
   tipo?: Prisma.EnumTipoTesteFieldUpdateOperationsInput | $Enums.TipoTeste
   tema?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tempoMinutos?: Prisma.IntFieldUpdateOperationsInput | number
+  dificuldade?: Prisma.NullableEnumNivelDificuldadeFieldUpdateOperationsInput | $Enums.NivelDificuldade | null
   quantidadeQuestoes?: Prisma.IntFieldUpdateOperationsInput | number
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   responsavel?: Prisma.UsuarioUpdateOneRequiredWithoutTestesResponsavelNestedInput
   questoes?: Prisma.TesteQuestaoUpdateManyWithoutTesteNestedInput
+  tentativas?: Prisma.TentativaTesteUpdateManyWithoutTesteNestedInput
 }
 
 export type TesteUncheckedUpdateWithoutModuloInput = {
@@ -825,10 +970,12 @@ export type TesteUncheckedUpdateWithoutModuloInput = {
   tipo?: Prisma.EnumTipoTesteFieldUpdateOperationsInput | $Enums.TipoTeste
   tema?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tempoMinutos?: Prisma.IntFieldUpdateOperationsInput | number
+  dificuldade?: Prisma.NullableEnumNivelDificuldadeFieldUpdateOperationsInput | $Enums.NivelDificuldade | null
   quantidadeQuestoes?: Prisma.IntFieldUpdateOperationsInput | number
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   questoes?: Prisma.TesteQuestaoUncheckedUpdateManyWithoutTesteNestedInput
+  tentativas?: Prisma.TentativaTesteUncheckedUpdateManyWithoutTesteNestedInput
 }
 
 export type TesteUncheckedUpdateManyWithoutModuloInput = {
@@ -837,6 +984,7 @@ export type TesteUncheckedUpdateManyWithoutModuloInput = {
   tipo?: Prisma.EnumTipoTesteFieldUpdateOperationsInput | $Enums.TipoTeste
   tema?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tempoMinutos?: Prisma.IntFieldUpdateOperationsInput | number
+  dificuldade?: Prisma.NullableEnumNivelDificuldadeFieldUpdateOperationsInput | $Enums.NivelDificuldade | null
   quantidadeQuestoes?: Prisma.IntFieldUpdateOperationsInput | number
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -849,10 +997,12 @@ export type TesteUncheckedUpdateManyWithoutModuloInput = {
 
 export type TesteCountOutputType = {
   questoes: number
+  tentativas: number
 }
 
 export type TesteCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   questoes?: boolean | TesteCountOutputTypeCountQuestoesArgs
+  tentativas?: boolean | TesteCountOutputTypeCountTentativasArgs
 }
 
 /**
@@ -872,6 +1022,13 @@ export type TesteCountOutputTypeCountQuestoesArgs<ExtArgs extends runtime.Types.
   where?: Prisma.TesteQuestaoWhereInput
 }
 
+/**
+ * TesteCountOutputType without action
+ */
+export type TesteCountOutputTypeCountTentativasArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.TentativaTesteWhereInput
+}
+
 
 export type TesteSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -880,12 +1037,14 @@ export type TesteSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   tipo?: boolean
   tema?: boolean
   tempoMinutos?: boolean
+  dificuldade?: boolean
   quantidadeQuestoes?: boolean
   criadoEm?: boolean
   atualizadoEm?: boolean
   modulo?: boolean | Prisma.Teste$moduloArgs<ExtArgs>
   responsavel?: boolean | Prisma.UsuarioDefaultArgs<ExtArgs>
   questoes?: boolean | Prisma.Teste$questoesArgs<ExtArgs>
+  tentativas?: boolean | Prisma.Teste$tentativasArgs<ExtArgs>
   _count?: boolean | Prisma.TesteCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["teste"]>
 
@@ -896,6 +1055,7 @@ export type TesteSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   tipo?: boolean
   tema?: boolean
   tempoMinutos?: boolean
+  dificuldade?: boolean
   quantidadeQuestoes?: boolean
   criadoEm?: boolean
   atualizadoEm?: boolean
@@ -910,6 +1070,7 @@ export type TesteSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   tipo?: boolean
   tema?: boolean
   tempoMinutos?: boolean
+  dificuldade?: boolean
   quantidadeQuestoes?: boolean
   criadoEm?: boolean
   atualizadoEm?: boolean
@@ -924,16 +1085,18 @@ export type TesteSelectScalar = {
   tipo?: boolean
   tema?: boolean
   tempoMinutos?: boolean
+  dificuldade?: boolean
   quantidadeQuestoes?: boolean
   criadoEm?: boolean
   atualizadoEm?: boolean
 }
 
-export type TesteOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "idModulo" | "idResponsavel" | "tipo" | "tema" | "tempoMinutos" | "quantidadeQuestoes" | "criadoEm" | "atualizadoEm", ExtArgs["result"]["teste"]>
+export type TesteOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "idModulo" | "idResponsavel" | "tipo" | "tema" | "tempoMinutos" | "dificuldade" | "quantidadeQuestoes" | "criadoEm" | "atualizadoEm", ExtArgs["result"]["teste"]>
 export type TesteInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   modulo?: boolean | Prisma.Teste$moduloArgs<ExtArgs>
   responsavel?: boolean | Prisma.UsuarioDefaultArgs<ExtArgs>
   questoes?: boolean | Prisma.Teste$questoesArgs<ExtArgs>
+  tentativas?: boolean | Prisma.Teste$tentativasArgs<ExtArgs>
   _count?: boolean | Prisma.TesteCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type TesteIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -951,6 +1114,7 @@ export type $TestePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
     modulo: Prisma.$ModuloPayload<ExtArgs> | null
     responsavel: Prisma.$UsuarioPayload<ExtArgs>
     questoes: Prisma.$TesteQuestaoPayload<ExtArgs>[]
+    tentativas: Prisma.$TentativaTestePayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -959,6 +1123,7 @@ export type $TestePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
     tipo: $Enums.TipoTeste
     tema: string | null
     tempoMinutos: number
+    dificuldade: $Enums.NivelDificuldade | null
     quantidadeQuestoes: number
     criadoEm: Date
     atualizadoEm: Date
@@ -1359,6 +1524,7 @@ export interface Prisma__TesteClient<T, Null = never, ExtArgs extends runtime.Ty
   modulo<T extends Prisma.Teste$moduloArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Teste$moduloArgs<ExtArgs>>): Prisma.Prisma__ModuloClient<runtime.Types.Result.GetResult<Prisma.$ModuloPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   responsavel<T extends Prisma.UsuarioDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UsuarioDefaultArgs<ExtArgs>>): Prisma.Prisma__UsuarioClient<runtime.Types.Result.GetResult<Prisma.$UsuarioPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   questoes<T extends Prisma.Teste$questoesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Teste$questoesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TesteQuestaoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  tentativas<T extends Prisma.Teste$tentativasArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Teste$tentativasArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TentativaTestePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1394,6 +1560,7 @@ export interface TesteFieldRefs {
   readonly tipo: Prisma.FieldRef<"Teste", 'TipoTeste'>
   readonly tema: Prisma.FieldRef<"Teste", 'String'>
   readonly tempoMinutos: Prisma.FieldRef<"Teste", 'Int'>
+  readonly dificuldade: Prisma.FieldRef<"Teste", 'NivelDificuldade'>
   readonly quantidadeQuestoes: Prisma.FieldRef<"Teste", 'Int'>
   readonly criadoEm: Prisma.FieldRef<"Teste", 'DateTime'>
   readonly atualizadoEm: Prisma.FieldRef<"Teste", 'DateTime'>
@@ -1838,6 +2005,30 @@ export type Teste$questoesArgs<ExtArgs extends runtime.Types.Extensions.Internal
   take?: number
   skip?: number
   distinct?: Prisma.TesteQuestaoScalarFieldEnum | Prisma.TesteQuestaoScalarFieldEnum[]
+}
+
+/**
+ * Teste.tentativas
+ */
+export type Teste$tentativasArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the TentativaTeste
+   */
+  select?: Prisma.TentativaTesteSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the TentativaTeste
+   */
+  omit?: Prisma.TentativaTesteOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TentativaTesteInclude<ExtArgs> | null
+  where?: Prisma.TentativaTesteWhereInput
+  orderBy?: Prisma.TentativaTesteOrderByWithRelationInput | Prisma.TentativaTesteOrderByWithRelationInput[]
+  cursor?: Prisma.TentativaTesteWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.TentativaTesteScalarFieldEnum | Prisma.TentativaTesteScalarFieldEnum[]
 }
 
 /**

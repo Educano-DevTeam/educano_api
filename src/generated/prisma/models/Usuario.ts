@@ -215,6 +215,9 @@ export type UsuarioWhereInput = {
   modulosResponsavel?: Prisma.ModuloListRelationFilter
   aulasResponsavel?: Prisma.AulaListRelationFilter
   testesResponsavel?: Prisma.TesteListRelationFilter
+  tentativasTeste?: Prisma.TentativaTesteListRelationFilter
+  tentativasQuestoes?: Prisma.TentativaQuestaoListRelationFilter
+  testesQuestoesResponsavel?: Prisma.TesteQuestaoListRelationFilter
   questoesResponsavel?: Prisma.QuestaoListRelationFilter
   alternativasResponsavel?: Prisma.AlternativaListRelationFilter
   inscricoes?: Prisma.InscricaoListRelationFilter
@@ -238,6 +241,9 @@ export type UsuarioOrderByWithRelationInput = {
   modulosResponsavel?: Prisma.ModuloOrderByRelationAggregateInput
   aulasResponsavel?: Prisma.AulaOrderByRelationAggregateInput
   testesResponsavel?: Prisma.TesteOrderByRelationAggregateInput
+  tentativasTeste?: Prisma.TentativaTesteOrderByRelationAggregateInput
+  tentativasQuestoes?: Prisma.TentativaQuestaoOrderByRelationAggregateInput
+  testesQuestoesResponsavel?: Prisma.TesteQuestaoOrderByRelationAggregateInput
   questoesResponsavel?: Prisma.QuestaoOrderByRelationAggregateInput
   alternativasResponsavel?: Prisma.AlternativaOrderByRelationAggregateInput
   inscricoes?: Prisma.InscricaoOrderByRelationAggregateInput
@@ -264,6 +270,9 @@ export type UsuarioWhereUniqueInput = Prisma.AtLeast<{
   modulosResponsavel?: Prisma.ModuloListRelationFilter
   aulasResponsavel?: Prisma.AulaListRelationFilter
   testesResponsavel?: Prisma.TesteListRelationFilter
+  tentativasTeste?: Prisma.TentativaTesteListRelationFilter
+  tentativasQuestoes?: Prisma.TentativaQuestaoListRelationFilter
+  testesQuestoesResponsavel?: Prisma.TesteQuestaoListRelationFilter
   questoesResponsavel?: Prisma.QuestaoListRelationFilter
   alternativasResponsavel?: Prisma.AlternativaListRelationFilter
   inscricoes?: Prisma.InscricaoListRelationFilter
@@ -315,6 +324,9 @@ export type UsuarioCreateInput = {
   modulosResponsavel?: Prisma.ModuloCreateNestedManyWithoutResponsavelInput
   aulasResponsavel?: Prisma.AulaCreateNestedManyWithoutResponsavelInput
   testesResponsavel?: Prisma.TesteCreateNestedManyWithoutResponsavelInput
+  tentativasTeste?: Prisma.TentativaTesteCreateNestedManyWithoutUsuarioInput
+  tentativasQuestoes?: Prisma.TentativaQuestaoCreateNestedManyWithoutUsuarioInput
+  testesQuestoesResponsavel?: Prisma.TesteQuestaoCreateNestedManyWithoutResponsavelInput
   questoesResponsavel?: Prisma.QuestaoCreateNestedManyWithoutResponsavelInput
   alternativasResponsavel?: Prisma.AlternativaCreateNestedManyWithoutResponsavelInput
   inscricoes?: Prisma.InscricaoCreateNestedManyWithoutUsuarioInput
@@ -338,6 +350,9 @@ export type UsuarioUncheckedCreateInput = {
   modulosResponsavel?: Prisma.ModuloUncheckedCreateNestedManyWithoutResponsavelInput
   aulasResponsavel?: Prisma.AulaUncheckedCreateNestedManyWithoutResponsavelInput
   testesResponsavel?: Prisma.TesteUncheckedCreateNestedManyWithoutResponsavelInput
+  tentativasTeste?: Prisma.TentativaTesteUncheckedCreateNestedManyWithoutUsuarioInput
+  tentativasQuestoes?: Prisma.TentativaQuestaoUncheckedCreateNestedManyWithoutUsuarioInput
+  testesQuestoesResponsavel?: Prisma.TesteQuestaoUncheckedCreateNestedManyWithoutResponsavelInput
   questoesResponsavel?: Prisma.QuestaoUncheckedCreateNestedManyWithoutResponsavelInput
   alternativasResponsavel?: Prisma.AlternativaUncheckedCreateNestedManyWithoutResponsavelInput
   inscricoes?: Prisma.InscricaoUncheckedCreateNestedManyWithoutUsuarioInput
@@ -361,6 +376,9 @@ export type UsuarioUpdateInput = {
   modulosResponsavel?: Prisma.ModuloUpdateManyWithoutResponsavelNestedInput
   aulasResponsavel?: Prisma.AulaUpdateManyWithoutResponsavelNestedInput
   testesResponsavel?: Prisma.TesteUpdateManyWithoutResponsavelNestedInput
+  tentativasTeste?: Prisma.TentativaTesteUpdateManyWithoutUsuarioNestedInput
+  tentativasQuestoes?: Prisma.TentativaQuestaoUpdateManyWithoutUsuarioNestedInput
+  testesQuestoesResponsavel?: Prisma.TesteQuestaoUpdateManyWithoutResponsavelNestedInput
   questoesResponsavel?: Prisma.QuestaoUpdateManyWithoutResponsavelNestedInput
   alternativasResponsavel?: Prisma.AlternativaUpdateManyWithoutResponsavelNestedInput
   inscricoes?: Prisma.InscricaoUpdateManyWithoutUsuarioNestedInput
@@ -384,6 +402,9 @@ export type UsuarioUncheckedUpdateInput = {
   modulosResponsavel?: Prisma.ModuloUncheckedUpdateManyWithoutResponsavelNestedInput
   aulasResponsavel?: Prisma.AulaUncheckedUpdateManyWithoutResponsavelNestedInput
   testesResponsavel?: Prisma.TesteUncheckedUpdateManyWithoutResponsavelNestedInput
+  tentativasTeste?: Prisma.TentativaTesteUncheckedUpdateManyWithoutUsuarioNestedInput
+  tentativasQuestoes?: Prisma.TentativaQuestaoUncheckedUpdateManyWithoutUsuarioNestedInput
+  testesQuestoesResponsavel?: Prisma.TesteQuestaoUncheckedUpdateManyWithoutResponsavelNestedInput
   questoesResponsavel?: Prisma.QuestaoUncheckedUpdateManyWithoutResponsavelNestedInput
   alternativasResponsavel?: Prisma.AlternativaUncheckedUpdateManyWithoutResponsavelNestedInput
   inscricoes?: Prisma.InscricaoUncheckedUpdateManyWithoutUsuarioNestedInput
@@ -637,6 +658,50 @@ export type UsuarioUpdateOneRequiredWithoutAlternativasResponsavelNestedInput = 
   update?: Prisma.XOR<Prisma.XOR<Prisma.UsuarioUpdateToOneWithWhereWithoutAlternativasResponsavelInput, Prisma.UsuarioUpdateWithoutAlternativasResponsavelInput>, Prisma.UsuarioUncheckedUpdateWithoutAlternativasResponsavelInput>
 }
 
+export type UsuarioCreateNestedOneWithoutTestesQuestoesResponsavelInput = {
+  create?: Prisma.XOR<Prisma.UsuarioCreateWithoutTestesQuestoesResponsavelInput, Prisma.UsuarioUncheckedCreateWithoutTestesQuestoesResponsavelInput>
+  connectOrCreate?: Prisma.UsuarioCreateOrConnectWithoutTestesQuestoesResponsavelInput
+  connect?: Prisma.UsuarioWhereUniqueInput
+}
+
+export type UsuarioUpdateOneRequiredWithoutTestesQuestoesResponsavelNestedInput = {
+  create?: Prisma.XOR<Prisma.UsuarioCreateWithoutTestesQuestoesResponsavelInput, Prisma.UsuarioUncheckedCreateWithoutTestesQuestoesResponsavelInput>
+  connectOrCreate?: Prisma.UsuarioCreateOrConnectWithoutTestesQuestoesResponsavelInput
+  upsert?: Prisma.UsuarioUpsertWithoutTestesQuestoesResponsavelInput
+  connect?: Prisma.UsuarioWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UsuarioUpdateToOneWithWhereWithoutTestesQuestoesResponsavelInput, Prisma.UsuarioUpdateWithoutTestesQuestoesResponsavelInput>, Prisma.UsuarioUncheckedUpdateWithoutTestesQuestoesResponsavelInput>
+}
+
+export type UsuarioCreateNestedOneWithoutTentativasTesteInput = {
+  create?: Prisma.XOR<Prisma.UsuarioCreateWithoutTentativasTesteInput, Prisma.UsuarioUncheckedCreateWithoutTentativasTesteInput>
+  connectOrCreate?: Prisma.UsuarioCreateOrConnectWithoutTentativasTesteInput
+  connect?: Prisma.UsuarioWhereUniqueInput
+}
+
+export type UsuarioUpdateOneRequiredWithoutTentativasTesteNestedInput = {
+  create?: Prisma.XOR<Prisma.UsuarioCreateWithoutTentativasTesteInput, Prisma.UsuarioUncheckedCreateWithoutTentativasTesteInput>
+  connectOrCreate?: Prisma.UsuarioCreateOrConnectWithoutTentativasTesteInput
+  upsert?: Prisma.UsuarioUpsertWithoutTentativasTesteInput
+  connect?: Prisma.UsuarioWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UsuarioUpdateToOneWithWhereWithoutTentativasTesteInput, Prisma.UsuarioUpdateWithoutTentativasTesteInput>, Prisma.UsuarioUncheckedUpdateWithoutTentativasTesteInput>
+}
+
+export type UsuarioCreateNestedOneWithoutTentativasQuestoesInput = {
+  create?: Prisma.XOR<Prisma.UsuarioCreateWithoutTentativasQuestoesInput, Prisma.UsuarioUncheckedCreateWithoutTentativasQuestoesInput>
+  connectOrCreate?: Prisma.UsuarioCreateOrConnectWithoutTentativasQuestoesInput
+  connect?: Prisma.UsuarioWhereUniqueInput
+}
+
+export type UsuarioUpdateOneWithoutTentativasQuestoesNestedInput = {
+  create?: Prisma.XOR<Prisma.UsuarioCreateWithoutTentativasQuestoesInput, Prisma.UsuarioUncheckedCreateWithoutTentativasQuestoesInput>
+  connectOrCreate?: Prisma.UsuarioCreateOrConnectWithoutTentativasQuestoesInput
+  upsert?: Prisma.UsuarioUpsertWithoutTentativasQuestoesInput
+  disconnect?: Prisma.UsuarioWhereInput | boolean
+  delete?: Prisma.UsuarioWhereInput | boolean
+  connect?: Prisma.UsuarioWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UsuarioUpdateToOneWithWhereWithoutTentativasQuestoesInput, Prisma.UsuarioUpdateWithoutTentativasQuestoesInput>, Prisma.UsuarioUncheckedUpdateWithoutTentativasQuestoesInput>
+}
+
 export type UsuarioCreateNestedOneWithoutInscricoesInput = {
   create?: Prisma.XOR<Prisma.UsuarioCreateWithoutInscricoesInput, Prisma.UsuarioUncheckedCreateWithoutInscricoesInput>
   connectOrCreate?: Prisma.UsuarioCreateOrConnectWithoutInscricoesInput
@@ -668,6 +733,9 @@ export type UsuarioCreateWithoutPerfilInput = {
   modulosResponsavel?: Prisma.ModuloCreateNestedManyWithoutResponsavelInput
   aulasResponsavel?: Prisma.AulaCreateNestedManyWithoutResponsavelInput
   testesResponsavel?: Prisma.TesteCreateNestedManyWithoutResponsavelInput
+  tentativasTeste?: Prisma.TentativaTesteCreateNestedManyWithoutUsuarioInput
+  tentativasQuestoes?: Prisma.TentativaQuestaoCreateNestedManyWithoutUsuarioInput
+  testesQuestoesResponsavel?: Prisma.TesteQuestaoCreateNestedManyWithoutResponsavelInput
   questoesResponsavel?: Prisma.QuestaoCreateNestedManyWithoutResponsavelInput
   alternativasResponsavel?: Prisma.AlternativaCreateNestedManyWithoutResponsavelInput
   inscricoes?: Prisma.InscricaoCreateNestedManyWithoutUsuarioInput
@@ -690,6 +758,9 @@ export type UsuarioUncheckedCreateWithoutPerfilInput = {
   modulosResponsavel?: Prisma.ModuloUncheckedCreateNestedManyWithoutResponsavelInput
   aulasResponsavel?: Prisma.AulaUncheckedCreateNestedManyWithoutResponsavelInput
   testesResponsavel?: Prisma.TesteUncheckedCreateNestedManyWithoutResponsavelInput
+  tentativasTeste?: Prisma.TentativaTesteUncheckedCreateNestedManyWithoutUsuarioInput
+  tentativasQuestoes?: Prisma.TentativaQuestaoUncheckedCreateNestedManyWithoutUsuarioInput
+  testesQuestoesResponsavel?: Prisma.TesteQuestaoUncheckedCreateNestedManyWithoutResponsavelInput
   questoesResponsavel?: Prisma.QuestaoUncheckedCreateNestedManyWithoutResponsavelInput
   alternativasResponsavel?: Prisma.AlternativaUncheckedCreateNestedManyWithoutResponsavelInput
   inscricoes?: Prisma.InscricaoUncheckedCreateNestedManyWithoutUsuarioInput
@@ -728,6 +799,9 @@ export type UsuarioUpdateWithoutPerfilInput = {
   modulosResponsavel?: Prisma.ModuloUpdateManyWithoutResponsavelNestedInput
   aulasResponsavel?: Prisma.AulaUpdateManyWithoutResponsavelNestedInput
   testesResponsavel?: Prisma.TesteUpdateManyWithoutResponsavelNestedInput
+  tentativasTeste?: Prisma.TentativaTesteUpdateManyWithoutUsuarioNestedInput
+  tentativasQuestoes?: Prisma.TentativaQuestaoUpdateManyWithoutUsuarioNestedInput
+  testesQuestoesResponsavel?: Prisma.TesteQuestaoUpdateManyWithoutResponsavelNestedInput
   questoesResponsavel?: Prisma.QuestaoUpdateManyWithoutResponsavelNestedInput
   alternativasResponsavel?: Prisma.AlternativaUpdateManyWithoutResponsavelNestedInput
   inscricoes?: Prisma.InscricaoUpdateManyWithoutUsuarioNestedInput
@@ -750,6 +824,9 @@ export type UsuarioUncheckedUpdateWithoutPerfilInput = {
   modulosResponsavel?: Prisma.ModuloUncheckedUpdateManyWithoutResponsavelNestedInput
   aulasResponsavel?: Prisma.AulaUncheckedUpdateManyWithoutResponsavelNestedInput
   testesResponsavel?: Prisma.TesteUncheckedUpdateManyWithoutResponsavelNestedInput
+  tentativasTeste?: Prisma.TentativaTesteUncheckedUpdateManyWithoutUsuarioNestedInput
+  tentativasQuestoes?: Prisma.TentativaQuestaoUncheckedUpdateManyWithoutUsuarioNestedInput
+  testesQuestoesResponsavel?: Prisma.TesteQuestaoUncheckedUpdateManyWithoutResponsavelNestedInput
   questoesResponsavel?: Prisma.QuestaoUncheckedUpdateManyWithoutResponsavelNestedInput
   alternativasResponsavel?: Prisma.AlternativaUncheckedUpdateManyWithoutResponsavelNestedInput
   inscricoes?: Prisma.InscricaoUncheckedUpdateManyWithoutUsuarioNestedInput
@@ -772,6 +849,9 @@ export type UsuarioCreateWithoutCodigosValidacaoInput = {
   modulosResponsavel?: Prisma.ModuloCreateNestedManyWithoutResponsavelInput
   aulasResponsavel?: Prisma.AulaCreateNestedManyWithoutResponsavelInput
   testesResponsavel?: Prisma.TesteCreateNestedManyWithoutResponsavelInput
+  tentativasTeste?: Prisma.TentativaTesteCreateNestedManyWithoutUsuarioInput
+  tentativasQuestoes?: Prisma.TentativaQuestaoCreateNestedManyWithoutUsuarioInput
+  testesQuestoesResponsavel?: Prisma.TesteQuestaoCreateNestedManyWithoutResponsavelInput
   questoesResponsavel?: Prisma.QuestaoCreateNestedManyWithoutResponsavelInput
   alternativasResponsavel?: Prisma.AlternativaCreateNestedManyWithoutResponsavelInput
   inscricoes?: Prisma.InscricaoCreateNestedManyWithoutUsuarioInput
@@ -794,6 +874,9 @@ export type UsuarioUncheckedCreateWithoutCodigosValidacaoInput = {
   modulosResponsavel?: Prisma.ModuloUncheckedCreateNestedManyWithoutResponsavelInput
   aulasResponsavel?: Prisma.AulaUncheckedCreateNestedManyWithoutResponsavelInput
   testesResponsavel?: Prisma.TesteUncheckedCreateNestedManyWithoutResponsavelInput
+  tentativasTeste?: Prisma.TentativaTesteUncheckedCreateNestedManyWithoutUsuarioInput
+  tentativasQuestoes?: Prisma.TentativaQuestaoUncheckedCreateNestedManyWithoutUsuarioInput
+  testesQuestoesResponsavel?: Prisma.TesteQuestaoUncheckedCreateNestedManyWithoutResponsavelInput
   questoesResponsavel?: Prisma.QuestaoUncheckedCreateNestedManyWithoutResponsavelInput
   alternativasResponsavel?: Prisma.AlternativaUncheckedCreateNestedManyWithoutResponsavelInput
   inscricoes?: Prisma.InscricaoUncheckedCreateNestedManyWithoutUsuarioInput
@@ -832,6 +915,9 @@ export type UsuarioUpdateWithoutCodigosValidacaoInput = {
   modulosResponsavel?: Prisma.ModuloUpdateManyWithoutResponsavelNestedInput
   aulasResponsavel?: Prisma.AulaUpdateManyWithoutResponsavelNestedInput
   testesResponsavel?: Prisma.TesteUpdateManyWithoutResponsavelNestedInput
+  tentativasTeste?: Prisma.TentativaTesteUpdateManyWithoutUsuarioNestedInput
+  tentativasQuestoes?: Prisma.TentativaQuestaoUpdateManyWithoutUsuarioNestedInput
+  testesQuestoesResponsavel?: Prisma.TesteQuestaoUpdateManyWithoutResponsavelNestedInput
   questoesResponsavel?: Prisma.QuestaoUpdateManyWithoutResponsavelNestedInput
   alternativasResponsavel?: Prisma.AlternativaUpdateManyWithoutResponsavelNestedInput
   inscricoes?: Prisma.InscricaoUpdateManyWithoutUsuarioNestedInput
@@ -854,6 +940,9 @@ export type UsuarioUncheckedUpdateWithoutCodigosValidacaoInput = {
   modulosResponsavel?: Prisma.ModuloUncheckedUpdateManyWithoutResponsavelNestedInput
   aulasResponsavel?: Prisma.AulaUncheckedUpdateManyWithoutResponsavelNestedInput
   testesResponsavel?: Prisma.TesteUncheckedUpdateManyWithoutResponsavelNestedInput
+  tentativasTeste?: Prisma.TentativaTesteUncheckedUpdateManyWithoutUsuarioNestedInput
+  tentativasQuestoes?: Prisma.TentativaQuestaoUncheckedUpdateManyWithoutUsuarioNestedInput
+  testesQuestoesResponsavel?: Prisma.TesteQuestaoUncheckedUpdateManyWithoutResponsavelNestedInput
   questoesResponsavel?: Prisma.QuestaoUncheckedUpdateManyWithoutResponsavelNestedInput
   alternativasResponsavel?: Prisma.AlternativaUncheckedUpdateManyWithoutResponsavelNestedInput
   inscricoes?: Prisma.InscricaoUncheckedUpdateManyWithoutUsuarioNestedInput
@@ -876,6 +965,9 @@ export type UsuarioCreateWithoutArquivosInput = {
   modulosResponsavel?: Prisma.ModuloCreateNestedManyWithoutResponsavelInput
   aulasResponsavel?: Prisma.AulaCreateNestedManyWithoutResponsavelInput
   testesResponsavel?: Prisma.TesteCreateNestedManyWithoutResponsavelInput
+  tentativasTeste?: Prisma.TentativaTesteCreateNestedManyWithoutUsuarioInput
+  tentativasQuestoes?: Prisma.TentativaQuestaoCreateNestedManyWithoutUsuarioInput
+  testesQuestoesResponsavel?: Prisma.TesteQuestaoCreateNestedManyWithoutResponsavelInput
   questoesResponsavel?: Prisma.QuestaoCreateNestedManyWithoutResponsavelInput
   alternativasResponsavel?: Prisma.AlternativaCreateNestedManyWithoutResponsavelInput
   inscricoes?: Prisma.InscricaoCreateNestedManyWithoutUsuarioInput
@@ -898,6 +990,9 @@ export type UsuarioUncheckedCreateWithoutArquivosInput = {
   modulosResponsavel?: Prisma.ModuloUncheckedCreateNestedManyWithoutResponsavelInput
   aulasResponsavel?: Prisma.AulaUncheckedCreateNestedManyWithoutResponsavelInput
   testesResponsavel?: Prisma.TesteUncheckedCreateNestedManyWithoutResponsavelInput
+  tentativasTeste?: Prisma.TentativaTesteUncheckedCreateNestedManyWithoutUsuarioInput
+  tentativasQuestoes?: Prisma.TentativaQuestaoUncheckedCreateNestedManyWithoutUsuarioInput
+  testesQuestoesResponsavel?: Prisma.TesteQuestaoUncheckedCreateNestedManyWithoutResponsavelInput
   questoesResponsavel?: Prisma.QuestaoUncheckedCreateNestedManyWithoutResponsavelInput
   alternativasResponsavel?: Prisma.AlternativaUncheckedCreateNestedManyWithoutResponsavelInput
   inscricoes?: Prisma.InscricaoUncheckedCreateNestedManyWithoutUsuarioInput
@@ -936,6 +1031,9 @@ export type UsuarioUpdateWithoutArquivosInput = {
   modulosResponsavel?: Prisma.ModuloUpdateManyWithoutResponsavelNestedInput
   aulasResponsavel?: Prisma.AulaUpdateManyWithoutResponsavelNestedInput
   testesResponsavel?: Prisma.TesteUpdateManyWithoutResponsavelNestedInput
+  tentativasTeste?: Prisma.TentativaTesteUpdateManyWithoutUsuarioNestedInput
+  tentativasQuestoes?: Prisma.TentativaQuestaoUpdateManyWithoutUsuarioNestedInput
+  testesQuestoesResponsavel?: Prisma.TesteQuestaoUpdateManyWithoutResponsavelNestedInput
   questoesResponsavel?: Prisma.QuestaoUpdateManyWithoutResponsavelNestedInput
   alternativasResponsavel?: Prisma.AlternativaUpdateManyWithoutResponsavelNestedInput
   inscricoes?: Prisma.InscricaoUpdateManyWithoutUsuarioNestedInput
@@ -958,6 +1056,9 @@ export type UsuarioUncheckedUpdateWithoutArquivosInput = {
   modulosResponsavel?: Prisma.ModuloUncheckedUpdateManyWithoutResponsavelNestedInput
   aulasResponsavel?: Prisma.AulaUncheckedUpdateManyWithoutResponsavelNestedInput
   testesResponsavel?: Prisma.TesteUncheckedUpdateManyWithoutResponsavelNestedInput
+  tentativasTeste?: Prisma.TentativaTesteUncheckedUpdateManyWithoutUsuarioNestedInput
+  tentativasQuestoes?: Prisma.TentativaQuestaoUncheckedUpdateManyWithoutUsuarioNestedInput
+  testesQuestoesResponsavel?: Prisma.TesteQuestaoUncheckedUpdateManyWithoutResponsavelNestedInput
   questoesResponsavel?: Prisma.QuestaoUncheckedUpdateManyWithoutResponsavelNestedInput
   alternativasResponsavel?: Prisma.AlternativaUncheckedUpdateManyWithoutResponsavelNestedInput
   inscricoes?: Prisma.InscricaoUncheckedUpdateManyWithoutUsuarioNestedInput
@@ -980,6 +1081,9 @@ export type UsuarioCreateWithoutCursosResponsavelInput = {
   modulosResponsavel?: Prisma.ModuloCreateNestedManyWithoutResponsavelInput
   aulasResponsavel?: Prisma.AulaCreateNestedManyWithoutResponsavelInput
   testesResponsavel?: Prisma.TesteCreateNestedManyWithoutResponsavelInput
+  tentativasTeste?: Prisma.TentativaTesteCreateNestedManyWithoutUsuarioInput
+  tentativasQuestoes?: Prisma.TentativaQuestaoCreateNestedManyWithoutUsuarioInput
+  testesQuestoesResponsavel?: Prisma.TesteQuestaoCreateNestedManyWithoutResponsavelInput
   questoesResponsavel?: Prisma.QuestaoCreateNestedManyWithoutResponsavelInput
   alternativasResponsavel?: Prisma.AlternativaCreateNestedManyWithoutResponsavelInput
   inscricoes?: Prisma.InscricaoCreateNestedManyWithoutUsuarioInput
@@ -1002,6 +1106,9 @@ export type UsuarioUncheckedCreateWithoutCursosResponsavelInput = {
   modulosResponsavel?: Prisma.ModuloUncheckedCreateNestedManyWithoutResponsavelInput
   aulasResponsavel?: Prisma.AulaUncheckedCreateNestedManyWithoutResponsavelInput
   testesResponsavel?: Prisma.TesteUncheckedCreateNestedManyWithoutResponsavelInput
+  tentativasTeste?: Prisma.TentativaTesteUncheckedCreateNestedManyWithoutUsuarioInput
+  tentativasQuestoes?: Prisma.TentativaQuestaoUncheckedCreateNestedManyWithoutUsuarioInput
+  testesQuestoesResponsavel?: Prisma.TesteQuestaoUncheckedCreateNestedManyWithoutResponsavelInput
   questoesResponsavel?: Prisma.QuestaoUncheckedCreateNestedManyWithoutResponsavelInput
   alternativasResponsavel?: Prisma.AlternativaUncheckedCreateNestedManyWithoutResponsavelInput
   inscricoes?: Prisma.InscricaoUncheckedCreateNestedManyWithoutUsuarioInput
@@ -1029,6 +1136,9 @@ export type UsuarioCreateWithoutCursosAutorizadosInput = {
   modulosResponsavel?: Prisma.ModuloCreateNestedManyWithoutResponsavelInput
   aulasResponsavel?: Prisma.AulaCreateNestedManyWithoutResponsavelInput
   testesResponsavel?: Prisma.TesteCreateNestedManyWithoutResponsavelInput
+  tentativasTeste?: Prisma.TentativaTesteCreateNestedManyWithoutUsuarioInput
+  tentativasQuestoes?: Prisma.TentativaQuestaoCreateNestedManyWithoutUsuarioInput
+  testesQuestoesResponsavel?: Prisma.TesteQuestaoCreateNestedManyWithoutResponsavelInput
   questoesResponsavel?: Prisma.QuestaoCreateNestedManyWithoutResponsavelInput
   alternativasResponsavel?: Prisma.AlternativaCreateNestedManyWithoutResponsavelInput
   inscricoes?: Prisma.InscricaoCreateNestedManyWithoutUsuarioInput
@@ -1051,6 +1161,9 @@ export type UsuarioUncheckedCreateWithoutCursosAutorizadosInput = {
   modulosResponsavel?: Prisma.ModuloUncheckedCreateNestedManyWithoutResponsavelInput
   aulasResponsavel?: Prisma.AulaUncheckedCreateNestedManyWithoutResponsavelInput
   testesResponsavel?: Prisma.TesteUncheckedCreateNestedManyWithoutResponsavelInput
+  tentativasTeste?: Prisma.TentativaTesteUncheckedCreateNestedManyWithoutUsuarioInput
+  tentativasQuestoes?: Prisma.TentativaQuestaoUncheckedCreateNestedManyWithoutUsuarioInput
+  testesQuestoesResponsavel?: Prisma.TesteQuestaoUncheckedCreateNestedManyWithoutResponsavelInput
   questoesResponsavel?: Prisma.QuestaoUncheckedCreateNestedManyWithoutResponsavelInput
   alternativasResponsavel?: Prisma.AlternativaUncheckedCreateNestedManyWithoutResponsavelInput
   inscricoes?: Prisma.InscricaoUncheckedCreateNestedManyWithoutUsuarioInput
@@ -1089,6 +1202,9 @@ export type UsuarioUpdateWithoutCursosResponsavelInput = {
   modulosResponsavel?: Prisma.ModuloUpdateManyWithoutResponsavelNestedInput
   aulasResponsavel?: Prisma.AulaUpdateManyWithoutResponsavelNestedInput
   testesResponsavel?: Prisma.TesteUpdateManyWithoutResponsavelNestedInput
+  tentativasTeste?: Prisma.TentativaTesteUpdateManyWithoutUsuarioNestedInput
+  tentativasQuestoes?: Prisma.TentativaQuestaoUpdateManyWithoutUsuarioNestedInput
+  testesQuestoesResponsavel?: Prisma.TesteQuestaoUpdateManyWithoutResponsavelNestedInput
   questoesResponsavel?: Prisma.QuestaoUpdateManyWithoutResponsavelNestedInput
   alternativasResponsavel?: Prisma.AlternativaUpdateManyWithoutResponsavelNestedInput
   inscricoes?: Prisma.InscricaoUpdateManyWithoutUsuarioNestedInput
@@ -1111,6 +1227,9 @@ export type UsuarioUncheckedUpdateWithoutCursosResponsavelInput = {
   modulosResponsavel?: Prisma.ModuloUncheckedUpdateManyWithoutResponsavelNestedInput
   aulasResponsavel?: Prisma.AulaUncheckedUpdateManyWithoutResponsavelNestedInput
   testesResponsavel?: Prisma.TesteUncheckedUpdateManyWithoutResponsavelNestedInput
+  tentativasTeste?: Prisma.TentativaTesteUncheckedUpdateManyWithoutUsuarioNestedInput
+  tentativasQuestoes?: Prisma.TentativaQuestaoUncheckedUpdateManyWithoutUsuarioNestedInput
+  testesQuestoesResponsavel?: Prisma.TesteQuestaoUncheckedUpdateManyWithoutResponsavelNestedInput
   questoesResponsavel?: Prisma.QuestaoUncheckedUpdateManyWithoutResponsavelNestedInput
   alternativasResponsavel?: Prisma.AlternativaUncheckedUpdateManyWithoutResponsavelNestedInput
   inscricoes?: Prisma.InscricaoUncheckedUpdateManyWithoutUsuarioNestedInput
@@ -1144,6 +1263,9 @@ export type UsuarioUpdateWithoutCursosAutorizadosInput = {
   modulosResponsavel?: Prisma.ModuloUpdateManyWithoutResponsavelNestedInput
   aulasResponsavel?: Prisma.AulaUpdateManyWithoutResponsavelNestedInput
   testesResponsavel?: Prisma.TesteUpdateManyWithoutResponsavelNestedInput
+  tentativasTeste?: Prisma.TentativaTesteUpdateManyWithoutUsuarioNestedInput
+  tentativasQuestoes?: Prisma.TentativaQuestaoUpdateManyWithoutUsuarioNestedInput
+  testesQuestoesResponsavel?: Prisma.TesteQuestaoUpdateManyWithoutResponsavelNestedInput
   questoesResponsavel?: Prisma.QuestaoUpdateManyWithoutResponsavelNestedInput
   alternativasResponsavel?: Prisma.AlternativaUpdateManyWithoutResponsavelNestedInput
   inscricoes?: Prisma.InscricaoUpdateManyWithoutUsuarioNestedInput
@@ -1166,6 +1288,9 @@ export type UsuarioUncheckedUpdateWithoutCursosAutorizadosInput = {
   modulosResponsavel?: Prisma.ModuloUncheckedUpdateManyWithoutResponsavelNestedInput
   aulasResponsavel?: Prisma.AulaUncheckedUpdateManyWithoutResponsavelNestedInput
   testesResponsavel?: Prisma.TesteUncheckedUpdateManyWithoutResponsavelNestedInput
+  tentativasTeste?: Prisma.TentativaTesteUncheckedUpdateManyWithoutUsuarioNestedInput
+  tentativasQuestoes?: Prisma.TentativaQuestaoUncheckedUpdateManyWithoutUsuarioNestedInput
+  testesQuestoesResponsavel?: Prisma.TesteQuestaoUncheckedUpdateManyWithoutResponsavelNestedInput
   questoesResponsavel?: Prisma.QuestaoUncheckedUpdateManyWithoutResponsavelNestedInput
   alternativasResponsavel?: Prisma.AlternativaUncheckedUpdateManyWithoutResponsavelNestedInput
   inscricoes?: Prisma.InscricaoUncheckedUpdateManyWithoutUsuarioNestedInput
@@ -1188,6 +1313,9 @@ export type UsuarioCreateWithoutSessoesResponsavelInput = {
   modulosResponsavel?: Prisma.ModuloCreateNestedManyWithoutResponsavelInput
   aulasResponsavel?: Prisma.AulaCreateNestedManyWithoutResponsavelInput
   testesResponsavel?: Prisma.TesteCreateNestedManyWithoutResponsavelInput
+  tentativasTeste?: Prisma.TentativaTesteCreateNestedManyWithoutUsuarioInput
+  tentativasQuestoes?: Prisma.TentativaQuestaoCreateNestedManyWithoutUsuarioInput
+  testesQuestoesResponsavel?: Prisma.TesteQuestaoCreateNestedManyWithoutResponsavelInput
   questoesResponsavel?: Prisma.QuestaoCreateNestedManyWithoutResponsavelInput
   alternativasResponsavel?: Prisma.AlternativaCreateNestedManyWithoutResponsavelInput
   inscricoes?: Prisma.InscricaoCreateNestedManyWithoutUsuarioInput
@@ -1210,6 +1338,9 @@ export type UsuarioUncheckedCreateWithoutSessoesResponsavelInput = {
   modulosResponsavel?: Prisma.ModuloUncheckedCreateNestedManyWithoutResponsavelInput
   aulasResponsavel?: Prisma.AulaUncheckedCreateNestedManyWithoutResponsavelInput
   testesResponsavel?: Prisma.TesteUncheckedCreateNestedManyWithoutResponsavelInput
+  tentativasTeste?: Prisma.TentativaTesteUncheckedCreateNestedManyWithoutUsuarioInput
+  tentativasQuestoes?: Prisma.TentativaQuestaoUncheckedCreateNestedManyWithoutUsuarioInput
+  testesQuestoesResponsavel?: Prisma.TesteQuestaoUncheckedCreateNestedManyWithoutResponsavelInput
   questoesResponsavel?: Prisma.QuestaoUncheckedCreateNestedManyWithoutResponsavelInput
   alternativasResponsavel?: Prisma.AlternativaUncheckedCreateNestedManyWithoutResponsavelInput
   inscricoes?: Prisma.InscricaoUncheckedCreateNestedManyWithoutUsuarioInput
@@ -1248,6 +1379,9 @@ export type UsuarioUpdateWithoutSessoesResponsavelInput = {
   modulosResponsavel?: Prisma.ModuloUpdateManyWithoutResponsavelNestedInput
   aulasResponsavel?: Prisma.AulaUpdateManyWithoutResponsavelNestedInput
   testesResponsavel?: Prisma.TesteUpdateManyWithoutResponsavelNestedInput
+  tentativasTeste?: Prisma.TentativaTesteUpdateManyWithoutUsuarioNestedInput
+  tentativasQuestoes?: Prisma.TentativaQuestaoUpdateManyWithoutUsuarioNestedInput
+  testesQuestoesResponsavel?: Prisma.TesteQuestaoUpdateManyWithoutResponsavelNestedInput
   questoesResponsavel?: Prisma.QuestaoUpdateManyWithoutResponsavelNestedInput
   alternativasResponsavel?: Prisma.AlternativaUpdateManyWithoutResponsavelNestedInput
   inscricoes?: Prisma.InscricaoUpdateManyWithoutUsuarioNestedInput
@@ -1270,6 +1404,9 @@ export type UsuarioUncheckedUpdateWithoutSessoesResponsavelInput = {
   modulosResponsavel?: Prisma.ModuloUncheckedUpdateManyWithoutResponsavelNestedInput
   aulasResponsavel?: Prisma.AulaUncheckedUpdateManyWithoutResponsavelNestedInput
   testesResponsavel?: Prisma.TesteUncheckedUpdateManyWithoutResponsavelNestedInput
+  tentativasTeste?: Prisma.TentativaTesteUncheckedUpdateManyWithoutUsuarioNestedInput
+  tentativasQuestoes?: Prisma.TentativaQuestaoUncheckedUpdateManyWithoutUsuarioNestedInput
+  testesQuestoesResponsavel?: Prisma.TesteQuestaoUncheckedUpdateManyWithoutResponsavelNestedInput
   questoesResponsavel?: Prisma.QuestaoUncheckedUpdateManyWithoutResponsavelNestedInput
   alternativasResponsavel?: Prisma.AlternativaUncheckedUpdateManyWithoutResponsavelNestedInput
   inscricoes?: Prisma.InscricaoUncheckedUpdateManyWithoutUsuarioNestedInput
@@ -1292,6 +1429,9 @@ export type UsuarioCreateWithoutModulosResponsavelInput = {
   sessoesResponsavel?: Prisma.SessaoCreateNestedManyWithoutResponsavelInput
   aulasResponsavel?: Prisma.AulaCreateNestedManyWithoutResponsavelInput
   testesResponsavel?: Prisma.TesteCreateNestedManyWithoutResponsavelInput
+  tentativasTeste?: Prisma.TentativaTesteCreateNestedManyWithoutUsuarioInput
+  tentativasQuestoes?: Prisma.TentativaQuestaoCreateNestedManyWithoutUsuarioInput
+  testesQuestoesResponsavel?: Prisma.TesteQuestaoCreateNestedManyWithoutResponsavelInput
   questoesResponsavel?: Prisma.QuestaoCreateNestedManyWithoutResponsavelInput
   alternativasResponsavel?: Prisma.AlternativaCreateNestedManyWithoutResponsavelInput
   inscricoes?: Prisma.InscricaoCreateNestedManyWithoutUsuarioInput
@@ -1314,6 +1454,9 @@ export type UsuarioUncheckedCreateWithoutModulosResponsavelInput = {
   sessoesResponsavel?: Prisma.SessaoUncheckedCreateNestedManyWithoutResponsavelInput
   aulasResponsavel?: Prisma.AulaUncheckedCreateNestedManyWithoutResponsavelInput
   testesResponsavel?: Prisma.TesteUncheckedCreateNestedManyWithoutResponsavelInput
+  tentativasTeste?: Prisma.TentativaTesteUncheckedCreateNestedManyWithoutUsuarioInput
+  tentativasQuestoes?: Prisma.TentativaQuestaoUncheckedCreateNestedManyWithoutUsuarioInput
+  testesQuestoesResponsavel?: Prisma.TesteQuestaoUncheckedCreateNestedManyWithoutResponsavelInput
   questoesResponsavel?: Prisma.QuestaoUncheckedCreateNestedManyWithoutResponsavelInput
   alternativasResponsavel?: Prisma.AlternativaUncheckedCreateNestedManyWithoutResponsavelInput
   inscricoes?: Prisma.InscricaoUncheckedCreateNestedManyWithoutUsuarioInput
@@ -1352,6 +1495,9 @@ export type UsuarioUpdateWithoutModulosResponsavelInput = {
   sessoesResponsavel?: Prisma.SessaoUpdateManyWithoutResponsavelNestedInput
   aulasResponsavel?: Prisma.AulaUpdateManyWithoutResponsavelNestedInput
   testesResponsavel?: Prisma.TesteUpdateManyWithoutResponsavelNestedInput
+  tentativasTeste?: Prisma.TentativaTesteUpdateManyWithoutUsuarioNestedInput
+  tentativasQuestoes?: Prisma.TentativaQuestaoUpdateManyWithoutUsuarioNestedInput
+  testesQuestoesResponsavel?: Prisma.TesteQuestaoUpdateManyWithoutResponsavelNestedInput
   questoesResponsavel?: Prisma.QuestaoUpdateManyWithoutResponsavelNestedInput
   alternativasResponsavel?: Prisma.AlternativaUpdateManyWithoutResponsavelNestedInput
   inscricoes?: Prisma.InscricaoUpdateManyWithoutUsuarioNestedInput
@@ -1374,6 +1520,9 @@ export type UsuarioUncheckedUpdateWithoutModulosResponsavelInput = {
   sessoesResponsavel?: Prisma.SessaoUncheckedUpdateManyWithoutResponsavelNestedInput
   aulasResponsavel?: Prisma.AulaUncheckedUpdateManyWithoutResponsavelNestedInput
   testesResponsavel?: Prisma.TesteUncheckedUpdateManyWithoutResponsavelNestedInput
+  tentativasTeste?: Prisma.TentativaTesteUncheckedUpdateManyWithoutUsuarioNestedInput
+  tentativasQuestoes?: Prisma.TentativaQuestaoUncheckedUpdateManyWithoutUsuarioNestedInput
+  testesQuestoesResponsavel?: Prisma.TesteQuestaoUncheckedUpdateManyWithoutResponsavelNestedInput
   questoesResponsavel?: Prisma.QuestaoUncheckedUpdateManyWithoutResponsavelNestedInput
   alternativasResponsavel?: Prisma.AlternativaUncheckedUpdateManyWithoutResponsavelNestedInput
   inscricoes?: Prisma.InscricaoUncheckedUpdateManyWithoutUsuarioNestedInput
@@ -1396,6 +1545,9 @@ export type UsuarioCreateWithoutAulasResponsavelInput = {
   sessoesResponsavel?: Prisma.SessaoCreateNestedManyWithoutResponsavelInput
   modulosResponsavel?: Prisma.ModuloCreateNestedManyWithoutResponsavelInput
   testesResponsavel?: Prisma.TesteCreateNestedManyWithoutResponsavelInput
+  tentativasTeste?: Prisma.TentativaTesteCreateNestedManyWithoutUsuarioInput
+  tentativasQuestoes?: Prisma.TentativaQuestaoCreateNestedManyWithoutUsuarioInput
+  testesQuestoesResponsavel?: Prisma.TesteQuestaoCreateNestedManyWithoutResponsavelInput
   questoesResponsavel?: Prisma.QuestaoCreateNestedManyWithoutResponsavelInput
   alternativasResponsavel?: Prisma.AlternativaCreateNestedManyWithoutResponsavelInput
   inscricoes?: Prisma.InscricaoCreateNestedManyWithoutUsuarioInput
@@ -1418,6 +1570,9 @@ export type UsuarioUncheckedCreateWithoutAulasResponsavelInput = {
   sessoesResponsavel?: Prisma.SessaoUncheckedCreateNestedManyWithoutResponsavelInput
   modulosResponsavel?: Prisma.ModuloUncheckedCreateNestedManyWithoutResponsavelInput
   testesResponsavel?: Prisma.TesteUncheckedCreateNestedManyWithoutResponsavelInput
+  tentativasTeste?: Prisma.TentativaTesteUncheckedCreateNestedManyWithoutUsuarioInput
+  tentativasQuestoes?: Prisma.TentativaQuestaoUncheckedCreateNestedManyWithoutUsuarioInput
+  testesQuestoesResponsavel?: Prisma.TesteQuestaoUncheckedCreateNestedManyWithoutResponsavelInput
   questoesResponsavel?: Prisma.QuestaoUncheckedCreateNestedManyWithoutResponsavelInput
   alternativasResponsavel?: Prisma.AlternativaUncheckedCreateNestedManyWithoutResponsavelInput
   inscricoes?: Prisma.InscricaoUncheckedCreateNestedManyWithoutUsuarioInput
@@ -1456,6 +1611,9 @@ export type UsuarioUpdateWithoutAulasResponsavelInput = {
   sessoesResponsavel?: Prisma.SessaoUpdateManyWithoutResponsavelNestedInput
   modulosResponsavel?: Prisma.ModuloUpdateManyWithoutResponsavelNestedInput
   testesResponsavel?: Prisma.TesteUpdateManyWithoutResponsavelNestedInput
+  tentativasTeste?: Prisma.TentativaTesteUpdateManyWithoutUsuarioNestedInput
+  tentativasQuestoes?: Prisma.TentativaQuestaoUpdateManyWithoutUsuarioNestedInput
+  testesQuestoesResponsavel?: Prisma.TesteQuestaoUpdateManyWithoutResponsavelNestedInput
   questoesResponsavel?: Prisma.QuestaoUpdateManyWithoutResponsavelNestedInput
   alternativasResponsavel?: Prisma.AlternativaUpdateManyWithoutResponsavelNestedInput
   inscricoes?: Prisma.InscricaoUpdateManyWithoutUsuarioNestedInput
@@ -1478,6 +1636,9 @@ export type UsuarioUncheckedUpdateWithoutAulasResponsavelInput = {
   sessoesResponsavel?: Prisma.SessaoUncheckedUpdateManyWithoutResponsavelNestedInput
   modulosResponsavel?: Prisma.ModuloUncheckedUpdateManyWithoutResponsavelNestedInput
   testesResponsavel?: Prisma.TesteUncheckedUpdateManyWithoutResponsavelNestedInput
+  tentativasTeste?: Prisma.TentativaTesteUncheckedUpdateManyWithoutUsuarioNestedInput
+  tentativasQuestoes?: Prisma.TentativaQuestaoUncheckedUpdateManyWithoutUsuarioNestedInput
+  testesQuestoesResponsavel?: Prisma.TesteQuestaoUncheckedUpdateManyWithoutResponsavelNestedInput
   questoesResponsavel?: Prisma.QuestaoUncheckedUpdateManyWithoutResponsavelNestedInput
   alternativasResponsavel?: Prisma.AlternativaUncheckedUpdateManyWithoutResponsavelNestedInput
   inscricoes?: Prisma.InscricaoUncheckedUpdateManyWithoutUsuarioNestedInput
@@ -1500,6 +1661,9 @@ export type UsuarioCreateWithoutTestesResponsavelInput = {
   sessoesResponsavel?: Prisma.SessaoCreateNestedManyWithoutResponsavelInput
   modulosResponsavel?: Prisma.ModuloCreateNestedManyWithoutResponsavelInput
   aulasResponsavel?: Prisma.AulaCreateNestedManyWithoutResponsavelInput
+  tentativasTeste?: Prisma.TentativaTesteCreateNestedManyWithoutUsuarioInput
+  tentativasQuestoes?: Prisma.TentativaQuestaoCreateNestedManyWithoutUsuarioInput
+  testesQuestoesResponsavel?: Prisma.TesteQuestaoCreateNestedManyWithoutResponsavelInput
   questoesResponsavel?: Prisma.QuestaoCreateNestedManyWithoutResponsavelInput
   alternativasResponsavel?: Prisma.AlternativaCreateNestedManyWithoutResponsavelInput
   inscricoes?: Prisma.InscricaoCreateNestedManyWithoutUsuarioInput
@@ -1522,6 +1686,9 @@ export type UsuarioUncheckedCreateWithoutTestesResponsavelInput = {
   sessoesResponsavel?: Prisma.SessaoUncheckedCreateNestedManyWithoutResponsavelInput
   modulosResponsavel?: Prisma.ModuloUncheckedCreateNestedManyWithoutResponsavelInput
   aulasResponsavel?: Prisma.AulaUncheckedCreateNestedManyWithoutResponsavelInput
+  tentativasTeste?: Prisma.TentativaTesteUncheckedCreateNestedManyWithoutUsuarioInput
+  tentativasQuestoes?: Prisma.TentativaQuestaoUncheckedCreateNestedManyWithoutUsuarioInput
+  testesQuestoesResponsavel?: Prisma.TesteQuestaoUncheckedCreateNestedManyWithoutResponsavelInput
   questoesResponsavel?: Prisma.QuestaoUncheckedCreateNestedManyWithoutResponsavelInput
   alternativasResponsavel?: Prisma.AlternativaUncheckedCreateNestedManyWithoutResponsavelInput
   inscricoes?: Prisma.InscricaoUncheckedCreateNestedManyWithoutUsuarioInput
@@ -1560,6 +1727,9 @@ export type UsuarioUpdateWithoutTestesResponsavelInput = {
   sessoesResponsavel?: Prisma.SessaoUpdateManyWithoutResponsavelNestedInput
   modulosResponsavel?: Prisma.ModuloUpdateManyWithoutResponsavelNestedInput
   aulasResponsavel?: Prisma.AulaUpdateManyWithoutResponsavelNestedInput
+  tentativasTeste?: Prisma.TentativaTesteUpdateManyWithoutUsuarioNestedInput
+  tentativasQuestoes?: Prisma.TentativaQuestaoUpdateManyWithoutUsuarioNestedInput
+  testesQuestoesResponsavel?: Prisma.TesteQuestaoUpdateManyWithoutResponsavelNestedInput
   questoesResponsavel?: Prisma.QuestaoUpdateManyWithoutResponsavelNestedInput
   alternativasResponsavel?: Prisma.AlternativaUpdateManyWithoutResponsavelNestedInput
   inscricoes?: Prisma.InscricaoUpdateManyWithoutUsuarioNestedInput
@@ -1582,6 +1752,9 @@ export type UsuarioUncheckedUpdateWithoutTestesResponsavelInput = {
   sessoesResponsavel?: Prisma.SessaoUncheckedUpdateManyWithoutResponsavelNestedInput
   modulosResponsavel?: Prisma.ModuloUncheckedUpdateManyWithoutResponsavelNestedInput
   aulasResponsavel?: Prisma.AulaUncheckedUpdateManyWithoutResponsavelNestedInput
+  tentativasTeste?: Prisma.TentativaTesteUncheckedUpdateManyWithoutUsuarioNestedInput
+  tentativasQuestoes?: Prisma.TentativaQuestaoUncheckedUpdateManyWithoutUsuarioNestedInput
+  testesQuestoesResponsavel?: Prisma.TesteQuestaoUncheckedUpdateManyWithoutResponsavelNestedInput
   questoesResponsavel?: Prisma.QuestaoUncheckedUpdateManyWithoutResponsavelNestedInput
   alternativasResponsavel?: Prisma.AlternativaUncheckedUpdateManyWithoutResponsavelNestedInput
   inscricoes?: Prisma.InscricaoUncheckedUpdateManyWithoutUsuarioNestedInput
@@ -1605,6 +1778,9 @@ export type UsuarioCreateWithoutQuestoesResponsavelInput = {
   modulosResponsavel?: Prisma.ModuloCreateNestedManyWithoutResponsavelInput
   aulasResponsavel?: Prisma.AulaCreateNestedManyWithoutResponsavelInput
   testesResponsavel?: Prisma.TesteCreateNestedManyWithoutResponsavelInput
+  tentativasTeste?: Prisma.TentativaTesteCreateNestedManyWithoutUsuarioInput
+  tentativasQuestoes?: Prisma.TentativaQuestaoCreateNestedManyWithoutUsuarioInput
+  testesQuestoesResponsavel?: Prisma.TesteQuestaoCreateNestedManyWithoutResponsavelInput
   alternativasResponsavel?: Prisma.AlternativaCreateNestedManyWithoutResponsavelInput
   inscricoes?: Prisma.InscricaoCreateNestedManyWithoutUsuarioInput
 }
@@ -1627,6 +1803,9 @@ export type UsuarioUncheckedCreateWithoutQuestoesResponsavelInput = {
   modulosResponsavel?: Prisma.ModuloUncheckedCreateNestedManyWithoutResponsavelInput
   aulasResponsavel?: Prisma.AulaUncheckedCreateNestedManyWithoutResponsavelInput
   testesResponsavel?: Prisma.TesteUncheckedCreateNestedManyWithoutResponsavelInput
+  tentativasTeste?: Prisma.TentativaTesteUncheckedCreateNestedManyWithoutUsuarioInput
+  tentativasQuestoes?: Prisma.TentativaQuestaoUncheckedCreateNestedManyWithoutUsuarioInput
+  testesQuestoesResponsavel?: Prisma.TesteQuestaoUncheckedCreateNestedManyWithoutResponsavelInput
   alternativasResponsavel?: Prisma.AlternativaUncheckedCreateNestedManyWithoutResponsavelInput
   inscricoes?: Prisma.InscricaoUncheckedCreateNestedManyWithoutUsuarioInput
 }
@@ -1665,6 +1844,9 @@ export type UsuarioUpdateWithoutQuestoesResponsavelInput = {
   modulosResponsavel?: Prisma.ModuloUpdateManyWithoutResponsavelNestedInput
   aulasResponsavel?: Prisma.AulaUpdateManyWithoutResponsavelNestedInput
   testesResponsavel?: Prisma.TesteUpdateManyWithoutResponsavelNestedInput
+  tentativasTeste?: Prisma.TentativaTesteUpdateManyWithoutUsuarioNestedInput
+  tentativasQuestoes?: Prisma.TentativaQuestaoUpdateManyWithoutUsuarioNestedInput
+  testesQuestoesResponsavel?: Prisma.TesteQuestaoUpdateManyWithoutResponsavelNestedInput
   alternativasResponsavel?: Prisma.AlternativaUpdateManyWithoutResponsavelNestedInput
   inscricoes?: Prisma.InscricaoUpdateManyWithoutUsuarioNestedInput
 }
@@ -1687,6 +1869,9 @@ export type UsuarioUncheckedUpdateWithoutQuestoesResponsavelInput = {
   modulosResponsavel?: Prisma.ModuloUncheckedUpdateManyWithoutResponsavelNestedInput
   aulasResponsavel?: Prisma.AulaUncheckedUpdateManyWithoutResponsavelNestedInput
   testesResponsavel?: Prisma.TesteUncheckedUpdateManyWithoutResponsavelNestedInput
+  tentativasTeste?: Prisma.TentativaTesteUncheckedUpdateManyWithoutUsuarioNestedInput
+  tentativasQuestoes?: Prisma.TentativaQuestaoUncheckedUpdateManyWithoutUsuarioNestedInput
+  testesQuestoesResponsavel?: Prisma.TesteQuestaoUncheckedUpdateManyWithoutResponsavelNestedInput
   alternativasResponsavel?: Prisma.AlternativaUncheckedUpdateManyWithoutResponsavelNestedInput
   inscricoes?: Prisma.InscricaoUncheckedUpdateManyWithoutUsuarioNestedInput
 }
@@ -1709,6 +1894,9 @@ export type UsuarioCreateWithoutAlternativasResponsavelInput = {
   modulosResponsavel?: Prisma.ModuloCreateNestedManyWithoutResponsavelInput
   aulasResponsavel?: Prisma.AulaCreateNestedManyWithoutResponsavelInput
   testesResponsavel?: Prisma.TesteCreateNestedManyWithoutResponsavelInput
+  tentativasTeste?: Prisma.TentativaTesteCreateNestedManyWithoutUsuarioInput
+  tentativasQuestoes?: Prisma.TentativaQuestaoCreateNestedManyWithoutUsuarioInput
+  testesQuestoesResponsavel?: Prisma.TesteQuestaoCreateNestedManyWithoutResponsavelInput
   questoesResponsavel?: Prisma.QuestaoCreateNestedManyWithoutResponsavelInput
   inscricoes?: Prisma.InscricaoCreateNestedManyWithoutUsuarioInput
 }
@@ -1731,6 +1919,9 @@ export type UsuarioUncheckedCreateWithoutAlternativasResponsavelInput = {
   modulosResponsavel?: Prisma.ModuloUncheckedCreateNestedManyWithoutResponsavelInput
   aulasResponsavel?: Prisma.AulaUncheckedCreateNestedManyWithoutResponsavelInput
   testesResponsavel?: Prisma.TesteUncheckedCreateNestedManyWithoutResponsavelInput
+  tentativasTeste?: Prisma.TentativaTesteUncheckedCreateNestedManyWithoutUsuarioInput
+  tentativasQuestoes?: Prisma.TentativaQuestaoUncheckedCreateNestedManyWithoutUsuarioInput
+  testesQuestoesResponsavel?: Prisma.TesteQuestaoUncheckedCreateNestedManyWithoutResponsavelInput
   questoesResponsavel?: Prisma.QuestaoUncheckedCreateNestedManyWithoutResponsavelInput
   inscricoes?: Prisma.InscricaoUncheckedCreateNestedManyWithoutUsuarioInput
 }
@@ -1769,6 +1960,9 @@ export type UsuarioUpdateWithoutAlternativasResponsavelInput = {
   modulosResponsavel?: Prisma.ModuloUpdateManyWithoutResponsavelNestedInput
   aulasResponsavel?: Prisma.AulaUpdateManyWithoutResponsavelNestedInput
   testesResponsavel?: Prisma.TesteUpdateManyWithoutResponsavelNestedInput
+  tentativasTeste?: Prisma.TentativaTesteUpdateManyWithoutUsuarioNestedInput
+  tentativasQuestoes?: Prisma.TentativaQuestaoUpdateManyWithoutUsuarioNestedInput
+  testesQuestoesResponsavel?: Prisma.TesteQuestaoUpdateManyWithoutResponsavelNestedInput
   questoesResponsavel?: Prisma.QuestaoUpdateManyWithoutResponsavelNestedInput
   inscricoes?: Prisma.InscricaoUpdateManyWithoutUsuarioNestedInput
 }
@@ -1791,7 +1985,358 @@ export type UsuarioUncheckedUpdateWithoutAlternativasResponsavelInput = {
   modulosResponsavel?: Prisma.ModuloUncheckedUpdateManyWithoutResponsavelNestedInput
   aulasResponsavel?: Prisma.AulaUncheckedUpdateManyWithoutResponsavelNestedInput
   testesResponsavel?: Prisma.TesteUncheckedUpdateManyWithoutResponsavelNestedInput
+  tentativasTeste?: Prisma.TentativaTesteUncheckedUpdateManyWithoutUsuarioNestedInput
+  tentativasQuestoes?: Prisma.TentativaQuestaoUncheckedUpdateManyWithoutUsuarioNestedInput
+  testesQuestoesResponsavel?: Prisma.TesteQuestaoUncheckedUpdateManyWithoutResponsavelNestedInput
   questoesResponsavel?: Prisma.QuestaoUncheckedUpdateManyWithoutResponsavelNestedInput
+  inscricoes?: Prisma.InscricaoUncheckedUpdateManyWithoutUsuarioNestedInput
+}
+
+export type UsuarioCreateWithoutTestesQuestoesResponsavelInput = {
+  id?: string
+  nome: string
+  email: string
+  senha: string
+  tipo?: $Enums.TipoUsuario
+  status?: $Enums.StatusUsuario
+  criadoEm?: Date | string
+  atualizadoEm?: Date | string
+  perfil?: Prisma.PerfilCreateNestedOneWithoutUsuarioInput
+  codigosValidacao?: Prisma.CodigoValidacaoCreateNestedManyWithoutUsuarioInput
+  arquivos?: Prisma.ArquivoCreateNestedManyWithoutUsuarioInput
+  cursosResponsavel?: Prisma.CursoCreateNestedManyWithoutResponsavelInput
+  cursosAutorizados?: Prisma.CursoCreateNestedManyWithoutAdminAutorizadorInput
+  sessoesResponsavel?: Prisma.SessaoCreateNestedManyWithoutResponsavelInput
+  modulosResponsavel?: Prisma.ModuloCreateNestedManyWithoutResponsavelInput
+  aulasResponsavel?: Prisma.AulaCreateNestedManyWithoutResponsavelInput
+  testesResponsavel?: Prisma.TesteCreateNestedManyWithoutResponsavelInput
+  tentativasTeste?: Prisma.TentativaTesteCreateNestedManyWithoutUsuarioInput
+  tentativasQuestoes?: Prisma.TentativaQuestaoCreateNestedManyWithoutUsuarioInput
+  questoesResponsavel?: Prisma.QuestaoCreateNestedManyWithoutResponsavelInput
+  alternativasResponsavel?: Prisma.AlternativaCreateNestedManyWithoutResponsavelInput
+  inscricoes?: Prisma.InscricaoCreateNestedManyWithoutUsuarioInput
+}
+
+export type UsuarioUncheckedCreateWithoutTestesQuestoesResponsavelInput = {
+  id?: string
+  nome: string
+  email: string
+  senha: string
+  tipo?: $Enums.TipoUsuario
+  status?: $Enums.StatusUsuario
+  criadoEm?: Date | string
+  atualizadoEm?: Date | string
+  perfil?: Prisma.PerfilUncheckedCreateNestedOneWithoutUsuarioInput
+  codigosValidacao?: Prisma.CodigoValidacaoUncheckedCreateNestedManyWithoutUsuarioInput
+  arquivos?: Prisma.ArquivoUncheckedCreateNestedManyWithoutUsuarioInput
+  cursosResponsavel?: Prisma.CursoUncheckedCreateNestedManyWithoutResponsavelInput
+  cursosAutorizados?: Prisma.CursoUncheckedCreateNestedManyWithoutAdminAutorizadorInput
+  sessoesResponsavel?: Prisma.SessaoUncheckedCreateNestedManyWithoutResponsavelInput
+  modulosResponsavel?: Prisma.ModuloUncheckedCreateNestedManyWithoutResponsavelInput
+  aulasResponsavel?: Prisma.AulaUncheckedCreateNestedManyWithoutResponsavelInput
+  testesResponsavel?: Prisma.TesteUncheckedCreateNestedManyWithoutResponsavelInput
+  tentativasTeste?: Prisma.TentativaTesteUncheckedCreateNestedManyWithoutUsuarioInput
+  tentativasQuestoes?: Prisma.TentativaQuestaoUncheckedCreateNestedManyWithoutUsuarioInput
+  questoesResponsavel?: Prisma.QuestaoUncheckedCreateNestedManyWithoutResponsavelInput
+  alternativasResponsavel?: Prisma.AlternativaUncheckedCreateNestedManyWithoutResponsavelInput
+  inscricoes?: Prisma.InscricaoUncheckedCreateNestedManyWithoutUsuarioInput
+}
+
+export type UsuarioCreateOrConnectWithoutTestesQuestoesResponsavelInput = {
+  where: Prisma.UsuarioWhereUniqueInput
+  create: Prisma.XOR<Prisma.UsuarioCreateWithoutTestesQuestoesResponsavelInput, Prisma.UsuarioUncheckedCreateWithoutTestesQuestoesResponsavelInput>
+}
+
+export type UsuarioUpsertWithoutTestesQuestoesResponsavelInput = {
+  update: Prisma.XOR<Prisma.UsuarioUpdateWithoutTestesQuestoesResponsavelInput, Prisma.UsuarioUncheckedUpdateWithoutTestesQuestoesResponsavelInput>
+  create: Prisma.XOR<Prisma.UsuarioCreateWithoutTestesQuestoesResponsavelInput, Prisma.UsuarioUncheckedCreateWithoutTestesQuestoesResponsavelInput>
+  where?: Prisma.UsuarioWhereInput
+}
+
+export type UsuarioUpdateToOneWithWhereWithoutTestesQuestoesResponsavelInput = {
+  where?: Prisma.UsuarioWhereInput
+  data: Prisma.XOR<Prisma.UsuarioUpdateWithoutTestesQuestoesResponsavelInput, Prisma.UsuarioUncheckedUpdateWithoutTestesQuestoesResponsavelInput>
+}
+
+export type UsuarioUpdateWithoutTestesQuestoesResponsavelInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  nome?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  senha?: Prisma.StringFieldUpdateOperationsInput | string
+  tipo?: Prisma.EnumTipoUsuarioFieldUpdateOperationsInput | $Enums.TipoUsuario
+  status?: Prisma.EnumStatusUsuarioFieldUpdateOperationsInput | $Enums.StatusUsuario
+  criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  perfil?: Prisma.PerfilUpdateOneWithoutUsuarioNestedInput
+  codigosValidacao?: Prisma.CodigoValidacaoUpdateManyWithoutUsuarioNestedInput
+  arquivos?: Prisma.ArquivoUpdateManyWithoutUsuarioNestedInput
+  cursosResponsavel?: Prisma.CursoUpdateManyWithoutResponsavelNestedInput
+  cursosAutorizados?: Prisma.CursoUpdateManyWithoutAdminAutorizadorNestedInput
+  sessoesResponsavel?: Prisma.SessaoUpdateManyWithoutResponsavelNestedInput
+  modulosResponsavel?: Prisma.ModuloUpdateManyWithoutResponsavelNestedInput
+  aulasResponsavel?: Prisma.AulaUpdateManyWithoutResponsavelNestedInput
+  testesResponsavel?: Prisma.TesteUpdateManyWithoutResponsavelNestedInput
+  tentativasTeste?: Prisma.TentativaTesteUpdateManyWithoutUsuarioNestedInput
+  tentativasQuestoes?: Prisma.TentativaQuestaoUpdateManyWithoutUsuarioNestedInput
+  questoesResponsavel?: Prisma.QuestaoUpdateManyWithoutResponsavelNestedInput
+  alternativasResponsavel?: Prisma.AlternativaUpdateManyWithoutResponsavelNestedInput
+  inscricoes?: Prisma.InscricaoUpdateManyWithoutUsuarioNestedInput
+}
+
+export type UsuarioUncheckedUpdateWithoutTestesQuestoesResponsavelInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  nome?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  senha?: Prisma.StringFieldUpdateOperationsInput | string
+  tipo?: Prisma.EnumTipoUsuarioFieldUpdateOperationsInput | $Enums.TipoUsuario
+  status?: Prisma.EnumStatusUsuarioFieldUpdateOperationsInput | $Enums.StatusUsuario
+  criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  perfil?: Prisma.PerfilUncheckedUpdateOneWithoutUsuarioNestedInput
+  codigosValidacao?: Prisma.CodigoValidacaoUncheckedUpdateManyWithoutUsuarioNestedInput
+  arquivos?: Prisma.ArquivoUncheckedUpdateManyWithoutUsuarioNestedInput
+  cursosResponsavel?: Prisma.CursoUncheckedUpdateManyWithoutResponsavelNestedInput
+  cursosAutorizados?: Prisma.CursoUncheckedUpdateManyWithoutAdminAutorizadorNestedInput
+  sessoesResponsavel?: Prisma.SessaoUncheckedUpdateManyWithoutResponsavelNestedInput
+  modulosResponsavel?: Prisma.ModuloUncheckedUpdateManyWithoutResponsavelNestedInput
+  aulasResponsavel?: Prisma.AulaUncheckedUpdateManyWithoutResponsavelNestedInput
+  testesResponsavel?: Prisma.TesteUncheckedUpdateManyWithoutResponsavelNestedInput
+  tentativasTeste?: Prisma.TentativaTesteUncheckedUpdateManyWithoutUsuarioNestedInput
+  tentativasQuestoes?: Prisma.TentativaQuestaoUncheckedUpdateManyWithoutUsuarioNestedInput
+  questoesResponsavel?: Prisma.QuestaoUncheckedUpdateManyWithoutResponsavelNestedInput
+  alternativasResponsavel?: Prisma.AlternativaUncheckedUpdateManyWithoutResponsavelNestedInput
+  inscricoes?: Prisma.InscricaoUncheckedUpdateManyWithoutUsuarioNestedInput
+}
+
+export type UsuarioCreateWithoutTentativasTesteInput = {
+  id?: string
+  nome: string
+  email: string
+  senha: string
+  tipo?: $Enums.TipoUsuario
+  status?: $Enums.StatusUsuario
+  criadoEm?: Date | string
+  atualizadoEm?: Date | string
+  perfil?: Prisma.PerfilCreateNestedOneWithoutUsuarioInput
+  codigosValidacao?: Prisma.CodigoValidacaoCreateNestedManyWithoutUsuarioInput
+  arquivos?: Prisma.ArquivoCreateNestedManyWithoutUsuarioInput
+  cursosResponsavel?: Prisma.CursoCreateNestedManyWithoutResponsavelInput
+  cursosAutorizados?: Prisma.CursoCreateNestedManyWithoutAdminAutorizadorInput
+  sessoesResponsavel?: Prisma.SessaoCreateNestedManyWithoutResponsavelInput
+  modulosResponsavel?: Prisma.ModuloCreateNestedManyWithoutResponsavelInput
+  aulasResponsavel?: Prisma.AulaCreateNestedManyWithoutResponsavelInput
+  testesResponsavel?: Prisma.TesteCreateNestedManyWithoutResponsavelInput
+  tentativasQuestoes?: Prisma.TentativaQuestaoCreateNestedManyWithoutUsuarioInput
+  testesQuestoesResponsavel?: Prisma.TesteQuestaoCreateNestedManyWithoutResponsavelInput
+  questoesResponsavel?: Prisma.QuestaoCreateNestedManyWithoutResponsavelInput
+  alternativasResponsavel?: Prisma.AlternativaCreateNestedManyWithoutResponsavelInput
+  inscricoes?: Prisma.InscricaoCreateNestedManyWithoutUsuarioInput
+}
+
+export type UsuarioUncheckedCreateWithoutTentativasTesteInput = {
+  id?: string
+  nome: string
+  email: string
+  senha: string
+  tipo?: $Enums.TipoUsuario
+  status?: $Enums.StatusUsuario
+  criadoEm?: Date | string
+  atualizadoEm?: Date | string
+  perfil?: Prisma.PerfilUncheckedCreateNestedOneWithoutUsuarioInput
+  codigosValidacao?: Prisma.CodigoValidacaoUncheckedCreateNestedManyWithoutUsuarioInput
+  arquivos?: Prisma.ArquivoUncheckedCreateNestedManyWithoutUsuarioInput
+  cursosResponsavel?: Prisma.CursoUncheckedCreateNestedManyWithoutResponsavelInput
+  cursosAutorizados?: Prisma.CursoUncheckedCreateNestedManyWithoutAdminAutorizadorInput
+  sessoesResponsavel?: Prisma.SessaoUncheckedCreateNestedManyWithoutResponsavelInput
+  modulosResponsavel?: Prisma.ModuloUncheckedCreateNestedManyWithoutResponsavelInput
+  aulasResponsavel?: Prisma.AulaUncheckedCreateNestedManyWithoutResponsavelInput
+  testesResponsavel?: Prisma.TesteUncheckedCreateNestedManyWithoutResponsavelInput
+  tentativasQuestoes?: Prisma.TentativaQuestaoUncheckedCreateNestedManyWithoutUsuarioInput
+  testesQuestoesResponsavel?: Prisma.TesteQuestaoUncheckedCreateNestedManyWithoutResponsavelInput
+  questoesResponsavel?: Prisma.QuestaoUncheckedCreateNestedManyWithoutResponsavelInput
+  alternativasResponsavel?: Prisma.AlternativaUncheckedCreateNestedManyWithoutResponsavelInput
+  inscricoes?: Prisma.InscricaoUncheckedCreateNestedManyWithoutUsuarioInput
+}
+
+export type UsuarioCreateOrConnectWithoutTentativasTesteInput = {
+  where: Prisma.UsuarioWhereUniqueInput
+  create: Prisma.XOR<Prisma.UsuarioCreateWithoutTentativasTesteInput, Prisma.UsuarioUncheckedCreateWithoutTentativasTesteInput>
+}
+
+export type UsuarioUpsertWithoutTentativasTesteInput = {
+  update: Prisma.XOR<Prisma.UsuarioUpdateWithoutTentativasTesteInput, Prisma.UsuarioUncheckedUpdateWithoutTentativasTesteInput>
+  create: Prisma.XOR<Prisma.UsuarioCreateWithoutTentativasTesteInput, Prisma.UsuarioUncheckedCreateWithoutTentativasTesteInput>
+  where?: Prisma.UsuarioWhereInput
+}
+
+export type UsuarioUpdateToOneWithWhereWithoutTentativasTesteInput = {
+  where?: Prisma.UsuarioWhereInput
+  data: Prisma.XOR<Prisma.UsuarioUpdateWithoutTentativasTesteInput, Prisma.UsuarioUncheckedUpdateWithoutTentativasTesteInput>
+}
+
+export type UsuarioUpdateWithoutTentativasTesteInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  nome?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  senha?: Prisma.StringFieldUpdateOperationsInput | string
+  tipo?: Prisma.EnumTipoUsuarioFieldUpdateOperationsInput | $Enums.TipoUsuario
+  status?: Prisma.EnumStatusUsuarioFieldUpdateOperationsInput | $Enums.StatusUsuario
+  criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  perfil?: Prisma.PerfilUpdateOneWithoutUsuarioNestedInput
+  codigosValidacao?: Prisma.CodigoValidacaoUpdateManyWithoutUsuarioNestedInput
+  arquivos?: Prisma.ArquivoUpdateManyWithoutUsuarioNestedInput
+  cursosResponsavel?: Prisma.CursoUpdateManyWithoutResponsavelNestedInput
+  cursosAutorizados?: Prisma.CursoUpdateManyWithoutAdminAutorizadorNestedInput
+  sessoesResponsavel?: Prisma.SessaoUpdateManyWithoutResponsavelNestedInput
+  modulosResponsavel?: Prisma.ModuloUpdateManyWithoutResponsavelNestedInput
+  aulasResponsavel?: Prisma.AulaUpdateManyWithoutResponsavelNestedInput
+  testesResponsavel?: Prisma.TesteUpdateManyWithoutResponsavelNestedInput
+  tentativasQuestoes?: Prisma.TentativaQuestaoUpdateManyWithoutUsuarioNestedInput
+  testesQuestoesResponsavel?: Prisma.TesteQuestaoUpdateManyWithoutResponsavelNestedInput
+  questoesResponsavel?: Prisma.QuestaoUpdateManyWithoutResponsavelNestedInput
+  alternativasResponsavel?: Prisma.AlternativaUpdateManyWithoutResponsavelNestedInput
+  inscricoes?: Prisma.InscricaoUpdateManyWithoutUsuarioNestedInput
+}
+
+export type UsuarioUncheckedUpdateWithoutTentativasTesteInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  nome?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  senha?: Prisma.StringFieldUpdateOperationsInput | string
+  tipo?: Prisma.EnumTipoUsuarioFieldUpdateOperationsInput | $Enums.TipoUsuario
+  status?: Prisma.EnumStatusUsuarioFieldUpdateOperationsInput | $Enums.StatusUsuario
+  criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  perfil?: Prisma.PerfilUncheckedUpdateOneWithoutUsuarioNestedInput
+  codigosValidacao?: Prisma.CodigoValidacaoUncheckedUpdateManyWithoutUsuarioNestedInput
+  arquivos?: Prisma.ArquivoUncheckedUpdateManyWithoutUsuarioNestedInput
+  cursosResponsavel?: Prisma.CursoUncheckedUpdateManyWithoutResponsavelNestedInput
+  cursosAutorizados?: Prisma.CursoUncheckedUpdateManyWithoutAdminAutorizadorNestedInput
+  sessoesResponsavel?: Prisma.SessaoUncheckedUpdateManyWithoutResponsavelNestedInput
+  modulosResponsavel?: Prisma.ModuloUncheckedUpdateManyWithoutResponsavelNestedInput
+  aulasResponsavel?: Prisma.AulaUncheckedUpdateManyWithoutResponsavelNestedInput
+  testesResponsavel?: Prisma.TesteUncheckedUpdateManyWithoutResponsavelNestedInput
+  tentativasQuestoes?: Prisma.TentativaQuestaoUncheckedUpdateManyWithoutUsuarioNestedInput
+  testesQuestoesResponsavel?: Prisma.TesteQuestaoUncheckedUpdateManyWithoutResponsavelNestedInput
+  questoesResponsavel?: Prisma.QuestaoUncheckedUpdateManyWithoutResponsavelNestedInput
+  alternativasResponsavel?: Prisma.AlternativaUncheckedUpdateManyWithoutResponsavelNestedInput
+  inscricoes?: Prisma.InscricaoUncheckedUpdateManyWithoutUsuarioNestedInput
+}
+
+export type UsuarioCreateWithoutTentativasQuestoesInput = {
+  id?: string
+  nome: string
+  email: string
+  senha: string
+  tipo?: $Enums.TipoUsuario
+  status?: $Enums.StatusUsuario
+  criadoEm?: Date | string
+  atualizadoEm?: Date | string
+  perfil?: Prisma.PerfilCreateNestedOneWithoutUsuarioInput
+  codigosValidacao?: Prisma.CodigoValidacaoCreateNestedManyWithoutUsuarioInput
+  arquivos?: Prisma.ArquivoCreateNestedManyWithoutUsuarioInput
+  cursosResponsavel?: Prisma.CursoCreateNestedManyWithoutResponsavelInput
+  cursosAutorizados?: Prisma.CursoCreateNestedManyWithoutAdminAutorizadorInput
+  sessoesResponsavel?: Prisma.SessaoCreateNestedManyWithoutResponsavelInput
+  modulosResponsavel?: Prisma.ModuloCreateNestedManyWithoutResponsavelInput
+  aulasResponsavel?: Prisma.AulaCreateNestedManyWithoutResponsavelInput
+  testesResponsavel?: Prisma.TesteCreateNestedManyWithoutResponsavelInput
+  tentativasTeste?: Prisma.TentativaTesteCreateNestedManyWithoutUsuarioInput
+  testesQuestoesResponsavel?: Prisma.TesteQuestaoCreateNestedManyWithoutResponsavelInput
+  questoesResponsavel?: Prisma.QuestaoCreateNestedManyWithoutResponsavelInput
+  alternativasResponsavel?: Prisma.AlternativaCreateNestedManyWithoutResponsavelInput
+  inscricoes?: Prisma.InscricaoCreateNestedManyWithoutUsuarioInput
+}
+
+export type UsuarioUncheckedCreateWithoutTentativasQuestoesInput = {
+  id?: string
+  nome: string
+  email: string
+  senha: string
+  tipo?: $Enums.TipoUsuario
+  status?: $Enums.StatusUsuario
+  criadoEm?: Date | string
+  atualizadoEm?: Date | string
+  perfil?: Prisma.PerfilUncheckedCreateNestedOneWithoutUsuarioInput
+  codigosValidacao?: Prisma.CodigoValidacaoUncheckedCreateNestedManyWithoutUsuarioInput
+  arquivos?: Prisma.ArquivoUncheckedCreateNestedManyWithoutUsuarioInput
+  cursosResponsavel?: Prisma.CursoUncheckedCreateNestedManyWithoutResponsavelInput
+  cursosAutorizados?: Prisma.CursoUncheckedCreateNestedManyWithoutAdminAutorizadorInput
+  sessoesResponsavel?: Prisma.SessaoUncheckedCreateNestedManyWithoutResponsavelInput
+  modulosResponsavel?: Prisma.ModuloUncheckedCreateNestedManyWithoutResponsavelInput
+  aulasResponsavel?: Prisma.AulaUncheckedCreateNestedManyWithoutResponsavelInput
+  testesResponsavel?: Prisma.TesteUncheckedCreateNestedManyWithoutResponsavelInput
+  tentativasTeste?: Prisma.TentativaTesteUncheckedCreateNestedManyWithoutUsuarioInput
+  testesQuestoesResponsavel?: Prisma.TesteQuestaoUncheckedCreateNestedManyWithoutResponsavelInput
+  questoesResponsavel?: Prisma.QuestaoUncheckedCreateNestedManyWithoutResponsavelInput
+  alternativasResponsavel?: Prisma.AlternativaUncheckedCreateNestedManyWithoutResponsavelInput
+  inscricoes?: Prisma.InscricaoUncheckedCreateNestedManyWithoutUsuarioInput
+}
+
+export type UsuarioCreateOrConnectWithoutTentativasQuestoesInput = {
+  where: Prisma.UsuarioWhereUniqueInput
+  create: Prisma.XOR<Prisma.UsuarioCreateWithoutTentativasQuestoesInput, Prisma.UsuarioUncheckedCreateWithoutTentativasQuestoesInput>
+}
+
+export type UsuarioUpsertWithoutTentativasQuestoesInput = {
+  update: Prisma.XOR<Prisma.UsuarioUpdateWithoutTentativasQuestoesInput, Prisma.UsuarioUncheckedUpdateWithoutTentativasQuestoesInput>
+  create: Prisma.XOR<Prisma.UsuarioCreateWithoutTentativasQuestoesInput, Prisma.UsuarioUncheckedCreateWithoutTentativasQuestoesInput>
+  where?: Prisma.UsuarioWhereInput
+}
+
+export type UsuarioUpdateToOneWithWhereWithoutTentativasQuestoesInput = {
+  where?: Prisma.UsuarioWhereInput
+  data: Prisma.XOR<Prisma.UsuarioUpdateWithoutTentativasQuestoesInput, Prisma.UsuarioUncheckedUpdateWithoutTentativasQuestoesInput>
+}
+
+export type UsuarioUpdateWithoutTentativasQuestoesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  nome?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  senha?: Prisma.StringFieldUpdateOperationsInput | string
+  tipo?: Prisma.EnumTipoUsuarioFieldUpdateOperationsInput | $Enums.TipoUsuario
+  status?: Prisma.EnumStatusUsuarioFieldUpdateOperationsInput | $Enums.StatusUsuario
+  criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  perfil?: Prisma.PerfilUpdateOneWithoutUsuarioNestedInput
+  codigosValidacao?: Prisma.CodigoValidacaoUpdateManyWithoutUsuarioNestedInput
+  arquivos?: Prisma.ArquivoUpdateManyWithoutUsuarioNestedInput
+  cursosResponsavel?: Prisma.CursoUpdateManyWithoutResponsavelNestedInput
+  cursosAutorizados?: Prisma.CursoUpdateManyWithoutAdminAutorizadorNestedInput
+  sessoesResponsavel?: Prisma.SessaoUpdateManyWithoutResponsavelNestedInput
+  modulosResponsavel?: Prisma.ModuloUpdateManyWithoutResponsavelNestedInput
+  aulasResponsavel?: Prisma.AulaUpdateManyWithoutResponsavelNestedInput
+  testesResponsavel?: Prisma.TesteUpdateManyWithoutResponsavelNestedInput
+  tentativasTeste?: Prisma.TentativaTesteUpdateManyWithoutUsuarioNestedInput
+  testesQuestoesResponsavel?: Prisma.TesteQuestaoUpdateManyWithoutResponsavelNestedInput
+  questoesResponsavel?: Prisma.QuestaoUpdateManyWithoutResponsavelNestedInput
+  alternativasResponsavel?: Prisma.AlternativaUpdateManyWithoutResponsavelNestedInput
+  inscricoes?: Prisma.InscricaoUpdateManyWithoutUsuarioNestedInput
+}
+
+export type UsuarioUncheckedUpdateWithoutTentativasQuestoesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  nome?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  senha?: Prisma.StringFieldUpdateOperationsInput | string
+  tipo?: Prisma.EnumTipoUsuarioFieldUpdateOperationsInput | $Enums.TipoUsuario
+  status?: Prisma.EnumStatusUsuarioFieldUpdateOperationsInput | $Enums.StatusUsuario
+  criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  perfil?: Prisma.PerfilUncheckedUpdateOneWithoutUsuarioNestedInput
+  codigosValidacao?: Prisma.CodigoValidacaoUncheckedUpdateManyWithoutUsuarioNestedInput
+  arquivos?: Prisma.ArquivoUncheckedUpdateManyWithoutUsuarioNestedInput
+  cursosResponsavel?: Prisma.CursoUncheckedUpdateManyWithoutResponsavelNestedInput
+  cursosAutorizados?: Prisma.CursoUncheckedUpdateManyWithoutAdminAutorizadorNestedInput
+  sessoesResponsavel?: Prisma.SessaoUncheckedUpdateManyWithoutResponsavelNestedInput
+  modulosResponsavel?: Prisma.ModuloUncheckedUpdateManyWithoutResponsavelNestedInput
+  aulasResponsavel?: Prisma.AulaUncheckedUpdateManyWithoutResponsavelNestedInput
+  testesResponsavel?: Prisma.TesteUncheckedUpdateManyWithoutResponsavelNestedInput
+  tentativasTeste?: Prisma.TentativaTesteUncheckedUpdateManyWithoutUsuarioNestedInput
+  testesQuestoesResponsavel?: Prisma.TesteQuestaoUncheckedUpdateManyWithoutResponsavelNestedInput
+  questoesResponsavel?: Prisma.QuestaoUncheckedUpdateManyWithoutResponsavelNestedInput
+  alternativasResponsavel?: Prisma.AlternativaUncheckedUpdateManyWithoutResponsavelNestedInput
   inscricoes?: Prisma.InscricaoUncheckedUpdateManyWithoutUsuarioNestedInput
 }
 
@@ -1813,6 +2358,9 @@ export type UsuarioCreateWithoutInscricoesInput = {
   modulosResponsavel?: Prisma.ModuloCreateNestedManyWithoutResponsavelInput
   aulasResponsavel?: Prisma.AulaCreateNestedManyWithoutResponsavelInput
   testesResponsavel?: Prisma.TesteCreateNestedManyWithoutResponsavelInput
+  tentativasTeste?: Prisma.TentativaTesteCreateNestedManyWithoutUsuarioInput
+  tentativasQuestoes?: Prisma.TentativaQuestaoCreateNestedManyWithoutUsuarioInput
+  testesQuestoesResponsavel?: Prisma.TesteQuestaoCreateNestedManyWithoutResponsavelInput
   questoesResponsavel?: Prisma.QuestaoCreateNestedManyWithoutResponsavelInput
   alternativasResponsavel?: Prisma.AlternativaCreateNestedManyWithoutResponsavelInput
 }
@@ -1835,6 +2383,9 @@ export type UsuarioUncheckedCreateWithoutInscricoesInput = {
   modulosResponsavel?: Prisma.ModuloUncheckedCreateNestedManyWithoutResponsavelInput
   aulasResponsavel?: Prisma.AulaUncheckedCreateNestedManyWithoutResponsavelInput
   testesResponsavel?: Prisma.TesteUncheckedCreateNestedManyWithoutResponsavelInput
+  tentativasTeste?: Prisma.TentativaTesteUncheckedCreateNestedManyWithoutUsuarioInput
+  tentativasQuestoes?: Prisma.TentativaQuestaoUncheckedCreateNestedManyWithoutUsuarioInput
+  testesQuestoesResponsavel?: Prisma.TesteQuestaoUncheckedCreateNestedManyWithoutResponsavelInput
   questoesResponsavel?: Prisma.QuestaoUncheckedCreateNestedManyWithoutResponsavelInput
   alternativasResponsavel?: Prisma.AlternativaUncheckedCreateNestedManyWithoutResponsavelInput
 }
@@ -1873,6 +2424,9 @@ export type UsuarioUpdateWithoutInscricoesInput = {
   modulosResponsavel?: Prisma.ModuloUpdateManyWithoutResponsavelNestedInput
   aulasResponsavel?: Prisma.AulaUpdateManyWithoutResponsavelNestedInput
   testesResponsavel?: Prisma.TesteUpdateManyWithoutResponsavelNestedInput
+  tentativasTeste?: Prisma.TentativaTesteUpdateManyWithoutUsuarioNestedInput
+  tentativasQuestoes?: Prisma.TentativaQuestaoUpdateManyWithoutUsuarioNestedInput
+  testesQuestoesResponsavel?: Prisma.TesteQuestaoUpdateManyWithoutResponsavelNestedInput
   questoesResponsavel?: Prisma.QuestaoUpdateManyWithoutResponsavelNestedInput
   alternativasResponsavel?: Prisma.AlternativaUpdateManyWithoutResponsavelNestedInput
 }
@@ -1895,6 +2449,9 @@ export type UsuarioUncheckedUpdateWithoutInscricoesInput = {
   modulosResponsavel?: Prisma.ModuloUncheckedUpdateManyWithoutResponsavelNestedInput
   aulasResponsavel?: Prisma.AulaUncheckedUpdateManyWithoutResponsavelNestedInput
   testesResponsavel?: Prisma.TesteUncheckedUpdateManyWithoutResponsavelNestedInput
+  tentativasTeste?: Prisma.TentativaTesteUncheckedUpdateManyWithoutUsuarioNestedInput
+  tentativasQuestoes?: Prisma.TentativaQuestaoUncheckedUpdateManyWithoutUsuarioNestedInput
+  testesQuestoesResponsavel?: Prisma.TesteQuestaoUncheckedUpdateManyWithoutResponsavelNestedInput
   questoesResponsavel?: Prisma.QuestaoUncheckedUpdateManyWithoutResponsavelNestedInput
   alternativasResponsavel?: Prisma.AlternativaUncheckedUpdateManyWithoutResponsavelNestedInput
 }
@@ -1913,6 +2470,9 @@ export type UsuarioCountOutputType = {
   modulosResponsavel: number
   aulasResponsavel: number
   testesResponsavel: number
+  tentativasTeste: number
+  tentativasQuestoes: number
+  testesQuestoesResponsavel: number
   questoesResponsavel: number
   alternativasResponsavel: number
   inscricoes: number
@@ -1927,6 +2487,9 @@ export type UsuarioCountOutputTypeSelect<ExtArgs extends runtime.Types.Extension
   modulosResponsavel?: boolean | UsuarioCountOutputTypeCountModulosResponsavelArgs
   aulasResponsavel?: boolean | UsuarioCountOutputTypeCountAulasResponsavelArgs
   testesResponsavel?: boolean | UsuarioCountOutputTypeCountTestesResponsavelArgs
+  tentativasTeste?: boolean | UsuarioCountOutputTypeCountTentativasTesteArgs
+  tentativasQuestoes?: boolean | UsuarioCountOutputTypeCountTentativasQuestoesArgs
+  testesQuestoesResponsavel?: boolean | UsuarioCountOutputTypeCountTestesQuestoesResponsavelArgs
   questoesResponsavel?: boolean | UsuarioCountOutputTypeCountQuestoesResponsavelArgs
   alternativasResponsavel?: boolean | UsuarioCountOutputTypeCountAlternativasResponsavelArgs
   inscricoes?: boolean | UsuarioCountOutputTypeCountInscricoesArgs
@@ -2001,6 +2564,27 @@ export type UsuarioCountOutputTypeCountTestesResponsavelArgs<ExtArgs extends run
 /**
  * UsuarioCountOutputType without action
  */
+export type UsuarioCountOutputTypeCountTentativasTesteArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.TentativaTesteWhereInput
+}
+
+/**
+ * UsuarioCountOutputType without action
+ */
+export type UsuarioCountOutputTypeCountTentativasQuestoesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.TentativaQuestaoWhereInput
+}
+
+/**
+ * UsuarioCountOutputType without action
+ */
+export type UsuarioCountOutputTypeCountTestesQuestoesResponsavelArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.TesteQuestaoWhereInput
+}
+
+/**
+ * UsuarioCountOutputType without action
+ */
 export type UsuarioCountOutputTypeCountQuestoesResponsavelArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.QuestaoWhereInput
 }
@@ -2038,6 +2622,9 @@ export type UsuarioSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   modulosResponsavel?: boolean | Prisma.Usuario$modulosResponsavelArgs<ExtArgs>
   aulasResponsavel?: boolean | Prisma.Usuario$aulasResponsavelArgs<ExtArgs>
   testesResponsavel?: boolean | Prisma.Usuario$testesResponsavelArgs<ExtArgs>
+  tentativasTeste?: boolean | Prisma.Usuario$tentativasTesteArgs<ExtArgs>
+  tentativasQuestoes?: boolean | Prisma.Usuario$tentativasQuestoesArgs<ExtArgs>
+  testesQuestoesResponsavel?: boolean | Prisma.Usuario$testesQuestoesResponsavelArgs<ExtArgs>
   questoesResponsavel?: boolean | Prisma.Usuario$questoesResponsavelArgs<ExtArgs>
   alternativasResponsavel?: boolean | Prisma.Usuario$alternativasResponsavelArgs<ExtArgs>
   inscricoes?: boolean | Prisma.Usuario$inscricoesArgs<ExtArgs>
@@ -2088,6 +2675,9 @@ export type UsuarioInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs
   modulosResponsavel?: boolean | Prisma.Usuario$modulosResponsavelArgs<ExtArgs>
   aulasResponsavel?: boolean | Prisma.Usuario$aulasResponsavelArgs<ExtArgs>
   testesResponsavel?: boolean | Prisma.Usuario$testesResponsavelArgs<ExtArgs>
+  tentativasTeste?: boolean | Prisma.Usuario$tentativasTesteArgs<ExtArgs>
+  tentativasQuestoes?: boolean | Prisma.Usuario$tentativasQuestoesArgs<ExtArgs>
+  testesQuestoesResponsavel?: boolean | Prisma.Usuario$testesQuestoesResponsavelArgs<ExtArgs>
   questoesResponsavel?: boolean | Prisma.Usuario$questoesResponsavelArgs<ExtArgs>
   alternativasResponsavel?: boolean | Prisma.Usuario$alternativasResponsavelArgs<ExtArgs>
   inscricoes?: boolean | Prisma.Usuario$inscricoesArgs<ExtArgs>
@@ -2108,6 +2698,9 @@ export type $UsuarioPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     modulosResponsavel: Prisma.$ModuloPayload<ExtArgs>[]
     aulasResponsavel: Prisma.$AulaPayload<ExtArgs>[]
     testesResponsavel: Prisma.$TestePayload<ExtArgs>[]
+    tentativasTeste: Prisma.$TentativaTestePayload<ExtArgs>[]
+    tentativasQuestoes: Prisma.$TentativaQuestaoPayload<ExtArgs>[]
+    testesQuestoesResponsavel: Prisma.$TesteQuestaoPayload<ExtArgs>[]
     questoesResponsavel: Prisma.$QuestaoPayload<ExtArgs>[]
     alternativasResponsavel: Prisma.$AlternativaPayload<ExtArgs>[]
     inscricoes: Prisma.$InscricaoPayload<ExtArgs>[]
@@ -2524,6 +3117,9 @@ export interface Prisma__UsuarioClient<T, Null = never, ExtArgs extends runtime.
   modulosResponsavel<T extends Prisma.Usuario$modulosResponsavelArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Usuario$modulosResponsavelArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ModuloPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   aulasResponsavel<T extends Prisma.Usuario$aulasResponsavelArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Usuario$aulasResponsavelArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AulaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   testesResponsavel<T extends Prisma.Usuario$testesResponsavelArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Usuario$testesResponsavelArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TestePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  tentativasTeste<T extends Prisma.Usuario$tentativasTesteArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Usuario$tentativasTesteArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TentativaTestePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  tentativasQuestoes<T extends Prisma.Usuario$tentativasQuestoesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Usuario$tentativasQuestoesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TentativaQuestaoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  testesQuestoesResponsavel<T extends Prisma.Usuario$testesQuestoesResponsavelArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Usuario$testesQuestoesResponsavelArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TesteQuestaoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   questoesResponsavel<T extends Prisma.Usuario$questoesResponsavelArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Usuario$questoesResponsavelArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$QuestaoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   alternativasResponsavel<T extends Prisma.Usuario$alternativasResponsavelArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Usuario$alternativasResponsavelArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AlternativaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   inscricoes<T extends Prisma.Usuario$inscricoesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Usuario$inscricoesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$InscricaoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -3165,6 +3761,78 @@ export type Usuario$testesResponsavelArgs<ExtArgs extends runtime.Types.Extensio
   take?: number
   skip?: number
   distinct?: Prisma.TesteScalarFieldEnum | Prisma.TesteScalarFieldEnum[]
+}
+
+/**
+ * Usuario.tentativasTeste
+ */
+export type Usuario$tentativasTesteArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the TentativaTeste
+   */
+  select?: Prisma.TentativaTesteSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the TentativaTeste
+   */
+  omit?: Prisma.TentativaTesteOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TentativaTesteInclude<ExtArgs> | null
+  where?: Prisma.TentativaTesteWhereInput
+  orderBy?: Prisma.TentativaTesteOrderByWithRelationInput | Prisma.TentativaTesteOrderByWithRelationInput[]
+  cursor?: Prisma.TentativaTesteWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.TentativaTesteScalarFieldEnum | Prisma.TentativaTesteScalarFieldEnum[]
+}
+
+/**
+ * Usuario.tentativasQuestoes
+ */
+export type Usuario$tentativasQuestoesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the TentativaQuestao
+   */
+  select?: Prisma.TentativaQuestaoSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the TentativaQuestao
+   */
+  omit?: Prisma.TentativaQuestaoOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TentativaQuestaoInclude<ExtArgs> | null
+  where?: Prisma.TentativaQuestaoWhereInput
+  orderBy?: Prisma.TentativaQuestaoOrderByWithRelationInput | Prisma.TentativaQuestaoOrderByWithRelationInput[]
+  cursor?: Prisma.TentativaQuestaoWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.TentativaQuestaoScalarFieldEnum | Prisma.TentativaQuestaoScalarFieldEnum[]
+}
+
+/**
+ * Usuario.testesQuestoesResponsavel
+ */
+export type Usuario$testesQuestoesResponsavelArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the TesteQuestao
+   */
+  select?: Prisma.TesteQuestaoSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the TesteQuestao
+   */
+  omit?: Prisma.TesteQuestaoOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TesteQuestaoInclude<ExtArgs> | null
+  where?: Prisma.TesteQuestaoWhereInput
+  orderBy?: Prisma.TesteQuestaoOrderByWithRelationInput | Prisma.TesteQuestaoOrderByWithRelationInput[]
+  cursor?: Prisma.TesteQuestaoWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.TesteQuestaoScalarFieldEnum | Prisma.TesteQuestaoScalarFieldEnum[]
 }
 
 /**

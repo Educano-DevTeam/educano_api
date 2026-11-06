@@ -409,6 +409,8 @@ export const ModelName = {
   Questao: 'Questao',
   Alternativa: 'Alternativa',
   TesteQuestao: 'TesteQuestao',
+  TentativaTeste: 'TentativaTeste',
+  TentativaQuestao: 'TentativaQuestao',
   Inscricao: 'Inscricao'
 } as const
 
@@ -425,7 +427,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "usuario" | "perfil" | "codigoValidacao" | "arquivo" | "curso" | "sessao" | "modulo" | "aula" | "teste" | "questao" | "alternativa" | "testeQuestao" | "inscricao"
+    modelProps: "usuario" | "perfil" | "codigoValidacao" | "arquivo" | "curso" | "sessao" | "modulo" | "aula" | "teste" | "questao" | "alternativa" | "testeQuestao" | "tentativaTeste" | "tentativaQuestao" | "inscricao"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1317,6 +1319,154 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    TentativaTeste: {
+      payload: Prisma.$TentativaTestePayload<ExtArgs>
+      fields: Prisma.TentativaTesteFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.TentativaTesteFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TentativaTestePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.TentativaTesteFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TentativaTestePayload>
+        }
+        findFirst: {
+          args: Prisma.TentativaTesteFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TentativaTestePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.TentativaTesteFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TentativaTestePayload>
+        }
+        findMany: {
+          args: Prisma.TentativaTesteFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TentativaTestePayload>[]
+        }
+        create: {
+          args: Prisma.TentativaTesteCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TentativaTestePayload>
+        }
+        createMany: {
+          args: Prisma.TentativaTesteCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.TentativaTesteCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TentativaTestePayload>[]
+        }
+        delete: {
+          args: Prisma.TentativaTesteDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TentativaTestePayload>
+        }
+        update: {
+          args: Prisma.TentativaTesteUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TentativaTestePayload>
+        }
+        deleteMany: {
+          args: Prisma.TentativaTesteDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.TentativaTesteUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.TentativaTesteUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TentativaTestePayload>[]
+        }
+        upsert: {
+          args: Prisma.TentativaTesteUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TentativaTestePayload>
+        }
+        aggregate: {
+          args: Prisma.TentativaTesteAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateTentativaTeste>
+        }
+        groupBy: {
+          args: Prisma.TentativaTesteGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.TentativaTesteGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.TentativaTesteCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.TentativaTesteCountAggregateOutputType> | number
+        }
+      }
+    }
+    TentativaQuestao: {
+      payload: Prisma.$TentativaQuestaoPayload<ExtArgs>
+      fields: Prisma.TentativaQuestaoFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.TentativaQuestaoFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TentativaQuestaoPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.TentativaQuestaoFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TentativaQuestaoPayload>
+        }
+        findFirst: {
+          args: Prisma.TentativaQuestaoFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TentativaQuestaoPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.TentativaQuestaoFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TentativaQuestaoPayload>
+        }
+        findMany: {
+          args: Prisma.TentativaQuestaoFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TentativaQuestaoPayload>[]
+        }
+        create: {
+          args: Prisma.TentativaQuestaoCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TentativaQuestaoPayload>
+        }
+        createMany: {
+          args: Prisma.TentativaQuestaoCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.TentativaQuestaoCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TentativaQuestaoPayload>[]
+        }
+        delete: {
+          args: Prisma.TentativaQuestaoDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TentativaQuestaoPayload>
+        }
+        update: {
+          args: Prisma.TentativaQuestaoUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TentativaQuestaoPayload>
+        }
+        deleteMany: {
+          args: Prisma.TentativaQuestaoDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.TentativaQuestaoUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.TentativaQuestaoUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TentativaQuestaoPayload>[]
+        }
+        upsert: {
+          args: Prisma.TentativaQuestaoUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TentativaQuestaoPayload>
+        }
+        aggregate: {
+          args: Prisma.TentativaQuestaoAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateTentativaQuestao>
+        }
+        groupBy: {
+          args: Prisma.TentativaQuestaoGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.TentativaQuestaoGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.TentativaQuestaoCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.TentativaQuestaoCountAggregateOutputType> | number
+        }
+      }
+    }
     Inscricao: {
       payload: Prisma.$InscricaoPayload<ExtArgs>
       fields: Prisma.InscricaoFieldRefs
@@ -1564,6 +1714,7 @@ export const TesteScalarFieldEnum = {
   tipo: 'tipo',
   tema: 'tema',
   tempoMinutos: 'tempoMinutos',
+  dificuldade: 'dificuldade',
   quantidadeQuestoes: 'quantidadeQuestoes',
   criadoEm: 'criadoEm',
   atualizadoEm: 'atualizadoEm'
@@ -1591,6 +1742,7 @@ export const AlternativaScalarFieldEnum = {
   idQuestao: 'idQuestao',
   idResponsavel: 'idResponsavel',
   texto: 'texto',
+  letra: 'letra',
   criadoEm: 'criadoEm',
   atualizadoEm: 'atualizadoEm'
 } as const
@@ -1602,10 +1754,45 @@ export const TesteQuestaoScalarFieldEnum = {
   id: 'id',
   idTeste: 'idTeste',
   idQuestao: 'idQuestao',
-  ordem: 'ordem'
+  ordem: 'ordem',
+  idResponsavel: 'idResponsavel',
+  criadoEm: 'criadoEm'
 } as const
 
 export type TesteQuestaoScalarFieldEnum = (typeof TesteQuestaoScalarFieldEnum)[keyof typeof TesteQuestaoScalarFieldEnum]
+
+
+export const TentativaTesteScalarFieldEnum = {
+  id: 'id',
+  idUsuario: 'idUsuario',
+  idTeste: 'idTeste',
+  tempoConsumido: 'tempoConsumido',
+  notaFinal: 'notaFinal',
+  iniciadoEm: 'iniciadoEm',
+  enviadoEm: 'enviadoEm'
+} as const
+
+export type TentativaTesteScalarFieldEnum = (typeof TentativaTesteScalarFieldEnum)[keyof typeof TentativaTesteScalarFieldEnum]
+
+
+export const TentativaQuestaoScalarFieldEnum = {
+  id: 'id',
+  idTentativa: 'idTentativa',
+  idQuestao: 'idQuestao',
+  enunciado: 'enunciado',
+  alternativaA: 'alternativaA',
+  alternativaB: 'alternativaB',
+  alternativaC: 'alternativaC',
+  alternativaD: 'alternativaD',
+  alternativaE: 'alternativaE',
+  respostaCorreta: 'respostaCorreta',
+  respostaUsuario: 'respostaUsuario',
+  acertou: 'acertou',
+  criadoEm: 'criadoEm',
+  usuarioId: 'usuarioId'
+} as const
+
+export type TentativaQuestaoScalarFieldEnum = (typeof TentativaQuestaoScalarFieldEnum)[keyof typeof TentativaQuestaoScalarFieldEnum]
 
 
 export const InscricaoScalarFieldEnum = {
@@ -1887,6 +2074,13 @@ export type ListEnumNivelDificuldadeFieldRefInput<$PrismaModel> = FieldRefInputT
 
 
 /**
+ * Reference to a field of type 'Boolean'
+ */
+export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
+    
+
+
+/**
  * Reference to a field of type 'Float'
  */
 export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
@@ -2062,6 +2256,8 @@ export type GlobalOmitConfig = {
   questao?: Prisma.QuestaoOmit
   alternativa?: Prisma.AlternativaOmit
   testeQuestao?: Prisma.TesteQuestaoOmit
+  tentativaTeste?: Prisma.TentativaTesteOmit
+  tentativaQuestao?: Prisma.TentativaQuestaoOmit
   inscricao?: Prisma.InscricaoOmit
 }
 
