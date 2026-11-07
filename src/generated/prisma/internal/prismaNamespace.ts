@@ -411,7 +411,8 @@ export const ModelName = {
   TesteQuestao: 'TesteQuestao',
   TentativaTeste: 'TentativaTeste',
   TentativaQuestao: 'TentativaQuestao',
-  Inscricao: 'Inscricao'
+  Inscricao: 'Inscricao',
+  CursoProfessor: 'CursoProfessor'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -427,7 +428,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "usuario" | "perfil" | "codigoValidacao" | "arquivo" | "curso" | "sessao" | "modulo" | "aula" | "teste" | "questao" | "alternativa" | "testeQuestao" | "tentativaTeste" | "tentativaQuestao" | "inscricao"
+    modelProps: "usuario" | "perfil" | "codigoValidacao" | "arquivo" | "curso" | "sessao" | "modulo" | "aula" | "teste" | "questao" | "alternativa" | "testeQuestao" | "tentativaTeste" | "tentativaQuestao" | "inscricao" | "cursoProfessor"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1541,6 +1542,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    CursoProfessor: {
+      payload: Prisma.$CursoProfessorPayload<ExtArgs>
+      fields: Prisma.CursoProfessorFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.CursoProfessorFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CursoProfessorPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.CursoProfessorFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CursoProfessorPayload>
+        }
+        findFirst: {
+          args: Prisma.CursoProfessorFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CursoProfessorPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.CursoProfessorFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CursoProfessorPayload>
+        }
+        findMany: {
+          args: Prisma.CursoProfessorFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CursoProfessorPayload>[]
+        }
+        create: {
+          args: Prisma.CursoProfessorCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CursoProfessorPayload>
+        }
+        createMany: {
+          args: Prisma.CursoProfessorCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.CursoProfessorCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CursoProfessorPayload>[]
+        }
+        delete: {
+          args: Prisma.CursoProfessorDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CursoProfessorPayload>
+        }
+        update: {
+          args: Prisma.CursoProfessorUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CursoProfessorPayload>
+        }
+        deleteMany: {
+          args: Prisma.CursoProfessorDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.CursoProfessorUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.CursoProfessorUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CursoProfessorPayload>[]
+        }
+        upsert: {
+          args: Prisma.CursoProfessorUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CursoProfessorPayload>
+        }
+        aggregate: {
+          args: Prisma.CursoProfessorAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateCursoProfessor>
+        }
+        groupBy: {
+          args: Prisma.CursoProfessorGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CursoProfessorGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.CursoProfessorCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CursoProfessorCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -1803,6 +1878,17 @@ export const InscricaoScalarFieldEnum = {
 } as const
 
 export type InscricaoScalarFieldEnum = (typeof InscricaoScalarFieldEnum)[keyof typeof InscricaoScalarFieldEnum]
+
+
+export const CursoProfessorScalarFieldEnum = {
+  id: 'id',
+  idProfessor: 'idProfessor',
+  idCurso: 'idCurso',
+  idResponsavelVinculo: 'idResponsavelVinculo',
+  criadoEm: 'criadoEm'
+} as const
+
+export type CursoProfessorScalarFieldEnum = (typeof CursoProfessorScalarFieldEnum)[keyof typeof CursoProfessorScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -2259,6 +2345,7 @@ export type GlobalOmitConfig = {
   tentativaTeste?: Prisma.TentativaTesteOmit
   tentativaQuestao?: Prisma.TentativaQuestaoOmit
   inscricao?: Prisma.InscricaoOmit
+  cursoProfessor?: Prisma.CursoProfessorOmit
 }
 
 /* Types for Logging */

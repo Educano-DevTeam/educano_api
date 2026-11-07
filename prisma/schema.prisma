@@ -148,6 +148,12 @@ model Usuario {
 
   inscricoes Inscricao[]
 
+  // Cursos nos quais o usuário atua como professor.
+  cursosComoProfessor CursoProfessor[] @relation("ProfessorCurso")
+
+  // Vínculos de professores realizados por este usuário.
+  vinculosProfessorCriados CursoProfessor[] @relation("ResponsavelVinculoProfessor")
+
   @@map("usuario")
 }
 
@@ -250,8 +256,9 @@ model Curso {
   responsavel      Usuario  @relation("CursoResponsavel", fields: [idResponsavel], references: [id], onDelete: Restrict)
   adminAutorizador Usuario? @relation("CursoAutorizado", fields: [idAdminAutorizador], references: [id], onDelete: SetNull)
 
-  sessoes    Sessao[]
-  inscricoes Inscricao[]
+  sessoes     Sessao[]
+  inscricoes  Inscricao[]
+  professores CursoProfessor[]
 
   @@index([nome])
   @@index([categoria])
@@ -506,4 +513,27 @@ model Inscricao {
   @@unique([idUsuario, idCurso])
   @@index([idCurso])
   @@map("inscricao")
+}
+
+model CursoProfessor {
+  id String @id @default(uuid()) @db.Uuid
+
+  idProfessor          String @map("id_professor") @db.Uuid
+  idCurso              String @map("id_curso") @db.Uuid
+  idResponsavelVinculo String @map("id_responsavel_vinculo") @db.Uuid
+
+  criadoEm DateTime @default(now()) @map("criado_em") @db.Timestamptz(3)
+
+  professor Usuario @relation("ProfessorCurso", fields: [idProfessor], references: [id], onDelete: Cascade)
+
+  curso Curso @relation(fields: [idCurso], references: [id], onDelete: Cascade)
+
+  responsavelVinculo Usuario @relation("ResponsavelVinculoProfessor", fields: [idResponsavelVinculo], references: [id], onDelete: Restrict)
+
+  // Impede vínculos duplicados.
+  @@unique([idProfessor, idCurso])
+  @@index([idCurso])
+  @@index([idProfessor])
+  @@index([idResponsavelVinculo])
+  @@map("curso_professor")
 }

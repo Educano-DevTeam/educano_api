@@ -116,3 +116,8 @@ export type TentativaQuestao = Prisma.TentativaQuestaoModel
  * 
  */
 export type Inscricao = Prisma.InscricaoModel
+/**
+ * Model CursoProfessor
+ * 
+ */
+export type CursoProfessor = Prisma.CursoProfessorModel
