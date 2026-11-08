@@ -18,6 +18,12 @@ import {
     excluirAula,
 } from "../services/lessons.service.js";
 
+import {
+    registrarConclusaoMaterial,
+} from "../../progress/services/progress.service.js";
+
+import { prisma } from "../../../config/prisma.js";
+
 async function removerTemporario(caminho?: string) {
     if (caminho) {
         await unlink(caminho).catch(() => undefined);
@@ -244,6 +250,56 @@ export async function excluir(
 
         return res.status(200).json({
             message: "Aula e material excluídos com sucesso.",
+        });
+    } catch (erro) {
+        return responderErro(res, erro);
+    }
+}
+
+export async function concluirProgresso(
+    req: Request<{ id: string }>,
+    res: Response,
+) {
+    const validacao = idAulaParamsSchema.safeParse(req.params);
+
+    if (!validacao.success) {
+        return res.status(400).json({
+            message: "Identificador da aula inválido.",
+        });
+    }
+
+    try {
+        const usuario = req.usuarioAutenticado!;
+
+        // A consulta valida se o usuário realmente pode acessar a aula.
+        await consultarAula(
+            validacao.data.id,
+            usuario.id,
+            usuario.tipo,
+        );
+
+        // Professores e responsáveis não recebem recompensas por
+        // visualizar os próprios materiais.
+        if (usuario.tipo !== "ALUNO") {
+            return res.status(403).json({
+                message: "Somente alunos podem registrar a conclusão de materiais.",
+            });
+        }
+
+        const resultado = await prisma.$transaction(async (tx) => {
+            return registrarConclusaoMaterial(
+                tx,
+                usuario.id,
+                validacao.data.id,
+            );
+        });
+
+        return res.status(200).json({
+            message: resultado.registrada
+                ? "Material concluído! Recompensas adicionadas ao perfil."
+                : "Este material já havia sido concluído.",
+            concluida: true,
+            recompensa: resultado.recompensa,
         });
     } catch (erro) {
         return responderErro(res, erro);

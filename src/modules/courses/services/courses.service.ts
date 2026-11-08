@@ -475,6 +475,68 @@ export async function consultarConteudoCurso(
         );
     }
 
+    
+    // Identifica todos os materiais e atividades do curso.
+    const idsAulas = curso.sessoes.flatMap((sessao) =>
+        sessao.modulos.flatMap((modulo) =>
+            modulo.aulas.map((aula) => aula.id),
+        ),
+    );
+
+    const idsTestes = curso.sessoes.flatMap((sessao) =>
+        sessao.modulos.flatMap((modulo) =>
+            modulo.testes.map((teste) => teste.id),
+        ),
+    );
+
+    const filtrosProgresso = [
+        ...(idsAulas.length > 0
+            ? [{ idAula: { in: idsAulas } }]
+            : []),
+        ...(idsTestes.length > 0
+            ? [{ idTeste: { in: idsTestes } }]
+            : []),
+    ];
+
+    const progressos = filtrosProgresso.length > 0
+        ? await prisma.progresso.findMany({
+            where: {
+                idUsuario,
+                concluida: true,
+                OR: filtrosProgresso,
+            },
+            select: {
+                idAula: true,
+                idTeste: true,
+            },
+        })
+        : [];
+
+    const aulasConcluidas = new Set(
+        progressos
+            .map((item) => item.idAula)
+            .filter((id): id is string => id !== null),
+    );
+
+    const testesConcluidos = new Set(
+        progressos
+            .map((item) => item.idTeste)
+            .filter((id): id is string => id !== null),
+    );
+
+    function calcularProgresso(
+        total: number,
+        concluidos: number,
+    ) {
+        return {
+            total,
+            concluidos,
+            percentual: total > 0
+                ? Math.round((concluidos / total) * 100)
+                : 0,
+        };
+    }
+
     // Gera a URL temporária da capa, quando existir.
     const capa = curso.idCapa
         ? await consultarArquivo(curso.idCapa)
@@ -489,59 +551,96 @@ export async function consultarConteudoCurso(
 
     // Percorre as sessões, módulos e aulas para gerar
     // as URLs temporárias dos materiais.
+    
     const sessoes = await Promise.all(
-        curso.sessoes.map(async (sessao) => ({
-            ...sessao,
-
-            modulos: await Promise.all(
+        curso.sessoes.map(async (sessao) => {
+            const modulos = await Promise.all(
                 sessao.modulos.map(async (modulo) => {
-                    const {
-                        testes,
-                        ...dadosModulo
-                    } = modulo;
+                    const aulas = await Promise.all(
+                        modulo.aulas.map(async (aula) => {
+                            const arquivo = aula.idArquivo
+                                ? await consultarArquivo(aula.idArquivo)
+                                : null;
+
+                            if (aula.idArquivo && !arquivo) {
+                                throw new CoursesServiceError(
+                                    "MATERIAL_INDISPONIVEL",
+                                    `O material da aula "${aula.titulo}" não está disponível.`,
+                                );
+                            }
+
+                            const {
+                                idArquivo,
+                                ...dadosAula
+                            } = aula;
+
+                            return {
+                                ...dadosAula,
+                                concluida: aulasConcluidas.has(aula.id),
+                                arquivo: arquivo
+                                    ? {
+                                        id: arquivo.id,
+                                        nomeOriginal: arquivo.nomeOriginal,
+                                        tipo: arquivo.tipo,
+                                        contentType: arquivo.contentType,
+                                        tamanhoBytes: arquivo.tamanhoBytes,
+                                        url: arquivo.url,
+                                    }
+                                    : null,
+                            };
+                        }),
+                    );
+
+                    const atividades = modulo.testes.map((teste) => ({
+                        ...teste,
+                        concluida: testesConcluidos.has(teste.id),
+                    }));
+
+                    const total = aulas.length + atividades.length;
+
+                    const concluidos =
+                        aulas.filter((aula) => aula.concluida).length +
+                        atividades.filter((teste) => teste.concluida).length;
 
                     return {
-                        ...dadosModulo,
-
-                        aulas: await Promise.all(
-                            modulo.aulas.map(async (aula) => {
-                                const arquivo = aula.idArquivo
-                                    ? await consultarArquivo(aula.idArquivo)
-                                    : null;
-
-                                if (aula.idArquivo && !arquivo) {
-                                    throw new CoursesServiceError(
-                                        "MATERIAL_INDISPONIVEL",
-                                        `O material da aula "${aula.titulo}" não está disponível.`,
-                                    );
-                                }
-
-                                const {
-                                    idArquivo,
-                                    ...dadosAula
-                                } = aula;
-
-                                return {
-                                    ...dadosAula,
-                                    arquivo: arquivo
-                                        ? {
-                                            id: arquivo.id,
-                                            nomeOriginal: arquivo.nomeOriginal,
-                                            tipo: arquivo.tipo,
-                                            contentType: arquivo.contentType,
-                                            tamanhoBytes: arquivo.tamanhoBytes,
-                                            url: arquivo.url,
-                                        }
-                                        : null,
-                                };
-                            }),
-                        ),
-
-                        atividades: testes,
+                        id: modulo.id,
+                        titulo: modulo.titulo,
+                        descricao: modulo.descricao,
+                        criadoEm: modulo.criadoEm,
+                        responsavel: modulo.responsavel,
+                        aulas,
+                        atividades,
+                        progresso: calcularProgresso(total, concluidos),
                     };
-                })
-            ),
-        })),
+                }),
+            );
+
+            const total = modulos.reduce(
+                (soma, modulo) => soma + modulo.progresso.total,
+                0,
+            );
+
+            const concluidos = modulos.reduce(
+                (soma, modulo) => soma + modulo.progresso.concluidos,
+                0,
+            );
+
+            return {
+                ...sessao,
+                modulos,
+                progresso: calcularProgresso(total, concluidos),
+            };
+        }),
+    );
+
+    const totalCurso = sessoes.reduce(
+        (soma, sessao) => soma + sessao.progresso.total,
+        0,
+    );
+
+    const concluidosCurso = sessoes.reduce(
+        (soma, sessao) => soma + sessao.progresso.concluidos,
+        0,
     );
 
     const {
@@ -577,6 +676,11 @@ export async function consultarConteudoCurso(
         quantidadeAlunosInscritos: curso._count.inscricoes,
 
         quantidadeSessoes: curso._count.sessoes,
+
+        progresso: calcularProgresso(
+            totalCurso,
+            concluidosCurso,
+        ),
 
         sessoes,
     };

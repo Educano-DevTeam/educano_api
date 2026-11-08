@@ -412,7 +412,8 @@ export const ModelName = {
   TentativaTeste: 'TentativaTeste',
   TentativaQuestao: 'TentativaQuestao',
   Inscricao: 'Inscricao',
-  CursoProfessor: 'CursoProfessor'
+  CursoProfessor: 'CursoProfessor',
+  Progresso: 'Progresso'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -428,7 +429,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "usuario" | "perfil" | "codigoValidacao" | "arquivo" | "curso" | "sessao" | "modulo" | "aula" | "teste" | "questao" | "alternativa" | "testeQuestao" | "tentativaTeste" | "tentativaQuestao" | "inscricao" | "cursoProfessor"
+    modelProps: "usuario" | "perfil" | "codigoValidacao" | "arquivo" | "curso" | "sessao" | "modulo" | "aula" | "teste" | "questao" | "alternativa" | "testeQuestao" | "tentativaTeste" | "tentativaQuestao" | "inscricao" | "cursoProfessor" | "progresso"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1616,6 +1617,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    Progresso: {
+      payload: Prisma.$ProgressoPayload<ExtArgs>
+      fields: Prisma.ProgressoFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ProgressoFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProgressoPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ProgressoFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProgressoPayload>
+        }
+        findFirst: {
+          args: Prisma.ProgressoFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProgressoPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ProgressoFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProgressoPayload>
+        }
+        findMany: {
+          args: Prisma.ProgressoFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProgressoPayload>[]
+        }
+        create: {
+          args: Prisma.ProgressoCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProgressoPayload>
+        }
+        createMany: {
+          args: Prisma.ProgressoCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ProgressoCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProgressoPayload>[]
+        }
+        delete: {
+          args: Prisma.ProgressoDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProgressoPayload>
+        }
+        update: {
+          args: Prisma.ProgressoUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProgressoPayload>
+        }
+        deleteMany: {
+          args: Prisma.ProgressoDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ProgressoUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ProgressoUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProgressoPayload>[]
+        }
+        upsert: {
+          args: Prisma.ProgressoUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProgressoPayload>
+        }
+        aggregate: {
+          args: Prisma.ProgressoAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateProgresso>
+        }
+        groupBy: {
+          args: Prisma.ProgressoGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ProgressoGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ProgressoCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ProgressoCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -1889,6 +1964,20 @@ export const CursoProfessorScalarFieldEnum = {
 } as const
 
 export type CursoProfessorScalarFieldEnum = (typeof CursoProfessorScalarFieldEnum)[keyof typeof CursoProfessorScalarFieldEnum]
+
+
+export const ProgressoScalarFieldEnum = {
+  id: 'id',
+  idUsuario: 'idUsuario',
+  idAula: 'idAula',
+  idTeste: 'idTeste',
+  concluida: 'concluida',
+  concluidoEm: 'concluidoEm',
+  criadoEm: 'criadoEm',
+  atualizadoEm: 'atualizadoEm'
+} as const
+
+export type ProgressoScalarFieldEnum = (typeof ProgressoScalarFieldEnum)[keyof typeof ProgressoScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -2346,6 +2435,7 @@ export type GlobalOmitConfig = {
   tentativaQuestao?: Prisma.TentativaQuestaoOmit
   inscricao?: Prisma.InscricaoOmit
   cursoProfessor?: Prisma.CursoProfessorOmit
+  progresso?: Prisma.ProgressoOmit
 }
 
 /* Types for Logging */

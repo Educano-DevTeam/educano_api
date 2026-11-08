@@ -66,7 +66,8 @@ export const ModelName = {
   TentativaTeste: 'TentativaTeste',
   TentativaQuestao: 'TentativaQuestao',
   Inscricao: 'Inscricao',
-  CursoProfessor: 'CursoProfessor'
+  CursoProfessor: 'CursoProfessor',
+  Progresso: 'Progresso'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -319,6 +320,20 @@ export const CursoProfessorScalarFieldEnum = {
 } as const
 
 export type CursoProfessorScalarFieldEnum = (typeof CursoProfessorScalarFieldEnum)[keyof typeof CursoProfessorScalarFieldEnum]
+
+
+export const ProgressoScalarFieldEnum = {
+  id: 'id',
+  idUsuario: 'idUsuario',
+  idAula: 'idAula',
+  idTeste: 'idTeste',
+  concluida: 'concluida',
+  concluidoEm: 'concluidoEm',
+  criadoEm: 'criadoEm',
+  atualizadoEm: 'atualizadoEm'
+} as const
+
+export type ProgressoScalarFieldEnum = (typeof ProgressoScalarFieldEnum)[keyof typeof ProgressoScalarFieldEnum]
 
 
 export const SortOrder = {

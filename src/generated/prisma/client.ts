@@ -121,3 +121,8 @@ export type Inscricao = Prisma.InscricaoModel
  * 
  */
 export type CursoProfessor = Prisma.CursoProfessorModel
+/**
+ * Model Progresso
+ * 
+ */
+export type Progresso = Prisma.ProgressoModel

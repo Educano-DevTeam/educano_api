@@ -3,6 +3,10 @@ import { prisma } from "../../../config/prisma.js";
 
 import { consultarAcessoCurso } from "../../courses/services/course-permissions.service.js";
 
+import {
+    registrarConclusaoTeste,
+} from "../../progress/services/progress.service.js";
+
 export class AttemptsServiceError extends Error {
     constructor(
         public readonly code: string,
@@ -432,6 +436,45 @@ export async function enviarRespostas(
             },
         });
 
+        
+        const teste = await tx.teste.findUnique({
+            where: {
+                id: tentativa.idTeste,
+            },
+            select: {
+                id: true,
+                tipo: true,
+                dificuldade: true,
+                tempoMinutos: true,
+            },
+        });
+
+        if (!teste) {
+            throw new AttemptsServiceError(
+                "TESTE_NAO_ENCONTRADO",
+                "Não foi possível localizar a atividade ou o simulado.",
+            );
+        }
+
+        let recompensa = {
+            moedas: 0,
+            xp: 0,
+        };
+
+        if (teste.tipo === "ATIVIDADE" || teste.tipo === "SIMULADO") {
+            const progresso = await registrarConclusaoTeste(tx, {
+                idUsuario,
+                idTeste: teste.id,
+                tipo: teste.tipo,
+                nota: notaFinal,
+                dificuldade: teste.dificuldade,
+                tempoConsumido,
+                tempoLimiteMinutos: teste.tempoMinutos,
+            });
+
+            recompensa = progresso.recompensa;
+        }
+
         return {
             tentativa: finalizada,
             resultado: {
@@ -440,6 +483,7 @@ export async function enviarRespostas(
                 erros: totalQuestoes - acertos,
                 notaFinal,
             },
+            recompensa,
         };
     });
 }

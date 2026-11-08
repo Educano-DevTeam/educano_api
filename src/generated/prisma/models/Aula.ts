@@ -271,6 +271,7 @@ export type AulaWhereInput = {
   modulo?: Prisma.XOR<Prisma.ModuloScalarRelationFilter, Prisma.ModuloWhereInput>
   arquivo?: Prisma.XOR<Prisma.ArquivoNullableScalarRelationFilter, Prisma.ArquivoWhereInput> | null
   responsavel?: Prisma.XOR<Prisma.UsuarioScalarRelationFilter, Prisma.UsuarioWhereInput>
+  progressos?: Prisma.ProgressoListRelationFilter
 }
 
 export type AulaOrderByWithRelationInput = {
@@ -288,6 +289,7 @@ export type AulaOrderByWithRelationInput = {
   modulo?: Prisma.ModuloOrderByWithRelationInput
   arquivo?: Prisma.ArquivoOrderByWithRelationInput
   responsavel?: Prisma.UsuarioOrderByWithRelationInput
+  progressos?: Prisma.ProgressoOrderByRelationAggregateInput
 }
 
 export type AulaWhereUniqueInput = Prisma.AtLeast<{
@@ -308,6 +310,7 @@ export type AulaWhereUniqueInput = Prisma.AtLeast<{
   modulo?: Prisma.XOR<Prisma.ModuloScalarRelationFilter, Prisma.ModuloWhereInput>
   arquivo?: Prisma.XOR<Prisma.ArquivoNullableScalarRelationFilter, Prisma.ArquivoWhereInput> | null
   responsavel?: Prisma.XOR<Prisma.UsuarioScalarRelationFilter, Prisma.UsuarioWhereInput>
+  progressos?: Prisma.ProgressoListRelationFilter
 }, "id" | "idArquivo">
 
 export type AulaOrderByWithAggregationInput = {
@@ -358,6 +361,7 @@ export type AulaCreateInput = {
   modulo: Prisma.ModuloCreateNestedOneWithoutAulasInput
   arquivo?: Prisma.ArquivoCreateNestedOneWithoutAulaInput
   responsavel: Prisma.UsuarioCreateNestedOneWithoutAulasResponsavelInput
+  progressos?: Prisma.ProgressoCreateNestedManyWithoutAulaInput
 }
 
 export type AulaUncheckedCreateInput = {
@@ -372,6 +376,7 @@ export type AulaUncheckedCreateInput = {
   idResponsavel: string
   criadoEm?: Date | string
   atualizadoEm?: Date | string
+  progressos?: Prisma.ProgressoUncheckedCreateNestedManyWithoutAulaInput
 }
 
 export type AulaUpdateInput = {
@@ -386,6 +391,7 @@ export type AulaUpdateInput = {
   modulo?: Prisma.ModuloUpdateOneRequiredWithoutAulasNestedInput
   arquivo?: Prisma.ArquivoUpdateOneWithoutAulaNestedInput
   responsavel?: Prisma.UsuarioUpdateOneRequiredWithoutAulasResponsavelNestedInput
+  progressos?: Prisma.ProgressoUpdateManyWithoutAulaNestedInput
 }
 
 export type AulaUncheckedUpdateInput = {
@@ -400,6 +406,7 @@ export type AulaUncheckedUpdateInput = {
   idResponsavel?: Prisma.StringFieldUpdateOperationsInput | string
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  progressos?: Prisma.ProgressoUncheckedUpdateManyWithoutAulaNestedInput
 }
 
 export type AulaCreateManyInput = {
@@ -628,6 +635,22 @@ export type EnumTipoMaterialFieldUpdateOperationsInput = {
   set?: $Enums.TipoMaterial
 }
 
+export type AulaCreateNestedOneWithoutProgressosInput = {
+  create?: Prisma.XOR<Prisma.AulaCreateWithoutProgressosInput, Prisma.AulaUncheckedCreateWithoutProgressosInput>
+  connectOrCreate?: Prisma.AulaCreateOrConnectWithoutProgressosInput
+  connect?: Prisma.AulaWhereUniqueInput
+}
+
+export type AulaUpdateOneWithoutProgressosNestedInput = {
+  create?: Prisma.XOR<Prisma.AulaCreateWithoutProgressosInput, Prisma.AulaUncheckedCreateWithoutProgressosInput>
+  connectOrCreate?: Prisma.AulaCreateOrConnectWithoutProgressosInput
+  upsert?: Prisma.AulaUpsertWithoutProgressosInput
+  disconnect?: Prisma.AulaWhereInput | boolean
+  delete?: Prisma.AulaWhereInput | boolean
+  connect?: Prisma.AulaWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.AulaUpdateToOneWithWhereWithoutProgressosInput, Prisma.AulaUpdateWithoutProgressosInput>, Prisma.AulaUncheckedUpdateWithoutProgressosInput>
+}
+
 export type AulaCreateWithoutResponsavelInput = {
   id?: string
   titulo: string
@@ -639,6 +662,7 @@ export type AulaCreateWithoutResponsavelInput = {
   atualizadoEm?: Date | string
   modulo: Prisma.ModuloCreateNestedOneWithoutAulasInput
   arquivo?: Prisma.ArquivoCreateNestedOneWithoutAulaInput
+  progressos?: Prisma.ProgressoCreateNestedManyWithoutAulaInput
 }
 
 export type AulaUncheckedCreateWithoutResponsavelInput = {
@@ -652,6 +676,7 @@ export type AulaUncheckedCreateWithoutResponsavelInput = {
   duracaoMinutos?: number | null
   criadoEm?: Date | string
   atualizadoEm?: Date | string
+  progressos?: Prisma.ProgressoUncheckedCreateNestedManyWithoutAulaInput
 }
 
 export type AulaCreateOrConnectWithoutResponsavelInput = {
@@ -708,6 +733,7 @@ export type AulaCreateWithoutArquivoInput = {
   atualizadoEm?: Date | string
   modulo: Prisma.ModuloCreateNestedOneWithoutAulasInput
   responsavel: Prisma.UsuarioCreateNestedOneWithoutAulasResponsavelInput
+  progressos?: Prisma.ProgressoCreateNestedManyWithoutAulaInput
 }
 
 export type AulaUncheckedCreateWithoutArquivoInput = {
@@ -721,6 +747,7 @@ export type AulaUncheckedCreateWithoutArquivoInput = {
   idResponsavel: string
   criadoEm?: Date | string
   atualizadoEm?: Date | string
+  progressos?: Prisma.ProgressoUncheckedCreateNestedManyWithoutAulaInput
 }
 
 export type AulaCreateOrConnectWithoutArquivoInput = {
@@ -750,6 +777,7 @@ export type AulaUpdateWithoutArquivoInput = {
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   modulo?: Prisma.ModuloUpdateOneRequiredWithoutAulasNestedInput
   responsavel?: Prisma.UsuarioUpdateOneRequiredWithoutAulasResponsavelNestedInput
+  progressos?: Prisma.ProgressoUpdateManyWithoutAulaNestedInput
 }
 
 export type AulaUncheckedUpdateWithoutArquivoInput = {
@@ -763,6 +791,7 @@ export type AulaUncheckedUpdateWithoutArquivoInput = {
   idResponsavel?: Prisma.StringFieldUpdateOperationsInput | string
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  progressos?: Prisma.ProgressoUncheckedUpdateManyWithoutAulaNestedInput
 }
 
 export type AulaCreateWithoutModuloInput = {
@@ -776,6 +805,7 @@ export type AulaCreateWithoutModuloInput = {
   atualizadoEm?: Date | string
   arquivo?: Prisma.ArquivoCreateNestedOneWithoutAulaInput
   responsavel: Prisma.UsuarioCreateNestedOneWithoutAulasResponsavelInput
+  progressos?: Prisma.ProgressoCreateNestedManyWithoutAulaInput
 }
 
 export type AulaUncheckedCreateWithoutModuloInput = {
@@ -789,6 +819,7 @@ export type AulaUncheckedCreateWithoutModuloInput = {
   idResponsavel: string
   criadoEm?: Date | string
   atualizadoEm?: Date | string
+  progressos?: Prisma.ProgressoUncheckedCreateNestedManyWithoutAulaInput
 }
 
 export type AulaCreateOrConnectWithoutModuloInput = {
@@ -817,6 +848,78 @@ export type AulaUpdateManyWithWhereWithoutModuloInput = {
   data: Prisma.XOR<Prisma.AulaUpdateManyMutationInput, Prisma.AulaUncheckedUpdateManyWithoutModuloInput>
 }
 
+export type AulaCreateWithoutProgressosInput = {
+  id?: string
+  titulo: string
+  descricao?: string | null
+  tipo: $Enums.TipoMaterial
+  quantidadePaginas?: number | null
+  duracaoMinutos?: number | null
+  criadoEm?: Date | string
+  atualizadoEm?: Date | string
+  modulo: Prisma.ModuloCreateNestedOneWithoutAulasInput
+  arquivo?: Prisma.ArquivoCreateNestedOneWithoutAulaInput
+  responsavel: Prisma.UsuarioCreateNestedOneWithoutAulasResponsavelInput
+}
+
+export type AulaUncheckedCreateWithoutProgressosInput = {
+  id?: string
+  idModulo: string
+  titulo: string
+  descricao?: string | null
+  idArquivo?: string | null
+  tipo: $Enums.TipoMaterial
+  quantidadePaginas?: number | null
+  duracaoMinutos?: number | null
+  idResponsavel: string
+  criadoEm?: Date | string
+  atualizadoEm?: Date | string
+}
+
+export type AulaCreateOrConnectWithoutProgressosInput = {
+  where: Prisma.AulaWhereUniqueInput
+  create: Prisma.XOR<Prisma.AulaCreateWithoutProgressosInput, Prisma.AulaUncheckedCreateWithoutProgressosInput>
+}
+
+export type AulaUpsertWithoutProgressosInput = {
+  update: Prisma.XOR<Prisma.AulaUpdateWithoutProgressosInput, Prisma.AulaUncheckedUpdateWithoutProgressosInput>
+  create: Prisma.XOR<Prisma.AulaCreateWithoutProgressosInput, Prisma.AulaUncheckedCreateWithoutProgressosInput>
+  where?: Prisma.AulaWhereInput
+}
+
+export type AulaUpdateToOneWithWhereWithoutProgressosInput = {
+  where?: Prisma.AulaWhereInput
+  data: Prisma.XOR<Prisma.AulaUpdateWithoutProgressosInput, Prisma.AulaUncheckedUpdateWithoutProgressosInput>
+}
+
+export type AulaUpdateWithoutProgressosInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  titulo?: Prisma.StringFieldUpdateOperationsInput | string
+  descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tipo?: Prisma.EnumTipoMaterialFieldUpdateOperationsInput | $Enums.TipoMaterial
+  quantidadePaginas?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  duracaoMinutos?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  modulo?: Prisma.ModuloUpdateOneRequiredWithoutAulasNestedInput
+  arquivo?: Prisma.ArquivoUpdateOneWithoutAulaNestedInput
+  responsavel?: Prisma.UsuarioUpdateOneRequiredWithoutAulasResponsavelNestedInput
+}
+
+export type AulaUncheckedUpdateWithoutProgressosInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  idModulo?: Prisma.StringFieldUpdateOperationsInput | string
+  titulo?: Prisma.StringFieldUpdateOperationsInput | string
+  descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idArquivo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tipo?: Prisma.EnumTipoMaterialFieldUpdateOperationsInput | $Enums.TipoMaterial
+  quantidadePaginas?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  duracaoMinutos?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  idResponsavel?: Prisma.StringFieldUpdateOperationsInput | string
+  criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
 export type AulaCreateManyResponsavelInput = {
   id?: string
   idModulo: string
@@ -841,6 +944,7 @@ export type AulaUpdateWithoutResponsavelInput = {
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   modulo?: Prisma.ModuloUpdateOneRequiredWithoutAulasNestedInput
   arquivo?: Prisma.ArquivoUpdateOneWithoutAulaNestedInput
+  progressos?: Prisma.ProgressoUpdateManyWithoutAulaNestedInput
 }
 
 export type AulaUncheckedUpdateWithoutResponsavelInput = {
@@ -854,6 +958,7 @@ export type AulaUncheckedUpdateWithoutResponsavelInput = {
   duracaoMinutos?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  progressos?: Prisma.ProgressoUncheckedUpdateManyWithoutAulaNestedInput
 }
 
 export type AulaUncheckedUpdateManyWithoutResponsavelInput = {
@@ -893,6 +998,7 @@ export type AulaUpdateWithoutModuloInput = {
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   arquivo?: Prisma.ArquivoUpdateOneWithoutAulaNestedInput
   responsavel?: Prisma.UsuarioUpdateOneRequiredWithoutAulasResponsavelNestedInput
+  progressos?: Prisma.ProgressoUpdateManyWithoutAulaNestedInput
 }
 
 export type AulaUncheckedUpdateWithoutModuloInput = {
@@ -906,6 +1012,7 @@ export type AulaUncheckedUpdateWithoutModuloInput = {
   idResponsavel?: Prisma.StringFieldUpdateOperationsInput | string
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  progressos?: Prisma.ProgressoUncheckedUpdateManyWithoutAulaNestedInput
 }
 
 export type AulaUncheckedUpdateManyWithoutModuloInput = {
@@ -921,6 +1028,35 @@ export type AulaUncheckedUpdateManyWithoutModuloInput = {
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
+
+/**
+ * Count Type AulaCountOutputType
+ */
+
+export type AulaCountOutputType = {
+  progressos: number
+}
+
+export type AulaCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  progressos?: boolean | AulaCountOutputTypeCountProgressosArgs
+}
+
+/**
+ * AulaCountOutputType without action
+ */
+export type AulaCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the AulaCountOutputType
+   */
+  select?: Prisma.AulaCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * AulaCountOutputType without action
+ */
+export type AulaCountOutputTypeCountProgressosArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ProgressoWhereInput
+}
 
 
 export type AulaSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -938,6 +1074,8 @@ export type AulaSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   modulo?: boolean | Prisma.ModuloDefaultArgs<ExtArgs>
   arquivo?: boolean | Prisma.Aula$arquivoArgs<ExtArgs>
   responsavel?: boolean | Prisma.UsuarioDefaultArgs<ExtArgs>
+  progressos?: boolean | Prisma.Aula$progressosArgs<ExtArgs>
+  _count?: boolean | Prisma.AulaCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["aula"]>
 
 export type AulaSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -993,6 +1131,8 @@ export type AulaInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   modulo?: boolean | Prisma.ModuloDefaultArgs<ExtArgs>
   arquivo?: boolean | Prisma.Aula$arquivoArgs<ExtArgs>
   responsavel?: boolean | Prisma.UsuarioDefaultArgs<ExtArgs>
+  progressos?: boolean | Prisma.Aula$progressosArgs<ExtArgs>
+  _count?: boolean | Prisma.AulaCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type AulaIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   modulo?: boolean | Prisma.ModuloDefaultArgs<ExtArgs>
@@ -1011,6 +1151,7 @@ export type $AulaPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     modulo: Prisma.$ModuloPayload<ExtArgs>
     arquivo: Prisma.$ArquivoPayload<ExtArgs> | null
     responsavel: Prisma.$UsuarioPayload<ExtArgs>
+    progressos: Prisma.$ProgressoPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1421,6 +1562,7 @@ export interface Prisma__AulaClient<T, Null = never, ExtArgs extends runtime.Typ
   modulo<T extends Prisma.ModuloDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ModuloDefaultArgs<ExtArgs>>): Prisma.Prisma__ModuloClient<runtime.Types.Result.GetResult<Prisma.$ModuloPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   arquivo<T extends Prisma.Aula$arquivoArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Aula$arquivoArgs<ExtArgs>>): Prisma.Prisma__ArquivoClient<runtime.Types.Result.GetResult<Prisma.$ArquivoPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   responsavel<T extends Prisma.UsuarioDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UsuarioDefaultArgs<ExtArgs>>): Prisma.Prisma__UsuarioClient<runtime.Types.Result.GetResult<Prisma.$UsuarioPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  progressos<T extends Prisma.Aula$progressosArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Aula$progressosArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProgressoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1878,6 +2020,30 @@ export type Aula$arquivoArgs<ExtArgs extends runtime.Types.Extensions.InternalAr
    */
   include?: Prisma.ArquivoInclude<ExtArgs> | null
   where?: Prisma.ArquivoWhereInput
+}
+
+/**
+ * Aula.progressos
+ */
+export type Aula$progressosArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Progresso
+   */
+  select?: Prisma.ProgressoSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Progresso
+   */
+  omit?: Prisma.ProgressoOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ProgressoInclude<ExtArgs> | null
+  where?: Prisma.ProgressoWhereInput
+  orderBy?: Prisma.ProgressoOrderByWithRelationInput | Prisma.ProgressoOrderByWithRelationInput[]
+  cursor?: Prisma.ProgressoWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ProgressoScalarFieldEnum | Prisma.ProgressoScalarFieldEnum[]
 }
 
 /**

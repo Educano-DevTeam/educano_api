@@ -147,6 +147,7 @@ model Usuario {
   alternativasResponsavel   Alternativa[]
 
   inscricoes Inscricao[]
+  progressos Progresso[]
 
   // Cursos nos quais o usuário atua como professor.
   cursosComoProfessor CursoProfessor[] @relation("ProfessorCurso")
@@ -339,6 +340,8 @@ model Aula {
   arquivo     Arquivo? @relation("ArquivoAula", fields: [idArquivo], references: [id], onDelete: SetNull)
   responsavel Usuario  @relation(fields: [idResponsavel], references: [id], onDelete: Restrict)
 
+  progressos Progresso[]
+
   @@index([idModulo])
   @@index([idResponsavel])
   @@map("aula")
@@ -368,6 +371,8 @@ model Teste {
 
   questoes   TesteQuestao[]
   tentativas TentativaTeste[]
+
+  progressos Progresso[]
 
   @@index([idModulo])
   @@index([idResponsavel])
@@ -536,4 +541,28 @@ model CursoProfessor {
   @@index([idProfessor])
   @@index([idResponsavelVinculo])
   @@map("curso_professor")
+}
+
+model Progresso {
+  id        String  @id @default(uuid()) @db.Uuid
+  idUsuario String  @map("id_usuario") @db.Uuid
+  idAula    String? @map("id_aula") @db.Uuid
+  idTeste   String? @map("id_teste") @db.Uuid
+
+  concluida   Boolean   @default(false)
+  concluidoEm DateTime? @map("concluido_em") @db.Timestamptz(3)
+
+  criadoEm     DateTime @default(now()) @map("criado_em") @db.Timestamptz(3)
+  atualizadoEm DateTime @updatedAt @map("atualizado_em") @db.Timestamptz(3)
+
+  usuario Usuario @relation(fields: [idUsuario], references: [id], onDelete: Cascade)
+  aula    Aula?   @relation(fields: [idAula], references: [id], onDelete: Cascade)
+  teste   Teste?  @relation(fields: [idTeste], references: [id], onDelete: Cascade)
+
+  @@unique([idUsuario, idAula])
+  @@unique([idUsuario, idTeste])
+  @@index([idUsuario])
+  @@index([idAula])
+  @@index([idTeste])
+  @@map("progresso")
 }

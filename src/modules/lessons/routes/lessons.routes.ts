@@ -15,6 +15,7 @@ import {
     consultar,
     atualizar,
     excluir,
+    concluirProgresso,
 } from "../controllers/lessons.controller.js";
 
 const lessonsRouter = Router();
@@ -32,6 +33,11 @@ lessonsRouter.post(
 lessonsRouter.get(
     "/",
     listar,
+);
+
+lessonsRouter.post(
+    "/:id/progresso",
+    concluirProgresso,
 );
 
 // Consultar uma aula e gerar a URL do arquivo.
