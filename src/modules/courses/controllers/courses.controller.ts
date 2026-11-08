@@ -11,12 +11,11 @@ import {
     CoursesServiceError,
     criarCurso,
     consultarCurso,
+    consultarConteudoCurso,
     listarCursos,
     atualizarCurso,
     excluirCurso,
 } from "../services/courses.service.js";
-
-
 
 function responderErro(res: Response, error: unknown) {
     if (error instanceof CoursesServiceError) {
@@ -36,6 +35,10 @@ function responderErro(res: Response, error: unknown) {
             CAPA_JA_UTILIZADA: 409,
 
             ERRO_UPLOAD_CAPA: 502,
+
+            CAPA_INDISPONIVEL: 404,
+            MATERIAL_INDISPONIVEL: 404,
+            SEM_ACESSO_CURSO: 403,
         };
 
         return res.status(status[error.code] ?? 400).json({
@@ -125,6 +128,40 @@ export async function consultar(
         );
 
         return res.status(200).json({ curso });
+    } catch (error) {
+        return responderErro(res, error);
+    }
+}
+
+
+// -----------------------------------------------------
+// CONSULTAR CONTEÚDO COMPLETO DO CURSO
+// -----------------------------------------------------
+
+export async function consultarConteudo(
+    req: Request,
+    res: Response,
+) {
+    const validacao = idCursoParamsSchema.safeParse(req.params);
+
+    if (!validacao.success) {
+        return res.status(400).json({
+            message: "Identificador de curso inválido.",
+        });
+    }
+
+    try {
+        const usuario = req.usuarioAutenticado!;
+
+        const conteudo = await consultarConteudoCurso(
+            validacao.data.id,
+            usuario.id,
+            usuario.tipo,
+        );
+
+        return res.status(200).json({
+            curso: conteudo,
+        });
     } catch (error) {
         return responderErro(res, error);
     }

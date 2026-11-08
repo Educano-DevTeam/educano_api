@@ -5,6 +5,7 @@ import { prisma } from "../../../config/prisma.js";
 import {
     enviarArquivo,
     excluirArquivo,
+    consultarArquivo,
 } from "../../files/services/files.service.js";
 
 import type {
@@ -13,6 +14,7 @@ import type {
     FiltrosCursosInput,
 } from "../types/courses.types.js";
 import { cursoEstaCompleto, mesclarDadosCurso, obterStatusInicialCurso } from "../utils/courses.utils.js";
+import { consultarAcessoCurso } from "./course-permissions.service.js";
 
 const CURSOS_POR_PAGINA = 20;
 
@@ -295,6 +297,289 @@ export async function consultarCurso(
     }
 
     return serializarCurso(curso);
+}
+
+
+// -----------------------------------------------------
+// CONSULTAR CONTEÚDO COMPLETO DO CURSO
+// -----------------------------------------------------
+
+export async function consultarConteudoCurso(
+    id: string,
+    idUsuario: string,
+    tipoUsuario: string,
+) {
+    validarUuid(id);
+
+    // Verifica se o usuário pode visualizar o curso e seu conteúdo.
+    const acesso = await consultarAcessoCurso(
+        id,
+        idUsuario,
+        tipoUsuario,
+    );
+
+    if (!acesso.existe) {
+        throw new CoursesServiceError(
+            "CURSO_NAO_ENCONTRADO",
+            "Curso não encontrado.",
+        );
+    }
+
+    if (!acesso.podeLer) {
+        throw new CoursesServiceError(
+            "SEM_ACESSO_CURSO",
+            "Você precisa estar inscrito em um curso ativo ou possuir autorização para acessar seu conteúdo.",
+        );
+    }
+
+    // Busca os dados do curso e toda a sua estrutura.
+    const curso = await prisma.curso.findUnique({
+        where: { id },
+
+        select: {
+            id: true,
+            nome: true,
+            categoria: true,
+            status: true,
+            cargaHoraria: true,
+            vagas: true,
+            preco: true,
+            descricao: true,
+            cor: true,
+            idCapa: true,
+            iconeCapa: true,
+            criadoEm: true,
+            atualizadoEm: true,
+
+            responsavel: {
+                select: {
+                    id: true,
+                    nome: true,
+                    tipo: true,
+                },
+            },
+
+            professores: {
+                select: {
+                    professor: {
+                        select: {
+                            id: true,
+                            nome: true,
+                            tipo: true,
+                        },
+                    },
+                },
+            },
+
+            _count: {
+                select: {
+                    inscricoes: true,
+                    sessoes: true,
+                },
+            },
+
+            sessoes: {
+                orderBy: [
+                    { criadoEm: "asc" },
+                    { id: "asc" },
+                ],
+
+                select: {
+                    id: true,
+                    titulo: true,
+                    subtitulo: true,
+                    descricao: true,
+                    criadoEm: true,
+
+                    responsavel: {
+                        select: {
+                            id: true,
+                            nome: true,
+                        },
+                    },
+
+                    modulos: {
+                        orderBy: [
+                            { criadoEm: "asc" },
+                            { id: "asc" },
+                        ],
+
+                        select: {
+                            id: true,
+                            titulo: true,
+                            descricao: true,
+                            criadoEm: true,
+
+                            responsavel: {
+                                select: {
+                                    id: true,
+                                    nome: true,
+                                },
+                            },
+
+                            aulas: {
+                                orderBy: [
+                                    { criadoEm: "asc" },
+                                    { id: "asc" },
+                                ],
+
+                                select: {
+                                    id: true,
+                                    titulo: true,
+                                    descricao: true,
+                                    idArquivo: true,
+                                    tipo: true,
+                                    quantidadePaginas: true,
+                                    duracaoMinutos: true,
+                                    criadoEm: true,
+                                },
+                            },
+
+                            testes: {
+                                where: {
+                                    tipo: "ATIVIDADE",
+                                },
+
+                                orderBy: [
+                                    { criadoEm: "asc" },
+                                    { id: "asc" },
+                                ],
+
+                                select: {
+                                    id: true,
+                                    tipo: true,
+                                    tema: true,
+                                    tempoMinutos: true,
+                                    quantidadeQuestoes: true,
+                                    criadoEm: true,
+
+                                    responsavel: {
+                                        select: {
+                                            id: true,
+                                            nome: true,
+                                        },
+                                    },
+                                },
+                            },
+                        },
+                    },
+                },
+            },
+        },
+    });
+
+    if (!curso) {
+        throw new CoursesServiceError(
+            "CURSO_NAO_ENCONTRADO",
+            "Curso não encontrado.",
+        );
+    }
+
+    // Gera a URL temporária da capa, quando existir.
+    const capa = curso.idCapa
+        ? await consultarArquivo(curso.idCapa)
+        : null;
+
+    if (curso.idCapa && !capa) {
+        throw new CoursesServiceError(
+            "CAPA_INDISPONIVEL",
+            "A capa deste curso não está disponível.",
+        );
+    }
+
+    // Percorre as sessões, módulos e aulas para gerar
+    // as URLs temporárias dos materiais.
+    const sessoes = await Promise.all(
+        curso.sessoes.map(async (sessao) => ({
+            ...sessao,
+
+            modulos: await Promise.all(
+                sessao.modulos.map(async (modulo) => {
+                    const {
+                        testes,
+                        ...dadosModulo
+                    } = modulo;
+
+                    return {
+                        ...dadosModulo,
+
+                        aulas: await Promise.all(
+                            modulo.aulas.map(async (aula) => {
+                                const arquivo = aula.idArquivo
+                                    ? await consultarArquivo(aula.idArquivo)
+                                    : null;
+
+                                if (aula.idArquivo && !arquivo) {
+                                    throw new CoursesServiceError(
+                                        "MATERIAL_INDISPONIVEL",
+                                        `O material da aula "${aula.titulo}" não está disponível.`,
+                                    );
+                                }
+
+                                const {
+                                    idArquivo,
+                                    ...dadosAula
+                                } = aula;
+
+                                return {
+                                    ...dadosAula,
+                                    arquivo: arquivo
+                                        ? {
+                                            id: arquivo.id,
+                                            nomeOriginal: arquivo.nomeOriginal,
+                                            tipo: arquivo.tipo,
+                                            contentType: arquivo.contentType,
+                                            tamanhoBytes: arquivo.tamanhoBytes,
+                                            url: arquivo.url,
+                                        }
+                                        : null,
+                                };
+                            }),
+                        ),
+
+                        atividades: testes,
+                    };
+                })
+            ),
+        })),
+    );
+
+    const {
+        idCapa,
+        sessoes: _sessoesOriginais,
+        preco,
+        ...dadosCurso
+    } = curso;
+
+    return {
+        ...dadosCurso,
+
+        preco: preco?.toString() ?? null,
+
+        capa: capa
+            ? {
+                id: capa.id,
+                nomeOriginal: capa.nomeOriginal,
+                contentType: capa.contentType,
+                tamanhoBytes: capa.tamanhoBytes,
+                url: capa.url,
+            }
+            : {
+                id: null,
+                icone: curso.iconeCapa,
+                url: null,
+            },
+
+        professores: curso.professores.map(
+            (vinculo) => vinculo.professor,
+        ),
+
+        quantidadeAlunosInscritos: curso._count.inscricoes,
+
+        quantidadeSessoes: curso._count.sessoes,
+
+        sessoes,
+    };
 }
 
 // -----------------------------------------------------

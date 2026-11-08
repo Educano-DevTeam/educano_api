@@ -7,6 +7,7 @@ import { uploadArquivo } from "../../files/middleware/upload.middleware.js";
 import {
   criar,
   consultar,
+  consultarConteudo,
   listar,
   atualizar,
   excluir,
@@ -51,7 +52,10 @@ coursesRouter.delete(
   desvincular,
 );
 
-// Consulta básica, atualização e exclusão
+// Consulta completa do curso e seus conteúdos.
+coursesRouter.get("/:id/conteudo", consultarConteudo);
+
+// Consulta básica, atualização e exclusão.
 coursesRouter.get("/:id", consultar);
 coursesRouter.patch(
   "/:id",
