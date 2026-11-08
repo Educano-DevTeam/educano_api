@@ -271,21 +271,15 @@ export async function concluirProgresso(
     try {
         const usuario = req.usuarioAutenticado!;
 
-        // A consulta valida se o usuário realmente pode acessar a aula.
+        // Valida se o usuário possui acesso ao material.
         await consultarAula(
             validacao.data.id,
             usuario.id,
             usuario.tipo,
         );
 
-        // Professores e responsáveis não recebem recompensas por
-        // visualizar os próprios materiais.
-        if (usuario.tipo !== "ALUNO") {
-            return res.status(403).json({
-                message: "Somente alunos podem registrar a conclusão de materiais.",
-            });
-        }
-
+        // Registra a conclusão e concede a recompensa,
+        // independentemente do tipo de usuário.
         const resultado = await prisma.$transaction(async (tx) => {
             return registrarConclusaoMaterial(
                 tx,
