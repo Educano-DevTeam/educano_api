@@ -65,6 +65,7 @@ export async function iniciar(
         const resultado = await iniciarTentativa(
             params.data.id,
             usuario.id,
+            usuario.tipo,
         );
 
         return res.status(201).json({

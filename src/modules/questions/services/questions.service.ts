@@ -62,8 +62,8 @@ async function verificarPermissaoQuestao(
         );
     }
 
-    // O responsável pode administrar a própria questão.
-    // Professores e administradores também podem administrar questões.
+    // Somente o autor da questão ou um administrador
+    // pode modificá-la ou excluí-la.
     const permitido =
         questao.idResponsavel === idUsuario ||
         tipoUsuario === "ADMIN";

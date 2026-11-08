@@ -1,6 +1,8 @@
 
 import { prisma } from "../../../config/prisma.js";
 
+import { consultarAcessoCurso } from "../../courses/services/course-permissions.service.js";
+
 export class AttemptsServiceError extends Error {
     constructor(
         public readonly code: string,
@@ -34,6 +36,7 @@ function embaralhar<T>(lista: T[]): T[] {
 export async function iniciarTentativa(
     idTeste: string,
     idUsuario: string,
+    tipoUsuario: string,
 ) {
     const teste = await prisma.teste.findUnique({
         where: { id: idTeste },
@@ -79,29 +82,36 @@ export async function iniciarTentativa(
     if (teste.tipo === "ATIVIDADE") {
         const curso = teste.modulo?.sessao.curso;
 
-        if (!curso || curso.status !== "ATIVO") {
+        if (!curso) {
             throw new AttemptsServiceError(
                 "CURSO_INDISPONIVEL",
                 "O curso desta atividade não está disponível.",
             );
         }
 
-        const inscricao = await prisma.inscricao.findUnique({
-            where: {
-                idUsuario_idCurso: {
-                    idUsuario,
-                    idCurso: curso.id,
-                },
-            },
-            select: {
-                id: true,
-            },
-        });
+        const acesso = await consultarAcessoCurso(
+            curso.id,
+            idUsuario,
+            tipoUsuario,
+        );
 
-        if (!inscricao) {
+        if (!acesso.podeLer) {
             throw new AttemptsServiceError(
                 "SEM_ACESSO_CURSO",
-                "Você precisa estar inscrito no curso para realizar esta atividade.",
+                "Você precisa estar inscrito em um curso ativo ou possuir autorização para realizar esta atividade.",
+            );
+        }
+    } else {
+        // Simulados são pessoais.
+        // Somente o criador ou um administrador pode iniciá-los.
+        const permitido =
+            teste.idResponsavel === idUsuario ||
+            tipoUsuario === "ADMIN";
+
+        if (!permitido) {
+            throw new AttemptsServiceError(
+                "SEM_PERMISSAO",
+                "Você não tem permissão para iniciar este simulado.",
             );
         }
     }

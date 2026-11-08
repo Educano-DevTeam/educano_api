@@ -9,6 +9,8 @@ import type {
     ListarTestesInput,
 } from "../types/tests.types.js";
 
+import { consultarAcessoCurso } from "../../courses/services/course-permissions.service.js";
+
 export class TestsServiceError extends Error {
     constructor(
         public readonly code: string,
@@ -46,15 +48,9 @@ async function verificarPermissaoModulo(
 
         select: {
             id: true,
-
             sessao: {
                 select: {
-                    curso: {
-                        select: {
-                            id: true,
-                            idResponsavel: true,
-                        },
-                    },
+                    idCurso: true,
                 },
             },
         },
@@ -67,18 +63,16 @@ async function verificarPermissaoModulo(
         );
     }
 
-    const permitido =
-        tipoUsuario === "ADMIN" ||
-        tipoUsuario === "PROFESSOR" ||
-        (
-            tipoUsuario === "PARCEIRO" &&
-            modulo.sessao.curso.idResponsavel === idUsuario
-        );
+    const acesso = await consultarAcessoCurso(
+        modulo.sessao.idCurso,
+        idUsuario,
+        tipoUsuario,
+    );
 
-    if (!permitido) {
+    if (!acesso.existe || !acesso.podeGerenciar) {
         throw new TestsServiceError(
             "SEM_PERMISSAO",
-            "Somente professores, administradores ou o parceiro responsável pelo curso podem gerenciar atividades deste módulo.",
+            "Somente o responsável pelo curso, professores vinculados ou administradores podem gerenciar atividades deste módulo.",
         );
     }
 
@@ -275,58 +269,46 @@ function montarFiltroAcesso(
         return {};
     }
 
-    if (tipoUsuario === "PROFESSOR") {
-        return {
-            OR: [
-                { tipo: "ATIVIDADE" },
-                {
-                    tipo: "SIMULADO",
-                    idResponsavel: idUsuario,
-                },
-            ],
-        };
-    }
-
-    if (tipoUsuario === "PARCEIRO") {
-        return {
-            OR: [
-                {
-                    tipo: "ATIVIDADE",
-                    modulo: {
-                        sessao: {
-                            curso: {
-                                idResponsavel: idUsuario,
-                            },
-                        },
-                    },
-                },
-                {
-                    tipo: "SIMULADO",
-                    idResponsavel: idUsuario,
-                },
-            ],
-        };
-    }
-
-    // Alunos visualizam seus simulados e atividades
-    // dos cursos ativos nos quais estão inscritos.
     return {
         OR: [
+            // Simulados pessoais.
             {
                 tipo: "SIMULADO",
                 idResponsavel: idUsuario,
             },
+
+            // Atividades de cursos que o usuário gerencia
+            // ou nos quais está inscrito.
             {
                 tipo: "ATIVIDADE",
                 modulo: {
                     sessao: {
                         curso: {
-                            status: "ATIVO",
-                            inscricoes: {
-                                some: {
-                                    idUsuario,
+                            OR: [
+                                // Responsável pelo curso.
+                                {
+                                    idResponsavel: idUsuario,
                                 },
-                            },
+
+                                // Professor vinculado ao curso.
+                                {
+                                    professores: {
+                                        some: {
+                                            idProfessor: idUsuario,
+                                        },
+                                    },
+                                },
+
+                                // Inscrito em curso ativo.
+                                {
+                                    status: "ATIVO",
+                                    inscricoes: {
+                                        some: {
+                                            idUsuario,
+                                        },
+                                    },
+                                },
+                            ],
                         },
                     },
                 },
@@ -520,34 +502,17 @@ export async function consultarTeste(
         );
     }
 
-    const podeGerenciar =
-        tipoUsuario === "ADMIN" ||
-        tipoUsuario === "PROFESSOR" ||
-        (
-            tipoUsuario === "PARCEIRO" &&
-            curso.idResponsavel === idUsuario
+    const acesso = await consultarAcessoCurso(
+        curso.id,
+        idUsuario,
+        tipoUsuario,
+    );
+
+    if (!acesso.podeLer) {
+        throw new TestsServiceError(
+            "SEM_ACESSO_CURSO",
+            "Você precisa estar inscrito em um curso ativo ou possuir autorização para acessar esta atividade.",
         );
-
-    if (!podeGerenciar) {
-        const inscricao = await prisma.inscricao.findUnique({
-            where: {
-                idUsuario_idCurso: {
-                    idUsuario,
-                    idCurso: curso.id,
-                },
-            },
-
-            select: {
-                id: true,
-            },
-        });
-
-        if (!inscricao || curso.status !== "ATIVO") {
-            throw new TestsServiceError(
-                "SEM_ACESSO_CURSO",
-                "Você precisa estar inscrito em um curso ativo para acessar esta atividade.",
-            );
-        }
     }
 
     return teste;
