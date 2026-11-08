@@ -483,20 +483,6 @@ export async function enviarRespostas(
             boostAplicado = progresso.boostAplicado;
         }
 
-        if (teste.tipo === "ATIVIDADE" || teste.tipo === "SIMULADO") {
-            const progresso = await registrarConclusaoTeste(tx, {
-                idUsuario,
-                idTeste: teste.id,
-                tipo: teste.tipo,
-                nota: notaFinal,
-                dificuldade: teste.dificuldade,
-                tempoConsumido,
-                tempoLimiteMinutos: teste.tempoMinutos,
-            });
-
-            recompensa = progresso.recompensa;
-        }
-
         return {
             tentativa: finalizada,
             resultado: {

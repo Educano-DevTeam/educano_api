@@ -64,7 +64,7 @@ export async function ativar(req: Request, res: Response) {
   try {
     const inventario = await ativarItem(
       req.usuarioAutenticado!.id,
-      validacao.data.id,
+      validacao.data.idInventario,
     );
 
     return res.status(200).json({
@@ -94,7 +94,7 @@ export async function verificar(req: Request, res: Response) {
       return verificarItemInventario(
         tx,
         req.usuarioAutenticado!.id,
-        validacao.data.id,
+        validacao.data.idInventario,
       );
     });
 

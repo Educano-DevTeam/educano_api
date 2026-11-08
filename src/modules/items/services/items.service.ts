@@ -31,13 +31,20 @@ async function atualizarItensExpirados(
 ) {
   const agora = new Date();
 
-  await (tx as any).inventario.updateMany({
+  await tx.inventario.updateMany({
     where: {
       idUsuario,
       status: "ATIVO",
-      expiraEm: {
-        lte: agora,
-      },
+      OR: [
+        {
+          expiraEm: {
+              lte: agora,
+          },
+        },
+        {
+          expiraEm: null,
+        },
+      ],
     },
     data: {
       status: "USADO",

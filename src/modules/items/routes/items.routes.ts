@@ -32,9 +32,15 @@ itemsRouter.use(autenticar);
 // Rotas estáticas antes de /:id.
 itemsRouter.get("/loja", loja);
 itemsRouter.get("/inventario", listarInventario);
-itemsRouter.patch("/inventario/:id/ativar", ativar);
-itemsRouter.get("/inventario/:id/verificar", verificar);
+itemsRouter.patch(
+  "/inventario/:idInventario/ativar",
+  ativar,
+);
 
+itemsRouter.get(
+  "/inventario/:idInventario/verificar",
+  verificar,
+);
 // -----------------------------------------------------
 // COMPRA
 // -----------------------------------------------------
