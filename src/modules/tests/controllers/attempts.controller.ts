@@ -20,7 +20,7 @@ function responderErro(res: Response, erro: unknown) {
         const status: Record<string, number> = {
             TESTE_NAO_ENCONTRADO: 404,
             TENTATIVA_NAO_ENCONTRADA: 404,
-            CURSO_INDISPONIVEL: 403,
+            CURSO_INDISPONIVEL: 404,
             SEM_ACESSO_CURSO: 403,
             SEM_PERMISSAO: 403,
             QUESTOES_INSUFICIENTES: 422,
