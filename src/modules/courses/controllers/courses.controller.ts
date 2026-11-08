@@ -13,6 +13,7 @@ import {
     consultarCurso,
     consultarConteudoCurso,
     listarCursos,
+    listarMeusCursosInscritos, 
     atualizarCurso,
     excluirCurso,
 } from "../services/courses.service.js";
@@ -166,6 +167,29 @@ export async function consultarConteudo(
         return responderErro(res, error);
     }
 }
+
+
+// -----------------------------------------------------
+// LISTAR CURSOS INSCRITOS PELO PRÓPRIO USUÁRIO
+// -----------------------------------------------------
+
+export async function listarMeusCursos(
+    req: Request,
+    res: Response,
+) {
+    try {
+        const usuario = req.usuarioAutenticado!;
+
+        const resultado = await listarMeusCursosInscritos(
+            usuario.id,
+        );
+
+        return res.status(200).json(resultado);
+    } catch (error) {
+        return responderErro(res, error);
+    }
+}
+
 
 // -----------------------------------------------------
 // LISTAR E PESQUISAR CURSOS

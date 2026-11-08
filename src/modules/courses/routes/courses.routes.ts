@@ -9,6 +9,7 @@ import {
   consultar,
   consultarConteudo,
   listar,
+  listarMeusCursos, 
   atualizar,
   excluir,
 } from "../controllers/courses.controller.js";
@@ -31,6 +32,9 @@ coursesRouter.use(autenticar);
 // Cursos
 coursesRouter.get("/", listar);
 coursesRouter.post("/", uploadArquivo.single("arquivo"), criar);
+
+// Cursos inscritos pelo próprio usuário.
+coursesRouter.get("/minhas-inscricoes", listarMeusCursos);
 
 // Inscrições do próprio usuário
 coursesRouter.post("/:id/inscricoes", inscrever);

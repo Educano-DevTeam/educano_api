@@ -687,6 +687,173 @@ export async function consultarConteudoCurso(
 }
 
 // -----------------------------------------------------
+// LISTAR CURSOS DO PRÓPRIO USUÁRIO
+// -----------------------------------------------------
+
+export async function listarMeusCursosInscritos(
+    idUsuario: string,
+) {
+    // Busca as inscrições e a estrutura necessária para calcular
+    // o total de aulas e atividades de cada curso.
+    const inscricoes = await prisma.inscricao.findMany({
+        where: { idUsuario },
+        orderBy: [
+            { criadoEm: "desc" },
+            { id: "asc" },
+        ],
+        select: {
+            criadoEm: true,
+            curso: {
+                select: {
+                    id: true,
+                    nome: true,
+                    descricao: true,
+                    cargaHoraria: true,
+                    idCapa: true,
+                    sessoes: {
+                        select: {
+                            modulos: {
+                                select: {
+                                    aulas: {
+                                        select: { id: true },
+                                    },
+                                    testes: {
+                                        where: {
+                                            tipo: "ATIVIDADE",
+                                        },
+                                        select: { id: true },
+                                    },
+                                },
+                            },
+                        },
+                    },
+                },
+            },
+        },
+    });
+
+    // Reúne os IDs de aulas e atividades de todos os cursos.
+    const idsAulas = inscricoes.flatMap(({ curso }) =>
+        curso.sessoes.flatMap((sessao) =>
+            sessao.modulos.flatMap((modulo) =>
+                modulo.aulas.map((aula) => aula.id),
+            ),
+        ),
+    );
+
+    const idsAtividades = inscricoes.flatMap(({ curso }) =>
+        curso.sessoes.flatMap((sessao) =>
+            sessao.modulos.flatMap((modulo) =>
+                modulo.testes.map((teste) => teste.id),
+            ),
+        ),
+    );
+
+    // Busca, em uma única consulta, as conclusões do usuário.
+    const filtrosProgresso = [
+        ...(idsAulas.length > 0
+            ? [{ idAula: { in: idsAulas } }]
+            : []),
+        ...(idsAtividades.length > 0
+            ? [{ idTeste: { in: idsAtividades } }]
+            : []),
+    ];
+
+    const progressos = filtrosProgresso.length > 0
+        ? await prisma.progresso.findMany({
+            where: {
+                idUsuario,
+                concluida: true,
+                OR: filtrosProgresso,
+            },
+            select: {
+                idAula: true,
+                idTeste: true,
+            },
+        })
+        : [];
+
+    const aulasConcluidas = new Set(
+        progressos
+            .map((item) => item.idAula)
+            .filter((id): id is string => id !== null),
+    );
+
+    const atividadesConcluidas = new Set(
+        progressos
+            .map((item) => item.idTeste)
+            .filter((id): id is string => id !== null),
+    );
+
+    // Calcula o progresso individual de cada curso.
+    const cursos = await Promise.all(
+        inscricoes.map(async ({ criadoEm, curso }) => {
+            const aulas = curso.sessoes.flatMap((sessao) =>
+                sessao.modulos.flatMap((modulo) => modulo.aulas),
+            );
+
+            const atividades = curso.sessoes.flatMap((sessao) =>
+                sessao.modulos.flatMap((modulo) => modulo.testes),
+            );
+
+            const total = aulas.length + atividades.length;
+
+            const concluidos =
+                aulas.filter((aula) =>
+                    aulasConcluidas.has(aula.id),
+                ).length +
+                atividades.filter((atividade) =>
+                    atividadesConcluidas.has(atividade.id),
+                ).length;
+
+            const percentual = total > 0
+                ? Math.round((concluidos / total) * 100)
+                : 0;
+
+            // Gera a URL temporária da capa.
+            const capa = curso.idCapa
+                ? await consultarArquivo(curso.idCapa)
+                : null;
+
+            return {
+                id: curso.id,
+                nome: curso.nome,
+                descricao: curso.descricao,
+                cargaHoraria: curso.cargaHoraria,
+
+                capa: capa?.url ?? null,
+
+                inscritoEm: criadoEm,
+
+                progresso: {
+                    total,
+                    concluidos,
+                    percentual,
+                },
+            };
+        }),
+    );
+
+    // Média das porcentagens dos cursos inscritos.
+    const totalCursos = cursos.length;
+
+    const progressoGeral = totalCursos > 0
+        ? Math.round(
+            cursos.reduce(
+                (soma, curso) => soma + curso.progresso.percentual,
+                0,
+            ) / totalCursos,
+        )
+        : 0;
+
+    return {
+        totalCursos,
+        progressoGeral,
+        cursos,
+    };
+}
+
+// -----------------------------------------------------
 // LISTAR E PESQUISAR CURSOS
 // -----------------------------------------------------
 
