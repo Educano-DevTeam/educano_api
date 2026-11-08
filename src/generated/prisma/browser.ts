@@ -102,3 +102,13 @@ export type CursoProfessor = Prisma.CursoProfessorModel
  * 
  */
 export type Progresso = Prisma.ProgressoModel
+/**
+ * Model Item
+ * 
+ */
+export type Item = Prisma.ItemModel
+/**
+ * Model Inventario
+ * 
+ */
+export type Inventario = Prisma.InventarioModel

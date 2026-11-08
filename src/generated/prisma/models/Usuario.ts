@@ -222,6 +222,8 @@ export type UsuarioWhereInput = {
   alternativasResponsavel?: Prisma.AlternativaListRelationFilter
   inscricoes?: Prisma.InscricaoListRelationFilter
   progressos?: Prisma.ProgressoListRelationFilter
+  itensCriados?: Prisma.ItemListRelationFilter
+  inventario?: Prisma.InventarioListRelationFilter
   cursosComoProfessor?: Prisma.CursoProfessorListRelationFilter
   vinculosProfessorCriados?: Prisma.CursoProfessorListRelationFilter
 }
@@ -251,6 +253,8 @@ export type UsuarioOrderByWithRelationInput = {
   alternativasResponsavel?: Prisma.AlternativaOrderByRelationAggregateInput
   inscricoes?: Prisma.InscricaoOrderByRelationAggregateInput
   progressos?: Prisma.ProgressoOrderByRelationAggregateInput
+  itensCriados?: Prisma.ItemOrderByRelationAggregateInput
+  inventario?: Prisma.InventarioOrderByRelationAggregateInput
   cursosComoProfessor?: Prisma.CursoProfessorOrderByRelationAggregateInput
   vinculosProfessorCriados?: Prisma.CursoProfessorOrderByRelationAggregateInput
 }
@@ -283,6 +287,8 @@ export type UsuarioWhereUniqueInput = Prisma.AtLeast<{
   alternativasResponsavel?: Prisma.AlternativaListRelationFilter
   inscricoes?: Prisma.InscricaoListRelationFilter
   progressos?: Prisma.ProgressoListRelationFilter
+  itensCriados?: Prisma.ItemListRelationFilter
+  inventario?: Prisma.InventarioListRelationFilter
   cursosComoProfessor?: Prisma.CursoProfessorListRelationFilter
   vinculosProfessorCriados?: Prisma.CursoProfessorListRelationFilter
 }, "id" | "email">
@@ -340,6 +346,8 @@ export type UsuarioCreateInput = {
   alternativasResponsavel?: Prisma.AlternativaCreateNestedManyWithoutResponsavelInput
   inscricoes?: Prisma.InscricaoCreateNestedManyWithoutUsuarioInput
   progressos?: Prisma.ProgressoCreateNestedManyWithoutUsuarioInput
+  itensCriados?: Prisma.ItemCreateNestedManyWithoutResponsavelInput
+  inventario?: Prisma.InventarioCreateNestedManyWithoutUsuarioInput
   cursosComoProfessor?: Prisma.CursoProfessorCreateNestedManyWithoutProfessorInput
   vinculosProfessorCriados?: Prisma.CursoProfessorCreateNestedManyWithoutResponsavelVinculoInput
 }
@@ -369,6 +377,8 @@ export type UsuarioUncheckedCreateInput = {
   alternativasResponsavel?: Prisma.AlternativaUncheckedCreateNestedManyWithoutResponsavelInput
   inscricoes?: Prisma.InscricaoUncheckedCreateNestedManyWithoutUsuarioInput
   progressos?: Prisma.ProgressoUncheckedCreateNestedManyWithoutUsuarioInput
+  itensCriados?: Prisma.ItemUncheckedCreateNestedManyWithoutResponsavelInput
+  inventario?: Prisma.InventarioUncheckedCreateNestedManyWithoutUsuarioInput
   cursosComoProfessor?: Prisma.CursoProfessorUncheckedCreateNestedManyWithoutProfessorInput
   vinculosProfessorCriados?: Prisma.CursoProfessorUncheckedCreateNestedManyWithoutResponsavelVinculoInput
 }
@@ -398,6 +408,8 @@ export type UsuarioUpdateInput = {
   alternativasResponsavel?: Prisma.AlternativaUpdateManyWithoutResponsavelNestedInput
   inscricoes?: Prisma.InscricaoUpdateManyWithoutUsuarioNestedInput
   progressos?: Prisma.ProgressoUpdateManyWithoutUsuarioNestedInput
+  itensCriados?: Prisma.ItemUpdateManyWithoutResponsavelNestedInput
+  inventario?: Prisma.InventarioUpdateManyWithoutUsuarioNestedInput
   cursosComoProfessor?: Prisma.CursoProfessorUpdateManyWithoutProfessorNestedInput
   vinculosProfessorCriados?: Prisma.CursoProfessorUpdateManyWithoutResponsavelVinculoNestedInput
 }
@@ -427,6 +439,8 @@ export type UsuarioUncheckedUpdateInput = {
   alternativasResponsavel?: Prisma.AlternativaUncheckedUpdateManyWithoutResponsavelNestedInput
   inscricoes?: Prisma.InscricaoUncheckedUpdateManyWithoutUsuarioNestedInput
   progressos?: Prisma.ProgressoUncheckedUpdateManyWithoutUsuarioNestedInput
+  itensCriados?: Prisma.ItemUncheckedUpdateManyWithoutResponsavelNestedInput
+  inventario?: Prisma.InventarioUncheckedUpdateManyWithoutUsuarioNestedInput
   cursosComoProfessor?: Prisma.CursoProfessorUncheckedUpdateManyWithoutProfessorNestedInput
   vinculosProfessorCriados?: Prisma.CursoProfessorUncheckedUpdateManyWithoutResponsavelVinculoNestedInput
 }
@@ -779,6 +793,34 @@ export type UsuarioUpdateOneRequiredWithoutProgressosNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UsuarioUpdateToOneWithWhereWithoutProgressosInput, Prisma.UsuarioUpdateWithoutProgressosInput>, Prisma.UsuarioUncheckedUpdateWithoutProgressosInput>
 }
 
+export type UsuarioCreateNestedOneWithoutItensCriadosInput = {
+  create?: Prisma.XOR<Prisma.UsuarioCreateWithoutItensCriadosInput, Prisma.UsuarioUncheckedCreateWithoutItensCriadosInput>
+  connectOrCreate?: Prisma.UsuarioCreateOrConnectWithoutItensCriadosInput
+  connect?: Prisma.UsuarioWhereUniqueInput
+}
+
+export type UsuarioUpdateOneRequiredWithoutItensCriadosNestedInput = {
+  create?: Prisma.XOR<Prisma.UsuarioCreateWithoutItensCriadosInput, Prisma.UsuarioUncheckedCreateWithoutItensCriadosInput>
+  connectOrCreate?: Prisma.UsuarioCreateOrConnectWithoutItensCriadosInput
+  upsert?: Prisma.UsuarioUpsertWithoutItensCriadosInput
+  connect?: Prisma.UsuarioWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UsuarioUpdateToOneWithWhereWithoutItensCriadosInput, Prisma.UsuarioUpdateWithoutItensCriadosInput>, Prisma.UsuarioUncheckedUpdateWithoutItensCriadosInput>
+}
+
+export type UsuarioCreateNestedOneWithoutInventarioInput = {
+  create?: Prisma.XOR<Prisma.UsuarioCreateWithoutInventarioInput, Prisma.UsuarioUncheckedCreateWithoutInventarioInput>
+  connectOrCreate?: Prisma.UsuarioCreateOrConnectWithoutInventarioInput
+  connect?: Prisma.UsuarioWhereUniqueInput
+}
+
+export type UsuarioUpdateOneRequiredWithoutInventarioNestedInput = {
+  create?: Prisma.XOR<Prisma.UsuarioCreateWithoutInventarioInput, Prisma.UsuarioUncheckedCreateWithoutInventarioInput>
+  connectOrCreate?: Prisma.UsuarioCreateOrConnectWithoutInventarioInput
+  upsert?: Prisma.UsuarioUpsertWithoutInventarioInput
+  connect?: Prisma.UsuarioWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UsuarioUpdateToOneWithWhereWithoutInventarioInput, Prisma.UsuarioUpdateWithoutInventarioInput>, Prisma.UsuarioUncheckedUpdateWithoutInventarioInput>
+}
+
 export type UsuarioCreateWithoutPerfilInput = {
   id?: string
   nome: string
@@ -803,6 +845,8 @@ export type UsuarioCreateWithoutPerfilInput = {
   alternativasResponsavel?: Prisma.AlternativaCreateNestedManyWithoutResponsavelInput
   inscricoes?: Prisma.InscricaoCreateNestedManyWithoutUsuarioInput
   progressos?: Prisma.ProgressoCreateNestedManyWithoutUsuarioInput
+  itensCriados?: Prisma.ItemCreateNestedManyWithoutResponsavelInput
+  inventario?: Prisma.InventarioCreateNestedManyWithoutUsuarioInput
   cursosComoProfessor?: Prisma.CursoProfessorCreateNestedManyWithoutProfessorInput
   vinculosProfessorCriados?: Prisma.CursoProfessorCreateNestedManyWithoutResponsavelVinculoInput
 }
@@ -831,6 +875,8 @@ export type UsuarioUncheckedCreateWithoutPerfilInput = {
   alternativasResponsavel?: Prisma.AlternativaUncheckedCreateNestedManyWithoutResponsavelInput
   inscricoes?: Prisma.InscricaoUncheckedCreateNestedManyWithoutUsuarioInput
   progressos?: Prisma.ProgressoUncheckedCreateNestedManyWithoutUsuarioInput
+  itensCriados?: Prisma.ItemUncheckedCreateNestedManyWithoutResponsavelInput
+  inventario?: Prisma.InventarioUncheckedCreateNestedManyWithoutUsuarioInput
   cursosComoProfessor?: Prisma.CursoProfessorUncheckedCreateNestedManyWithoutProfessorInput
   vinculosProfessorCriados?: Prisma.CursoProfessorUncheckedCreateNestedManyWithoutResponsavelVinculoInput
 }
@@ -875,6 +921,8 @@ export type UsuarioUpdateWithoutPerfilInput = {
   alternativasResponsavel?: Prisma.AlternativaUpdateManyWithoutResponsavelNestedInput
   inscricoes?: Prisma.InscricaoUpdateManyWithoutUsuarioNestedInput
   progressos?: Prisma.ProgressoUpdateManyWithoutUsuarioNestedInput
+  itensCriados?: Prisma.ItemUpdateManyWithoutResponsavelNestedInput
+  inventario?: Prisma.InventarioUpdateManyWithoutUsuarioNestedInput
   cursosComoProfessor?: Prisma.CursoProfessorUpdateManyWithoutProfessorNestedInput
   vinculosProfessorCriados?: Prisma.CursoProfessorUpdateManyWithoutResponsavelVinculoNestedInput
 }
@@ -903,6 +951,8 @@ export type UsuarioUncheckedUpdateWithoutPerfilInput = {
   alternativasResponsavel?: Prisma.AlternativaUncheckedUpdateManyWithoutResponsavelNestedInput
   inscricoes?: Prisma.InscricaoUncheckedUpdateManyWithoutUsuarioNestedInput
   progressos?: Prisma.ProgressoUncheckedUpdateManyWithoutUsuarioNestedInput
+  itensCriados?: Prisma.ItemUncheckedUpdateManyWithoutResponsavelNestedInput
+  inventario?: Prisma.InventarioUncheckedUpdateManyWithoutUsuarioNestedInput
   cursosComoProfessor?: Prisma.CursoProfessorUncheckedUpdateManyWithoutProfessorNestedInput
   vinculosProfessorCriados?: Prisma.CursoProfessorUncheckedUpdateManyWithoutResponsavelVinculoNestedInput
 }
@@ -931,6 +981,8 @@ export type UsuarioCreateWithoutCodigosValidacaoInput = {
   alternativasResponsavel?: Prisma.AlternativaCreateNestedManyWithoutResponsavelInput
   inscricoes?: Prisma.InscricaoCreateNestedManyWithoutUsuarioInput
   progressos?: Prisma.ProgressoCreateNestedManyWithoutUsuarioInput
+  itensCriados?: Prisma.ItemCreateNestedManyWithoutResponsavelInput
+  inventario?: Prisma.InventarioCreateNestedManyWithoutUsuarioInput
   cursosComoProfessor?: Prisma.CursoProfessorCreateNestedManyWithoutProfessorInput
   vinculosProfessorCriados?: Prisma.CursoProfessorCreateNestedManyWithoutResponsavelVinculoInput
 }
@@ -959,6 +1011,8 @@ export type UsuarioUncheckedCreateWithoutCodigosValidacaoInput = {
   alternativasResponsavel?: Prisma.AlternativaUncheckedCreateNestedManyWithoutResponsavelInput
   inscricoes?: Prisma.InscricaoUncheckedCreateNestedManyWithoutUsuarioInput
   progressos?: Prisma.ProgressoUncheckedCreateNestedManyWithoutUsuarioInput
+  itensCriados?: Prisma.ItemUncheckedCreateNestedManyWithoutResponsavelInput
+  inventario?: Prisma.InventarioUncheckedCreateNestedManyWithoutUsuarioInput
   cursosComoProfessor?: Prisma.CursoProfessorUncheckedCreateNestedManyWithoutProfessorInput
   vinculosProfessorCriados?: Prisma.CursoProfessorUncheckedCreateNestedManyWithoutResponsavelVinculoInput
 }
@@ -1003,6 +1057,8 @@ export type UsuarioUpdateWithoutCodigosValidacaoInput = {
   alternativasResponsavel?: Prisma.AlternativaUpdateManyWithoutResponsavelNestedInput
   inscricoes?: Prisma.InscricaoUpdateManyWithoutUsuarioNestedInput
   progressos?: Prisma.ProgressoUpdateManyWithoutUsuarioNestedInput
+  itensCriados?: Prisma.ItemUpdateManyWithoutResponsavelNestedInput
+  inventario?: Prisma.InventarioUpdateManyWithoutUsuarioNestedInput
   cursosComoProfessor?: Prisma.CursoProfessorUpdateManyWithoutProfessorNestedInput
   vinculosProfessorCriados?: Prisma.CursoProfessorUpdateManyWithoutResponsavelVinculoNestedInput
 }
@@ -1031,6 +1087,8 @@ export type UsuarioUncheckedUpdateWithoutCodigosValidacaoInput = {
   alternativasResponsavel?: Prisma.AlternativaUncheckedUpdateManyWithoutResponsavelNestedInput
   inscricoes?: Prisma.InscricaoUncheckedUpdateManyWithoutUsuarioNestedInput
   progressos?: Prisma.ProgressoUncheckedUpdateManyWithoutUsuarioNestedInput
+  itensCriados?: Prisma.ItemUncheckedUpdateManyWithoutResponsavelNestedInput
+  inventario?: Prisma.InventarioUncheckedUpdateManyWithoutUsuarioNestedInput
   cursosComoProfessor?: Prisma.CursoProfessorUncheckedUpdateManyWithoutProfessorNestedInput
   vinculosProfessorCriados?: Prisma.CursoProfessorUncheckedUpdateManyWithoutResponsavelVinculoNestedInput
 }
@@ -1059,6 +1117,8 @@ export type UsuarioCreateWithoutArquivosInput = {
   alternativasResponsavel?: Prisma.AlternativaCreateNestedManyWithoutResponsavelInput
   inscricoes?: Prisma.InscricaoCreateNestedManyWithoutUsuarioInput
   progressos?: Prisma.ProgressoCreateNestedManyWithoutUsuarioInput
+  itensCriados?: Prisma.ItemCreateNestedManyWithoutResponsavelInput
+  inventario?: Prisma.InventarioCreateNestedManyWithoutUsuarioInput
   cursosComoProfessor?: Prisma.CursoProfessorCreateNestedManyWithoutProfessorInput
   vinculosProfessorCriados?: Prisma.CursoProfessorCreateNestedManyWithoutResponsavelVinculoInput
 }
@@ -1087,6 +1147,8 @@ export type UsuarioUncheckedCreateWithoutArquivosInput = {
   alternativasResponsavel?: Prisma.AlternativaUncheckedCreateNestedManyWithoutResponsavelInput
   inscricoes?: Prisma.InscricaoUncheckedCreateNestedManyWithoutUsuarioInput
   progressos?: Prisma.ProgressoUncheckedCreateNestedManyWithoutUsuarioInput
+  itensCriados?: Prisma.ItemUncheckedCreateNestedManyWithoutResponsavelInput
+  inventario?: Prisma.InventarioUncheckedCreateNestedManyWithoutUsuarioInput
   cursosComoProfessor?: Prisma.CursoProfessorUncheckedCreateNestedManyWithoutProfessorInput
   vinculosProfessorCriados?: Prisma.CursoProfessorUncheckedCreateNestedManyWithoutResponsavelVinculoInput
 }
@@ -1131,6 +1193,8 @@ export type UsuarioUpdateWithoutArquivosInput = {
   alternativasResponsavel?: Prisma.AlternativaUpdateManyWithoutResponsavelNestedInput
   inscricoes?: Prisma.InscricaoUpdateManyWithoutUsuarioNestedInput
   progressos?: Prisma.ProgressoUpdateManyWithoutUsuarioNestedInput
+  itensCriados?: Prisma.ItemUpdateManyWithoutResponsavelNestedInput
+  inventario?: Prisma.InventarioUpdateManyWithoutUsuarioNestedInput
   cursosComoProfessor?: Prisma.CursoProfessorUpdateManyWithoutProfessorNestedInput
   vinculosProfessorCriados?: Prisma.CursoProfessorUpdateManyWithoutResponsavelVinculoNestedInput
 }
@@ -1159,6 +1223,8 @@ export type UsuarioUncheckedUpdateWithoutArquivosInput = {
   alternativasResponsavel?: Prisma.AlternativaUncheckedUpdateManyWithoutResponsavelNestedInput
   inscricoes?: Prisma.InscricaoUncheckedUpdateManyWithoutUsuarioNestedInput
   progressos?: Prisma.ProgressoUncheckedUpdateManyWithoutUsuarioNestedInput
+  itensCriados?: Prisma.ItemUncheckedUpdateManyWithoutResponsavelNestedInput
+  inventario?: Prisma.InventarioUncheckedUpdateManyWithoutUsuarioNestedInput
   cursosComoProfessor?: Prisma.CursoProfessorUncheckedUpdateManyWithoutProfessorNestedInput
   vinculosProfessorCriados?: Prisma.CursoProfessorUncheckedUpdateManyWithoutResponsavelVinculoNestedInput
 }
@@ -1187,6 +1253,8 @@ export type UsuarioCreateWithoutCursosResponsavelInput = {
   alternativasResponsavel?: Prisma.AlternativaCreateNestedManyWithoutResponsavelInput
   inscricoes?: Prisma.InscricaoCreateNestedManyWithoutUsuarioInput
   progressos?: Prisma.ProgressoCreateNestedManyWithoutUsuarioInput
+  itensCriados?: Prisma.ItemCreateNestedManyWithoutResponsavelInput
+  inventario?: Prisma.InventarioCreateNestedManyWithoutUsuarioInput
   cursosComoProfessor?: Prisma.CursoProfessorCreateNestedManyWithoutProfessorInput
   vinculosProfessorCriados?: Prisma.CursoProfessorCreateNestedManyWithoutResponsavelVinculoInput
 }
@@ -1215,6 +1283,8 @@ export type UsuarioUncheckedCreateWithoutCursosResponsavelInput = {
   alternativasResponsavel?: Prisma.AlternativaUncheckedCreateNestedManyWithoutResponsavelInput
   inscricoes?: Prisma.InscricaoUncheckedCreateNestedManyWithoutUsuarioInput
   progressos?: Prisma.ProgressoUncheckedCreateNestedManyWithoutUsuarioInput
+  itensCriados?: Prisma.ItemUncheckedCreateNestedManyWithoutResponsavelInput
+  inventario?: Prisma.InventarioUncheckedCreateNestedManyWithoutUsuarioInput
   cursosComoProfessor?: Prisma.CursoProfessorUncheckedCreateNestedManyWithoutProfessorInput
   vinculosProfessorCriados?: Prisma.CursoProfessorUncheckedCreateNestedManyWithoutResponsavelVinculoInput
 }
@@ -1248,6 +1318,8 @@ export type UsuarioCreateWithoutCursosAutorizadosInput = {
   alternativasResponsavel?: Prisma.AlternativaCreateNestedManyWithoutResponsavelInput
   inscricoes?: Prisma.InscricaoCreateNestedManyWithoutUsuarioInput
   progressos?: Prisma.ProgressoCreateNestedManyWithoutUsuarioInput
+  itensCriados?: Prisma.ItemCreateNestedManyWithoutResponsavelInput
+  inventario?: Prisma.InventarioCreateNestedManyWithoutUsuarioInput
   cursosComoProfessor?: Prisma.CursoProfessorCreateNestedManyWithoutProfessorInput
   vinculosProfessorCriados?: Prisma.CursoProfessorCreateNestedManyWithoutResponsavelVinculoInput
 }
@@ -1276,6 +1348,8 @@ export type UsuarioUncheckedCreateWithoutCursosAutorizadosInput = {
   alternativasResponsavel?: Prisma.AlternativaUncheckedCreateNestedManyWithoutResponsavelInput
   inscricoes?: Prisma.InscricaoUncheckedCreateNestedManyWithoutUsuarioInput
   progressos?: Prisma.ProgressoUncheckedCreateNestedManyWithoutUsuarioInput
+  itensCriados?: Prisma.ItemUncheckedCreateNestedManyWithoutResponsavelInput
+  inventario?: Prisma.InventarioUncheckedCreateNestedManyWithoutUsuarioInput
   cursosComoProfessor?: Prisma.CursoProfessorUncheckedCreateNestedManyWithoutProfessorInput
   vinculosProfessorCriados?: Prisma.CursoProfessorUncheckedCreateNestedManyWithoutResponsavelVinculoInput
 }
@@ -1320,6 +1394,8 @@ export type UsuarioUpdateWithoutCursosResponsavelInput = {
   alternativasResponsavel?: Prisma.AlternativaUpdateManyWithoutResponsavelNestedInput
   inscricoes?: Prisma.InscricaoUpdateManyWithoutUsuarioNestedInput
   progressos?: Prisma.ProgressoUpdateManyWithoutUsuarioNestedInput
+  itensCriados?: Prisma.ItemUpdateManyWithoutResponsavelNestedInput
+  inventario?: Prisma.InventarioUpdateManyWithoutUsuarioNestedInput
   cursosComoProfessor?: Prisma.CursoProfessorUpdateManyWithoutProfessorNestedInput
   vinculosProfessorCriados?: Prisma.CursoProfessorUpdateManyWithoutResponsavelVinculoNestedInput
 }
@@ -1348,6 +1424,8 @@ export type UsuarioUncheckedUpdateWithoutCursosResponsavelInput = {
   alternativasResponsavel?: Prisma.AlternativaUncheckedUpdateManyWithoutResponsavelNestedInput
   inscricoes?: Prisma.InscricaoUncheckedUpdateManyWithoutUsuarioNestedInput
   progressos?: Prisma.ProgressoUncheckedUpdateManyWithoutUsuarioNestedInput
+  itensCriados?: Prisma.ItemUncheckedUpdateManyWithoutResponsavelNestedInput
+  inventario?: Prisma.InventarioUncheckedUpdateManyWithoutUsuarioNestedInput
   cursosComoProfessor?: Prisma.CursoProfessorUncheckedUpdateManyWithoutProfessorNestedInput
   vinculosProfessorCriados?: Prisma.CursoProfessorUncheckedUpdateManyWithoutResponsavelVinculoNestedInput
 }
@@ -1387,6 +1465,8 @@ export type UsuarioUpdateWithoutCursosAutorizadosInput = {
   alternativasResponsavel?: Prisma.AlternativaUpdateManyWithoutResponsavelNestedInput
   inscricoes?: Prisma.InscricaoUpdateManyWithoutUsuarioNestedInput
   progressos?: Prisma.ProgressoUpdateManyWithoutUsuarioNestedInput
+  itensCriados?: Prisma.ItemUpdateManyWithoutResponsavelNestedInput
+  inventario?: Prisma.InventarioUpdateManyWithoutUsuarioNestedInput
   cursosComoProfessor?: Prisma.CursoProfessorUpdateManyWithoutProfessorNestedInput
   vinculosProfessorCriados?: Prisma.CursoProfessorUpdateManyWithoutResponsavelVinculoNestedInput
 }
@@ -1415,6 +1495,8 @@ export type UsuarioUncheckedUpdateWithoutCursosAutorizadosInput = {
   alternativasResponsavel?: Prisma.AlternativaUncheckedUpdateManyWithoutResponsavelNestedInput
   inscricoes?: Prisma.InscricaoUncheckedUpdateManyWithoutUsuarioNestedInput
   progressos?: Prisma.ProgressoUncheckedUpdateManyWithoutUsuarioNestedInput
+  itensCriados?: Prisma.ItemUncheckedUpdateManyWithoutResponsavelNestedInput
+  inventario?: Prisma.InventarioUncheckedUpdateManyWithoutUsuarioNestedInput
   cursosComoProfessor?: Prisma.CursoProfessorUncheckedUpdateManyWithoutProfessorNestedInput
   vinculosProfessorCriados?: Prisma.CursoProfessorUncheckedUpdateManyWithoutResponsavelVinculoNestedInput
 }
@@ -1443,6 +1525,8 @@ export type UsuarioCreateWithoutSessoesResponsavelInput = {
   alternativasResponsavel?: Prisma.AlternativaCreateNestedManyWithoutResponsavelInput
   inscricoes?: Prisma.InscricaoCreateNestedManyWithoutUsuarioInput
   progressos?: Prisma.ProgressoCreateNestedManyWithoutUsuarioInput
+  itensCriados?: Prisma.ItemCreateNestedManyWithoutResponsavelInput
+  inventario?: Prisma.InventarioCreateNestedManyWithoutUsuarioInput
   cursosComoProfessor?: Prisma.CursoProfessorCreateNestedManyWithoutProfessorInput
   vinculosProfessorCriados?: Prisma.CursoProfessorCreateNestedManyWithoutResponsavelVinculoInput
 }
@@ -1471,6 +1555,8 @@ export type UsuarioUncheckedCreateWithoutSessoesResponsavelInput = {
   alternativasResponsavel?: Prisma.AlternativaUncheckedCreateNestedManyWithoutResponsavelInput
   inscricoes?: Prisma.InscricaoUncheckedCreateNestedManyWithoutUsuarioInput
   progressos?: Prisma.ProgressoUncheckedCreateNestedManyWithoutUsuarioInput
+  itensCriados?: Prisma.ItemUncheckedCreateNestedManyWithoutResponsavelInput
+  inventario?: Prisma.InventarioUncheckedCreateNestedManyWithoutUsuarioInput
   cursosComoProfessor?: Prisma.CursoProfessorUncheckedCreateNestedManyWithoutProfessorInput
   vinculosProfessorCriados?: Prisma.CursoProfessorUncheckedCreateNestedManyWithoutResponsavelVinculoInput
 }
@@ -1515,6 +1601,8 @@ export type UsuarioUpdateWithoutSessoesResponsavelInput = {
   alternativasResponsavel?: Prisma.AlternativaUpdateManyWithoutResponsavelNestedInput
   inscricoes?: Prisma.InscricaoUpdateManyWithoutUsuarioNestedInput
   progressos?: Prisma.ProgressoUpdateManyWithoutUsuarioNestedInput
+  itensCriados?: Prisma.ItemUpdateManyWithoutResponsavelNestedInput
+  inventario?: Prisma.InventarioUpdateManyWithoutUsuarioNestedInput
   cursosComoProfessor?: Prisma.CursoProfessorUpdateManyWithoutProfessorNestedInput
   vinculosProfessorCriados?: Prisma.CursoProfessorUpdateManyWithoutResponsavelVinculoNestedInput
 }
@@ -1543,6 +1631,8 @@ export type UsuarioUncheckedUpdateWithoutSessoesResponsavelInput = {
   alternativasResponsavel?: Prisma.AlternativaUncheckedUpdateManyWithoutResponsavelNestedInput
   inscricoes?: Prisma.InscricaoUncheckedUpdateManyWithoutUsuarioNestedInput
   progressos?: Prisma.ProgressoUncheckedUpdateManyWithoutUsuarioNestedInput
+  itensCriados?: Prisma.ItemUncheckedUpdateManyWithoutResponsavelNestedInput
+  inventario?: Prisma.InventarioUncheckedUpdateManyWithoutUsuarioNestedInput
   cursosComoProfessor?: Prisma.CursoProfessorUncheckedUpdateManyWithoutProfessorNestedInput
   vinculosProfessorCriados?: Prisma.CursoProfessorUncheckedUpdateManyWithoutResponsavelVinculoNestedInput
 }
@@ -1571,6 +1661,8 @@ export type UsuarioCreateWithoutModulosResponsavelInput = {
   alternativasResponsavel?: Prisma.AlternativaCreateNestedManyWithoutResponsavelInput
   inscricoes?: Prisma.InscricaoCreateNestedManyWithoutUsuarioInput
   progressos?: Prisma.ProgressoCreateNestedManyWithoutUsuarioInput
+  itensCriados?: Prisma.ItemCreateNestedManyWithoutResponsavelInput
+  inventario?: Prisma.InventarioCreateNestedManyWithoutUsuarioInput
   cursosComoProfessor?: Prisma.CursoProfessorCreateNestedManyWithoutProfessorInput
   vinculosProfessorCriados?: Prisma.CursoProfessorCreateNestedManyWithoutResponsavelVinculoInput
 }
@@ -1599,6 +1691,8 @@ export type UsuarioUncheckedCreateWithoutModulosResponsavelInput = {
   alternativasResponsavel?: Prisma.AlternativaUncheckedCreateNestedManyWithoutResponsavelInput
   inscricoes?: Prisma.InscricaoUncheckedCreateNestedManyWithoutUsuarioInput
   progressos?: Prisma.ProgressoUncheckedCreateNestedManyWithoutUsuarioInput
+  itensCriados?: Prisma.ItemUncheckedCreateNestedManyWithoutResponsavelInput
+  inventario?: Prisma.InventarioUncheckedCreateNestedManyWithoutUsuarioInput
   cursosComoProfessor?: Prisma.CursoProfessorUncheckedCreateNestedManyWithoutProfessorInput
   vinculosProfessorCriados?: Prisma.CursoProfessorUncheckedCreateNestedManyWithoutResponsavelVinculoInput
 }
@@ -1643,6 +1737,8 @@ export type UsuarioUpdateWithoutModulosResponsavelInput = {
   alternativasResponsavel?: Prisma.AlternativaUpdateManyWithoutResponsavelNestedInput
   inscricoes?: Prisma.InscricaoUpdateManyWithoutUsuarioNestedInput
   progressos?: Prisma.ProgressoUpdateManyWithoutUsuarioNestedInput
+  itensCriados?: Prisma.ItemUpdateManyWithoutResponsavelNestedInput
+  inventario?: Prisma.InventarioUpdateManyWithoutUsuarioNestedInput
   cursosComoProfessor?: Prisma.CursoProfessorUpdateManyWithoutProfessorNestedInput
   vinculosProfessorCriados?: Prisma.CursoProfessorUpdateManyWithoutResponsavelVinculoNestedInput
 }
@@ -1671,6 +1767,8 @@ export type UsuarioUncheckedUpdateWithoutModulosResponsavelInput = {
   alternativasResponsavel?: Prisma.AlternativaUncheckedUpdateManyWithoutResponsavelNestedInput
   inscricoes?: Prisma.InscricaoUncheckedUpdateManyWithoutUsuarioNestedInput
   progressos?: Prisma.ProgressoUncheckedUpdateManyWithoutUsuarioNestedInput
+  itensCriados?: Prisma.ItemUncheckedUpdateManyWithoutResponsavelNestedInput
+  inventario?: Prisma.InventarioUncheckedUpdateManyWithoutUsuarioNestedInput
   cursosComoProfessor?: Prisma.CursoProfessorUncheckedUpdateManyWithoutProfessorNestedInput
   vinculosProfessorCriados?: Prisma.CursoProfessorUncheckedUpdateManyWithoutResponsavelVinculoNestedInput
 }
@@ -1699,6 +1797,8 @@ export type UsuarioCreateWithoutAulasResponsavelInput = {
   alternativasResponsavel?: Prisma.AlternativaCreateNestedManyWithoutResponsavelInput
   inscricoes?: Prisma.InscricaoCreateNestedManyWithoutUsuarioInput
   progressos?: Prisma.ProgressoCreateNestedManyWithoutUsuarioInput
+  itensCriados?: Prisma.ItemCreateNestedManyWithoutResponsavelInput
+  inventario?: Prisma.InventarioCreateNestedManyWithoutUsuarioInput
   cursosComoProfessor?: Prisma.CursoProfessorCreateNestedManyWithoutProfessorInput
   vinculosProfessorCriados?: Prisma.CursoProfessorCreateNestedManyWithoutResponsavelVinculoInput
 }
@@ -1727,6 +1827,8 @@ export type UsuarioUncheckedCreateWithoutAulasResponsavelInput = {
   alternativasResponsavel?: Prisma.AlternativaUncheckedCreateNestedManyWithoutResponsavelInput
   inscricoes?: Prisma.InscricaoUncheckedCreateNestedManyWithoutUsuarioInput
   progressos?: Prisma.ProgressoUncheckedCreateNestedManyWithoutUsuarioInput
+  itensCriados?: Prisma.ItemUncheckedCreateNestedManyWithoutResponsavelInput
+  inventario?: Prisma.InventarioUncheckedCreateNestedManyWithoutUsuarioInput
   cursosComoProfessor?: Prisma.CursoProfessorUncheckedCreateNestedManyWithoutProfessorInput
   vinculosProfessorCriados?: Prisma.CursoProfessorUncheckedCreateNestedManyWithoutResponsavelVinculoInput
 }
@@ -1771,6 +1873,8 @@ export type UsuarioUpdateWithoutAulasResponsavelInput = {
   alternativasResponsavel?: Prisma.AlternativaUpdateManyWithoutResponsavelNestedInput
   inscricoes?: Prisma.InscricaoUpdateManyWithoutUsuarioNestedInput
   progressos?: Prisma.ProgressoUpdateManyWithoutUsuarioNestedInput
+  itensCriados?: Prisma.ItemUpdateManyWithoutResponsavelNestedInput
+  inventario?: Prisma.InventarioUpdateManyWithoutUsuarioNestedInput
   cursosComoProfessor?: Prisma.CursoProfessorUpdateManyWithoutProfessorNestedInput
   vinculosProfessorCriados?: Prisma.CursoProfessorUpdateManyWithoutResponsavelVinculoNestedInput
 }
@@ -1799,6 +1903,8 @@ export type UsuarioUncheckedUpdateWithoutAulasResponsavelInput = {
   alternativasResponsavel?: Prisma.AlternativaUncheckedUpdateManyWithoutResponsavelNestedInput
   inscricoes?: Prisma.InscricaoUncheckedUpdateManyWithoutUsuarioNestedInput
   progressos?: Prisma.ProgressoUncheckedUpdateManyWithoutUsuarioNestedInput
+  itensCriados?: Prisma.ItemUncheckedUpdateManyWithoutResponsavelNestedInput
+  inventario?: Prisma.InventarioUncheckedUpdateManyWithoutUsuarioNestedInput
   cursosComoProfessor?: Prisma.CursoProfessorUncheckedUpdateManyWithoutProfessorNestedInput
   vinculosProfessorCriados?: Prisma.CursoProfessorUncheckedUpdateManyWithoutResponsavelVinculoNestedInput
 }
@@ -1827,6 +1933,8 @@ export type UsuarioCreateWithoutTestesResponsavelInput = {
   alternativasResponsavel?: Prisma.AlternativaCreateNestedManyWithoutResponsavelInput
   inscricoes?: Prisma.InscricaoCreateNestedManyWithoutUsuarioInput
   progressos?: Prisma.ProgressoCreateNestedManyWithoutUsuarioInput
+  itensCriados?: Prisma.ItemCreateNestedManyWithoutResponsavelInput
+  inventario?: Prisma.InventarioCreateNestedManyWithoutUsuarioInput
   cursosComoProfessor?: Prisma.CursoProfessorCreateNestedManyWithoutProfessorInput
   vinculosProfessorCriados?: Prisma.CursoProfessorCreateNestedManyWithoutResponsavelVinculoInput
 }
@@ -1855,6 +1963,8 @@ export type UsuarioUncheckedCreateWithoutTestesResponsavelInput = {
   alternativasResponsavel?: Prisma.AlternativaUncheckedCreateNestedManyWithoutResponsavelInput
   inscricoes?: Prisma.InscricaoUncheckedCreateNestedManyWithoutUsuarioInput
   progressos?: Prisma.ProgressoUncheckedCreateNestedManyWithoutUsuarioInput
+  itensCriados?: Prisma.ItemUncheckedCreateNestedManyWithoutResponsavelInput
+  inventario?: Prisma.InventarioUncheckedCreateNestedManyWithoutUsuarioInput
   cursosComoProfessor?: Prisma.CursoProfessorUncheckedCreateNestedManyWithoutProfessorInput
   vinculosProfessorCriados?: Prisma.CursoProfessorUncheckedCreateNestedManyWithoutResponsavelVinculoInput
 }
@@ -1899,6 +2009,8 @@ export type UsuarioUpdateWithoutTestesResponsavelInput = {
   alternativasResponsavel?: Prisma.AlternativaUpdateManyWithoutResponsavelNestedInput
   inscricoes?: Prisma.InscricaoUpdateManyWithoutUsuarioNestedInput
   progressos?: Prisma.ProgressoUpdateManyWithoutUsuarioNestedInput
+  itensCriados?: Prisma.ItemUpdateManyWithoutResponsavelNestedInput
+  inventario?: Prisma.InventarioUpdateManyWithoutUsuarioNestedInput
   cursosComoProfessor?: Prisma.CursoProfessorUpdateManyWithoutProfessorNestedInput
   vinculosProfessorCriados?: Prisma.CursoProfessorUpdateManyWithoutResponsavelVinculoNestedInput
 }
@@ -1927,6 +2039,8 @@ export type UsuarioUncheckedUpdateWithoutTestesResponsavelInput = {
   alternativasResponsavel?: Prisma.AlternativaUncheckedUpdateManyWithoutResponsavelNestedInput
   inscricoes?: Prisma.InscricaoUncheckedUpdateManyWithoutUsuarioNestedInput
   progressos?: Prisma.ProgressoUncheckedUpdateManyWithoutUsuarioNestedInput
+  itensCriados?: Prisma.ItemUncheckedUpdateManyWithoutResponsavelNestedInput
+  inventario?: Prisma.InventarioUncheckedUpdateManyWithoutUsuarioNestedInput
   cursosComoProfessor?: Prisma.CursoProfessorUncheckedUpdateManyWithoutProfessorNestedInput
   vinculosProfessorCriados?: Prisma.CursoProfessorUncheckedUpdateManyWithoutResponsavelVinculoNestedInput
 }
@@ -1955,6 +2069,8 @@ export type UsuarioCreateWithoutQuestoesResponsavelInput = {
   alternativasResponsavel?: Prisma.AlternativaCreateNestedManyWithoutResponsavelInput
   inscricoes?: Prisma.InscricaoCreateNestedManyWithoutUsuarioInput
   progressos?: Prisma.ProgressoCreateNestedManyWithoutUsuarioInput
+  itensCriados?: Prisma.ItemCreateNestedManyWithoutResponsavelInput
+  inventario?: Prisma.InventarioCreateNestedManyWithoutUsuarioInput
   cursosComoProfessor?: Prisma.CursoProfessorCreateNestedManyWithoutProfessorInput
   vinculosProfessorCriados?: Prisma.CursoProfessorCreateNestedManyWithoutResponsavelVinculoInput
 }
@@ -1983,6 +2099,8 @@ export type UsuarioUncheckedCreateWithoutQuestoesResponsavelInput = {
   alternativasResponsavel?: Prisma.AlternativaUncheckedCreateNestedManyWithoutResponsavelInput
   inscricoes?: Prisma.InscricaoUncheckedCreateNestedManyWithoutUsuarioInput
   progressos?: Prisma.ProgressoUncheckedCreateNestedManyWithoutUsuarioInput
+  itensCriados?: Prisma.ItemUncheckedCreateNestedManyWithoutResponsavelInput
+  inventario?: Prisma.InventarioUncheckedCreateNestedManyWithoutUsuarioInput
   cursosComoProfessor?: Prisma.CursoProfessorUncheckedCreateNestedManyWithoutProfessorInput
   vinculosProfessorCriados?: Prisma.CursoProfessorUncheckedCreateNestedManyWithoutResponsavelVinculoInput
 }
@@ -2027,6 +2145,8 @@ export type UsuarioUpdateWithoutQuestoesResponsavelInput = {
   alternativasResponsavel?: Prisma.AlternativaUpdateManyWithoutResponsavelNestedInput
   inscricoes?: Prisma.InscricaoUpdateManyWithoutUsuarioNestedInput
   progressos?: Prisma.ProgressoUpdateManyWithoutUsuarioNestedInput
+  itensCriados?: Prisma.ItemUpdateManyWithoutResponsavelNestedInput
+  inventario?: Prisma.InventarioUpdateManyWithoutUsuarioNestedInput
   cursosComoProfessor?: Prisma.CursoProfessorUpdateManyWithoutProfessorNestedInput
   vinculosProfessorCriados?: Prisma.CursoProfessorUpdateManyWithoutResponsavelVinculoNestedInput
 }
@@ -2055,6 +2175,8 @@ export type UsuarioUncheckedUpdateWithoutQuestoesResponsavelInput = {
   alternativasResponsavel?: Prisma.AlternativaUncheckedUpdateManyWithoutResponsavelNestedInput
   inscricoes?: Prisma.InscricaoUncheckedUpdateManyWithoutUsuarioNestedInput
   progressos?: Prisma.ProgressoUncheckedUpdateManyWithoutUsuarioNestedInput
+  itensCriados?: Prisma.ItemUncheckedUpdateManyWithoutResponsavelNestedInput
+  inventario?: Prisma.InventarioUncheckedUpdateManyWithoutUsuarioNestedInput
   cursosComoProfessor?: Prisma.CursoProfessorUncheckedUpdateManyWithoutProfessorNestedInput
   vinculosProfessorCriados?: Prisma.CursoProfessorUncheckedUpdateManyWithoutResponsavelVinculoNestedInput
 }
@@ -2083,6 +2205,8 @@ export type UsuarioCreateWithoutAlternativasResponsavelInput = {
   questoesResponsavel?: Prisma.QuestaoCreateNestedManyWithoutResponsavelInput
   inscricoes?: Prisma.InscricaoCreateNestedManyWithoutUsuarioInput
   progressos?: Prisma.ProgressoCreateNestedManyWithoutUsuarioInput
+  itensCriados?: Prisma.ItemCreateNestedManyWithoutResponsavelInput
+  inventario?: Prisma.InventarioCreateNestedManyWithoutUsuarioInput
   cursosComoProfessor?: Prisma.CursoProfessorCreateNestedManyWithoutProfessorInput
   vinculosProfessorCriados?: Prisma.CursoProfessorCreateNestedManyWithoutResponsavelVinculoInput
 }
@@ -2111,6 +2235,8 @@ export type UsuarioUncheckedCreateWithoutAlternativasResponsavelInput = {
   questoesResponsavel?: Prisma.QuestaoUncheckedCreateNestedManyWithoutResponsavelInput
   inscricoes?: Prisma.InscricaoUncheckedCreateNestedManyWithoutUsuarioInput
   progressos?: Prisma.ProgressoUncheckedCreateNestedManyWithoutUsuarioInput
+  itensCriados?: Prisma.ItemUncheckedCreateNestedManyWithoutResponsavelInput
+  inventario?: Prisma.InventarioUncheckedCreateNestedManyWithoutUsuarioInput
   cursosComoProfessor?: Prisma.CursoProfessorUncheckedCreateNestedManyWithoutProfessorInput
   vinculosProfessorCriados?: Prisma.CursoProfessorUncheckedCreateNestedManyWithoutResponsavelVinculoInput
 }
@@ -2155,6 +2281,8 @@ export type UsuarioUpdateWithoutAlternativasResponsavelInput = {
   questoesResponsavel?: Prisma.QuestaoUpdateManyWithoutResponsavelNestedInput
   inscricoes?: Prisma.InscricaoUpdateManyWithoutUsuarioNestedInput
   progressos?: Prisma.ProgressoUpdateManyWithoutUsuarioNestedInput
+  itensCriados?: Prisma.ItemUpdateManyWithoutResponsavelNestedInput
+  inventario?: Prisma.InventarioUpdateManyWithoutUsuarioNestedInput
   cursosComoProfessor?: Prisma.CursoProfessorUpdateManyWithoutProfessorNestedInput
   vinculosProfessorCriados?: Prisma.CursoProfessorUpdateManyWithoutResponsavelVinculoNestedInput
 }
@@ -2183,6 +2311,8 @@ export type UsuarioUncheckedUpdateWithoutAlternativasResponsavelInput = {
   questoesResponsavel?: Prisma.QuestaoUncheckedUpdateManyWithoutResponsavelNestedInput
   inscricoes?: Prisma.InscricaoUncheckedUpdateManyWithoutUsuarioNestedInput
   progressos?: Prisma.ProgressoUncheckedUpdateManyWithoutUsuarioNestedInput
+  itensCriados?: Prisma.ItemUncheckedUpdateManyWithoutResponsavelNestedInput
+  inventario?: Prisma.InventarioUncheckedUpdateManyWithoutUsuarioNestedInput
   cursosComoProfessor?: Prisma.CursoProfessorUncheckedUpdateManyWithoutProfessorNestedInput
   vinculosProfessorCriados?: Prisma.CursoProfessorUncheckedUpdateManyWithoutResponsavelVinculoNestedInput
 }
@@ -2211,6 +2341,8 @@ export type UsuarioCreateWithoutTestesQuestoesResponsavelInput = {
   alternativasResponsavel?: Prisma.AlternativaCreateNestedManyWithoutResponsavelInput
   inscricoes?: Prisma.InscricaoCreateNestedManyWithoutUsuarioInput
   progressos?: Prisma.ProgressoCreateNestedManyWithoutUsuarioInput
+  itensCriados?: Prisma.ItemCreateNestedManyWithoutResponsavelInput
+  inventario?: Prisma.InventarioCreateNestedManyWithoutUsuarioInput
   cursosComoProfessor?: Prisma.CursoProfessorCreateNestedManyWithoutProfessorInput
   vinculosProfessorCriados?: Prisma.CursoProfessorCreateNestedManyWithoutResponsavelVinculoInput
 }
@@ -2239,6 +2371,8 @@ export type UsuarioUncheckedCreateWithoutTestesQuestoesResponsavelInput = {
   alternativasResponsavel?: Prisma.AlternativaUncheckedCreateNestedManyWithoutResponsavelInput
   inscricoes?: Prisma.InscricaoUncheckedCreateNestedManyWithoutUsuarioInput
   progressos?: Prisma.ProgressoUncheckedCreateNestedManyWithoutUsuarioInput
+  itensCriados?: Prisma.ItemUncheckedCreateNestedManyWithoutResponsavelInput
+  inventario?: Prisma.InventarioUncheckedCreateNestedManyWithoutUsuarioInput
   cursosComoProfessor?: Prisma.CursoProfessorUncheckedCreateNestedManyWithoutProfessorInput
   vinculosProfessorCriados?: Prisma.CursoProfessorUncheckedCreateNestedManyWithoutResponsavelVinculoInput
 }
@@ -2283,6 +2417,8 @@ export type UsuarioUpdateWithoutTestesQuestoesResponsavelInput = {
   alternativasResponsavel?: Prisma.AlternativaUpdateManyWithoutResponsavelNestedInput
   inscricoes?: Prisma.InscricaoUpdateManyWithoutUsuarioNestedInput
   progressos?: Prisma.ProgressoUpdateManyWithoutUsuarioNestedInput
+  itensCriados?: Prisma.ItemUpdateManyWithoutResponsavelNestedInput
+  inventario?: Prisma.InventarioUpdateManyWithoutUsuarioNestedInput
   cursosComoProfessor?: Prisma.CursoProfessorUpdateManyWithoutProfessorNestedInput
   vinculosProfessorCriados?: Prisma.CursoProfessorUpdateManyWithoutResponsavelVinculoNestedInput
 }
@@ -2311,6 +2447,8 @@ export type UsuarioUncheckedUpdateWithoutTestesQuestoesResponsavelInput = {
   alternativasResponsavel?: Prisma.AlternativaUncheckedUpdateManyWithoutResponsavelNestedInput
   inscricoes?: Prisma.InscricaoUncheckedUpdateManyWithoutUsuarioNestedInput
   progressos?: Prisma.ProgressoUncheckedUpdateManyWithoutUsuarioNestedInput
+  itensCriados?: Prisma.ItemUncheckedUpdateManyWithoutResponsavelNestedInput
+  inventario?: Prisma.InventarioUncheckedUpdateManyWithoutUsuarioNestedInput
   cursosComoProfessor?: Prisma.CursoProfessorUncheckedUpdateManyWithoutProfessorNestedInput
   vinculosProfessorCriados?: Prisma.CursoProfessorUncheckedUpdateManyWithoutResponsavelVinculoNestedInput
 }
@@ -2339,6 +2477,8 @@ export type UsuarioCreateWithoutTentativasTesteInput = {
   alternativasResponsavel?: Prisma.AlternativaCreateNestedManyWithoutResponsavelInput
   inscricoes?: Prisma.InscricaoCreateNestedManyWithoutUsuarioInput
   progressos?: Prisma.ProgressoCreateNestedManyWithoutUsuarioInput
+  itensCriados?: Prisma.ItemCreateNestedManyWithoutResponsavelInput
+  inventario?: Prisma.InventarioCreateNestedManyWithoutUsuarioInput
   cursosComoProfessor?: Prisma.CursoProfessorCreateNestedManyWithoutProfessorInput
   vinculosProfessorCriados?: Prisma.CursoProfessorCreateNestedManyWithoutResponsavelVinculoInput
 }
@@ -2367,6 +2507,8 @@ export type UsuarioUncheckedCreateWithoutTentativasTesteInput = {
   alternativasResponsavel?: Prisma.AlternativaUncheckedCreateNestedManyWithoutResponsavelInput
   inscricoes?: Prisma.InscricaoUncheckedCreateNestedManyWithoutUsuarioInput
   progressos?: Prisma.ProgressoUncheckedCreateNestedManyWithoutUsuarioInput
+  itensCriados?: Prisma.ItemUncheckedCreateNestedManyWithoutResponsavelInput
+  inventario?: Prisma.InventarioUncheckedCreateNestedManyWithoutUsuarioInput
   cursosComoProfessor?: Prisma.CursoProfessorUncheckedCreateNestedManyWithoutProfessorInput
   vinculosProfessorCriados?: Prisma.CursoProfessorUncheckedCreateNestedManyWithoutResponsavelVinculoInput
 }
@@ -2411,6 +2553,8 @@ export type UsuarioUpdateWithoutTentativasTesteInput = {
   alternativasResponsavel?: Prisma.AlternativaUpdateManyWithoutResponsavelNestedInput
   inscricoes?: Prisma.InscricaoUpdateManyWithoutUsuarioNestedInput
   progressos?: Prisma.ProgressoUpdateManyWithoutUsuarioNestedInput
+  itensCriados?: Prisma.ItemUpdateManyWithoutResponsavelNestedInput
+  inventario?: Prisma.InventarioUpdateManyWithoutUsuarioNestedInput
   cursosComoProfessor?: Prisma.CursoProfessorUpdateManyWithoutProfessorNestedInput
   vinculosProfessorCriados?: Prisma.CursoProfessorUpdateManyWithoutResponsavelVinculoNestedInput
 }
@@ -2439,6 +2583,8 @@ export type UsuarioUncheckedUpdateWithoutTentativasTesteInput = {
   alternativasResponsavel?: Prisma.AlternativaUncheckedUpdateManyWithoutResponsavelNestedInput
   inscricoes?: Prisma.InscricaoUncheckedUpdateManyWithoutUsuarioNestedInput
   progressos?: Prisma.ProgressoUncheckedUpdateManyWithoutUsuarioNestedInput
+  itensCriados?: Prisma.ItemUncheckedUpdateManyWithoutResponsavelNestedInput
+  inventario?: Prisma.InventarioUncheckedUpdateManyWithoutUsuarioNestedInput
   cursosComoProfessor?: Prisma.CursoProfessorUncheckedUpdateManyWithoutProfessorNestedInput
   vinculosProfessorCriados?: Prisma.CursoProfessorUncheckedUpdateManyWithoutResponsavelVinculoNestedInput
 }
@@ -2467,6 +2613,8 @@ export type UsuarioCreateWithoutTentativasQuestoesInput = {
   alternativasResponsavel?: Prisma.AlternativaCreateNestedManyWithoutResponsavelInput
   inscricoes?: Prisma.InscricaoCreateNestedManyWithoutUsuarioInput
   progressos?: Prisma.ProgressoCreateNestedManyWithoutUsuarioInput
+  itensCriados?: Prisma.ItemCreateNestedManyWithoutResponsavelInput
+  inventario?: Prisma.InventarioCreateNestedManyWithoutUsuarioInput
   cursosComoProfessor?: Prisma.CursoProfessorCreateNestedManyWithoutProfessorInput
   vinculosProfessorCriados?: Prisma.CursoProfessorCreateNestedManyWithoutResponsavelVinculoInput
 }
@@ -2495,6 +2643,8 @@ export type UsuarioUncheckedCreateWithoutTentativasQuestoesInput = {
   alternativasResponsavel?: Prisma.AlternativaUncheckedCreateNestedManyWithoutResponsavelInput
   inscricoes?: Prisma.InscricaoUncheckedCreateNestedManyWithoutUsuarioInput
   progressos?: Prisma.ProgressoUncheckedCreateNestedManyWithoutUsuarioInput
+  itensCriados?: Prisma.ItemUncheckedCreateNestedManyWithoutResponsavelInput
+  inventario?: Prisma.InventarioUncheckedCreateNestedManyWithoutUsuarioInput
   cursosComoProfessor?: Prisma.CursoProfessorUncheckedCreateNestedManyWithoutProfessorInput
   vinculosProfessorCriados?: Prisma.CursoProfessorUncheckedCreateNestedManyWithoutResponsavelVinculoInput
 }
@@ -2539,6 +2689,8 @@ export type UsuarioUpdateWithoutTentativasQuestoesInput = {
   alternativasResponsavel?: Prisma.AlternativaUpdateManyWithoutResponsavelNestedInput
   inscricoes?: Prisma.InscricaoUpdateManyWithoutUsuarioNestedInput
   progressos?: Prisma.ProgressoUpdateManyWithoutUsuarioNestedInput
+  itensCriados?: Prisma.ItemUpdateManyWithoutResponsavelNestedInput
+  inventario?: Prisma.InventarioUpdateManyWithoutUsuarioNestedInput
   cursosComoProfessor?: Prisma.CursoProfessorUpdateManyWithoutProfessorNestedInput
   vinculosProfessorCriados?: Prisma.CursoProfessorUpdateManyWithoutResponsavelVinculoNestedInput
 }
@@ -2567,6 +2719,8 @@ export type UsuarioUncheckedUpdateWithoutTentativasQuestoesInput = {
   alternativasResponsavel?: Prisma.AlternativaUncheckedUpdateManyWithoutResponsavelNestedInput
   inscricoes?: Prisma.InscricaoUncheckedUpdateManyWithoutUsuarioNestedInput
   progressos?: Prisma.ProgressoUncheckedUpdateManyWithoutUsuarioNestedInput
+  itensCriados?: Prisma.ItemUncheckedUpdateManyWithoutResponsavelNestedInput
+  inventario?: Prisma.InventarioUncheckedUpdateManyWithoutUsuarioNestedInput
   cursosComoProfessor?: Prisma.CursoProfessorUncheckedUpdateManyWithoutProfessorNestedInput
   vinculosProfessorCriados?: Prisma.CursoProfessorUncheckedUpdateManyWithoutResponsavelVinculoNestedInput
 }
@@ -2595,6 +2749,8 @@ export type UsuarioCreateWithoutInscricoesInput = {
   questoesResponsavel?: Prisma.QuestaoCreateNestedManyWithoutResponsavelInput
   alternativasResponsavel?: Prisma.AlternativaCreateNestedManyWithoutResponsavelInput
   progressos?: Prisma.ProgressoCreateNestedManyWithoutUsuarioInput
+  itensCriados?: Prisma.ItemCreateNestedManyWithoutResponsavelInput
+  inventario?: Prisma.InventarioCreateNestedManyWithoutUsuarioInput
   cursosComoProfessor?: Prisma.CursoProfessorCreateNestedManyWithoutProfessorInput
   vinculosProfessorCriados?: Prisma.CursoProfessorCreateNestedManyWithoutResponsavelVinculoInput
 }
@@ -2623,6 +2779,8 @@ export type UsuarioUncheckedCreateWithoutInscricoesInput = {
   questoesResponsavel?: Prisma.QuestaoUncheckedCreateNestedManyWithoutResponsavelInput
   alternativasResponsavel?: Prisma.AlternativaUncheckedCreateNestedManyWithoutResponsavelInput
   progressos?: Prisma.ProgressoUncheckedCreateNestedManyWithoutUsuarioInput
+  itensCriados?: Prisma.ItemUncheckedCreateNestedManyWithoutResponsavelInput
+  inventario?: Prisma.InventarioUncheckedCreateNestedManyWithoutUsuarioInput
   cursosComoProfessor?: Prisma.CursoProfessorUncheckedCreateNestedManyWithoutProfessorInput
   vinculosProfessorCriados?: Prisma.CursoProfessorUncheckedCreateNestedManyWithoutResponsavelVinculoInput
 }
@@ -2667,6 +2825,8 @@ export type UsuarioUpdateWithoutInscricoesInput = {
   questoesResponsavel?: Prisma.QuestaoUpdateManyWithoutResponsavelNestedInput
   alternativasResponsavel?: Prisma.AlternativaUpdateManyWithoutResponsavelNestedInput
   progressos?: Prisma.ProgressoUpdateManyWithoutUsuarioNestedInput
+  itensCriados?: Prisma.ItemUpdateManyWithoutResponsavelNestedInput
+  inventario?: Prisma.InventarioUpdateManyWithoutUsuarioNestedInput
   cursosComoProfessor?: Prisma.CursoProfessorUpdateManyWithoutProfessorNestedInput
   vinculosProfessorCriados?: Prisma.CursoProfessorUpdateManyWithoutResponsavelVinculoNestedInput
 }
@@ -2695,6 +2855,8 @@ export type UsuarioUncheckedUpdateWithoutInscricoesInput = {
   questoesResponsavel?: Prisma.QuestaoUncheckedUpdateManyWithoutResponsavelNestedInput
   alternativasResponsavel?: Prisma.AlternativaUncheckedUpdateManyWithoutResponsavelNestedInput
   progressos?: Prisma.ProgressoUncheckedUpdateManyWithoutUsuarioNestedInput
+  itensCriados?: Prisma.ItemUncheckedUpdateManyWithoutResponsavelNestedInput
+  inventario?: Prisma.InventarioUncheckedUpdateManyWithoutUsuarioNestedInput
   cursosComoProfessor?: Prisma.CursoProfessorUncheckedUpdateManyWithoutProfessorNestedInput
   vinculosProfessorCriados?: Prisma.CursoProfessorUncheckedUpdateManyWithoutResponsavelVinculoNestedInput
 }
@@ -2724,6 +2886,8 @@ export type UsuarioCreateWithoutCursosComoProfessorInput = {
   alternativasResponsavel?: Prisma.AlternativaCreateNestedManyWithoutResponsavelInput
   inscricoes?: Prisma.InscricaoCreateNestedManyWithoutUsuarioInput
   progressos?: Prisma.ProgressoCreateNestedManyWithoutUsuarioInput
+  itensCriados?: Prisma.ItemCreateNestedManyWithoutResponsavelInput
+  inventario?: Prisma.InventarioCreateNestedManyWithoutUsuarioInput
   vinculosProfessorCriados?: Prisma.CursoProfessorCreateNestedManyWithoutResponsavelVinculoInput
 }
 
@@ -2752,6 +2916,8 @@ export type UsuarioUncheckedCreateWithoutCursosComoProfessorInput = {
   alternativasResponsavel?: Prisma.AlternativaUncheckedCreateNestedManyWithoutResponsavelInput
   inscricoes?: Prisma.InscricaoUncheckedCreateNestedManyWithoutUsuarioInput
   progressos?: Prisma.ProgressoUncheckedCreateNestedManyWithoutUsuarioInput
+  itensCriados?: Prisma.ItemUncheckedCreateNestedManyWithoutResponsavelInput
+  inventario?: Prisma.InventarioUncheckedCreateNestedManyWithoutUsuarioInput
   vinculosProfessorCriados?: Prisma.CursoProfessorUncheckedCreateNestedManyWithoutResponsavelVinculoInput
 }
 
@@ -2785,6 +2951,8 @@ export type UsuarioCreateWithoutVinculosProfessorCriadosInput = {
   alternativasResponsavel?: Prisma.AlternativaCreateNestedManyWithoutResponsavelInput
   inscricoes?: Prisma.InscricaoCreateNestedManyWithoutUsuarioInput
   progressos?: Prisma.ProgressoCreateNestedManyWithoutUsuarioInput
+  itensCriados?: Prisma.ItemCreateNestedManyWithoutResponsavelInput
+  inventario?: Prisma.InventarioCreateNestedManyWithoutUsuarioInput
   cursosComoProfessor?: Prisma.CursoProfessorCreateNestedManyWithoutProfessorInput
 }
 
@@ -2813,6 +2981,8 @@ export type UsuarioUncheckedCreateWithoutVinculosProfessorCriadosInput = {
   alternativasResponsavel?: Prisma.AlternativaUncheckedCreateNestedManyWithoutResponsavelInput
   inscricoes?: Prisma.InscricaoUncheckedCreateNestedManyWithoutUsuarioInput
   progressos?: Prisma.ProgressoUncheckedCreateNestedManyWithoutUsuarioInput
+  itensCriados?: Prisma.ItemUncheckedCreateNestedManyWithoutResponsavelInput
+  inventario?: Prisma.InventarioUncheckedCreateNestedManyWithoutUsuarioInput
   cursosComoProfessor?: Prisma.CursoProfessorUncheckedCreateNestedManyWithoutProfessorInput
 }
 
@@ -2857,6 +3027,8 @@ export type UsuarioUpdateWithoutCursosComoProfessorInput = {
   alternativasResponsavel?: Prisma.AlternativaUpdateManyWithoutResponsavelNestedInput
   inscricoes?: Prisma.InscricaoUpdateManyWithoutUsuarioNestedInput
   progressos?: Prisma.ProgressoUpdateManyWithoutUsuarioNestedInput
+  itensCriados?: Prisma.ItemUpdateManyWithoutResponsavelNestedInput
+  inventario?: Prisma.InventarioUpdateManyWithoutUsuarioNestedInput
   vinculosProfessorCriados?: Prisma.CursoProfessorUpdateManyWithoutResponsavelVinculoNestedInput
 }
 
@@ -2885,6 +3057,8 @@ export type UsuarioUncheckedUpdateWithoutCursosComoProfessorInput = {
   alternativasResponsavel?: Prisma.AlternativaUncheckedUpdateManyWithoutResponsavelNestedInput
   inscricoes?: Prisma.InscricaoUncheckedUpdateManyWithoutUsuarioNestedInput
   progressos?: Prisma.ProgressoUncheckedUpdateManyWithoutUsuarioNestedInput
+  itensCriados?: Prisma.ItemUncheckedUpdateManyWithoutResponsavelNestedInput
+  inventario?: Prisma.InventarioUncheckedUpdateManyWithoutUsuarioNestedInput
   vinculosProfessorCriados?: Prisma.CursoProfessorUncheckedUpdateManyWithoutResponsavelVinculoNestedInput
 }
 
@@ -2924,6 +3098,8 @@ export type UsuarioUpdateWithoutVinculosProfessorCriadosInput = {
   alternativasResponsavel?: Prisma.AlternativaUpdateManyWithoutResponsavelNestedInput
   inscricoes?: Prisma.InscricaoUpdateManyWithoutUsuarioNestedInput
   progressos?: Prisma.ProgressoUpdateManyWithoutUsuarioNestedInput
+  itensCriados?: Prisma.ItemUpdateManyWithoutResponsavelNestedInput
+  inventario?: Prisma.InventarioUpdateManyWithoutUsuarioNestedInput
   cursosComoProfessor?: Prisma.CursoProfessorUpdateManyWithoutProfessorNestedInput
 }
 
@@ -2952,6 +3128,8 @@ export type UsuarioUncheckedUpdateWithoutVinculosProfessorCriadosInput = {
   alternativasResponsavel?: Prisma.AlternativaUncheckedUpdateManyWithoutResponsavelNestedInput
   inscricoes?: Prisma.InscricaoUncheckedUpdateManyWithoutUsuarioNestedInput
   progressos?: Prisma.ProgressoUncheckedUpdateManyWithoutUsuarioNestedInput
+  itensCriados?: Prisma.ItemUncheckedUpdateManyWithoutResponsavelNestedInput
+  inventario?: Prisma.InventarioUncheckedUpdateManyWithoutUsuarioNestedInput
   cursosComoProfessor?: Prisma.CursoProfessorUncheckedUpdateManyWithoutProfessorNestedInput
 }
 
@@ -2979,6 +3157,8 @@ export type UsuarioCreateWithoutProgressosInput = {
   questoesResponsavel?: Prisma.QuestaoCreateNestedManyWithoutResponsavelInput
   alternativasResponsavel?: Prisma.AlternativaCreateNestedManyWithoutResponsavelInput
   inscricoes?: Prisma.InscricaoCreateNestedManyWithoutUsuarioInput
+  itensCriados?: Prisma.ItemCreateNestedManyWithoutResponsavelInput
+  inventario?: Prisma.InventarioCreateNestedManyWithoutUsuarioInput
   cursosComoProfessor?: Prisma.CursoProfessorCreateNestedManyWithoutProfessorInput
   vinculosProfessorCriados?: Prisma.CursoProfessorCreateNestedManyWithoutResponsavelVinculoInput
 }
@@ -3007,6 +3187,8 @@ export type UsuarioUncheckedCreateWithoutProgressosInput = {
   questoesResponsavel?: Prisma.QuestaoUncheckedCreateNestedManyWithoutResponsavelInput
   alternativasResponsavel?: Prisma.AlternativaUncheckedCreateNestedManyWithoutResponsavelInput
   inscricoes?: Prisma.InscricaoUncheckedCreateNestedManyWithoutUsuarioInput
+  itensCriados?: Prisma.ItemUncheckedCreateNestedManyWithoutResponsavelInput
+  inventario?: Prisma.InventarioUncheckedCreateNestedManyWithoutUsuarioInput
   cursosComoProfessor?: Prisma.CursoProfessorUncheckedCreateNestedManyWithoutProfessorInput
   vinculosProfessorCriados?: Prisma.CursoProfessorUncheckedCreateNestedManyWithoutResponsavelVinculoInput
 }
@@ -3051,6 +3233,8 @@ export type UsuarioUpdateWithoutProgressosInput = {
   questoesResponsavel?: Prisma.QuestaoUpdateManyWithoutResponsavelNestedInput
   alternativasResponsavel?: Prisma.AlternativaUpdateManyWithoutResponsavelNestedInput
   inscricoes?: Prisma.InscricaoUpdateManyWithoutUsuarioNestedInput
+  itensCriados?: Prisma.ItemUpdateManyWithoutResponsavelNestedInput
+  inventario?: Prisma.InventarioUpdateManyWithoutUsuarioNestedInput
   cursosComoProfessor?: Prisma.CursoProfessorUpdateManyWithoutProfessorNestedInput
   vinculosProfessorCriados?: Prisma.CursoProfessorUpdateManyWithoutResponsavelVinculoNestedInput
 }
@@ -3079,6 +3263,280 @@ export type UsuarioUncheckedUpdateWithoutProgressosInput = {
   questoesResponsavel?: Prisma.QuestaoUncheckedUpdateManyWithoutResponsavelNestedInput
   alternativasResponsavel?: Prisma.AlternativaUncheckedUpdateManyWithoutResponsavelNestedInput
   inscricoes?: Prisma.InscricaoUncheckedUpdateManyWithoutUsuarioNestedInput
+  itensCriados?: Prisma.ItemUncheckedUpdateManyWithoutResponsavelNestedInput
+  inventario?: Prisma.InventarioUncheckedUpdateManyWithoutUsuarioNestedInput
+  cursosComoProfessor?: Prisma.CursoProfessorUncheckedUpdateManyWithoutProfessorNestedInput
+  vinculosProfessorCriados?: Prisma.CursoProfessorUncheckedUpdateManyWithoutResponsavelVinculoNestedInput
+}
+
+export type UsuarioCreateWithoutItensCriadosInput = {
+  id?: string
+  nome: string
+  email: string
+  senha: string
+  tipo?: $Enums.TipoUsuario
+  status?: $Enums.StatusUsuario
+  criadoEm?: Date | string
+  atualizadoEm?: Date | string
+  perfil?: Prisma.PerfilCreateNestedOneWithoutUsuarioInput
+  codigosValidacao?: Prisma.CodigoValidacaoCreateNestedManyWithoutUsuarioInput
+  arquivos?: Prisma.ArquivoCreateNestedManyWithoutUsuarioInput
+  cursosResponsavel?: Prisma.CursoCreateNestedManyWithoutResponsavelInput
+  cursosAutorizados?: Prisma.CursoCreateNestedManyWithoutAdminAutorizadorInput
+  sessoesResponsavel?: Prisma.SessaoCreateNestedManyWithoutResponsavelInput
+  modulosResponsavel?: Prisma.ModuloCreateNestedManyWithoutResponsavelInput
+  aulasResponsavel?: Prisma.AulaCreateNestedManyWithoutResponsavelInput
+  testesResponsavel?: Prisma.TesteCreateNestedManyWithoutResponsavelInput
+  tentativasTeste?: Prisma.TentativaTesteCreateNestedManyWithoutUsuarioInput
+  tentativasQuestoes?: Prisma.TentativaQuestaoCreateNestedManyWithoutUsuarioInput
+  testesQuestoesResponsavel?: Prisma.TesteQuestaoCreateNestedManyWithoutResponsavelInput
+  questoesResponsavel?: Prisma.QuestaoCreateNestedManyWithoutResponsavelInput
+  alternativasResponsavel?: Prisma.AlternativaCreateNestedManyWithoutResponsavelInput
+  inscricoes?: Prisma.InscricaoCreateNestedManyWithoutUsuarioInput
+  progressos?: Prisma.ProgressoCreateNestedManyWithoutUsuarioInput
+  inventario?: Prisma.InventarioCreateNestedManyWithoutUsuarioInput
+  cursosComoProfessor?: Prisma.CursoProfessorCreateNestedManyWithoutProfessorInput
+  vinculosProfessorCriados?: Prisma.CursoProfessorCreateNestedManyWithoutResponsavelVinculoInput
+}
+
+export type UsuarioUncheckedCreateWithoutItensCriadosInput = {
+  id?: string
+  nome: string
+  email: string
+  senha: string
+  tipo?: $Enums.TipoUsuario
+  status?: $Enums.StatusUsuario
+  criadoEm?: Date | string
+  atualizadoEm?: Date | string
+  perfil?: Prisma.PerfilUncheckedCreateNestedOneWithoutUsuarioInput
+  codigosValidacao?: Prisma.CodigoValidacaoUncheckedCreateNestedManyWithoutUsuarioInput
+  arquivos?: Prisma.ArquivoUncheckedCreateNestedManyWithoutUsuarioInput
+  cursosResponsavel?: Prisma.CursoUncheckedCreateNestedManyWithoutResponsavelInput
+  cursosAutorizados?: Prisma.CursoUncheckedCreateNestedManyWithoutAdminAutorizadorInput
+  sessoesResponsavel?: Prisma.SessaoUncheckedCreateNestedManyWithoutResponsavelInput
+  modulosResponsavel?: Prisma.ModuloUncheckedCreateNestedManyWithoutResponsavelInput
+  aulasResponsavel?: Prisma.AulaUncheckedCreateNestedManyWithoutResponsavelInput
+  testesResponsavel?: Prisma.TesteUncheckedCreateNestedManyWithoutResponsavelInput
+  tentativasTeste?: Prisma.TentativaTesteUncheckedCreateNestedManyWithoutUsuarioInput
+  tentativasQuestoes?: Prisma.TentativaQuestaoUncheckedCreateNestedManyWithoutUsuarioInput
+  testesQuestoesResponsavel?: Prisma.TesteQuestaoUncheckedCreateNestedManyWithoutResponsavelInput
+  questoesResponsavel?: Prisma.QuestaoUncheckedCreateNestedManyWithoutResponsavelInput
+  alternativasResponsavel?: Prisma.AlternativaUncheckedCreateNestedManyWithoutResponsavelInput
+  inscricoes?: Prisma.InscricaoUncheckedCreateNestedManyWithoutUsuarioInput
+  progressos?: Prisma.ProgressoUncheckedCreateNestedManyWithoutUsuarioInput
+  inventario?: Prisma.InventarioUncheckedCreateNestedManyWithoutUsuarioInput
+  cursosComoProfessor?: Prisma.CursoProfessorUncheckedCreateNestedManyWithoutProfessorInput
+  vinculosProfessorCriados?: Prisma.CursoProfessorUncheckedCreateNestedManyWithoutResponsavelVinculoInput
+}
+
+export type UsuarioCreateOrConnectWithoutItensCriadosInput = {
+  where: Prisma.UsuarioWhereUniqueInput
+  create: Prisma.XOR<Prisma.UsuarioCreateWithoutItensCriadosInput, Prisma.UsuarioUncheckedCreateWithoutItensCriadosInput>
+}
+
+export type UsuarioUpsertWithoutItensCriadosInput = {
+  update: Prisma.XOR<Prisma.UsuarioUpdateWithoutItensCriadosInput, Prisma.UsuarioUncheckedUpdateWithoutItensCriadosInput>
+  create: Prisma.XOR<Prisma.UsuarioCreateWithoutItensCriadosInput, Prisma.UsuarioUncheckedCreateWithoutItensCriadosInput>
+  where?: Prisma.UsuarioWhereInput
+}
+
+export type UsuarioUpdateToOneWithWhereWithoutItensCriadosInput = {
+  where?: Prisma.UsuarioWhereInput
+  data: Prisma.XOR<Prisma.UsuarioUpdateWithoutItensCriadosInput, Prisma.UsuarioUncheckedUpdateWithoutItensCriadosInput>
+}
+
+export type UsuarioUpdateWithoutItensCriadosInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  nome?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  senha?: Prisma.StringFieldUpdateOperationsInput | string
+  tipo?: Prisma.EnumTipoUsuarioFieldUpdateOperationsInput | $Enums.TipoUsuario
+  status?: Prisma.EnumStatusUsuarioFieldUpdateOperationsInput | $Enums.StatusUsuario
+  criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  perfil?: Prisma.PerfilUpdateOneWithoutUsuarioNestedInput
+  codigosValidacao?: Prisma.CodigoValidacaoUpdateManyWithoutUsuarioNestedInput
+  arquivos?: Prisma.ArquivoUpdateManyWithoutUsuarioNestedInput
+  cursosResponsavel?: Prisma.CursoUpdateManyWithoutResponsavelNestedInput
+  cursosAutorizados?: Prisma.CursoUpdateManyWithoutAdminAutorizadorNestedInput
+  sessoesResponsavel?: Prisma.SessaoUpdateManyWithoutResponsavelNestedInput
+  modulosResponsavel?: Prisma.ModuloUpdateManyWithoutResponsavelNestedInput
+  aulasResponsavel?: Prisma.AulaUpdateManyWithoutResponsavelNestedInput
+  testesResponsavel?: Prisma.TesteUpdateManyWithoutResponsavelNestedInput
+  tentativasTeste?: Prisma.TentativaTesteUpdateManyWithoutUsuarioNestedInput
+  tentativasQuestoes?: Prisma.TentativaQuestaoUpdateManyWithoutUsuarioNestedInput
+  testesQuestoesResponsavel?: Prisma.TesteQuestaoUpdateManyWithoutResponsavelNestedInput
+  questoesResponsavel?: Prisma.QuestaoUpdateManyWithoutResponsavelNestedInput
+  alternativasResponsavel?: Prisma.AlternativaUpdateManyWithoutResponsavelNestedInput
+  inscricoes?: Prisma.InscricaoUpdateManyWithoutUsuarioNestedInput
+  progressos?: Prisma.ProgressoUpdateManyWithoutUsuarioNestedInput
+  inventario?: Prisma.InventarioUpdateManyWithoutUsuarioNestedInput
+  cursosComoProfessor?: Prisma.CursoProfessorUpdateManyWithoutProfessorNestedInput
+  vinculosProfessorCriados?: Prisma.CursoProfessorUpdateManyWithoutResponsavelVinculoNestedInput
+}
+
+export type UsuarioUncheckedUpdateWithoutItensCriadosInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  nome?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  senha?: Prisma.StringFieldUpdateOperationsInput | string
+  tipo?: Prisma.EnumTipoUsuarioFieldUpdateOperationsInput | $Enums.TipoUsuario
+  status?: Prisma.EnumStatusUsuarioFieldUpdateOperationsInput | $Enums.StatusUsuario
+  criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  perfil?: Prisma.PerfilUncheckedUpdateOneWithoutUsuarioNestedInput
+  codigosValidacao?: Prisma.CodigoValidacaoUncheckedUpdateManyWithoutUsuarioNestedInput
+  arquivos?: Prisma.ArquivoUncheckedUpdateManyWithoutUsuarioNestedInput
+  cursosResponsavel?: Prisma.CursoUncheckedUpdateManyWithoutResponsavelNestedInput
+  cursosAutorizados?: Prisma.CursoUncheckedUpdateManyWithoutAdminAutorizadorNestedInput
+  sessoesResponsavel?: Prisma.SessaoUncheckedUpdateManyWithoutResponsavelNestedInput
+  modulosResponsavel?: Prisma.ModuloUncheckedUpdateManyWithoutResponsavelNestedInput
+  aulasResponsavel?: Prisma.AulaUncheckedUpdateManyWithoutResponsavelNestedInput
+  testesResponsavel?: Prisma.TesteUncheckedUpdateManyWithoutResponsavelNestedInput
+  tentativasTeste?: Prisma.TentativaTesteUncheckedUpdateManyWithoutUsuarioNestedInput
+  tentativasQuestoes?: Prisma.TentativaQuestaoUncheckedUpdateManyWithoutUsuarioNestedInput
+  testesQuestoesResponsavel?: Prisma.TesteQuestaoUncheckedUpdateManyWithoutResponsavelNestedInput
+  questoesResponsavel?: Prisma.QuestaoUncheckedUpdateManyWithoutResponsavelNestedInput
+  alternativasResponsavel?: Prisma.AlternativaUncheckedUpdateManyWithoutResponsavelNestedInput
+  inscricoes?: Prisma.InscricaoUncheckedUpdateManyWithoutUsuarioNestedInput
+  progressos?: Prisma.ProgressoUncheckedUpdateManyWithoutUsuarioNestedInput
+  inventario?: Prisma.InventarioUncheckedUpdateManyWithoutUsuarioNestedInput
+  cursosComoProfessor?: Prisma.CursoProfessorUncheckedUpdateManyWithoutProfessorNestedInput
+  vinculosProfessorCriados?: Prisma.CursoProfessorUncheckedUpdateManyWithoutResponsavelVinculoNestedInput
+}
+
+export type UsuarioCreateWithoutInventarioInput = {
+  id?: string
+  nome: string
+  email: string
+  senha: string
+  tipo?: $Enums.TipoUsuario
+  status?: $Enums.StatusUsuario
+  criadoEm?: Date | string
+  atualizadoEm?: Date | string
+  perfil?: Prisma.PerfilCreateNestedOneWithoutUsuarioInput
+  codigosValidacao?: Prisma.CodigoValidacaoCreateNestedManyWithoutUsuarioInput
+  arquivos?: Prisma.ArquivoCreateNestedManyWithoutUsuarioInput
+  cursosResponsavel?: Prisma.CursoCreateNestedManyWithoutResponsavelInput
+  cursosAutorizados?: Prisma.CursoCreateNestedManyWithoutAdminAutorizadorInput
+  sessoesResponsavel?: Prisma.SessaoCreateNestedManyWithoutResponsavelInput
+  modulosResponsavel?: Prisma.ModuloCreateNestedManyWithoutResponsavelInput
+  aulasResponsavel?: Prisma.AulaCreateNestedManyWithoutResponsavelInput
+  testesResponsavel?: Prisma.TesteCreateNestedManyWithoutResponsavelInput
+  tentativasTeste?: Prisma.TentativaTesteCreateNestedManyWithoutUsuarioInput
+  tentativasQuestoes?: Prisma.TentativaQuestaoCreateNestedManyWithoutUsuarioInput
+  testesQuestoesResponsavel?: Prisma.TesteQuestaoCreateNestedManyWithoutResponsavelInput
+  questoesResponsavel?: Prisma.QuestaoCreateNestedManyWithoutResponsavelInput
+  alternativasResponsavel?: Prisma.AlternativaCreateNestedManyWithoutResponsavelInput
+  inscricoes?: Prisma.InscricaoCreateNestedManyWithoutUsuarioInput
+  progressos?: Prisma.ProgressoCreateNestedManyWithoutUsuarioInput
+  itensCriados?: Prisma.ItemCreateNestedManyWithoutResponsavelInput
+  cursosComoProfessor?: Prisma.CursoProfessorCreateNestedManyWithoutProfessorInput
+  vinculosProfessorCriados?: Prisma.CursoProfessorCreateNestedManyWithoutResponsavelVinculoInput
+}
+
+export type UsuarioUncheckedCreateWithoutInventarioInput = {
+  id?: string
+  nome: string
+  email: string
+  senha: string
+  tipo?: $Enums.TipoUsuario
+  status?: $Enums.StatusUsuario
+  criadoEm?: Date | string
+  atualizadoEm?: Date | string
+  perfil?: Prisma.PerfilUncheckedCreateNestedOneWithoutUsuarioInput
+  codigosValidacao?: Prisma.CodigoValidacaoUncheckedCreateNestedManyWithoutUsuarioInput
+  arquivos?: Prisma.ArquivoUncheckedCreateNestedManyWithoutUsuarioInput
+  cursosResponsavel?: Prisma.CursoUncheckedCreateNestedManyWithoutResponsavelInput
+  cursosAutorizados?: Prisma.CursoUncheckedCreateNestedManyWithoutAdminAutorizadorInput
+  sessoesResponsavel?: Prisma.SessaoUncheckedCreateNestedManyWithoutResponsavelInput
+  modulosResponsavel?: Prisma.ModuloUncheckedCreateNestedManyWithoutResponsavelInput
+  aulasResponsavel?: Prisma.AulaUncheckedCreateNestedManyWithoutResponsavelInput
+  testesResponsavel?: Prisma.TesteUncheckedCreateNestedManyWithoutResponsavelInput
+  tentativasTeste?: Prisma.TentativaTesteUncheckedCreateNestedManyWithoutUsuarioInput
+  tentativasQuestoes?: Prisma.TentativaQuestaoUncheckedCreateNestedManyWithoutUsuarioInput
+  testesQuestoesResponsavel?: Prisma.TesteQuestaoUncheckedCreateNestedManyWithoutResponsavelInput
+  questoesResponsavel?: Prisma.QuestaoUncheckedCreateNestedManyWithoutResponsavelInput
+  alternativasResponsavel?: Prisma.AlternativaUncheckedCreateNestedManyWithoutResponsavelInput
+  inscricoes?: Prisma.InscricaoUncheckedCreateNestedManyWithoutUsuarioInput
+  progressos?: Prisma.ProgressoUncheckedCreateNestedManyWithoutUsuarioInput
+  itensCriados?: Prisma.ItemUncheckedCreateNestedManyWithoutResponsavelInput
+  cursosComoProfessor?: Prisma.CursoProfessorUncheckedCreateNestedManyWithoutProfessorInput
+  vinculosProfessorCriados?: Prisma.CursoProfessorUncheckedCreateNestedManyWithoutResponsavelVinculoInput
+}
+
+export type UsuarioCreateOrConnectWithoutInventarioInput = {
+  where: Prisma.UsuarioWhereUniqueInput
+  create: Prisma.XOR<Prisma.UsuarioCreateWithoutInventarioInput, Prisma.UsuarioUncheckedCreateWithoutInventarioInput>
+}
+
+export type UsuarioUpsertWithoutInventarioInput = {
+  update: Prisma.XOR<Prisma.UsuarioUpdateWithoutInventarioInput, Prisma.UsuarioUncheckedUpdateWithoutInventarioInput>
+  create: Prisma.XOR<Prisma.UsuarioCreateWithoutInventarioInput, Prisma.UsuarioUncheckedCreateWithoutInventarioInput>
+  where?: Prisma.UsuarioWhereInput
+}
+
+export type UsuarioUpdateToOneWithWhereWithoutInventarioInput = {
+  where?: Prisma.UsuarioWhereInput
+  data: Prisma.XOR<Prisma.UsuarioUpdateWithoutInventarioInput, Prisma.UsuarioUncheckedUpdateWithoutInventarioInput>
+}
+
+export type UsuarioUpdateWithoutInventarioInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  nome?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  senha?: Prisma.StringFieldUpdateOperationsInput | string
+  tipo?: Prisma.EnumTipoUsuarioFieldUpdateOperationsInput | $Enums.TipoUsuario
+  status?: Prisma.EnumStatusUsuarioFieldUpdateOperationsInput | $Enums.StatusUsuario
+  criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  perfil?: Prisma.PerfilUpdateOneWithoutUsuarioNestedInput
+  codigosValidacao?: Prisma.CodigoValidacaoUpdateManyWithoutUsuarioNestedInput
+  arquivos?: Prisma.ArquivoUpdateManyWithoutUsuarioNestedInput
+  cursosResponsavel?: Prisma.CursoUpdateManyWithoutResponsavelNestedInput
+  cursosAutorizados?: Prisma.CursoUpdateManyWithoutAdminAutorizadorNestedInput
+  sessoesResponsavel?: Prisma.SessaoUpdateManyWithoutResponsavelNestedInput
+  modulosResponsavel?: Prisma.ModuloUpdateManyWithoutResponsavelNestedInput
+  aulasResponsavel?: Prisma.AulaUpdateManyWithoutResponsavelNestedInput
+  testesResponsavel?: Prisma.TesteUpdateManyWithoutResponsavelNestedInput
+  tentativasTeste?: Prisma.TentativaTesteUpdateManyWithoutUsuarioNestedInput
+  tentativasQuestoes?: Prisma.TentativaQuestaoUpdateManyWithoutUsuarioNestedInput
+  testesQuestoesResponsavel?: Prisma.TesteQuestaoUpdateManyWithoutResponsavelNestedInput
+  questoesResponsavel?: Prisma.QuestaoUpdateManyWithoutResponsavelNestedInput
+  alternativasResponsavel?: Prisma.AlternativaUpdateManyWithoutResponsavelNestedInput
+  inscricoes?: Prisma.InscricaoUpdateManyWithoutUsuarioNestedInput
+  progressos?: Prisma.ProgressoUpdateManyWithoutUsuarioNestedInput
+  itensCriados?: Prisma.ItemUpdateManyWithoutResponsavelNestedInput
+  cursosComoProfessor?: Prisma.CursoProfessorUpdateManyWithoutProfessorNestedInput
+  vinculosProfessorCriados?: Prisma.CursoProfessorUpdateManyWithoutResponsavelVinculoNestedInput
+}
+
+export type UsuarioUncheckedUpdateWithoutInventarioInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  nome?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  senha?: Prisma.StringFieldUpdateOperationsInput | string
+  tipo?: Prisma.EnumTipoUsuarioFieldUpdateOperationsInput | $Enums.TipoUsuario
+  status?: Prisma.EnumStatusUsuarioFieldUpdateOperationsInput | $Enums.StatusUsuario
+  criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  perfil?: Prisma.PerfilUncheckedUpdateOneWithoutUsuarioNestedInput
+  codigosValidacao?: Prisma.CodigoValidacaoUncheckedUpdateManyWithoutUsuarioNestedInput
+  arquivos?: Prisma.ArquivoUncheckedUpdateManyWithoutUsuarioNestedInput
+  cursosResponsavel?: Prisma.CursoUncheckedUpdateManyWithoutResponsavelNestedInput
+  cursosAutorizados?: Prisma.CursoUncheckedUpdateManyWithoutAdminAutorizadorNestedInput
+  sessoesResponsavel?: Prisma.SessaoUncheckedUpdateManyWithoutResponsavelNestedInput
+  modulosResponsavel?: Prisma.ModuloUncheckedUpdateManyWithoutResponsavelNestedInput
+  aulasResponsavel?: Prisma.AulaUncheckedUpdateManyWithoutResponsavelNestedInput
+  testesResponsavel?: Prisma.TesteUncheckedUpdateManyWithoutResponsavelNestedInput
+  tentativasTeste?: Prisma.TentativaTesteUncheckedUpdateManyWithoutUsuarioNestedInput
+  tentativasQuestoes?: Prisma.TentativaQuestaoUncheckedUpdateManyWithoutUsuarioNestedInput
+  testesQuestoesResponsavel?: Prisma.TesteQuestaoUncheckedUpdateManyWithoutResponsavelNestedInput
+  questoesResponsavel?: Prisma.QuestaoUncheckedUpdateManyWithoutResponsavelNestedInput
+  alternativasResponsavel?: Prisma.AlternativaUncheckedUpdateManyWithoutResponsavelNestedInput
+  inscricoes?: Prisma.InscricaoUncheckedUpdateManyWithoutUsuarioNestedInput
+  progressos?: Prisma.ProgressoUncheckedUpdateManyWithoutUsuarioNestedInput
+  itensCriados?: Prisma.ItemUncheckedUpdateManyWithoutResponsavelNestedInput
   cursosComoProfessor?: Prisma.CursoProfessorUncheckedUpdateManyWithoutProfessorNestedInput
   vinculosProfessorCriados?: Prisma.CursoProfessorUncheckedUpdateManyWithoutResponsavelVinculoNestedInput
 }
@@ -3104,6 +3562,8 @@ export type UsuarioCountOutputType = {
   alternativasResponsavel: number
   inscricoes: number
   progressos: number
+  itensCriados: number
+  inventario: number
   cursosComoProfessor: number
   vinculosProfessorCriados: number
 }
@@ -3124,6 +3584,8 @@ export type UsuarioCountOutputTypeSelect<ExtArgs extends runtime.Types.Extension
   alternativasResponsavel?: boolean | UsuarioCountOutputTypeCountAlternativasResponsavelArgs
   inscricoes?: boolean | UsuarioCountOutputTypeCountInscricoesArgs
   progressos?: boolean | UsuarioCountOutputTypeCountProgressosArgs
+  itensCriados?: boolean | UsuarioCountOutputTypeCountItensCriadosArgs
+  inventario?: boolean | UsuarioCountOutputTypeCountInventarioArgs
   cursosComoProfessor?: boolean | UsuarioCountOutputTypeCountCursosComoProfessorArgs
   vinculosProfessorCriados?: boolean | UsuarioCountOutputTypeCountVinculosProfessorCriadosArgs
 }
@@ -3246,6 +3708,20 @@ export type UsuarioCountOutputTypeCountProgressosArgs<ExtArgs extends runtime.Ty
 /**
  * UsuarioCountOutputType without action
  */
+export type UsuarioCountOutputTypeCountItensCriadosArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ItemWhereInput
+}
+
+/**
+ * UsuarioCountOutputType without action
+ */
+export type UsuarioCountOutputTypeCountInventarioArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.InventarioWhereInput
+}
+
+/**
+ * UsuarioCountOutputType without action
+ */
 export type UsuarioCountOutputTypeCountCursosComoProfessorArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.CursoProfessorWhereInput
 }
@@ -3283,6 +3759,8 @@ export type UsuarioSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   alternativasResponsavel?: boolean | Prisma.Usuario$alternativasResponsavelArgs<ExtArgs>
   inscricoes?: boolean | Prisma.Usuario$inscricoesArgs<ExtArgs>
   progressos?: boolean | Prisma.Usuario$progressosArgs<ExtArgs>
+  itensCriados?: boolean | Prisma.Usuario$itensCriadosArgs<ExtArgs>
+  inventario?: boolean | Prisma.Usuario$inventarioArgs<ExtArgs>
   cursosComoProfessor?: boolean | Prisma.Usuario$cursosComoProfessorArgs<ExtArgs>
   vinculosProfessorCriados?: boolean | Prisma.Usuario$vinculosProfessorCriadosArgs<ExtArgs>
   _count?: boolean | Prisma.UsuarioCountOutputTypeDefaultArgs<ExtArgs>
@@ -3339,6 +3817,8 @@ export type UsuarioInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs
   alternativasResponsavel?: boolean | Prisma.Usuario$alternativasResponsavelArgs<ExtArgs>
   inscricoes?: boolean | Prisma.Usuario$inscricoesArgs<ExtArgs>
   progressos?: boolean | Prisma.Usuario$progressosArgs<ExtArgs>
+  itensCriados?: boolean | Prisma.Usuario$itensCriadosArgs<ExtArgs>
+  inventario?: boolean | Prisma.Usuario$inventarioArgs<ExtArgs>
   cursosComoProfessor?: boolean | Prisma.Usuario$cursosComoProfessorArgs<ExtArgs>
   vinculosProfessorCriados?: boolean | Prisma.Usuario$vinculosProfessorCriadosArgs<ExtArgs>
   _count?: boolean | Prisma.UsuarioCountOutputTypeDefaultArgs<ExtArgs>
@@ -3365,6 +3845,8 @@ export type $UsuarioPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     alternativasResponsavel: Prisma.$AlternativaPayload<ExtArgs>[]
     inscricoes: Prisma.$InscricaoPayload<ExtArgs>[]
     progressos: Prisma.$ProgressoPayload<ExtArgs>[]
+    itensCriados: Prisma.$ItemPayload<ExtArgs>[]
+    inventario: Prisma.$InventarioPayload<ExtArgs>[]
     cursosComoProfessor: Prisma.$CursoProfessorPayload<ExtArgs>[]
     vinculosProfessorCriados: Prisma.$CursoProfessorPayload<ExtArgs>[]
   }
@@ -3787,6 +4269,8 @@ export interface Prisma__UsuarioClient<T, Null = never, ExtArgs extends runtime.
   alternativasResponsavel<T extends Prisma.Usuario$alternativasResponsavelArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Usuario$alternativasResponsavelArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AlternativaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   inscricoes<T extends Prisma.Usuario$inscricoesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Usuario$inscricoesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$InscricaoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   progressos<T extends Prisma.Usuario$progressosArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Usuario$progressosArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProgressoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  itensCriados<T extends Prisma.Usuario$itensCriadosArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Usuario$itensCriadosArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  inventario<T extends Prisma.Usuario$inventarioArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Usuario$inventarioArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$InventarioPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   cursosComoProfessor<T extends Prisma.Usuario$cursosComoProfessorArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Usuario$cursosComoProfessorArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CursoProfessorPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   vinculosProfessorCriados<T extends Prisma.Usuario$vinculosProfessorCriadosArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Usuario$vinculosProfessorCriadosArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CursoProfessorPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
@@ -4595,6 +5079,54 @@ export type Usuario$progressosArgs<ExtArgs extends runtime.Types.Extensions.Inte
   take?: number
   skip?: number
   distinct?: Prisma.ProgressoScalarFieldEnum | Prisma.ProgressoScalarFieldEnum[]
+}
+
+/**
+ * Usuario.itensCriados
+ */
+export type Usuario$itensCriadosArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Item
+   */
+  select?: Prisma.ItemSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Item
+   */
+  omit?: Prisma.ItemOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ItemInclude<ExtArgs> | null
+  where?: Prisma.ItemWhereInput
+  orderBy?: Prisma.ItemOrderByWithRelationInput | Prisma.ItemOrderByWithRelationInput[]
+  cursor?: Prisma.ItemWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ItemScalarFieldEnum | Prisma.ItemScalarFieldEnum[]
+}
+
+/**
+ * Usuario.inventario
+ */
+export type Usuario$inventarioArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Inventario
+   */
+  select?: Prisma.InventarioSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Inventario
+   */
+  omit?: Prisma.InventarioOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.InventarioInclude<ExtArgs> | null
+  where?: Prisma.InventarioWhereInput
+  orderBy?: Prisma.InventarioOrderByWithRelationInput | Prisma.InventarioOrderByWithRelationInput[]
+  cursor?: Prisma.InventarioWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.InventarioScalarFieldEnum | Prisma.InventarioScalarFieldEnum[]
 }
 
 /**

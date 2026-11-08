@@ -690,38 +690,41 @@ export async function consultarConteudoCurso(
 // LISTAR CURSOS DO PRÓPRIO USUÁRIO
 // -----------------------------------------------------
 
+
 export async function listarMeusCursosInscritos(
     idUsuario: string,
 ) {
-    // Busca as inscrições e a estrutura necessária para calcular
-    // o total de aulas e atividades de cada curso.
-    const inscricoes = await prisma.inscricao.findMany({
-        where: { idUsuario },
-        orderBy: [
-            { criadoEm: "desc" },
-            { id: "asc" },
-        ],
-        select: {
-            criadoEm: true,
-            curso: {
-                select: {
-                    id: true,
-                    nome: true,
-                    descricao: true,
-                    cargaHoraria: true,
-                    idCapa: true,
-                    sessoes: {
-                        select: {
-                            modulos: {
-                                select: {
-                                    aulas: {
-                                        select: { id: true },
-                                    },
-                                    testes: {
-                                        where: {
-                                            tipo: "ATIVIDADE",
+    // Busca os cursos nos quais o usuário está inscrito
+    // e aqueles dos quais ele é responsável.
+    const [inscricoes, cursosProprios] = await Promise.all([
+        prisma.inscricao.findMany({
+            where: { idUsuario },
+            orderBy: [
+                { criadoEm: "desc" },
+                { id: "asc" },
+            ],
+            select: {
+                criadoEm: true,
+                curso: {
+                    select: {
+                        id: true,
+                        nome: true,
+                        descricao: true,
+                        cargaHoraria: true,
+                        idCapa: true,
+                        sessoes: {
+                            select: {
+                                modulos: {
+                                    select: {
+                                        aulas: {
+                                            select: { id: true },
                                         },
-                                        select: { id: true },
+                                        testes: {
+                                            where: {
+                                                tipo: "ATIVIDADE",
+                                            },
+                                            select: { id: true },
+                                        },
                                     },
                                 },
                             },
@@ -729,11 +732,78 @@ export async function listarMeusCursosInscritos(
                     },
                 },
             },
-        },
-    });
+        }),
+
+        prisma.curso.findMany({
+            where: { idResponsavel: idUsuario },
+            orderBy: [
+                { criadoEm: "desc" },
+                { id: "asc" },
+            ],
+            select: {
+                id: true,
+                nome: true,
+                descricao: true,
+                cargaHoraria: true,
+                idCapa: true,
+                sessoes: {
+                    select: {
+                        modulos: {
+                            select: {
+                                aulas: {
+                                    select: { id: true },
+                                },
+                                testes: {
+                                    where: {
+                                        tipo: "ATIVIDADE",
+                                    },
+                                    select: { id: true },
+                                },
+                            },
+                        },
+                    },
+                },
+            },
+        }),
+    ]);
+
+    // Estrutura única para reunir cursos inscritos e próprios.
+    type CursoLista = (typeof inscricoes)[number]["curso"];
+
+    const cursosPorId = new Map<
+        string,
+        {
+            curso: CursoLista;
+            inscritoEm: Date | null;
+            meuCurso: boolean;
+        }
+    >();
+
+    // Primeiro, adiciona os cursos em que o usuário está inscrito.
+    for (const inscricao of inscricoes) {
+        cursosPorId.set(inscricao.curso.id, {
+            curso: inscricao.curso,
+            inscritoEm: inscricao.criadoEm,
+            meuCurso: false,
+        });
+    }
+
+    // Depois, adiciona os cursos próprios.
+    // Se o curso já estiver na lista, apenas atualiza meuCurso.
+    for (const curso of cursosProprios) {
+        const existente = cursosPorId.get(curso.id);
+
+        cursosPorId.set(curso.id, {
+            curso,
+            inscritoEm: existente?.inscritoEm ?? null,
+            meuCurso: true,
+        });
+    }
+
+    const cursosUnificados = Array.from(cursosPorId.values());
 
     // Reúne os IDs de aulas e atividades de todos os cursos.
-    const idsAulas = inscricoes.flatMap(({ curso }) =>
+    const idsAulas = cursosUnificados.flatMap(({ curso }) =>
         curso.sessoes.flatMap((sessao) =>
             sessao.modulos.flatMap((modulo) =>
                 modulo.aulas.map((aula) => aula.id),
@@ -741,7 +811,7 @@ export async function listarMeusCursosInscritos(
         ),
     );
 
-    const idsAtividades = inscricoes.flatMap(({ curso }) =>
+    const idsAtividades = cursosUnificados.flatMap(({ curso }) =>
         curso.sessoes.flatMap((sessao) =>
             sessao.modulos.flatMap((modulo) =>
                 modulo.testes.map((teste) => teste.id),
@@ -787,7 +857,11 @@ export async function listarMeusCursosInscritos(
 
     // Calcula o progresso individual de cada curso.
     const cursos = await Promise.all(
-        inscricoes.map(async ({ criadoEm, curso }) => {
+        cursosUnificados.map(async ({
+            curso,
+            inscritoEm,
+            meuCurso,
+        }) => {
             const aulas = curso.sessoes.flatMap((sessao) =>
                 sessao.modulos.flatMap((modulo) => modulo.aulas),
             );
@@ -820,10 +894,10 @@ export async function listarMeusCursosInscritos(
                 nome: curso.nome,
                 descricao: curso.descricao,
                 cargaHoraria: curso.cargaHoraria,
-
                 capa: capa?.url ?? null,
 
-                inscritoEm: criadoEm,
+                inscritoEm,
+                meuCurso,
 
                 progresso: {
                     total,
@@ -834,20 +908,33 @@ export async function listarMeusCursosInscritos(
         }),
     );
 
-    // Média das porcentagens dos cursos inscritos.
-    const totalCursos = cursos.length;
+    // Separa os cursos em que o usuário está inscrito
+    // para calcular seu progresso como aluno.
+    const cursosInscritos = cursos.filter(
+        (curso) => curso.inscritoEm !== null,
+    );
 
-    const progressoGeral = totalCursos > 0
+    const totalCursos = cursos.length;
+    const totalInscritos = cursosInscritos.length;
+    const totalMeusCursos = cursos.filter(
+        (curso) => curso.meuCurso,
+    ).length;
+
+    // A média considera somente cursos inscritos,
+    // não os cursos que o usuário apenas administra.
+    const progressoGeral = totalInscritos > 0
         ? Math.round(
-            cursos.reduce(
+            cursosInscritos.reduce(
                 (soma, curso) => soma + curso.progresso.percentual,
                 0,
-            ) / totalCursos,
+            ) / totalInscritos,
         )
         : 0;
 
     return {
         totalCursos,
+        totalInscritos,
+        totalMeusCursos,
         progressoGeral,
         cursos,
     };

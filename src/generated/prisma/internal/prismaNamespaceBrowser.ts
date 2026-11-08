@@ -67,7 +67,9 @@ export const ModelName = {
   TentativaQuestao: 'TentativaQuestao',
   Inscricao: 'Inscricao',
   CursoProfessor: 'CursoProfessor',
-  Progresso: 'Progresso'
+  Progresso: 'Progresso',
+  Item: 'Item',
+  Inventario: 'Inventario'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -334,6 +336,37 @@ export const ProgressoScalarFieldEnum = {
 } as const
 
 export type ProgressoScalarFieldEnum = (typeof ProgressoScalarFieldEnum)[keyof typeof ProgressoScalarFieldEnum]
+
+
+export const ItemScalarFieldEnum = {
+  id: 'id',
+  nome: 'nome',
+  descricao: 'descricao',
+  preco: 'preco',
+  categoria: 'categoria',
+  icone: 'icone',
+  boost: 'boost',
+  tempoUso: 'tempoUso',
+  cor: 'cor',
+  status: 'status',
+  idResponsavel: 'idResponsavel',
+  criadoEm: 'criadoEm',
+  atualizadoEm: 'atualizadoEm'
+} as const
+
+export type ItemScalarFieldEnum = (typeof ItemScalarFieldEnum)[keyof typeof ItemScalarFieldEnum]
+
+
+export const InventarioScalarFieldEnum = {
+  id: 'id',
+  idUsuario: 'idUsuario',
+  idItem: 'idItem',
+  status: 'status',
+  compradoEm: 'compradoEm',
+  expiraEm: 'expiraEm'
+} as const
+
+export type InventarioScalarFieldEnum = (typeof InventarioScalarFieldEnum)[keyof typeof InventarioScalarFieldEnum]
 
 
 export const SortOrder = {

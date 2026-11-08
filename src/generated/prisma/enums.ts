@@ -129,3 +129,40 @@ export const NivelDificuldade = {
 } as const
 
 export type NivelDificuldade = (typeof NivelDificuldade)[keyof typeof NivelDificuldade]
+
+
+export const CategoriaItem = {
+  BOOST: 'BOOST'
+} as const
+
+export type CategoriaItem = (typeof CategoriaItem)[keyof typeof CategoriaItem]
+
+
+export const IconeItem = {
+  RAIO: 'RAIO',
+  ESCUDO: 'ESCUDO',
+  LAMPADA: 'LAMPADA',
+  CRONOMETRO: 'CRONOMETRO',
+  REINICIAR: 'REINICIAR',
+  AVATAR: 'AVATAR',
+  ESTRELA: 'ESTRELA'
+} as const
+
+export type IconeItem = (typeof IconeItem)[keyof typeof IconeItem]
+
+
+export const StatusItem = {
+  ATIVO: 'ATIVO',
+  INATIVO: 'INATIVO'
+} as const
+
+export type StatusItem = (typeof StatusItem)[keyof typeof StatusItem]
+
+
+export const StatusInventario = {
+  NAO_USADO: 'NAO_USADO',
+  ATIVO: 'ATIVO',
+  USADO: 'USADO'
+} as const
+
+export type StatusInventario = (typeof StatusInventario)[keyof typeof StatusInventario]

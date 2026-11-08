@@ -294,6 +294,7 @@ export async function concluirProgresso(
                 : "Este material já havia sido concluído.",
             concluida: true,
             recompensa: resultado.recompensa,
+            boostAplicado: resultado.boostAplicado,
         });
     } catch (erro) {
         return responderErro(res, erro);

@@ -1,10 +1,46 @@
 
 import { Prisma } from "../../../generated/prisma/client.js";
+import { obterBoostAtivo } from "../../items/services/items.service.js";
 
 export type Recompensa = {
     moedas: number;
     xp: number;
 };
+
+/**
+ * Verifica o inventário antes de conceder a recompensa.
+ * Se houver um boost válido, aplica o multiplicador
+ * tanto nas moedas quanto no XP.
+ */
+async function aplicarBoostNaRecompensa(
+  tx: Prisma.TransactionClient,
+  idUsuario: string,
+  recompensaBase: Recompensa,
+) {
+  const boostAtivo = await obterBoostAtivo(tx, idUsuario);
+
+  if (!boostAtivo) {
+    return {
+      recompensa: recompensaBase,
+      boostAplicado: null,
+    };
+  }
+
+  const multiplicador = boostAtivo.item.boost;
+
+  return {
+    recompensa: {
+      moedas: Math.round(recompensaBase.moedas * multiplicador),
+      xp: Math.round(recompensaBase.xp * multiplicador),
+    },
+    boostAplicado: {
+      idInventario: boostAtivo.id,
+      nome: boostAtivo.item.nome,
+      multiplicador,
+      expiraEm: boostAtivo.expiraEm,
+    },
+  };
+}
 
 const RECOMPENSAS_MATERIAL: Recompensa = {
     moedas: 2,
@@ -35,39 +71,51 @@ const MULTIPLICADOR_DIFICULDADE = {
 } as const;
 
 export async function registrarConclusaoMaterial(
-    tx: Prisma.TransactionClient,
-    idUsuario: string,
-    idAula: string,
+  tx: Prisma.TransactionClient,
+  idUsuario: string,
+  idAula: string,
 ) {
-    const resultado = await tx.progresso.createMany({
-        data: [{
-            idUsuario,
-            idAula,
-            concluida: true,
-            concluidoEm: new Date(),
-        }],
-        skipDuplicates: true,
-    });
+  const resultado = await tx.progresso.createMany({
+    data: [{
+      idUsuario,
+      idAula,
+      concluida: true,
+      concluidoEm: new Date(),
+    }],
+    skipDuplicates: true,
+  });
 
-    if (resultado.count === 0) {
-        return {
-            registrada: false,
-            recompensa: { moedas: 0, xp: 0 },
-        };
-    }
-
-    await tx.perfil.update({
-        where: { idUsuario },
-        data: {
-            moedas: { increment: RECOMPENSAS_MATERIAL.moedas },
-            xp: { increment: RECOMPENSAS_MATERIAL.xp },
-        },
-    });
-
+  if (resultado.count === 0) {
     return {
-        registrada: true,
-        recompensa: RECOMPENSAS_MATERIAL,
+      registrada: false,
+      recompensa: { moedas: 0, xp: 0 },
+      boostAplicado: null,
     };
+  }
+
+  const resultadoRecompensa = await aplicarBoostNaRecompensa(
+    tx,
+    idUsuario,
+    RECOMPENSAS_MATERIAL,
+  );
+
+  await tx.perfil.update({
+    where: { idUsuario },
+    data: {
+      moedas: {
+        increment: resultadoRecompensa.recompensa.moedas,
+      },
+      xp: {
+        increment: resultadoRecompensa.recompensa.xp,
+      },
+    },
+  });
+
+  return {
+    registrada: true,
+    recompensa: resultadoRecompensa.recompensa,
+    boostAplicado: resultadoRecompensa.boostAplicado,
+  };
 }
 
 export function calcularRecompensaTeste(params: {
@@ -115,46 +163,58 @@ export function calcularRecompensaTeste(params: {
 }
 
 export async function registrarConclusaoTeste(
-    tx: Prisma.TransactionClient,
-    params: {
-        idUsuario: string;
-        idTeste: string;
-        tipo: "ATIVIDADE" | "SIMULADO";
-        nota: number;
-        dificuldade: "FACIL" | "MEDIO" | "DIFICIL" | null;
-        tempoConsumido: number | null;
-        tempoLimiteMinutos: number;
-    },
+  tx: Prisma.TransactionClient,
+  params: {
+    idUsuario: string;
+    idTeste: string;
+    tipo: "ATIVIDADE" | "SIMULADO";
+    nota: number;
+    dificuldade: "FACIL" | "MEDIO" | "DIFICIL" | null;
+    tempoConsumido: number | null;
+    tempoLimiteMinutos: number;
+  },
 ) {
-    const recompensa = calcularRecompensaTeste(params);
+  const recompensaBase = calcularRecompensaTeste(params);
 
-    const resultado = await tx.progresso.createMany({
-        data: [{
-            idUsuario: params.idUsuario,
-            idTeste: params.idTeste,
-            concluida: true,
-            concluidoEm: new Date(),
-        }],
-        skipDuplicates: true,
-    });
+  const resultado = await tx.progresso.createMany({
+    data: [{
+      idUsuario: params.idUsuario,
+      idTeste: params.idTeste,
+      concluida: true,
+      concluidoEm: new Date(),
+    }],
+    skipDuplicates: true,
+  });
 
-    if (resultado.count === 0) {
-        return {
-            registrada: false,
-            recompensa: { moedas: 0, xp: 0 },
-        };
-    }
-
-    await tx.perfil.update({
-        where: { idUsuario: params.idUsuario },
-        data: {
-            moedas: { increment: recompensa.moedas },
-            xp: { increment: recompensa.xp },
-        },
-    });
-
+  if (resultado.count === 0) {
     return {
-        registrada: true,
-        recompensa,
+      registrada: false,
+      recompensa: { moedas: 0, xp: 0 },
+      boostAplicado: null,
     };
+  }
+
+  const resultadoRecompensa = await aplicarBoostNaRecompensa(
+    tx,
+    params.idUsuario,
+    recompensaBase,
+  );
+
+  await tx.perfil.update({
+    where: { idUsuario: params.idUsuario },
+    data: {
+      moedas: {
+        increment: resultadoRecompensa.recompensa.moedas,
+      },
+      xp: {
+        increment: resultadoRecompensa.recompensa.xp,
+      },
+    },
+  });
+
+  return {
+    registrada: true,
+    recompensa: resultadoRecompensa.recompensa,
+    boostAplicado: resultadoRecompensa.boostAplicado,
+  };
 }

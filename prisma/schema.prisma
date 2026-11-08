@@ -117,6 +117,39 @@ enum NivelDificuldade {
   @@map("nivel_dificuldade")
 }
 
+enum CategoriaItem {
+  BOOST
+
+  @@map("categoria_item")
+}
+
+enum IconeItem {
+  RAIO
+  ESCUDO
+  LAMPADA
+  CRONOMETRO
+  REINICIAR
+  AVATAR
+  ESTRELA
+
+  @@map("icone_item")
+}
+
+enum StatusItem {
+  ATIVO
+  INATIVO
+
+  @@map("status_item")
+}
+
+enum StatusInventario {
+  NAO_USADO
+  ATIVO
+  USADO
+
+  @@map("status_inventario")
+}
+
 model Usuario {
   id           String        @id @default(uuid()) @db.Uuid
   nome         String        @db.VarChar(120)
@@ -148,6 +181,9 @@ model Usuario {
 
   inscricoes Inscricao[]
   progressos Progresso[]
+
+  itensCriados Item[]       @relation("ItemResponsavel")
+  inventario   Inventario[]
 
   // Cursos nos quais o usuário atua como professor.
   cursosComoProfessor CursoProfessor[] @relation("ProfessorCurso")
@@ -565,4 +601,47 @@ model Progresso {
   @@index([idAula])
   @@index([idTeste])
   @@map("progresso")
+}
+
+model Item {
+  id        String        @id @default(uuid()) @db.Uuid
+  nome      String        @db.VarChar(100)
+  descricao String        @db.Text
+  preco     Int
+  categoria CategoriaItem @default(BOOST)
+  icone     IconeItem
+  boost     Float
+  tempoUso  Int           @map("tempo_uso")
+  cor       String        @db.VarChar(30)
+  status    StatusItem    @default(ATIVO)
+
+  idResponsavel String   @map("id_responsavel") @db.Uuid
+  criadoEm      DateTime @default(now()) @map("criado_em") @db.Timestamptz(3)
+  atualizadoEm  DateTime @updatedAt @map("atualizado_em") @db.Timestamptz(3)
+
+  responsavel Usuario      @relation("ItemResponsavel", fields: [idResponsavel], references: [id], onDelete: Restrict)
+  inventarios Inventario[]
+
+  @@index([categoria])
+  @@index([status])
+  @@index([idResponsavel])
+  @@map("item")
+}
+
+model Inventario {
+  id        String           @id @default(uuid()) @db.Uuid
+  idUsuario String           @map("id_usuario") @db.Uuid
+  idItem    String           @map("id_item") @db.Uuid
+  status    StatusInventario @default(NAO_USADO)
+
+  compradoEm DateTime  @default(now()) @map("comprado_em") @db.Timestamptz(3)
+  expiraEm   DateTime? @map("expira_em") @db.Timestamptz(3)
+
+  usuario Usuario @relation(fields: [idUsuario], references: [id], onDelete: Cascade)
+  item    Item    @relation(fields: [idItem], references: [id], onDelete: Restrict)
+
+  @@index([idUsuario, status])
+  @@index([idItem])
+  @@index([expiraEm])
+  @@map("inventario")
 }

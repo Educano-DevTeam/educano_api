@@ -11,6 +11,7 @@ import sessionsRouter from "./modules/sessions/routes/sessions.routes.js";
 import courseModulesRouter from "./modules/course-modules/routes/modules.routes.js";
 import questionsRouter from "./modules/questions/routes/questions.routes.js";import lessonsRouter from "./modules/lessons/routes/lessons.routes.js";
 import testsRouter from "./modules/tests/routes/tests.routes.js";
+import itemsRouter from "./modules/items/routes/items.routes.js";
 
 const app = express();
 
@@ -28,6 +29,7 @@ app.use("/api/course-modules", courseModulesRouter);
 app.use("/api/lessons", lessonsRouter);
 app.use("/api/questions", questionsRouter);
 app.use("/api/tests", testsRouter);
+app.use("/api/items", itemsRouter);
 
 app.get("/api/health", (_req, res) => {
   res.status(200).json({
