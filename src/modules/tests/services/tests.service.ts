@@ -99,11 +99,6 @@ async function validarQuestoesSelecionadas(
             id: {
                 in: questaoIds,
             },
-
-            // Parceiros só podem utilizar questões próprias.
-            ...(tipoUsuario === "PARCEIRO" && {
-                idResponsavel: idUsuario,
-            }),
         },
 
         select: {

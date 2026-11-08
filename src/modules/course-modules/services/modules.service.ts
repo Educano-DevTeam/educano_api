@@ -4,6 +4,9 @@ import type {
   CriarModuloInput,
   AtualizarModuloInput,
 } from "../types/modules.types.js";
+
+import { consultarAcessoCurso } from "../../courses/services/course-permissions.service.js";
+
 const uuidValido = (id: string) =>
   /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(id);
 
@@ -26,13 +29,56 @@ function validarUuid(id: string) {
   }
 }
 
-function verificarPermissao(tipoUsuario: string) {
-  if (!["PROFESSOR", "PARCEIRO"].includes(tipoUsuario)) {
-    throw new CourseModulesServiceError(
-      "SEM_PERMISSAO",
-      "Somente professores e parceiros podem administrar módulos.",
+
+async function verificarAcessoSessao(
+    idSessao: string,
+    idUsuario: string,
+    tipoUsuario: string,
+    modo: "LEITURA" | "GERENCIAMENTO" = "GERENCIAMENTO",
+) {
+    validarUuid(idSessao);
+
+    const sessao = await prisma.sessao.findUnique({
+        where: { id: idSessao },
+        select: {
+            id: true,
+            idCurso: true,
+        },
+    });
+
+    if (!sessao) {
+        throw new CourseModulesServiceError(
+            "SESSAO_NAO_ENCONTRADA",
+            "Sessão não encontrada.",
+        );
+    }
+
+    const acesso = await consultarAcessoCurso(
+        sessao.idCurso,
+        idUsuario,
+        tipoUsuario,
     );
-  }
+
+    if (!acesso.existe) {
+        throw new CourseModulesServiceError(
+            "CURSO_NAO_ENCONTRADO",
+            "Curso não encontrado.",
+        );
+    }
+
+    const permitido =
+        modo === "GERENCIAMENTO"
+            ? acesso.podeGerenciar
+            : acesso.podeLer;
+
+    if (!permitido) {
+        throw new CourseModulesServiceError(
+            "SEM_PERMISSAO",
+            "Você não tem permissão para acessar esta sessão.",
+        );
+    }
+
+    return sessao;
 }
 
 async function buscarModulo(id: string) {
@@ -83,59 +129,22 @@ async function buscarModulo(id: string) {
   return modulo;
 }
 
-async function verificarAcessoSessao(
-  idSessao: string,
-  idUsuario: string,
-  tipoUsuario: string,
-) {
-  validarUuid(idSessao);
-  verificarPermissao(tipoUsuario);
-
-  const sessao = await prisma.sessao.findUnique({
-    where: { id: idSessao },
-    select: {
-      id: true,
-      idCurso: true,
-      curso: {
-        select: {
-          idResponsavel: true,
-        },
-      },
-    },
-  });
-
-  if (!sessao) {
-    throw new CourseModulesServiceError(
-      "SESSAO_NAO_ENCONTRADA",
-      "Sessão não encontrada.",
-    );
-  }
-
-  if (
-    tipoUsuario === "PARCEIRO" &&
-    sessao.curso.idResponsavel !== idUsuario
-  ) {
-    throw new CourseModulesServiceError(
-      "SEM_PERMISSAO",
-      "Você não é o responsável pelo curso desta sessão.",
-    );
-  }
-}
-
 async function verificarAcessoModulo(
-  id: string,
-  idUsuario: string,
-  tipoUsuario: string,
+    id: string,
+    idUsuario: string,
+    tipoUsuario: string,
+    modo: "LEITURA" | "GERENCIAMENTO" = "GERENCIAMENTO",
 ) {
-  const modulo = await buscarModulo(id);
+    const modulo = await buscarModulo(id);
 
-  await verificarAcessoSessao(
-    modulo.idSessao,
-    idUsuario,
-    tipoUsuario,
-  );
+    await verificarAcessoSessao(
+        modulo.idSessao,
+        idUsuario,
+        tipoUsuario,
+        modo,
+    );
 
-  return modulo;
+    return modulo;
 }
 
 // -----------------------------------------------------
@@ -184,6 +193,7 @@ export async function listarModulos(
     idSessao,
     idUsuario,
     tipoUsuario,
+    "LEITURA"
   );
 
   return prisma.modulo.findMany({
@@ -224,6 +234,7 @@ export async function consultarModulo(
     id,
     idUsuario,
     tipoUsuario,
+    "LEITURA"
   );
 
   return buscarModulo(id);

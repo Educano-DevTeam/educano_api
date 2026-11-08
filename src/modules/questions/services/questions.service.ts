@@ -66,7 +66,6 @@ async function verificarPermissaoQuestao(
     // Professores e administradores também podem administrar questões.
     const permitido =
         questao.idResponsavel === idUsuario ||
-        tipoUsuario === "PROFESSOR" ||
         tipoUsuario === "ADMIN";
 
     if (!permitido) {
@@ -220,11 +219,6 @@ export async function listarQuestoes(
                 },
             ],
         }),
-
-        // Parceiros visualizam apenas suas próprias questões.
-        ...(tipoUsuario === "PARCEIRO" && {
-            idResponsavel: idUsuario,
-        }),
     };
 
     const [questoes, total] = await prisma.$transaction([
@@ -298,6 +292,7 @@ export async function consultarQuestao(
     const permitido =
         questao.idResponsavel === idUsuario ||
         tipoUsuario === "PROFESSOR" ||
+        tipoUsuario === "PARCEIRO" ||
         tipoUsuario === "ADMIN";
 
     if (!permitido) {
