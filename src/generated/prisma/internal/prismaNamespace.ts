@@ -415,7 +415,8 @@ export const ModelName = {
   CursoProfessor: 'CursoProfessor',
   Progresso: 'Progresso',
   Item: 'Item',
-  Inventario: 'Inventario'
+  Inventario: 'Inventario',
+  Flashcard: 'Flashcard'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -431,7 +432,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "usuario" | "perfil" | "codigoValidacao" | "arquivo" | "curso" | "sessao" | "modulo" | "aula" | "teste" | "questao" | "alternativa" | "testeQuestao" | "tentativaTeste" | "tentativaQuestao" | "inscricao" | "cursoProfessor" | "progresso" | "item" | "inventario"
+    modelProps: "usuario" | "perfil" | "codigoValidacao" | "arquivo" | "curso" | "sessao" | "modulo" | "aula" | "teste" | "questao" | "alternativa" | "testeQuestao" | "tentativaTeste" | "tentativaQuestao" | "inscricao" | "cursoProfessor" | "progresso" | "item" | "inventario" | "flashcard"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1841,6 +1842,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    Flashcard: {
+      payload: Prisma.$FlashcardPayload<ExtArgs>
+      fields: Prisma.FlashcardFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.FlashcardFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FlashcardPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.FlashcardFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FlashcardPayload>
+        }
+        findFirst: {
+          args: Prisma.FlashcardFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FlashcardPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.FlashcardFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FlashcardPayload>
+        }
+        findMany: {
+          args: Prisma.FlashcardFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FlashcardPayload>[]
+        }
+        create: {
+          args: Prisma.FlashcardCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FlashcardPayload>
+        }
+        createMany: {
+          args: Prisma.FlashcardCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.FlashcardCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FlashcardPayload>[]
+        }
+        delete: {
+          args: Prisma.FlashcardDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FlashcardPayload>
+        }
+        update: {
+          args: Prisma.FlashcardUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FlashcardPayload>
+        }
+        deleteMany: {
+          args: Prisma.FlashcardDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.FlashcardUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.FlashcardUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FlashcardPayload>[]
+        }
+        upsert: {
+          args: Prisma.FlashcardUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FlashcardPayload>
+        }
+        aggregate: {
+          args: Prisma.FlashcardAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateFlashcard>
+        }
+        groupBy: {
+          args: Prisma.FlashcardGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.FlashcardGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.FlashcardCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.FlashcardCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -2159,6 +2234,21 @@ export const InventarioScalarFieldEnum = {
 } as const
 
 export type InventarioScalarFieldEnum = (typeof InventarioScalarFieldEnum)[keyof typeof InventarioScalarFieldEnum]
+
+
+export const FlashcardScalarFieldEnum = {
+  id: 'id',
+  idUsuario: 'idUsuario',
+  titulo: 'titulo',
+  pergunta: 'pergunta',
+  resposta: 'resposta',
+  repeticoesMes: 'repeticoesMes',
+  ultimaVisualizacao: 'ultimaVisualizacao',
+  proximaVisualizacao: 'proximaVisualizacao',
+  criadoEm: 'criadoEm'
+} as const
+
+export type FlashcardScalarFieldEnum = (typeof FlashcardScalarFieldEnum)[keyof typeof FlashcardScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -2675,6 +2765,7 @@ export type GlobalOmitConfig = {
   progresso?: Prisma.ProgressoOmit
   item?: Prisma.ItemOmit
   inventario?: Prisma.InventarioOmit
+  flashcard?: Prisma.FlashcardOmit
 }
 
 /* Types for Logging */

@@ -185,6 +185,8 @@ model Usuario {
   itensCriados Item[]       @relation("ItemResponsavel")
   inventario   Inventario[]
 
+  flashcards Flashcard[]
+
   // Cursos nos quais o usuário atua como professor.
   cursosComoProfessor CursoProfessor[] @relation("ProfessorCurso")
 
@@ -644,4 +646,25 @@ model Inventario {
   @@index([idItem])
   @@index([expiraEm])
   @@map("inventario")
+}
+
+model Flashcard {
+  id        String @id @default(uuid()) @db.Uuid
+  idUsuario String @map("id_usuario") @db.Uuid
+
+  titulo        String @db.VarChar(150)
+  pergunta      String @db.Text
+  resposta      String @db.Text
+  repeticoesMes Int    @map("repeticoes_mes")
+
+  ultimaVisualizacao DateTime? @map("ultima_visualizacao") @db.Timestamptz(3)
+  proximaVisualizacao DateTime @map("proxima_visualizacao") @db.Timestamptz(3)
+
+  criadoEm DateTime @default(now()) @map("criado_em") @db.Timestamptz(3)
+
+  usuario Usuario @relation(fields: [idUsuario], references: [id], onDelete: Cascade)
+
+  @@index([idUsuario])
+  @@index([idUsuario, proximaVisualizacao])
+  @@map("flashcard")
 }

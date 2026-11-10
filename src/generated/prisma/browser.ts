@@ -112,3 +112,8 @@ export type Item = Prisma.ItemModel
  * 
  */
 export type Inventario = Prisma.InventarioModel
+/**
+ * Model Flashcard
+ * 
+ */
+export type Flashcard = Prisma.FlashcardModel
