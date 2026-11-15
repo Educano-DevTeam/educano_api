@@ -231,7 +231,15 @@ export async function criarCurso(
             return curso;
         });
 
-        return serializarCurso(curso);
+        // Gera a URL temporária da capa, quando existir.
+        const capa = curso.idCapa
+            ? await consultarArquivo(curso.idCapa)
+            : null;
+
+        return {
+            ...serializarCurso(curso),
+            capa: capa?.url ?? null,
+        };
     } catch (error) {
         // Se o curso não puder ser criado, remove a imagem enviada.
         if (idCapa) {
@@ -1011,8 +1019,22 @@ export async function listarCursos(
 
     const totalPaginas = Math.ceil(total / CURSOS_POR_PAGINA);
 
+    // Gera as URLs temporárias das capas dos cursos.
+    const cursosComCapa = await Promise.all(
+        cursos.map(async (curso) => {
+            const capa = curso.idCapa
+                ? await consultarArquivo(curso.idCapa)
+                : null;
+
+            return {
+                ...curso,
+                capa: capa?.url ?? null,
+            };
+        }),
+    );
+
     return {
-        dados: cursos,
+        dados: cursosComCapa,
         paginacao: {
             pagina: filtros.pagina,
             porPagina: CURSOS_POR_PAGINA,
@@ -1024,7 +1046,7 @@ export async function listarCursos(
                     ? filtros.pagina + 1
                     : null,
         },
-    };
+};
 }
 
 // -----------------------------------------------------
