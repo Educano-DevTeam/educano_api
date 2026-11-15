@@ -40,8 +40,9 @@ export const criarAtividadeSchema = z.object({
 export const criarSimuladoSchema = z.object({
     tema: z.string()
         .trim()
-        .min(1, "O tema do simulado é obrigatório.")
-        .max(150, "O tema deve ter no máximo 150 caracteres."),
+        .max(150, "O tema deve ter no máximo 150 caracteres.")
+        .nullable()
+        .optional(),
 
     tempoMinutos: tempoSchema,
 

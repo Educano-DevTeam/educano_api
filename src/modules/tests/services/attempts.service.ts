@@ -137,20 +137,18 @@ export async function iniciarTentativa(
         // Simulados sorteiam questões no início
         // de cada tentativa, respeitando tema e dificuldade.
 
-        if (!teste.tema?.trim()) {
-            throw new AttemptsServiceError(
-                "TEMA_NAO_INFORMADO",
-                "Este simulado não possui um tema configurado. Atualize sua configuração antes de iniciar.",
-            );
-        }
-
         const questoesDisponiveis = await prisma.questao.findMany({
             where: {
-                tema: {
-                    equals: teste.tema ?? "",
-                    mode: "insensitive",
-                },
+                // Se houver tema, aplica o filtro.
+                // Caso contrário, busca questões de todos os temas.
+                ...(teste.tema?.trim() && {
+                    tema: {
+                        equals: teste.tema.trim(),
+                        mode: "insensitive",
+                    },
+                }),
 
+                // Continua respeitando a dificuldade configurada.
                 dificuldade: teste.dificuldade ?? undefined,
             },
 

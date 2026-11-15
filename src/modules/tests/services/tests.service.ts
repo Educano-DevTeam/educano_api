@@ -217,12 +217,19 @@ export async function criarSimulado(
 
     // Verifica se existe quantidade suficiente de questões
     // com a dificuldade solicitada.
+    // Normaliza o tema.
+    // Quando não informado, o simulado será geral.
+    const tema = dados.tema?.trim() || null;
+
+    // Verifica a quantidade de questões disponíveis.
     const quantidadeDisponivel = await prisma.questao.count({
         where: {
-            tema: {
-                equals: dados.tema.trim(),
-                mode: "insensitive",
-            },
+            ...(tema && {
+                tema: {
+                    equals: tema,
+                    mode: "insensitive",
+                },
+            }),
 
             dificuldade: dados.dificuldade,
         },
@@ -231,7 +238,9 @@ export async function criarSimulado(
     if (quantidadeDisponivel < dados.quantidadeQuestoes) {
         throw new TestsServiceError(
             "QUESTOES_INSUFICIENTES",
-            `Existem apenas ${quantidadeDisponivel} questões disponíveis para o tema "${dados.tema}" e a dificuldade "${dados.dificuldade}".`
+            tema
+                ? `Existem apenas ${quantidadeDisponivel} questões disponíveis para o tema "${tema}" e a dificuldade "${dados.dificuldade}".`
+                : `Existem apenas ${quantidadeDisponivel} questões disponíveis para a dificuldade "${dados.dificuldade}" no simulado geral.`
         );
     }
 
@@ -633,19 +642,15 @@ export async function atualizarTeste(
             dados.quantidadeQuestoes !== undefined ||
             dados.tema !== undefined
         ) {
-            if (!tema) {
-                throw new TestsServiceError(
-                    "TEMA_NAO_INFORMADO",
-                    "O tema do simulado é obrigatório.",
-                );
-            }
 
             const quantidadeDisponivel = await prisma.questao.count({
                 where: {
-                    tema: {
-                        equals: tema,
-                        mode: "insensitive",
-                    },
+                    ...(tema && {
+                        tema: {
+                            equals: tema,
+                            mode: "insensitive",
+                        },
+                    }),
 
                     dificuldade: dificuldade ?? undefined,
                 },
