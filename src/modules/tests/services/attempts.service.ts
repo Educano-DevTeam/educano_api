@@ -135,12 +135,25 @@ export async function iniciarTentativa(
         );
     } else {
         // Simulados sorteiam questões no início
-        // de cada tentativa.
+        // de cada tentativa, respeitando tema e dificuldade.
+
+        if (!teste.tema?.trim()) {
+            throw new AttemptsServiceError(
+                "TEMA_NAO_INFORMADO",
+                "Este simulado não possui um tema configurado. Atualize sua configuração antes de iniciar.",
+            );
+        }
 
         const questoesDisponiveis = await prisma.questao.findMany({
             where: {
+                tema: {
+                    equals: teste.tema ?? "",
+                    mode: "insensitive",
+                },
+
                 dificuldade: teste.dificuldade ?? undefined,
             },
+
             select: {
                 id: true,
             },
@@ -164,8 +177,8 @@ export async function iniciarTentativa(
 
     if (questaoIds.length === 0) {
         throw new AttemptsServiceError(
-            "SEM_QUESTOES",
-            "Este teste não possui questões disponíveis.",
+            "QUESTOES_INSUFICIENTES",
+            "Não existem questões suficientes para gerar este simulado com o tema e a dificuldade selecionados.",
         );
     }
 

@@ -2180,6 +2180,7 @@ export const QuestaoScalarFieldEnum = {
   idAlternativaCorreta: 'idAlternativaCorreta',
   titulo: 'titulo',
   enunciado: 'enunciado',
+  tema: 'tema',
   dificuldade: 'dificuldade',
   criadoEm: 'criadoEm',
   atualizadoEm: 'atualizadoEm'

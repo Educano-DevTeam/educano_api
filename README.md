@@ -325,13 +325,13 @@ Rotas protegidas. Cadastro e listagem são permitidos a `PROFESSOR`, `PARCEIRO` 
 
 | Método e rota | Corpo ou parâmetros | Descrição |
 | --- | --- | --- |
-| `POST /api/questions` | `{ titulo?, enunciado, dificuldade?, alternativas, letraCorreta }` | Cria questão com alternativas. Dificuldade padrão: `MEDIO`. |
-| `GET /api/questions?pagina=1&limite=30&dificuldade=&busca=` | Filtros opcionais | Lista e pesquisa por título/enunciado; limite máximo 100. |
+| `POST /api/questions` | `{ titulo?, enunciado, tema, dificuldade?, alternativas, letraCorreta }` | Cria questão com alternativas. Dificuldade padrão: `MEDIO`. |
+| `GET /api/questions?pagina=1&limite=30&dificuldade=&tema=&busca=` | Filtros opcionais | Lista e pesquisa por tema, título ou enunciado; limite máximo 100. |
 | `GET /api/questions/:id` | UUID da questão | Consulta questão e gabarito para perfis autorizados. |
 | `PATCH /api/questions/:id` | Campos opcionais da criação | Atualiza questão; ao substituir alternativas, informe também `letraCorreta`. |
 | `DELETE /api/questions/:id` | UUID da questão | Exclui questão, se não estiver em uso. |
 
-`dificuldade` aceita `FACIL`, `MEDIO` ou `DIFICIL`. O enunciado aceita até 20.000 caracteres; o título, até 150; cada alternativa, até 5.000. Alunos não podem administrar o banco de questões.
+`dificuldade` aceita `FACIL`, `MEDIO` ou `DIFICIL`; `tema` filtra por correspondência exata sem diferenciar maiúsculas de minúsculas. O enunciado aceita até 20.000 caracteres; o título e o tema, até 150; cada alternativa, até 5.000. Alunos não podem administrar o banco de questões.
 
 ### Atividades, simulados e tentativas
 
@@ -340,7 +340,7 @@ Todas as rotas exigem autenticação. Atividades pertencem a módulos de cursos 
 | Método e rota | Corpo ou parâmetros | Descrição |
 | --- | --- | --- |
 | `POST /api/tests/activities` | `{ idModulo, tema?, tempoMinutos, questaoIds }` | Cria atividade usando de 1 a 100 questões existentes. |
-| `POST /api/tests/simulados` | `{ tema?, tempoMinutos, dificuldade, quantidadeQuestoes }` | Cria configuração de simulado; as questões são sorteadas ao iniciar a tentativa. |
+| `POST /api/tests/simulados` | `{ tema, tempoMinutos, dificuldade, quantidadeQuestoes }` | Cria configuração de simulado; as questões são sorteadas ao iniciar a tentativa. |
 | `GET /api/tests?tipo=&idModulo=&pagina=1&limite=30` | Filtros opcionais | Lista testes acessíveis ao usuário; limite máximo 100. |
 | `GET /api/tests/:id` | UUID do teste | Consulta teste acessível. |
 | `PATCH /api/tests/:id` | Campos de teste aplicáveis | Atualiza teste conforme tipo e permissões; alguns campos não são editáveis após uso. |
@@ -350,7 +350,7 @@ Todas as rotas exigem autenticação. Atividades pertencem a módulos de cursos 
 | `GET /api/tests/attempts?pagina=1&limite=30` | Paginação opcional | Lista as tentativas do usuário autenticado; limite máximo 100. |
 | `GET /api/tests/attempts/:id` | UUID da tentativa | Consulta tentativa própria. |
 
-`tempoMinutos` deve ser inteiro de 1 a 600; `dificuldade` aceita `FACIL`, `MEDIO` ou `DIFICIL`; simulados aceitam de 1 a 100 questões e exigem quantidade suficiente de questões cadastradas naquela dificuldade. O envio é final: uma tentativa concluída não pode receber novas respostas.
+`tempoMinutos` deve ser inteiro de 1 a 600; `dificuldade` aceita `FACIL`, `MEDIO` ou `DIFICIL`; simulados aceitam de 1 a 100 questões e exigem quantidade suficiente de questões cadastradas no tema e dificuldade selecionados. O envio é final: uma tentativa concluída não pode receber novas respostas.
 
 A conclusão também registra progresso e recompensa de XP/moedas. Os valores variam conforme o tipo do teste e a nota; dificuldade e tempo podem aplicar multiplicadores, e um boost ativo também pode multiplicar a recompensa. O envio repetido não concede recompensa duplicada.
 

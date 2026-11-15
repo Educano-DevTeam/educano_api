@@ -434,6 +434,7 @@ model Questao {
 
   titulo      String?          @db.VarChar(150)
   enunciado   String           @db.Text
+  tema        String?          @db.VarChar(150)
   dificuldade NivelDificuldade @default(MEDIO)
 
   criadoEm     DateTime @default(now()) @map("criado_em") @db.Timestamptz(3)
@@ -450,6 +451,7 @@ model Questao {
   @@index([idResponsavel])
   @@index([idAlternativaCorreta])
   @@index([dificuldade])
+  @@index([tema, dificuldade])
   @@map("questao")
 }
 

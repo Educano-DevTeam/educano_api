@@ -38,6 +38,11 @@ export const criarQuestaoSchema = z.object({
         .min(1, "O enunciado é obrigatório.")
         .max(20000),
 
+    tema: z.string()
+        .trim()
+        .min(1, "O tema da questão é obrigatório.")
+        .max(150, "O tema deve ter no máximo 150 caracteres."),
+
     dificuldade: z.nativeEnum(NivelDificuldade)
         .default("MEDIO"),
 
@@ -69,6 +74,12 @@ export const atualizarQuestaoSchema = z.object({
         .trim()
         .min(1)
         .max(20000)
+        .optional(),
+
+    tema: z.string()
+        .trim()
+        .min(1, "O tema não pode ficar vazio.")
+        .max(150)
         .optional(),
 
     dificuldade: z.nativeEnum(NivelDificuldade)
@@ -117,6 +128,8 @@ export const idQuestaoParamsSchema = z.object({
 
 export const listarQuestoesQuerySchema = z.object({
     dificuldade: z.nativeEnum(NivelDificuldade).optional(),
+
+    tema: z.string().trim().max(150).optional(),
 
     busca: z.string().trim().max(150).optional(),
 

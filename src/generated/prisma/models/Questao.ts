@@ -30,6 +30,7 @@ export type QuestaoMinAggregateOutputType = {
   idAlternativaCorreta: string | null
   titulo: string | null
   enunciado: string | null
+  tema: string | null
   dificuldade: $Enums.NivelDificuldade | null
   criadoEm: Date | null
   atualizadoEm: Date | null
@@ -41,6 +42,7 @@ export type QuestaoMaxAggregateOutputType = {
   idAlternativaCorreta: string | null
   titulo: string | null
   enunciado: string | null
+  tema: string | null
   dificuldade: $Enums.NivelDificuldade | null
   criadoEm: Date | null
   atualizadoEm: Date | null
@@ -52,6 +54,7 @@ export type QuestaoCountAggregateOutputType = {
   idAlternativaCorreta: number
   titulo: number
   enunciado: number
+  tema: number
   dificuldade: number
   criadoEm: number
   atualizadoEm: number
@@ -65,6 +68,7 @@ export type QuestaoMinAggregateInputType = {
   idAlternativaCorreta?: true
   titulo?: true
   enunciado?: true
+  tema?: true
   dificuldade?: true
   criadoEm?: true
   atualizadoEm?: true
@@ -76,6 +80,7 @@ export type QuestaoMaxAggregateInputType = {
   idAlternativaCorreta?: true
   titulo?: true
   enunciado?: true
+  tema?: true
   dificuldade?: true
   criadoEm?: true
   atualizadoEm?: true
@@ -87,6 +92,7 @@ export type QuestaoCountAggregateInputType = {
   idAlternativaCorreta?: true
   titulo?: true
   enunciado?: true
+  tema?: true
   dificuldade?: true
   criadoEm?: true
   atualizadoEm?: true
@@ -171,6 +177,7 @@ export type QuestaoGroupByOutputType = {
   idAlternativaCorreta: string | null
   titulo: string | null
   enunciado: string
+  tema: string | null
   dificuldade: $Enums.NivelDificuldade
   criadoEm: Date
   atualizadoEm: Date
@@ -203,6 +210,7 @@ export type QuestaoWhereInput = {
   idAlternativaCorreta?: Prisma.UuidNullableFilter<"Questao"> | string | null
   titulo?: Prisma.StringNullableFilter<"Questao"> | string | null
   enunciado?: Prisma.StringFilter<"Questao"> | string
+  tema?: Prisma.StringNullableFilter<"Questao"> | string | null
   dificuldade?: Prisma.EnumNivelDificuldadeFilter<"Questao"> | $Enums.NivelDificuldade
   criadoEm?: Prisma.DateTimeFilter<"Questao"> | Date | string
   atualizadoEm?: Prisma.DateTimeFilter<"Questao"> | Date | string
@@ -219,6 +227,7 @@ export type QuestaoOrderByWithRelationInput = {
   idAlternativaCorreta?: Prisma.SortOrderInput | Prisma.SortOrder
   titulo?: Prisma.SortOrderInput | Prisma.SortOrder
   enunciado?: Prisma.SortOrder
+  tema?: Prisma.SortOrderInput | Prisma.SortOrder
   dificuldade?: Prisma.SortOrder
   criadoEm?: Prisma.SortOrder
   atualizadoEm?: Prisma.SortOrder
@@ -238,6 +247,7 @@ export type QuestaoWhereUniqueInput = Prisma.AtLeast<{
   idAlternativaCorreta?: Prisma.UuidNullableFilter<"Questao"> | string | null
   titulo?: Prisma.StringNullableFilter<"Questao"> | string | null
   enunciado?: Prisma.StringFilter<"Questao"> | string
+  tema?: Prisma.StringNullableFilter<"Questao"> | string | null
   dificuldade?: Prisma.EnumNivelDificuldadeFilter<"Questao"> | $Enums.NivelDificuldade
   criadoEm?: Prisma.DateTimeFilter<"Questao"> | Date | string
   atualizadoEm?: Prisma.DateTimeFilter<"Questao"> | Date | string
@@ -254,6 +264,7 @@ export type QuestaoOrderByWithAggregationInput = {
   idAlternativaCorreta?: Prisma.SortOrderInput | Prisma.SortOrder
   titulo?: Prisma.SortOrderInput | Prisma.SortOrder
   enunciado?: Prisma.SortOrder
+  tema?: Prisma.SortOrderInput | Prisma.SortOrder
   dificuldade?: Prisma.SortOrder
   criadoEm?: Prisma.SortOrder
   atualizadoEm?: Prisma.SortOrder
@@ -271,6 +282,7 @@ export type QuestaoScalarWhereWithAggregatesInput = {
   idAlternativaCorreta?: Prisma.UuidNullableWithAggregatesFilter<"Questao"> | string | null
   titulo?: Prisma.StringNullableWithAggregatesFilter<"Questao"> | string | null
   enunciado?: Prisma.StringWithAggregatesFilter<"Questao"> | string
+  tema?: Prisma.StringNullableWithAggregatesFilter<"Questao"> | string | null
   dificuldade?: Prisma.EnumNivelDificuldadeWithAggregatesFilter<"Questao"> | $Enums.NivelDificuldade
   criadoEm?: Prisma.DateTimeWithAggregatesFilter<"Questao"> | Date | string
   atualizadoEm?: Prisma.DateTimeWithAggregatesFilter<"Questao"> | Date | string
@@ -280,6 +292,7 @@ export type QuestaoCreateInput = {
   id?: string
   titulo?: string | null
   enunciado: string
+  tema?: string | null
   dificuldade?: $Enums.NivelDificuldade
   criadoEm?: Date | string
   atualizadoEm?: Date | string
@@ -296,6 +309,7 @@ export type QuestaoUncheckedCreateInput = {
   idAlternativaCorreta?: string | null
   titulo?: string | null
   enunciado: string
+  tema?: string | null
   dificuldade?: $Enums.NivelDificuldade
   criadoEm?: Date | string
   atualizadoEm?: Date | string
@@ -308,6 +322,7 @@ export type QuestaoUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   titulo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   enunciado?: Prisma.StringFieldUpdateOperationsInput | string
+  tema?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dificuldade?: Prisma.EnumNivelDificuldadeFieldUpdateOperationsInput | $Enums.NivelDificuldade
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -324,6 +339,7 @@ export type QuestaoUncheckedUpdateInput = {
   idAlternativaCorreta?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   titulo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   enunciado?: Prisma.StringFieldUpdateOperationsInput | string
+  tema?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dificuldade?: Prisma.EnumNivelDificuldadeFieldUpdateOperationsInput | $Enums.NivelDificuldade
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -338,6 +354,7 @@ export type QuestaoCreateManyInput = {
   idAlternativaCorreta?: string | null
   titulo?: string | null
   enunciado: string
+  tema?: string | null
   dificuldade?: $Enums.NivelDificuldade
   criadoEm?: Date | string
   atualizadoEm?: Date | string
@@ -347,6 +364,7 @@ export type QuestaoUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   titulo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   enunciado?: Prisma.StringFieldUpdateOperationsInput | string
+  tema?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dificuldade?: Prisma.EnumNivelDificuldadeFieldUpdateOperationsInput | $Enums.NivelDificuldade
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -358,6 +376,7 @@ export type QuestaoUncheckedUpdateManyInput = {
   idAlternativaCorreta?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   titulo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   enunciado?: Prisma.StringFieldUpdateOperationsInput | string
+  tema?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dificuldade?: Prisma.EnumNivelDificuldadeFieldUpdateOperationsInput | $Enums.NivelDificuldade
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -379,6 +398,7 @@ export type QuestaoCountOrderByAggregateInput = {
   idAlternativaCorreta?: Prisma.SortOrder
   titulo?: Prisma.SortOrder
   enunciado?: Prisma.SortOrder
+  tema?: Prisma.SortOrder
   dificuldade?: Prisma.SortOrder
   criadoEm?: Prisma.SortOrder
   atualizadoEm?: Prisma.SortOrder
@@ -390,6 +410,7 @@ export type QuestaoMaxOrderByAggregateInput = {
   idAlternativaCorreta?: Prisma.SortOrder
   titulo?: Prisma.SortOrder
   enunciado?: Prisma.SortOrder
+  tema?: Prisma.SortOrder
   dificuldade?: Prisma.SortOrder
   criadoEm?: Prisma.SortOrder
   atualizadoEm?: Prisma.SortOrder
@@ -401,6 +422,7 @@ export type QuestaoMinOrderByAggregateInput = {
   idAlternativaCorreta?: Prisma.SortOrder
   titulo?: Prisma.SortOrder
   enunciado?: Prisma.SortOrder
+  tema?: Prisma.SortOrder
   dificuldade?: Prisma.SortOrder
   criadoEm?: Prisma.SortOrder
   atualizadoEm?: Prisma.SortOrder
@@ -545,6 +567,7 @@ export type QuestaoCreateWithoutResponsavelInput = {
   id?: string
   titulo?: string | null
   enunciado: string
+  tema?: string | null
   dificuldade?: $Enums.NivelDificuldade
   criadoEm?: Date | string
   atualizadoEm?: Date | string
@@ -559,6 +582,7 @@ export type QuestaoUncheckedCreateWithoutResponsavelInput = {
   idAlternativaCorreta?: string | null
   titulo?: string | null
   enunciado: string
+  tema?: string | null
   dificuldade?: $Enums.NivelDificuldade
   criadoEm?: Date | string
   atualizadoEm?: Date | string
@@ -602,6 +626,7 @@ export type QuestaoScalarWhereInput = {
   idAlternativaCorreta?: Prisma.UuidNullableFilter<"Questao"> | string | null
   titulo?: Prisma.StringNullableFilter<"Questao"> | string | null
   enunciado?: Prisma.StringFilter<"Questao"> | string
+  tema?: Prisma.StringNullableFilter<"Questao"> | string | null
   dificuldade?: Prisma.EnumNivelDificuldadeFilter<"Questao"> | $Enums.NivelDificuldade
   criadoEm?: Prisma.DateTimeFilter<"Questao"> | Date | string
   atualizadoEm?: Prisma.DateTimeFilter<"Questao"> | Date | string
@@ -611,6 +636,7 @@ export type QuestaoCreateWithoutAlternativasInput = {
   id?: string
   titulo?: string | null
   enunciado: string
+  tema?: string | null
   dificuldade?: $Enums.NivelDificuldade
   criadoEm?: Date | string
   atualizadoEm?: Date | string
@@ -626,6 +652,7 @@ export type QuestaoUncheckedCreateWithoutAlternativasInput = {
   idAlternativaCorreta?: string | null
   titulo?: string | null
   enunciado: string
+  tema?: string | null
   dificuldade?: $Enums.NivelDificuldade
   criadoEm?: Date | string
   atualizadoEm?: Date | string
@@ -642,6 +669,7 @@ export type QuestaoCreateWithoutAlternativaCorretaInput = {
   id?: string
   titulo?: string | null
   enunciado: string
+  tema?: string | null
   dificuldade?: $Enums.NivelDificuldade
   criadoEm?: Date | string
   atualizadoEm?: Date | string
@@ -656,6 +684,7 @@ export type QuestaoUncheckedCreateWithoutAlternativaCorretaInput = {
   idResponsavel: string
   titulo?: string | null
   enunciado: string
+  tema?: string | null
   dificuldade?: $Enums.NivelDificuldade
   criadoEm?: Date | string
   atualizadoEm?: Date | string
@@ -689,6 +718,7 @@ export type QuestaoUpdateWithoutAlternativasInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   titulo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   enunciado?: Prisma.StringFieldUpdateOperationsInput | string
+  tema?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dificuldade?: Prisma.EnumNivelDificuldadeFieldUpdateOperationsInput | $Enums.NivelDificuldade
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -704,6 +734,7 @@ export type QuestaoUncheckedUpdateWithoutAlternativasInput = {
   idAlternativaCorreta?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   titulo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   enunciado?: Prisma.StringFieldUpdateOperationsInput | string
+  tema?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dificuldade?: Prisma.EnumNivelDificuldadeFieldUpdateOperationsInput | $Enums.NivelDificuldade
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -731,6 +762,7 @@ export type QuestaoCreateWithoutTestesInput = {
   id?: string
   titulo?: string | null
   enunciado: string
+  tema?: string | null
   dificuldade?: $Enums.NivelDificuldade
   criadoEm?: Date | string
   atualizadoEm?: Date | string
@@ -746,6 +778,7 @@ export type QuestaoUncheckedCreateWithoutTestesInput = {
   idAlternativaCorreta?: string | null
   titulo?: string | null
   enunciado: string
+  tema?: string | null
   dificuldade?: $Enums.NivelDificuldade
   criadoEm?: Date | string
   atualizadoEm?: Date | string
@@ -773,6 +806,7 @@ export type QuestaoUpdateWithoutTestesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   titulo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   enunciado?: Prisma.StringFieldUpdateOperationsInput | string
+  tema?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dificuldade?: Prisma.EnumNivelDificuldadeFieldUpdateOperationsInput | $Enums.NivelDificuldade
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -788,6 +822,7 @@ export type QuestaoUncheckedUpdateWithoutTestesInput = {
   idAlternativaCorreta?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   titulo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   enunciado?: Prisma.StringFieldUpdateOperationsInput | string
+  tema?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dificuldade?: Prisma.EnumNivelDificuldadeFieldUpdateOperationsInput | $Enums.NivelDificuldade
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -799,6 +834,7 @@ export type QuestaoCreateWithoutTentativasInput = {
   id?: string
   titulo?: string | null
   enunciado: string
+  tema?: string | null
   dificuldade?: $Enums.NivelDificuldade
   criadoEm?: Date | string
   atualizadoEm?: Date | string
@@ -814,6 +850,7 @@ export type QuestaoUncheckedCreateWithoutTentativasInput = {
   idAlternativaCorreta?: string | null
   titulo?: string | null
   enunciado: string
+  tema?: string | null
   dificuldade?: $Enums.NivelDificuldade
   criadoEm?: Date | string
   atualizadoEm?: Date | string
@@ -841,6 +878,7 @@ export type QuestaoUpdateWithoutTentativasInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   titulo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   enunciado?: Prisma.StringFieldUpdateOperationsInput | string
+  tema?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dificuldade?: Prisma.EnumNivelDificuldadeFieldUpdateOperationsInput | $Enums.NivelDificuldade
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -856,6 +894,7 @@ export type QuestaoUncheckedUpdateWithoutTentativasInput = {
   idAlternativaCorreta?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   titulo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   enunciado?: Prisma.StringFieldUpdateOperationsInput | string
+  tema?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dificuldade?: Prisma.EnumNivelDificuldadeFieldUpdateOperationsInput | $Enums.NivelDificuldade
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -868,6 +907,7 @@ export type QuestaoCreateManyResponsavelInput = {
   idAlternativaCorreta?: string | null
   titulo?: string | null
   enunciado: string
+  tema?: string | null
   dificuldade?: $Enums.NivelDificuldade
   criadoEm?: Date | string
   atualizadoEm?: Date | string
@@ -877,6 +917,7 @@ export type QuestaoUpdateWithoutResponsavelInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   titulo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   enunciado?: Prisma.StringFieldUpdateOperationsInput | string
+  tema?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dificuldade?: Prisma.EnumNivelDificuldadeFieldUpdateOperationsInput | $Enums.NivelDificuldade
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -891,6 +932,7 @@ export type QuestaoUncheckedUpdateWithoutResponsavelInput = {
   idAlternativaCorreta?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   titulo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   enunciado?: Prisma.StringFieldUpdateOperationsInput | string
+  tema?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dificuldade?: Prisma.EnumNivelDificuldadeFieldUpdateOperationsInput | $Enums.NivelDificuldade
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -904,6 +946,7 @@ export type QuestaoUncheckedUpdateManyWithoutResponsavelInput = {
   idAlternativaCorreta?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   titulo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   enunciado?: Prisma.StringFieldUpdateOperationsInput | string
+  tema?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dificuldade?: Prisma.EnumNivelDificuldadeFieldUpdateOperationsInput | $Enums.NivelDificuldade
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -914,6 +957,7 @@ export type QuestaoCreateManyAlternativaCorretaInput = {
   idResponsavel: string
   titulo?: string | null
   enunciado: string
+  tema?: string | null
   dificuldade?: $Enums.NivelDificuldade
   criadoEm?: Date | string
   atualizadoEm?: Date | string
@@ -923,6 +967,7 @@ export type QuestaoUpdateWithoutAlternativaCorretaInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   titulo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   enunciado?: Prisma.StringFieldUpdateOperationsInput | string
+  tema?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dificuldade?: Prisma.EnumNivelDificuldadeFieldUpdateOperationsInput | $Enums.NivelDificuldade
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -937,6 +982,7 @@ export type QuestaoUncheckedUpdateWithoutAlternativaCorretaInput = {
   idResponsavel?: Prisma.StringFieldUpdateOperationsInput | string
   titulo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   enunciado?: Prisma.StringFieldUpdateOperationsInput | string
+  tema?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dificuldade?: Prisma.EnumNivelDificuldadeFieldUpdateOperationsInput | $Enums.NivelDificuldade
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -950,6 +996,7 @@ export type QuestaoUncheckedUpdateManyWithoutAlternativaCorretaInput = {
   idResponsavel?: Prisma.StringFieldUpdateOperationsInput | string
   titulo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   enunciado?: Prisma.StringFieldUpdateOperationsInput | string
+  tema?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dificuldade?: Prisma.EnumNivelDificuldadeFieldUpdateOperationsInput | $Enums.NivelDificuldade
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1010,6 +1057,7 @@ export type QuestaoSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   idAlternativaCorreta?: boolean
   titulo?: boolean
   enunciado?: boolean
+  tema?: boolean
   dificuldade?: boolean
   criadoEm?: boolean
   atualizadoEm?: boolean
@@ -1027,6 +1075,7 @@ export type QuestaoSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exten
   idAlternativaCorreta?: boolean
   titulo?: boolean
   enunciado?: boolean
+  tema?: boolean
   dificuldade?: boolean
   criadoEm?: boolean
   atualizadoEm?: boolean
@@ -1040,6 +1089,7 @@ export type QuestaoSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
   idAlternativaCorreta?: boolean
   titulo?: boolean
   enunciado?: boolean
+  tema?: boolean
   dificuldade?: boolean
   criadoEm?: boolean
   atualizadoEm?: boolean
@@ -1053,12 +1103,13 @@ export type QuestaoSelectScalar = {
   idAlternativaCorreta?: boolean
   titulo?: boolean
   enunciado?: boolean
+  tema?: boolean
   dificuldade?: boolean
   criadoEm?: boolean
   atualizadoEm?: boolean
 }
 
-export type QuestaoOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "idResponsavel" | "idAlternativaCorreta" | "titulo" | "enunciado" | "dificuldade" | "criadoEm" | "atualizadoEm", ExtArgs["result"]["questao"]>
+export type QuestaoOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "idResponsavel" | "idAlternativaCorreta" | "titulo" | "enunciado" | "tema" | "dificuldade" | "criadoEm" | "atualizadoEm", ExtArgs["result"]["questao"]>
 export type QuestaoInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   responsavel?: boolean | Prisma.UsuarioDefaultArgs<ExtArgs>
   alternativaCorreta?: boolean | Prisma.Questao$alternativaCorretaArgs<ExtArgs>
@@ -1091,6 +1142,7 @@ export type $QuestaoPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     idAlternativaCorreta: string | null
     titulo: string | null
     enunciado: string
+    tema: string | null
     dificuldade: $Enums.NivelDificuldade
     criadoEm: Date
     atualizadoEm: Date
@@ -1527,6 +1579,7 @@ export interface QuestaoFieldRefs {
   readonly idAlternativaCorreta: Prisma.FieldRef<"Questao", 'String'>
   readonly titulo: Prisma.FieldRef<"Questao", 'String'>
   readonly enunciado: Prisma.FieldRef<"Questao", 'String'>
+  readonly tema: Prisma.FieldRef<"Questao", 'String'>
   readonly dificuldade: Prisma.FieldRef<"Questao", 'NivelDificuldade'>
   readonly criadoEm: Prisma.FieldRef<"Questao", 'DateTime'>
   readonly atualizadoEm: Prisma.FieldRef<"Questao", 'DateTime'>

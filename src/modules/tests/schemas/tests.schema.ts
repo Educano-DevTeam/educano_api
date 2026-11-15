@@ -38,9 +38,15 @@ export const criarAtividadeSchema = z.object({
 
 // Criação de configuração de simulado personalizado.
 export const criarSimuladoSchema = z.object({
-    tema: temaSchema,
+    tema: z.string()
+        .trim()
+        .min(1, "O tema do simulado é obrigatório.")
+        .max(150, "O tema deve ter no máximo 150 caracteres."),
+
     tempoMinutos: tempoSchema,
+
     dificuldade: z.nativeEnum(NivelDificuldade),
+
     quantidadeQuestoes: z.coerce.number()
         .int()
         .min(1)

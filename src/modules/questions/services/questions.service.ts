@@ -82,6 +82,7 @@ const selecaoQuestao = {
     id: true,
     titulo: true,
     enunciado: true,
+    tema: true,
     dificuldade: true,
     criadoEm: true,
     atualizadoEm: true,
@@ -124,6 +125,7 @@ export async function criarQuestao(
             data: {
                 titulo: dados.titulo?.trim() || null,
                 enunciado: dados.enunciado,
+                tema: dados.tema.trim(),
                 dificuldade: dados.dificuldade,
                 idResponsavel: idUsuario,
             },
@@ -191,6 +193,7 @@ export async function listarQuestoes(
     tipoUsuario: string,
     filtros: {
         dificuldade?: "FACIL" | "MEDIO" | "DIFICIL";
+        tema?: string;
         busca?: string;
         pagina: number;
         limite: number;
@@ -201,6 +204,13 @@ export async function listarQuestoes(
     const where: Prisma.QuestaoWhereInput = {
         ...(filtros.dificuldade && {
             dificuldade: filtros.dificuldade,
+        }),
+
+        ...(filtros.tema && {
+            tema: {
+                equals: filtros.tema,
+                mode: "insensitive",
+            },
         }),
 
         ...(filtros.busca && {
@@ -336,6 +346,10 @@ export async function atualizarQuestao(
 
         if (dados.enunciado !== undefined) {
             dadosAtualizacao.enunciado = dados.enunciado;
+        }
+
+        if (dados.tema !== undefined) {
+            dadosAtualizacao.tema = dados.tema.trim();
         }
 
         if (dados.dificuldade !== undefined) {

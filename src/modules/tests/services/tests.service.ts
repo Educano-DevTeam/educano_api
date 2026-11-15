@@ -219,6 +219,11 @@ export async function criarSimulado(
     // com a dificuldade solicitada.
     const quantidadeDisponivel = await prisma.questao.count({
         where: {
+            tema: {
+                equals: dados.tema.trim(),
+                mode: "insensitive",
+            },
+
             dificuldade: dados.dificuldade,
         },
     });
@@ -226,7 +231,7 @@ export async function criarSimulado(
     if (quantidadeDisponivel < dados.quantidadeQuestoes) {
         throw new TestsServiceError(
             "QUESTOES_INSUFICIENTES",
-            `Existem apenas ${quantidadeDisponivel} questões disponíveis com essa dificuldade.`,
+            `Existem apenas ${quantidadeDisponivel} questões disponíveis para o tema "${dados.tema}" e a dificuldade "${dados.dificuldade}".`
         );
     }
 
@@ -539,6 +544,8 @@ export async function atualizarTeste(
             tipo: true,
             idModulo: true,
             dificuldade: true,
+            tema: true,
+            quantidadeQuestoes: true,
 
             _count: {
                 select: {
@@ -612,27 +619,42 @@ export async function atualizarTeste(
             );
         }
 
-        const dificuldade = dados.dificuldade;
-        const quantidade = dados.quantidadeQuestoes;
+        const dificuldade = dados.dificuldade ?? teste.dificuldade;
 
-        if (dificuldade || quantidade) {
+        const tema = dados.tema !== undefined
+            ? dados.tema?.trim() || null
+            : teste.tema;
+
+        const quantidadeSolicitada =
+            dados.quantidadeQuestoes ?? teste.quantidadeQuestoes;
+
+        if (
+            dados.dificuldade !== undefined ||
+            dados.quantidadeQuestoes !== undefined ||
+            dados.tema !== undefined
+        ) {
+            if (!tema) {
+                throw new TestsServiceError(
+                    "TEMA_NAO_INFORMADO",
+                    "O tema do simulado é obrigatório.",
+                );
+            }
+
             const quantidadeDisponivel = await prisma.questao.count({
                 where: {
+                    tema: {
+                        equals: tema,
+                        mode: "insensitive",
+                    },
+
                     dificuldade: dificuldade ?? undefined,
                 },
             });
 
-            const quantidadeSolicitada = quantidade ?? (
-                await prisma.teste.findUniqueOrThrow({
-                    where: { id },
-                    select: { quantidadeQuestoes: true },
-                })
-            ).quantidadeQuestoes;
-
             if (quantidadeDisponivel < quantidadeSolicitada) {
                 throw new TestsServiceError(
                     "QUESTOES_INSUFICIENTES",
-                    `Existem apenas ${quantidadeDisponivel} questões disponíveis para essa configuração.`,
+                    `Existem apenas ${quantidadeDisponivel} questões disponíveis para o tema "${tema}" e a dificuldade selecionada.`,
                 );
             }
         }
