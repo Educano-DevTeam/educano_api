@@ -39,6 +39,13 @@ enum StatusCodigoValidacao {
   @@map("status_codigo_validacao")
 }
 
+enum FinalidadeCodigoValidacao {
+  CADASTRO    @map("cadastro")
+  RESET_SENHA @map("reset_senha")
+
+  @@map("finalidade_codigo_validacao")
+}
+
 enum TipoArquivo {
   IMAGEM
   VIDEO
@@ -214,12 +221,13 @@ model Perfil {
 }
 
 model CodigoValidacao {
-  id          String                @id @default(uuid()) @db.Uuid
-  idUsuario   String                @map("id_usuario") @db.Uuid
-  codigo      String                @db.VarChar(64)
-  dataCriacao DateTime              @default(now()) @map("data_criacao") @db.Timestamptz(3)
-  expiraEm    DateTime              @default(dbgenerated("(CURRENT_TIMESTAMP + INTERVAL '10 minutes')")) @map("expira_em") @db.Timestamptz(3)
-  status      StatusCodigoValidacao @default(ATIVO)
+  id          String                    @id @default(uuid()) @db.Uuid
+  idUsuario   String                    @map("id_usuario") @db.Uuid
+  codigo      String                    @db.VarChar(64)
+  finalidade  FinalidadeCodigoValidacao @default(CADASTRO)
+  dataCriacao DateTime                  @default(now()) @map("data_criacao") @db.Timestamptz(3)
+  expiraEm    DateTime                  @default(dbgenerated("(CURRENT_TIMESTAMP + INTERVAL '10 minutes')")) @map("expira_em") @db.Timestamptz(3)
+  status      StatusCodigoValidacao     @default(ATIVO)
 
   usuario Usuario @relation(fields: [idUsuario], references: [id], onDelete: Cascade)
 
@@ -657,8 +665,8 @@ model Flashcard {
   resposta      String @db.Text
   repeticoesMes Int    @map("repeticoes_mes")
 
-  ultimaVisualizacao DateTime? @map("ultima_visualizacao") @db.Timestamptz(3)
-  proximaVisualizacao DateTime @map("proxima_visualizacao") @db.Timestamptz(3)
+  ultimaVisualizacao  DateTime? @map("ultima_visualizacao") @db.Timestamptz(3)
+  proximaVisualizacao DateTime  @map("proxima_visualizacao") @db.Timestamptz(3)
 
   criadoEm DateTime @default(now()) @map("criado_em") @db.Timestamptz(3)
 

@@ -26,7 +26,20 @@ export const loginSchema = z.object({
   senha: z.string().min(1).max(72),
 });
 
+export const solicitarRecuperacaoSenhaSchema = z.object({
+  email: z.string().trim().email().max(255),
+});
+
+export const redefinirSenhaSchema = z.object({
+  email: z.string().trim().email().max(255),
+  codigo: z.string().trim().toUpperCase().regex(/^[A-Z0-9]{6}$/),
+  senha: z.string().min(8).max(72),
+});
+
+export type SolicitarRecuperacaoSenhaInput = z.infer<typeof solicitarRecuperacaoSenhaSchema>;
+export type RedefinirSenhaInput = z.infer<typeof redefinirSenhaSchema>;
 export type TipoUsuarioCadastro = z.infer<typeof tipoUsuarioSchema>;
 export type RegisterInput = z.infer<typeof registerSchema>;
 export type VerifyCodeInput = z.infer<typeof verifyCodeSchema>;
 export type LoginInput = z.infer<typeof loginSchema>;
+

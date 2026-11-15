@@ -1989,6 +1989,7 @@ export const CodigoValidacaoScalarFieldEnum = {
   id: 'id',
   idUsuario: 'idUsuario',
   codigo: 'codigo',
+  finalidade: 'finalidade',
   dataCriacao: 'dataCriacao',
   expiraEm: 'expiraEm',
   status: 'status'
@@ -2362,6 +2363,20 @@ export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'In
  * Reference to a field of type 'Int[]'
  */
 export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
+    
+
+
+/**
+ * Reference to a field of type 'FinalidadeCodigoValidacao'
+ */
+export type EnumFinalidadeCodigoValidacaoFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'FinalidadeCodigoValidacao'>
+    
+
+
+/**
+ * Reference to a field of type 'FinalidadeCodigoValidacao[]'
+ */
+export type ListEnumFinalidadeCodigoValidacaoFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'FinalidadeCodigoValidacao[]'>
     
 
 

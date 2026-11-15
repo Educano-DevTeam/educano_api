@@ -45,6 +45,14 @@ export const StatusCodigoValidacao = {
 export type StatusCodigoValidacao = (typeof StatusCodigoValidacao)[keyof typeof StatusCodigoValidacao]
 
 
+export const FinalidadeCodigoValidacao = {
+  CADASTRO: 'CADASTRO',
+  RESET_SENHA: 'RESET_SENHA'
+} as const
+
+export type FinalidadeCodigoValidacao = (typeof FinalidadeCodigoValidacao)[keyof typeof FinalidadeCodigoValidacao]
+
+
 export const TipoArquivo = {
   IMAGEM: 'IMAGEM',
   VIDEO: 'VIDEO',

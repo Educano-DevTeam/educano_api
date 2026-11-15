@@ -17,6 +17,13 @@ import type {
 import { emitirToken, verificarToken} from "./token.service.js";
 import type { LoginInput } from "../schemas/auth.schema.js";
 
+import { gerarEmailRecuperacaoSenha } from "../templates/password-reset-email.template.js";
+
+import type {
+  SolicitarRecuperacaoSenhaInput,
+  RedefinirSenhaInput,
+} from "../schemas/auth.schema.js";
+
 const CORES_PERFIL = [
   "#425BC2",
   "#86C5FF",
@@ -371,4 +378,202 @@ export async function autenticarUsuario(dados: LoginInput) {
       status: usuario.status,
     },
   };
+}
+
+
+/**
+ * Solicita um código de recuperação de senha.
+ *
+ * Por segurança, não informa se o e-mail está cadastrado.
+ */
+export async function solicitarRecuperacaoSenha(
+  dados: SolicitarRecuperacaoSenhaInput,
+): Promise<void> {
+  const email = dados.email.toLowerCase();
+
+  const usuario = await prisma.usuario.findUnique({
+    where: { email },
+    select: {
+      id: true,
+      nome: true,
+      email: true,
+      status: true,
+    },
+  });
+
+  // Resposta genérica para não revelar a existência da conta.
+  if (!usuario || usuario.status !== "ATIVO") {
+    return;
+  }
+
+  const codigo = gerarCodigo();
+  const codigoHash = hashCodigo(codigo);
+
+  // Invalida códigos de recuperação anteriores e cria um novo.
+  const novoCodigo = await prisma.$transaction(async (tx) => {
+    await tx.codigoValidacao.updateMany({
+      where: {
+        idUsuario: usuario.id,
+        finalidade: "RESET_SENHA",
+        status: "ATIVO",
+      },
+      data: {
+        status: "INATIVO",
+      },
+    });
+
+    return tx.codigoValidacao.create({
+      data: {
+        idUsuario: usuario.id,
+        codigo: codigoHash,
+        finalidade: "RESET_SENHA",
+        status: "ATIVO",
+      },
+      select: {
+        id: true,
+      },
+    });
+  });
+
+  try {
+    await enviarEmail({
+      destinatario: usuario.email,
+      assunto: "Recuperação de senha | Educano",
+      html: gerarEmailRecuperacaoSenha(usuario.nome, codigo),
+    });
+  } catch (error) {
+    // Invalida o código caso o envio do e-mail falhe.
+    await prisma.codigoValidacao.updateMany({
+      where: {
+        id: novoCodigo.id,
+        status: "ATIVO",
+      },
+      data: {
+        status: "INATIVO",
+      },
+    });
+
+    console.error("Falha ao enviar código de recuperação:", error);
+
+    throw new AuthServiceError(
+      "FALHA_ENVIO_EMAIL",
+      "Não foi possível enviar o código. Tente novamente mais tarde.",
+    );
+  }
+}
+
+/**
+ * Valida o código e atualiza a senha do usuário.
+ */
+export async function redefinirSenha(
+  dados: RedefinirSenhaInput,
+): Promise<void> {
+  const email = dados.email.toLowerCase();
+
+  const usuario = await prisma.usuario.findUnique({
+    where: { email },
+    select: {
+      id: true,
+      status: true,
+    },
+  });
+
+  if (!usuario || usuario.status !== "ATIVO") {
+    throw new AuthServiceError(
+      "DADOS_INVALIDOS",
+      "Não foi possível validar os dados informados.",
+    );
+  }
+
+  const codigoSalvo = await prisma.codigoValidacao.findFirst({
+    where: {
+      idUsuario: usuario.id,
+      finalidade: "RESET_SENHA",
+      status: "ATIVO",
+    },
+    orderBy: {
+      dataCriacao: "desc",
+    },
+  });
+
+  if (!codigoSalvo) {
+    throw new AuthServiceError(
+      "CODIGO_INEXISTENTE",
+      "Código inexistente ou já utilizado. Solicite um novo código.",
+    );
+  }
+
+  const [relogio] = await prisma.$queryRaw<Array<{ agora: Date }>>`
+    SELECT CURRENT_TIMESTAMP AS agora
+  `;
+
+  if (codigoSalvo.expiraEm <= relogio.agora) {
+    await prisma.codigoValidacao.updateMany({
+      where: {
+        id: codigoSalvo.id,
+        status: "ATIVO",
+      },
+      data: {
+        status: "INATIVO",
+      },
+    });
+
+    throw new AuthServiceError(
+      "CODIGO_EXPIRADO",
+      "O código expirou. Solicite um novo código.",
+    );
+  }
+
+  const hashRecebido = hashCodigo(dados.codigo);
+
+  if (!compararHashes(codigoSalvo.codigo, hashRecebido)) {
+    throw new AuthServiceError(
+      "CODIGO_INCORRETO",
+      "Código de recuperação incorreto.",
+    );
+  }
+
+  // O hash é calculado antes da transação.
+  const novaSenhaHash = await bcrypt.hash(dados.senha, 12);
+
+  await prisma.$transaction(async (tx) => {
+    const [relogioTransacao] = await tx.$queryRaw<
+      Array<{ agora: Date }>
+    >`
+      SELECT CURRENT_TIMESTAMP AS agora
+    `;
+
+    // Atualização condicional impede a reutilização do código.
+    const resultado = await tx.codigoValidacao.updateMany({
+      where: {
+        id: codigoSalvo.id,
+        idUsuario: usuario.id,
+        finalidade: "RESET_SENHA",
+        status: "ATIVO",
+        expiraEm: {
+          gt: relogioTransacao.agora,
+        },
+      },
+      data: {
+        status: "USADO",
+      },
+    });
+
+    if (resultado.count !== 1) {
+      throw new AuthServiceError(
+        "CODIGO_EXPIRADO_OU_UTILIZADO",
+        "O código expirou ou já foi utilizado. Solicite outro.",
+      );
+    }
+
+    await tx.usuario.update({
+      where: {
+        id: usuario.id,
+      },
+      data: {
+        senha: novaSenhaHash,
+        atualizadoEm: relogioTransacao.agora,
+      },
+    });
+  });
 }

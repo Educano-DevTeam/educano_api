@@ -123,6 +123,7 @@ export const CodigoValidacaoScalarFieldEnum = {
   id: 'id',
   idUsuario: 'idUsuario',
   codigo: 'codigo',
+  finalidade: 'finalidade',
   dataCriacao: 'dataCriacao',
   expiraEm: 'expiraEm',
   status: 'status'

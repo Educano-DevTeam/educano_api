@@ -4,6 +4,8 @@ import {
   loginSchema,
   registerSchema,
   verifyCodeSchema,
+  solicitarRecuperacaoSenhaSchema,
+  redefinirSenhaSchema,
 } from "../schemas/auth.schema.js";
 import {
   AuthServiceError,
@@ -11,6 +13,8 @@ import {
   autorizarTipoCadastro,
   registrarUsuario,
   validarCodigo,
+  solicitarRecuperacaoSenha,
+  redefinirSenha,
 } from "../services/auth.service.js";
 
 function responderErro(res: Response, error: unknown) {
@@ -122,6 +126,66 @@ export async function login(req: Request, res: Response) {
     return res.status(200).json({
       message: "Login realizado com sucesso.",
       ...resultado,
+    });
+  } catch (error) {
+    return responderErro(res, error);
+  }
+}
+
+
+/**
+ * POST /api/auth/forgot-password
+ *
+ * Envia um código de recuperação para o e-mail informado.
+ */
+export async function solicitarCodigoRecuperacao(
+  req: Request,
+  res: Response,
+) {
+  const validacao = solicitarRecuperacaoSenhaSchema.safeParse(req.body);
+
+  if (!validacao.success) {
+    return res.status(400).json({
+      message: "Informe um endereço de e-mail válido.",
+      errors: validacao.error.issues,
+    });
+  }
+
+  try {
+    await solicitarRecuperacaoSenha(validacao.data);
+
+    return res.status(200).json({
+      message:
+        "Se o e-mail estiver cadastrado, você receberá um código de recuperação.",
+    });
+  } catch (error) {
+    return responderErro(res, error);
+  }
+}
+
+/**
+ * POST /api/auth/reset-password
+ *
+ * Valida o código e redefine a senha.
+ */
+export async function redefinirSenhaUsuario(
+  req: Request,
+  res: Response,
+) {
+  const validacao = redefinirSenhaSchema.safeParse(req.body);
+
+  if (!validacao.success) {
+    return res.status(400).json({
+      message: "Os dados para redefinição de senha são inválidos.",
+      errors: validacao.error.issues,
+    });
+  }
+
+  try {
+    await redefinirSenha(validacao.data);
+
+    return res.status(200).json({
+      message: "Senha redefinida com sucesso. Você já pode fazer login.",
     });
   } catch (error) {
     return responderErro(res, error);
