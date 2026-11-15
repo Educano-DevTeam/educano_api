@@ -167,8 +167,9 @@ model Usuario {
   criadoEm     DateTime      @default(now()) @map("criado_em") @db.Timestamptz(3)
   atualizadoEm DateTime      @default(now()) @map("atualizado_em") @db.Timestamptz(3)
 
-  perfil           Perfil?
-  codigosValidacao CodigoValidacao[]
+  perfil              Perfil?
+  codigosValidacao    CodigoValidacao[]
+  sessoesAutenticacao SessaoAutenticacao[]
 
   arquivos Arquivo[]
 
@@ -675,4 +676,20 @@ model Flashcard {
   @@index([idUsuario])
   @@index([idUsuario, proximaVisualizacao])
   @@map("flashcard")
+}
+
+model SessaoAutenticacao {
+  id           String    @id @default(uuid()) @db.Uuid
+  idUsuario    String    @map("id_usuario") @db.Uuid
+  tokenHash    String    @unique @map("token_hash") @db.VarChar(64)
+  expiraEm     DateTime  @map("expira_em") @db.Timestamptz(3)
+  revogadoEm   DateTime? @map("revogado_em") @db.Timestamptz(3)
+  criadoEm     DateTime  @default(now()) @map("criado_em") @db.Timestamptz(3)
+  atualizadoEm DateTime  @updatedAt @map("atualizado_em") @db.Timestamptz(3)
+
+  usuario Usuario @relation(fields: [idUsuario], references: [id], onDelete: Cascade)
+
+  @@index([idUsuario, revogadoEm])
+  @@index([expiraEm])
+  @@map("sessao_autenticacao")
 }

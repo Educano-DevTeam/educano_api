@@ -208,6 +208,7 @@ export type UsuarioWhereInput = {
   atualizadoEm?: Prisma.DateTimeFilter<"Usuario"> | Date | string
   perfil?: Prisma.XOR<Prisma.PerfilNullableScalarRelationFilter, Prisma.PerfilWhereInput> | null
   codigosValidacao?: Prisma.CodigoValidacaoListRelationFilter
+  sessoesAutenticacao?: Prisma.SessaoAutenticacaoListRelationFilter
   arquivos?: Prisma.ArquivoListRelationFilter
   cursosResponsavel?: Prisma.CursoListRelationFilter
   cursosAutorizados?: Prisma.CursoListRelationFilter
@@ -240,6 +241,7 @@ export type UsuarioOrderByWithRelationInput = {
   atualizadoEm?: Prisma.SortOrder
   perfil?: Prisma.PerfilOrderByWithRelationInput
   codigosValidacao?: Prisma.CodigoValidacaoOrderByRelationAggregateInput
+  sessoesAutenticacao?: Prisma.SessaoAutenticacaoOrderByRelationAggregateInput
   arquivos?: Prisma.ArquivoOrderByRelationAggregateInput
   cursosResponsavel?: Prisma.CursoOrderByRelationAggregateInput
   cursosAutorizados?: Prisma.CursoOrderByRelationAggregateInput
@@ -275,6 +277,7 @@ export type UsuarioWhereUniqueInput = Prisma.AtLeast<{
   atualizadoEm?: Prisma.DateTimeFilter<"Usuario"> | Date | string
   perfil?: Prisma.XOR<Prisma.PerfilNullableScalarRelationFilter, Prisma.PerfilWhereInput> | null
   codigosValidacao?: Prisma.CodigoValidacaoListRelationFilter
+  sessoesAutenticacao?: Prisma.SessaoAutenticacaoListRelationFilter
   arquivos?: Prisma.ArquivoListRelationFilter
   cursosResponsavel?: Prisma.CursoListRelationFilter
   cursosAutorizados?: Prisma.CursoListRelationFilter
@@ -335,6 +338,7 @@ export type UsuarioCreateInput = {
   atualizadoEm?: Date | string
   perfil?: Prisma.PerfilCreateNestedOneWithoutUsuarioInput
   codigosValidacao?: Prisma.CodigoValidacaoCreateNestedManyWithoutUsuarioInput
+  sessoesAutenticacao?: Prisma.SessaoAutenticacaoCreateNestedManyWithoutUsuarioInput
   arquivos?: Prisma.ArquivoCreateNestedManyWithoutUsuarioInput
   cursosResponsavel?: Prisma.CursoCreateNestedManyWithoutResponsavelInput
   cursosAutorizados?: Prisma.CursoCreateNestedManyWithoutAdminAutorizadorInput
@@ -367,6 +371,7 @@ export type UsuarioUncheckedCreateInput = {
   atualizadoEm?: Date | string
   perfil?: Prisma.PerfilUncheckedCreateNestedOneWithoutUsuarioInput
   codigosValidacao?: Prisma.CodigoValidacaoUncheckedCreateNestedManyWithoutUsuarioInput
+  sessoesAutenticacao?: Prisma.SessaoAutenticacaoUncheckedCreateNestedManyWithoutUsuarioInput
   arquivos?: Prisma.ArquivoUncheckedCreateNestedManyWithoutUsuarioInput
   cursosResponsavel?: Prisma.CursoUncheckedCreateNestedManyWithoutResponsavelInput
   cursosAutorizados?: Prisma.CursoUncheckedCreateNestedManyWithoutAdminAutorizadorInput
@@ -399,6 +404,7 @@ export type UsuarioUpdateInput = {
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   perfil?: Prisma.PerfilUpdateOneWithoutUsuarioNestedInput
   codigosValidacao?: Prisma.CodigoValidacaoUpdateManyWithoutUsuarioNestedInput
+  sessoesAutenticacao?: Prisma.SessaoAutenticacaoUpdateManyWithoutUsuarioNestedInput
   arquivos?: Prisma.ArquivoUpdateManyWithoutUsuarioNestedInput
   cursosResponsavel?: Prisma.CursoUpdateManyWithoutResponsavelNestedInput
   cursosAutorizados?: Prisma.CursoUpdateManyWithoutAdminAutorizadorNestedInput
@@ -431,6 +437,7 @@ export type UsuarioUncheckedUpdateInput = {
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   perfil?: Prisma.PerfilUncheckedUpdateOneWithoutUsuarioNestedInput
   codigosValidacao?: Prisma.CodigoValidacaoUncheckedUpdateManyWithoutUsuarioNestedInput
+  sessoesAutenticacao?: Prisma.SessaoAutenticacaoUncheckedUpdateManyWithoutUsuarioNestedInput
   arquivos?: Prisma.ArquivoUncheckedUpdateManyWithoutUsuarioNestedInput
   cursosResponsavel?: Prisma.CursoUncheckedUpdateManyWithoutResponsavelNestedInput
   cursosAutorizados?: Prisma.CursoUncheckedUpdateManyWithoutAdminAutorizadorNestedInput
@@ -842,6 +849,20 @@ export type UsuarioUpdateOneRequiredWithoutFlashcardsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UsuarioUpdateToOneWithWhereWithoutFlashcardsInput, Prisma.UsuarioUpdateWithoutFlashcardsInput>, Prisma.UsuarioUncheckedUpdateWithoutFlashcardsInput>
 }
 
+export type UsuarioCreateNestedOneWithoutSessoesAutenticacaoInput = {
+  create?: Prisma.XOR<Prisma.UsuarioCreateWithoutSessoesAutenticacaoInput, Prisma.UsuarioUncheckedCreateWithoutSessoesAutenticacaoInput>
+  connectOrCreate?: Prisma.UsuarioCreateOrConnectWithoutSessoesAutenticacaoInput
+  connect?: Prisma.UsuarioWhereUniqueInput
+}
+
+export type UsuarioUpdateOneRequiredWithoutSessoesAutenticacaoNestedInput = {
+  create?: Prisma.XOR<Prisma.UsuarioCreateWithoutSessoesAutenticacaoInput, Prisma.UsuarioUncheckedCreateWithoutSessoesAutenticacaoInput>
+  connectOrCreate?: Prisma.UsuarioCreateOrConnectWithoutSessoesAutenticacaoInput
+  upsert?: Prisma.UsuarioUpsertWithoutSessoesAutenticacaoInput
+  connect?: Prisma.UsuarioWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UsuarioUpdateToOneWithWhereWithoutSessoesAutenticacaoInput, Prisma.UsuarioUpdateWithoutSessoesAutenticacaoInput>, Prisma.UsuarioUncheckedUpdateWithoutSessoesAutenticacaoInput>
+}
+
 export type UsuarioCreateWithoutPerfilInput = {
   id?: string
   nome: string
@@ -852,6 +873,7 @@ export type UsuarioCreateWithoutPerfilInput = {
   criadoEm?: Date | string
   atualizadoEm?: Date | string
   codigosValidacao?: Prisma.CodigoValidacaoCreateNestedManyWithoutUsuarioInput
+  sessoesAutenticacao?: Prisma.SessaoAutenticacaoCreateNestedManyWithoutUsuarioInput
   arquivos?: Prisma.ArquivoCreateNestedManyWithoutUsuarioInput
   cursosResponsavel?: Prisma.CursoCreateNestedManyWithoutResponsavelInput
   cursosAutorizados?: Prisma.CursoCreateNestedManyWithoutAdminAutorizadorInput
@@ -883,6 +905,7 @@ export type UsuarioUncheckedCreateWithoutPerfilInput = {
   criadoEm?: Date | string
   atualizadoEm?: Date | string
   codigosValidacao?: Prisma.CodigoValidacaoUncheckedCreateNestedManyWithoutUsuarioInput
+  sessoesAutenticacao?: Prisma.SessaoAutenticacaoUncheckedCreateNestedManyWithoutUsuarioInput
   arquivos?: Prisma.ArquivoUncheckedCreateNestedManyWithoutUsuarioInput
   cursosResponsavel?: Prisma.CursoUncheckedCreateNestedManyWithoutResponsavelInput
   cursosAutorizados?: Prisma.CursoUncheckedCreateNestedManyWithoutAdminAutorizadorInput
@@ -930,6 +953,7 @@ export type UsuarioUpdateWithoutPerfilInput = {
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   codigosValidacao?: Prisma.CodigoValidacaoUpdateManyWithoutUsuarioNestedInput
+  sessoesAutenticacao?: Prisma.SessaoAutenticacaoUpdateManyWithoutUsuarioNestedInput
   arquivos?: Prisma.ArquivoUpdateManyWithoutUsuarioNestedInput
   cursosResponsavel?: Prisma.CursoUpdateManyWithoutResponsavelNestedInput
   cursosAutorizados?: Prisma.CursoUpdateManyWithoutAdminAutorizadorNestedInput
@@ -961,6 +985,7 @@ export type UsuarioUncheckedUpdateWithoutPerfilInput = {
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   codigosValidacao?: Prisma.CodigoValidacaoUncheckedUpdateManyWithoutUsuarioNestedInput
+  sessoesAutenticacao?: Prisma.SessaoAutenticacaoUncheckedUpdateManyWithoutUsuarioNestedInput
   arquivos?: Prisma.ArquivoUncheckedUpdateManyWithoutUsuarioNestedInput
   cursosResponsavel?: Prisma.CursoUncheckedUpdateManyWithoutResponsavelNestedInput
   cursosAutorizados?: Prisma.CursoUncheckedUpdateManyWithoutAdminAutorizadorNestedInput
@@ -992,6 +1017,7 @@ export type UsuarioCreateWithoutCodigosValidacaoInput = {
   criadoEm?: Date | string
   atualizadoEm?: Date | string
   perfil?: Prisma.PerfilCreateNestedOneWithoutUsuarioInput
+  sessoesAutenticacao?: Prisma.SessaoAutenticacaoCreateNestedManyWithoutUsuarioInput
   arquivos?: Prisma.ArquivoCreateNestedManyWithoutUsuarioInput
   cursosResponsavel?: Prisma.CursoCreateNestedManyWithoutResponsavelInput
   cursosAutorizados?: Prisma.CursoCreateNestedManyWithoutAdminAutorizadorInput
@@ -1023,6 +1049,7 @@ export type UsuarioUncheckedCreateWithoutCodigosValidacaoInput = {
   criadoEm?: Date | string
   atualizadoEm?: Date | string
   perfil?: Prisma.PerfilUncheckedCreateNestedOneWithoutUsuarioInput
+  sessoesAutenticacao?: Prisma.SessaoAutenticacaoUncheckedCreateNestedManyWithoutUsuarioInput
   arquivos?: Prisma.ArquivoUncheckedCreateNestedManyWithoutUsuarioInput
   cursosResponsavel?: Prisma.CursoUncheckedCreateNestedManyWithoutResponsavelInput
   cursosAutorizados?: Prisma.CursoUncheckedCreateNestedManyWithoutAdminAutorizadorInput
@@ -1070,6 +1097,7 @@ export type UsuarioUpdateWithoutCodigosValidacaoInput = {
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   perfil?: Prisma.PerfilUpdateOneWithoutUsuarioNestedInput
+  sessoesAutenticacao?: Prisma.SessaoAutenticacaoUpdateManyWithoutUsuarioNestedInput
   arquivos?: Prisma.ArquivoUpdateManyWithoutUsuarioNestedInput
   cursosResponsavel?: Prisma.CursoUpdateManyWithoutResponsavelNestedInput
   cursosAutorizados?: Prisma.CursoUpdateManyWithoutAdminAutorizadorNestedInput
@@ -1101,6 +1129,7 @@ export type UsuarioUncheckedUpdateWithoutCodigosValidacaoInput = {
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   perfil?: Prisma.PerfilUncheckedUpdateOneWithoutUsuarioNestedInput
+  sessoesAutenticacao?: Prisma.SessaoAutenticacaoUncheckedUpdateManyWithoutUsuarioNestedInput
   arquivos?: Prisma.ArquivoUncheckedUpdateManyWithoutUsuarioNestedInput
   cursosResponsavel?: Prisma.CursoUncheckedUpdateManyWithoutResponsavelNestedInput
   cursosAutorizados?: Prisma.CursoUncheckedUpdateManyWithoutAdminAutorizadorNestedInput
@@ -1133,6 +1162,7 @@ export type UsuarioCreateWithoutArquivosInput = {
   atualizadoEm?: Date | string
   perfil?: Prisma.PerfilCreateNestedOneWithoutUsuarioInput
   codigosValidacao?: Prisma.CodigoValidacaoCreateNestedManyWithoutUsuarioInput
+  sessoesAutenticacao?: Prisma.SessaoAutenticacaoCreateNestedManyWithoutUsuarioInput
   cursosResponsavel?: Prisma.CursoCreateNestedManyWithoutResponsavelInput
   cursosAutorizados?: Prisma.CursoCreateNestedManyWithoutAdminAutorizadorInput
   sessoesResponsavel?: Prisma.SessaoCreateNestedManyWithoutResponsavelInput
@@ -1164,6 +1194,7 @@ export type UsuarioUncheckedCreateWithoutArquivosInput = {
   atualizadoEm?: Date | string
   perfil?: Prisma.PerfilUncheckedCreateNestedOneWithoutUsuarioInput
   codigosValidacao?: Prisma.CodigoValidacaoUncheckedCreateNestedManyWithoutUsuarioInput
+  sessoesAutenticacao?: Prisma.SessaoAutenticacaoUncheckedCreateNestedManyWithoutUsuarioInput
   cursosResponsavel?: Prisma.CursoUncheckedCreateNestedManyWithoutResponsavelInput
   cursosAutorizados?: Prisma.CursoUncheckedCreateNestedManyWithoutAdminAutorizadorInput
   sessoesResponsavel?: Prisma.SessaoUncheckedCreateNestedManyWithoutResponsavelInput
@@ -1211,6 +1242,7 @@ export type UsuarioUpdateWithoutArquivosInput = {
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   perfil?: Prisma.PerfilUpdateOneWithoutUsuarioNestedInput
   codigosValidacao?: Prisma.CodigoValidacaoUpdateManyWithoutUsuarioNestedInput
+  sessoesAutenticacao?: Prisma.SessaoAutenticacaoUpdateManyWithoutUsuarioNestedInput
   cursosResponsavel?: Prisma.CursoUpdateManyWithoutResponsavelNestedInput
   cursosAutorizados?: Prisma.CursoUpdateManyWithoutAdminAutorizadorNestedInput
   sessoesResponsavel?: Prisma.SessaoUpdateManyWithoutResponsavelNestedInput
@@ -1242,6 +1274,7 @@ export type UsuarioUncheckedUpdateWithoutArquivosInput = {
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   perfil?: Prisma.PerfilUncheckedUpdateOneWithoutUsuarioNestedInput
   codigosValidacao?: Prisma.CodigoValidacaoUncheckedUpdateManyWithoutUsuarioNestedInput
+  sessoesAutenticacao?: Prisma.SessaoAutenticacaoUncheckedUpdateManyWithoutUsuarioNestedInput
   cursosResponsavel?: Prisma.CursoUncheckedUpdateManyWithoutResponsavelNestedInput
   cursosAutorizados?: Prisma.CursoUncheckedUpdateManyWithoutAdminAutorizadorNestedInput
   sessoesResponsavel?: Prisma.SessaoUncheckedUpdateManyWithoutResponsavelNestedInput
@@ -1273,6 +1306,7 @@ export type UsuarioCreateWithoutCursosResponsavelInput = {
   atualizadoEm?: Date | string
   perfil?: Prisma.PerfilCreateNestedOneWithoutUsuarioInput
   codigosValidacao?: Prisma.CodigoValidacaoCreateNestedManyWithoutUsuarioInput
+  sessoesAutenticacao?: Prisma.SessaoAutenticacaoCreateNestedManyWithoutUsuarioInput
   arquivos?: Prisma.ArquivoCreateNestedManyWithoutUsuarioInput
   cursosAutorizados?: Prisma.CursoCreateNestedManyWithoutAdminAutorizadorInput
   sessoesResponsavel?: Prisma.SessaoCreateNestedManyWithoutResponsavelInput
@@ -1304,6 +1338,7 @@ export type UsuarioUncheckedCreateWithoutCursosResponsavelInput = {
   atualizadoEm?: Date | string
   perfil?: Prisma.PerfilUncheckedCreateNestedOneWithoutUsuarioInput
   codigosValidacao?: Prisma.CodigoValidacaoUncheckedCreateNestedManyWithoutUsuarioInput
+  sessoesAutenticacao?: Prisma.SessaoAutenticacaoUncheckedCreateNestedManyWithoutUsuarioInput
   arquivos?: Prisma.ArquivoUncheckedCreateNestedManyWithoutUsuarioInput
   cursosAutorizados?: Prisma.CursoUncheckedCreateNestedManyWithoutAdminAutorizadorInput
   sessoesResponsavel?: Prisma.SessaoUncheckedCreateNestedManyWithoutResponsavelInput
@@ -1340,6 +1375,7 @@ export type UsuarioCreateWithoutCursosAutorizadosInput = {
   atualizadoEm?: Date | string
   perfil?: Prisma.PerfilCreateNestedOneWithoutUsuarioInput
   codigosValidacao?: Prisma.CodigoValidacaoCreateNestedManyWithoutUsuarioInput
+  sessoesAutenticacao?: Prisma.SessaoAutenticacaoCreateNestedManyWithoutUsuarioInput
   arquivos?: Prisma.ArquivoCreateNestedManyWithoutUsuarioInput
   cursosResponsavel?: Prisma.CursoCreateNestedManyWithoutResponsavelInput
   sessoesResponsavel?: Prisma.SessaoCreateNestedManyWithoutResponsavelInput
@@ -1371,6 +1407,7 @@ export type UsuarioUncheckedCreateWithoutCursosAutorizadosInput = {
   atualizadoEm?: Date | string
   perfil?: Prisma.PerfilUncheckedCreateNestedOneWithoutUsuarioInput
   codigosValidacao?: Prisma.CodigoValidacaoUncheckedCreateNestedManyWithoutUsuarioInput
+  sessoesAutenticacao?: Prisma.SessaoAutenticacaoUncheckedCreateNestedManyWithoutUsuarioInput
   arquivos?: Prisma.ArquivoUncheckedCreateNestedManyWithoutUsuarioInput
   cursosResponsavel?: Prisma.CursoUncheckedCreateNestedManyWithoutResponsavelInput
   sessoesResponsavel?: Prisma.SessaoUncheckedCreateNestedManyWithoutResponsavelInput
@@ -1418,6 +1455,7 @@ export type UsuarioUpdateWithoutCursosResponsavelInput = {
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   perfil?: Prisma.PerfilUpdateOneWithoutUsuarioNestedInput
   codigosValidacao?: Prisma.CodigoValidacaoUpdateManyWithoutUsuarioNestedInput
+  sessoesAutenticacao?: Prisma.SessaoAutenticacaoUpdateManyWithoutUsuarioNestedInput
   arquivos?: Prisma.ArquivoUpdateManyWithoutUsuarioNestedInput
   cursosAutorizados?: Prisma.CursoUpdateManyWithoutAdminAutorizadorNestedInput
   sessoesResponsavel?: Prisma.SessaoUpdateManyWithoutResponsavelNestedInput
@@ -1449,6 +1487,7 @@ export type UsuarioUncheckedUpdateWithoutCursosResponsavelInput = {
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   perfil?: Prisma.PerfilUncheckedUpdateOneWithoutUsuarioNestedInput
   codigosValidacao?: Prisma.CodigoValidacaoUncheckedUpdateManyWithoutUsuarioNestedInput
+  sessoesAutenticacao?: Prisma.SessaoAutenticacaoUncheckedUpdateManyWithoutUsuarioNestedInput
   arquivos?: Prisma.ArquivoUncheckedUpdateManyWithoutUsuarioNestedInput
   cursosAutorizados?: Prisma.CursoUncheckedUpdateManyWithoutAdminAutorizadorNestedInput
   sessoesResponsavel?: Prisma.SessaoUncheckedUpdateManyWithoutResponsavelNestedInput
@@ -1491,6 +1530,7 @@ export type UsuarioUpdateWithoutCursosAutorizadosInput = {
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   perfil?: Prisma.PerfilUpdateOneWithoutUsuarioNestedInput
   codigosValidacao?: Prisma.CodigoValidacaoUpdateManyWithoutUsuarioNestedInput
+  sessoesAutenticacao?: Prisma.SessaoAutenticacaoUpdateManyWithoutUsuarioNestedInput
   arquivos?: Prisma.ArquivoUpdateManyWithoutUsuarioNestedInput
   cursosResponsavel?: Prisma.CursoUpdateManyWithoutResponsavelNestedInput
   sessoesResponsavel?: Prisma.SessaoUpdateManyWithoutResponsavelNestedInput
@@ -1522,6 +1562,7 @@ export type UsuarioUncheckedUpdateWithoutCursosAutorizadosInput = {
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   perfil?: Prisma.PerfilUncheckedUpdateOneWithoutUsuarioNestedInput
   codigosValidacao?: Prisma.CodigoValidacaoUncheckedUpdateManyWithoutUsuarioNestedInput
+  sessoesAutenticacao?: Prisma.SessaoAutenticacaoUncheckedUpdateManyWithoutUsuarioNestedInput
   arquivos?: Prisma.ArquivoUncheckedUpdateManyWithoutUsuarioNestedInput
   cursosResponsavel?: Prisma.CursoUncheckedUpdateManyWithoutResponsavelNestedInput
   sessoesResponsavel?: Prisma.SessaoUncheckedUpdateManyWithoutResponsavelNestedInput
@@ -1553,6 +1594,7 @@ export type UsuarioCreateWithoutSessoesResponsavelInput = {
   atualizadoEm?: Date | string
   perfil?: Prisma.PerfilCreateNestedOneWithoutUsuarioInput
   codigosValidacao?: Prisma.CodigoValidacaoCreateNestedManyWithoutUsuarioInput
+  sessoesAutenticacao?: Prisma.SessaoAutenticacaoCreateNestedManyWithoutUsuarioInput
   arquivos?: Prisma.ArquivoCreateNestedManyWithoutUsuarioInput
   cursosResponsavel?: Prisma.CursoCreateNestedManyWithoutResponsavelInput
   cursosAutorizados?: Prisma.CursoCreateNestedManyWithoutAdminAutorizadorInput
@@ -1584,6 +1626,7 @@ export type UsuarioUncheckedCreateWithoutSessoesResponsavelInput = {
   atualizadoEm?: Date | string
   perfil?: Prisma.PerfilUncheckedCreateNestedOneWithoutUsuarioInput
   codigosValidacao?: Prisma.CodigoValidacaoUncheckedCreateNestedManyWithoutUsuarioInput
+  sessoesAutenticacao?: Prisma.SessaoAutenticacaoUncheckedCreateNestedManyWithoutUsuarioInput
   arquivos?: Prisma.ArquivoUncheckedCreateNestedManyWithoutUsuarioInput
   cursosResponsavel?: Prisma.CursoUncheckedCreateNestedManyWithoutResponsavelInput
   cursosAutorizados?: Prisma.CursoUncheckedCreateNestedManyWithoutAdminAutorizadorInput
@@ -1631,6 +1674,7 @@ export type UsuarioUpdateWithoutSessoesResponsavelInput = {
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   perfil?: Prisma.PerfilUpdateOneWithoutUsuarioNestedInput
   codigosValidacao?: Prisma.CodigoValidacaoUpdateManyWithoutUsuarioNestedInput
+  sessoesAutenticacao?: Prisma.SessaoAutenticacaoUpdateManyWithoutUsuarioNestedInput
   arquivos?: Prisma.ArquivoUpdateManyWithoutUsuarioNestedInput
   cursosResponsavel?: Prisma.CursoUpdateManyWithoutResponsavelNestedInput
   cursosAutorizados?: Prisma.CursoUpdateManyWithoutAdminAutorizadorNestedInput
@@ -1662,6 +1706,7 @@ export type UsuarioUncheckedUpdateWithoutSessoesResponsavelInput = {
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   perfil?: Prisma.PerfilUncheckedUpdateOneWithoutUsuarioNestedInput
   codigosValidacao?: Prisma.CodigoValidacaoUncheckedUpdateManyWithoutUsuarioNestedInput
+  sessoesAutenticacao?: Prisma.SessaoAutenticacaoUncheckedUpdateManyWithoutUsuarioNestedInput
   arquivos?: Prisma.ArquivoUncheckedUpdateManyWithoutUsuarioNestedInput
   cursosResponsavel?: Prisma.CursoUncheckedUpdateManyWithoutResponsavelNestedInput
   cursosAutorizados?: Prisma.CursoUncheckedUpdateManyWithoutAdminAutorizadorNestedInput
@@ -1693,6 +1738,7 @@ export type UsuarioCreateWithoutModulosResponsavelInput = {
   atualizadoEm?: Date | string
   perfil?: Prisma.PerfilCreateNestedOneWithoutUsuarioInput
   codigosValidacao?: Prisma.CodigoValidacaoCreateNestedManyWithoutUsuarioInput
+  sessoesAutenticacao?: Prisma.SessaoAutenticacaoCreateNestedManyWithoutUsuarioInput
   arquivos?: Prisma.ArquivoCreateNestedManyWithoutUsuarioInput
   cursosResponsavel?: Prisma.CursoCreateNestedManyWithoutResponsavelInput
   cursosAutorizados?: Prisma.CursoCreateNestedManyWithoutAdminAutorizadorInput
@@ -1724,6 +1770,7 @@ export type UsuarioUncheckedCreateWithoutModulosResponsavelInput = {
   atualizadoEm?: Date | string
   perfil?: Prisma.PerfilUncheckedCreateNestedOneWithoutUsuarioInput
   codigosValidacao?: Prisma.CodigoValidacaoUncheckedCreateNestedManyWithoutUsuarioInput
+  sessoesAutenticacao?: Prisma.SessaoAutenticacaoUncheckedCreateNestedManyWithoutUsuarioInput
   arquivos?: Prisma.ArquivoUncheckedCreateNestedManyWithoutUsuarioInput
   cursosResponsavel?: Prisma.CursoUncheckedCreateNestedManyWithoutResponsavelInput
   cursosAutorizados?: Prisma.CursoUncheckedCreateNestedManyWithoutAdminAutorizadorInput
@@ -1771,6 +1818,7 @@ export type UsuarioUpdateWithoutModulosResponsavelInput = {
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   perfil?: Prisma.PerfilUpdateOneWithoutUsuarioNestedInput
   codigosValidacao?: Prisma.CodigoValidacaoUpdateManyWithoutUsuarioNestedInput
+  sessoesAutenticacao?: Prisma.SessaoAutenticacaoUpdateManyWithoutUsuarioNestedInput
   arquivos?: Prisma.ArquivoUpdateManyWithoutUsuarioNestedInput
   cursosResponsavel?: Prisma.CursoUpdateManyWithoutResponsavelNestedInput
   cursosAutorizados?: Prisma.CursoUpdateManyWithoutAdminAutorizadorNestedInput
@@ -1802,6 +1850,7 @@ export type UsuarioUncheckedUpdateWithoutModulosResponsavelInput = {
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   perfil?: Prisma.PerfilUncheckedUpdateOneWithoutUsuarioNestedInput
   codigosValidacao?: Prisma.CodigoValidacaoUncheckedUpdateManyWithoutUsuarioNestedInput
+  sessoesAutenticacao?: Prisma.SessaoAutenticacaoUncheckedUpdateManyWithoutUsuarioNestedInput
   arquivos?: Prisma.ArquivoUncheckedUpdateManyWithoutUsuarioNestedInput
   cursosResponsavel?: Prisma.CursoUncheckedUpdateManyWithoutResponsavelNestedInput
   cursosAutorizados?: Prisma.CursoUncheckedUpdateManyWithoutAdminAutorizadorNestedInput
@@ -1833,6 +1882,7 @@ export type UsuarioCreateWithoutAulasResponsavelInput = {
   atualizadoEm?: Date | string
   perfil?: Prisma.PerfilCreateNestedOneWithoutUsuarioInput
   codigosValidacao?: Prisma.CodigoValidacaoCreateNestedManyWithoutUsuarioInput
+  sessoesAutenticacao?: Prisma.SessaoAutenticacaoCreateNestedManyWithoutUsuarioInput
   arquivos?: Prisma.ArquivoCreateNestedManyWithoutUsuarioInput
   cursosResponsavel?: Prisma.CursoCreateNestedManyWithoutResponsavelInput
   cursosAutorizados?: Prisma.CursoCreateNestedManyWithoutAdminAutorizadorInput
@@ -1864,6 +1914,7 @@ export type UsuarioUncheckedCreateWithoutAulasResponsavelInput = {
   atualizadoEm?: Date | string
   perfil?: Prisma.PerfilUncheckedCreateNestedOneWithoutUsuarioInput
   codigosValidacao?: Prisma.CodigoValidacaoUncheckedCreateNestedManyWithoutUsuarioInput
+  sessoesAutenticacao?: Prisma.SessaoAutenticacaoUncheckedCreateNestedManyWithoutUsuarioInput
   arquivos?: Prisma.ArquivoUncheckedCreateNestedManyWithoutUsuarioInput
   cursosResponsavel?: Prisma.CursoUncheckedCreateNestedManyWithoutResponsavelInput
   cursosAutorizados?: Prisma.CursoUncheckedCreateNestedManyWithoutAdminAutorizadorInput
@@ -1911,6 +1962,7 @@ export type UsuarioUpdateWithoutAulasResponsavelInput = {
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   perfil?: Prisma.PerfilUpdateOneWithoutUsuarioNestedInput
   codigosValidacao?: Prisma.CodigoValidacaoUpdateManyWithoutUsuarioNestedInput
+  sessoesAutenticacao?: Prisma.SessaoAutenticacaoUpdateManyWithoutUsuarioNestedInput
   arquivos?: Prisma.ArquivoUpdateManyWithoutUsuarioNestedInput
   cursosResponsavel?: Prisma.CursoUpdateManyWithoutResponsavelNestedInput
   cursosAutorizados?: Prisma.CursoUpdateManyWithoutAdminAutorizadorNestedInput
@@ -1942,6 +1994,7 @@ export type UsuarioUncheckedUpdateWithoutAulasResponsavelInput = {
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   perfil?: Prisma.PerfilUncheckedUpdateOneWithoutUsuarioNestedInput
   codigosValidacao?: Prisma.CodigoValidacaoUncheckedUpdateManyWithoutUsuarioNestedInput
+  sessoesAutenticacao?: Prisma.SessaoAutenticacaoUncheckedUpdateManyWithoutUsuarioNestedInput
   arquivos?: Prisma.ArquivoUncheckedUpdateManyWithoutUsuarioNestedInput
   cursosResponsavel?: Prisma.CursoUncheckedUpdateManyWithoutResponsavelNestedInput
   cursosAutorizados?: Prisma.CursoUncheckedUpdateManyWithoutAdminAutorizadorNestedInput
@@ -1973,6 +2026,7 @@ export type UsuarioCreateWithoutTestesResponsavelInput = {
   atualizadoEm?: Date | string
   perfil?: Prisma.PerfilCreateNestedOneWithoutUsuarioInput
   codigosValidacao?: Prisma.CodigoValidacaoCreateNestedManyWithoutUsuarioInput
+  sessoesAutenticacao?: Prisma.SessaoAutenticacaoCreateNestedManyWithoutUsuarioInput
   arquivos?: Prisma.ArquivoCreateNestedManyWithoutUsuarioInput
   cursosResponsavel?: Prisma.CursoCreateNestedManyWithoutResponsavelInput
   cursosAutorizados?: Prisma.CursoCreateNestedManyWithoutAdminAutorizadorInput
@@ -2004,6 +2058,7 @@ export type UsuarioUncheckedCreateWithoutTestesResponsavelInput = {
   atualizadoEm?: Date | string
   perfil?: Prisma.PerfilUncheckedCreateNestedOneWithoutUsuarioInput
   codigosValidacao?: Prisma.CodigoValidacaoUncheckedCreateNestedManyWithoutUsuarioInput
+  sessoesAutenticacao?: Prisma.SessaoAutenticacaoUncheckedCreateNestedManyWithoutUsuarioInput
   arquivos?: Prisma.ArquivoUncheckedCreateNestedManyWithoutUsuarioInput
   cursosResponsavel?: Prisma.CursoUncheckedCreateNestedManyWithoutResponsavelInput
   cursosAutorizados?: Prisma.CursoUncheckedCreateNestedManyWithoutAdminAutorizadorInput
@@ -2051,6 +2106,7 @@ export type UsuarioUpdateWithoutTestesResponsavelInput = {
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   perfil?: Prisma.PerfilUpdateOneWithoutUsuarioNestedInput
   codigosValidacao?: Prisma.CodigoValidacaoUpdateManyWithoutUsuarioNestedInput
+  sessoesAutenticacao?: Prisma.SessaoAutenticacaoUpdateManyWithoutUsuarioNestedInput
   arquivos?: Prisma.ArquivoUpdateManyWithoutUsuarioNestedInput
   cursosResponsavel?: Prisma.CursoUpdateManyWithoutResponsavelNestedInput
   cursosAutorizados?: Prisma.CursoUpdateManyWithoutAdminAutorizadorNestedInput
@@ -2082,6 +2138,7 @@ export type UsuarioUncheckedUpdateWithoutTestesResponsavelInput = {
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   perfil?: Prisma.PerfilUncheckedUpdateOneWithoutUsuarioNestedInput
   codigosValidacao?: Prisma.CodigoValidacaoUncheckedUpdateManyWithoutUsuarioNestedInput
+  sessoesAutenticacao?: Prisma.SessaoAutenticacaoUncheckedUpdateManyWithoutUsuarioNestedInput
   arquivos?: Prisma.ArquivoUncheckedUpdateManyWithoutUsuarioNestedInput
   cursosResponsavel?: Prisma.CursoUncheckedUpdateManyWithoutResponsavelNestedInput
   cursosAutorizados?: Prisma.CursoUncheckedUpdateManyWithoutAdminAutorizadorNestedInput
@@ -2113,6 +2170,7 @@ export type UsuarioCreateWithoutQuestoesResponsavelInput = {
   atualizadoEm?: Date | string
   perfil?: Prisma.PerfilCreateNestedOneWithoutUsuarioInput
   codigosValidacao?: Prisma.CodigoValidacaoCreateNestedManyWithoutUsuarioInput
+  sessoesAutenticacao?: Prisma.SessaoAutenticacaoCreateNestedManyWithoutUsuarioInput
   arquivos?: Prisma.ArquivoCreateNestedManyWithoutUsuarioInput
   cursosResponsavel?: Prisma.CursoCreateNestedManyWithoutResponsavelInput
   cursosAutorizados?: Prisma.CursoCreateNestedManyWithoutAdminAutorizadorInput
@@ -2144,6 +2202,7 @@ export type UsuarioUncheckedCreateWithoutQuestoesResponsavelInput = {
   atualizadoEm?: Date | string
   perfil?: Prisma.PerfilUncheckedCreateNestedOneWithoutUsuarioInput
   codigosValidacao?: Prisma.CodigoValidacaoUncheckedCreateNestedManyWithoutUsuarioInput
+  sessoesAutenticacao?: Prisma.SessaoAutenticacaoUncheckedCreateNestedManyWithoutUsuarioInput
   arquivos?: Prisma.ArquivoUncheckedCreateNestedManyWithoutUsuarioInput
   cursosResponsavel?: Prisma.CursoUncheckedCreateNestedManyWithoutResponsavelInput
   cursosAutorizados?: Prisma.CursoUncheckedCreateNestedManyWithoutAdminAutorizadorInput
@@ -2191,6 +2250,7 @@ export type UsuarioUpdateWithoutQuestoesResponsavelInput = {
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   perfil?: Prisma.PerfilUpdateOneWithoutUsuarioNestedInput
   codigosValidacao?: Prisma.CodigoValidacaoUpdateManyWithoutUsuarioNestedInput
+  sessoesAutenticacao?: Prisma.SessaoAutenticacaoUpdateManyWithoutUsuarioNestedInput
   arquivos?: Prisma.ArquivoUpdateManyWithoutUsuarioNestedInput
   cursosResponsavel?: Prisma.CursoUpdateManyWithoutResponsavelNestedInput
   cursosAutorizados?: Prisma.CursoUpdateManyWithoutAdminAutorizadorNestedInput
@@ -2222,6 +2282,7 @@ export type UsuarioUncheckedUpdateWithoutQuestoesResponsavelInput = {
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   perfil?: Prisma.PerfilUncheckedUpdateOneWithoutUsuarioNestedInput
   codigosValidacao?: Prisma.CodigoValidacaoUncheckedUpdateManyWithoutUsuarioNestedInput
+  sessoesAutenticacao?: Prisma.SessaoAutenticacaoUncheckedUpdateManyWithoutUsuarioNestedInput
   arquivos?: Prisma.ArquivoUncheckedUpdateManyWithoutUsuarioNestedInput
   cursosResponsavel?: Prisma.CursoUncheckedUpdateManyWithoutResponsavelNestedInput
   cursosAutorizados?: Prisma.CursoUncheckedUpdateManyWithoutAdminAutorizadorNestedInput
@@ -2253,6 +2314,7 @@ export type UsuarioCreateWithoutAlternativasResponsavelInput = {
   atualizadoEm?: Date | string
   perfil?: Prisma.PerfilCreateNestedOneWithoutUsuarioInput
   codigosValidacao?: Prisma.CodigoValidacaoCreateNestedManyWithoutUsuarioInput
+  sessoesAutenticacao?: Prisma.SessaoAutenticacaoCreateNestedManyWithoutUsuarioInput
   arquivos?: Prisma.ArquivoCreateNestedManyWithoutUsuarioInput
   cursosResponsavel?: Prisma.CursoCreateNestedManyWithoutResponsavelInput
   cursosAutorizados?: Prisma.CursoCreateNestedManyWithoutAdminAutorizadorInput
@@ -2284,6 +2346,7 @@ export type UsuarioUncheckedCreateWithoutAlternativasResponsavelInput = {
   atualizadoEm?: Date | string
   perfil?: Prisma.PerfilUncheckedCreateNestedOneWithoutUsuarioInput
   codigosValidacao?: Prisma.CodigoValidacaoUncheckedCreateNestedManyWithoutUsuarioInput
+  sessoesAutenticacao?: Prisma.SessaoAutenticacaoUncheckedCreateNestedManyWithoutUsuarioInput
   arquivos?: Prisma.ArquivoUncheckedCreateNestedManyWithoutUsuarioInput
   cursosResponsavel?: Prisma.CursoUncheckedCreateNestedManyWithoutResponsavelInput
   cursosAutorizados?: Prisma.CursoUncheckedCreateNestedManyWithoutAdminAutorizadorInput
@@ -2331,6 +2394,7 @@ export type UsuarioUpdateWithoutAlternativasResponsavelInput = {
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   perfil?: Prisma.PerfilUpdateOneWithoutUsuarioNestedInput
   codigosValidacao?: Prisma.CodigoValidacaoUpdateManyWithoutUsuarioNestedInput
+  sessoesAutenticacao?: Prisma.SessaoAutenticacaoUpdateManyWithoutUsuarioNestedInput
   arquivos?: Prisma.ArquivoUpdateManyWithoutUsuarioNestedInput
   cursosResponsavel?: Prisma.CursoUpdateManyWithoutResponsavelNestedInput
   cursosAutorizados?: Prisma.CursoUpdateManyWithoutAdminAutorizadorNestedInput
@@ -2362,6 +2426,7 @@ export type UsuarioUncheckedUpdateWithoutAlternativasResponsavelInput = {
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   perfil?: Prisma.PerfilUncheckedUpdateOneWithoutUsuarioNestedInput
   codigosValidacao?: Prisma.CodigoValidacaoUncheckedUpdateManyWithoutUsuarioNestedInput
+  sessoesAutenticacao?: Prisma.SessaoAutenticacaoUncheckedUpdateManyWithoutUsuarioNestedInput
   arquivos?: Prisma.ArquivoUncheckedUpdateManyWithoutUsuarioNestedInput
   cursosResponsavel?: Prisma.CursoUncheckedUpdateManyWithoutResponsavelNestedInput
   cursosAutorizados?: Prisma.CursoUncheckedUpdateManyWithoutAdminAutorizadorNestedInput
@@ -2393,6 +2458,7 @@ export type UsuarioCreateWithoutTestesQuestoesResponsavelInput = {
   atualizadoEm?: Date | string
   perfil?: Prisma.PerfilCreateNestedOneWithoutUsuarioInput
   codigosValidacao?: Prisma.CodigoValidacaoCreateNestedManyWithoutUsuarioInput
+  sessoesAutenticacao?: Prisma.SessaoAutenticacaoCreateNestedManyWithoutUsuarioInput
   arquivos?: Prisma.ArquivoCreateNestedManyWithoutUsuarioInput
   cursosResponsavel?: Prisma.CursoCreateNestedManyWithoutResponsavelInput
   cursosAutorizados?: Prisma.CursoCreateNestedManyWithoutAdminAutorizadorInput
@@ -2424,6 +2490,7 @@ export type UsuarioUncheckedCreateWithoutTestesQuestoesResponsavelInput = {
   atualizadoEm?: Date | string
   perfil?: Prisma.PerfilUncheckedCreateNestedOneWithoutUsuarioInput
   codigosValidacao?: Prisma.CodigoValidacaoUncheckedCreateNestedManyWithoutUsuarioInput
+  sessoesAutenticacao?: Prisma.SessaoAutenticacaoUncheckedCreateNestedManyWithoutUsuarioInput
   arquivos?: Prisma.ArquivoUncheckedCreateNestedManyWithoutUsuarioInput
   cursosResponsavel?: Prisma.CursoUncheckedCreateNestedManyWithoutResponsavelInput
   cursosAutorizados?: Prisma.CursoUncheckedCreateNestedManyWithoutAdminAutorizadorInput
@@ -2471,6 +2538,7 @@ export type UsuarioUpdateWithoutTestesQuestoesResponsavelInput = {
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   perfil?: Prisma.PerfilUpdateOneWithoutUsuarioNestedInput
   codigosValidacao?: Prisma.CodigoValidacaoUpdateManyWithoutUsuarioNestedInput
+  sessoesAutenticacao?: Prisma.SessaoAutenticacaoUpdateManyWithoutUsuarioNestedInput
   arquivos?: Prisma.ArquivoUpdateManyWithoutUsuarioNestedInput
   cursosResponsavel?: Prisma.CursoUpdateManyWithoutResponsavelNestedInput
   cursosAutorizados?: Prisma.CursoUpdateManyWithoutAdminAutorizadorNestedInput
@@ -2502,6 +2570,7 @@ export type UsuarioUncheckedUpdateWithoutTestesQuestoesResponsavelInput = {
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   perfil?: Prisma.PerfilUncheckedUpdateOneWithoutUsuarioNestedInput
   codigosValidacao?: Prisma.CodigoValidacaoUncheckedUpdateManyWithoutUsuarioNestedInput
+  sessoesAutenticacao?: Prisma.SessaoAutenticacaoUncheckedUpdateManyWithoutUsuarioNestedInput
   arquivos?: Prisma.ArquivoUncheckedUpdateManyWithoutUsuarioNestedInput
   cursosResponsavel?: Prisma.CursoUncheckedUpdateManyWithoutResponsavelNestedInput
   cursosAutorizados?: Prisma.CursoUncheckedUpdateManyWithoutAdminAutorizadorNestedInput
@@ -2533,6 +2602,7 @@ export type UsuarioCreateWithoutTentativasTesteInput = {
   atualizadoEm?: Date | string
   perfil?: Prisma.PerfilCreateNestedOneWithoutUsuarioInput
   codigosValidacao?: Prisma.CodigoValidacaoCreateNestedManyWithoutUsuarioInput
+  sessoesAutenticacao?: Prisma.SessaoAutenticacaoCreateNestedManyWithoutUsuarioInput
   arquivos?: Prisma.ArquivoCreateNestedManyWithoutUsuarioInput
   cursosResponsavel?: Prisma.CursoCreateNestedManyWithoutResponsavelInput
   cursosAutorizados?: Prisma.CursoCreateNestedManyWithoutAdminAutorizadorInput
@@ -2564,6 +2634,7 @@ export type UsuarioUncheckedCreateWithoutTentativasTesteInput = {
   atualizadoEm?: Date | string
   perfil?: Prisma.PerfilUncheckedCreateNestedOneWithoutUsuarioInput
   codigosValidacao?: Prisma.CodigoValidacaoUncheckedCreateNestedManyWithoutUsuarioInput
+  sessoesAutenticacao?: Prisma.SessaoAutenticacaoUncheckedCreateNestedManyWithoutUsuarioInput
   arquivos?: Prisma.ArquivoUncheckedCreateNestedManyWithoutUsuarioInput
   cursosResponsavel?: Prisma.CursoUncheckedCreateNestedManyWithoutResponsavelInput
   cursosAutorizados?: Prisma.CursoUncheckedCreateNestedManyWithoutAdminAutorizadorInput
@@ -2611,6 +2682,7 @@ export type UsuarioUpdateWithoutTentativasTesteInput = {
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   perfil?: Prisma.PerfilUpdateOneWithoutUsuarioNestedInput
   codigosValidacao?: Prisma.CodigoValidacaoUpdateManyWithoutUsuarioNestedInput
+  sessoesAutenticacao?: Prisma.SessaoAutenticacaoUpdateManyWithoutUsuarioNestedInput
   arquivos?: Prisma.ArquivoUpdateManyWithoutUsuarioNestedInput
   cursosResponsavel?: Prisma.CursoUpdateManyWithoutResponsavelNestedInput
   cursosAutorizados?: Prisma.CursoUpdateManyWithoutAdminAutorizadorNestedInput
@@ -2642,6 +2714,7 @@ export type UsuarioUncheckedUpdateWithoutTentativasTesteInput = {
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   perfil?: Prisma.PerfilUncheckedUpdateOneWithoutUsuarioNestedInput
   codigosValidacao?: Prisma.CodigoValidacaoUncheckedUpdateManyWithoutUsuarioNestedInput
+  sessoesAutenticacao?: Prisma.SessaoAutenticacaoUncheckedUpdateManyWithoutUsuarioNestedInput
   arquivos?: Prisma.ArquivoUncheckedUpdateManyWithoutUsuarioNestedInput
   cursosResponsavel?: Prisma.CursoUncheckedUpdateManyWithoutResponsavelNestedInput
   cursosAutorizados?: Prisma.CursoUncheckedUpdateManyWithoutAdminAutorizadorNestedInput
@@ -2673,6 +2746,7 @@ export type UsuarioCreateWithoutTentativasQuestoesInput = {
   atualizadoEm?: Date | string
   perfil?: Prisma.PerfilCreateNestedOneWithoutUsuarioInput
   codigosValidacao?: Prisma.CodigoValidacaoCreateNestedManyWithoutUsuarioInput
+  sessoesAutenticacao?: Prisma.SessaoAutenticacaoCreateNestedManyWithoutUsuarioInput
   arquivos?: Prisma.ArquivoCreateNestedManyWithoutUsuarioInput
   cursosResponsavel?: Prisma.CursoCreateNestedManyWithoutResponsavelInput
   cursosAutorizados?: Prisma.CursoCreateNestedManyWithoutAdminAutorizadorInput
@@ -2704,6 +2778,7 @@ export type UsuarioUncheckedCreateWithoutTentativasQuestoesInput = {
   atualizadoEm?: Date | string
   perfil?: Prisma.PerfilUncheckedCreateNestedOneWithoutUsuarioInput
   codigosValidacao?: Prisma.CodigoValidacaoUncheckedCreateNestedManyWithoutUsuarioInput
+  sessoesAutenticacao?: Prisma.SessaoAutenticacaoUncheckedCreateNestedManyWithoutUsuarioInput
   arquivos?: Prisma.ArquivoUncheckedCreateNestedManyWithoutUsuarioInput
   cursosResponsavel?: Prisma.CursoUncheckedCreateNestedManyWithoutResponsavelInput
   cursosAutorizados?: Prisma.CursoUncheckedCreateNestedManyWithoutAdminAutorizadorInput
@@ -2751,6 +2826,7 @@ export type UsuarioUpdateWithoutTentativasQuestoesInput = {
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   perfil?: Prisma.PerfilUpdateOneWithoutUsuarioNestedInput
   codigosValidacao?: Prisma.CodigoValidacaoUpdateManyWithoutUsuarioNestedInput
+  sessoesAutenticacao?: Prisma.SessaoAutenticacaoUpdateManyWithoutUsuarioNestedInput
   arquivos?: Prisma.ArquivoUpdateManyWithoutUsuarioNestedInput
   cursosResponsavel?: Prisma.CursoUpdateManyWithoutResponsavelNestedInput
   cursosAutorizados?: Prisma.CursoUpdateManyWithoutAdminAutorizadorNestedInput
@@ -2782,6 +2858,7 @@ export type UsuarioUncheckedUpdateWithoutTentativasQuestoesInput = {
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   perfil?: Prisma.PerfilUncheckedUpdateOneWithoutUsuarioNestedInput
   codigosValidacao?: Prisma.CodigoValidacaoUncheckedUpdateManyWithoutUsuarioNestedInput
+  sessoesAutenticacao?: Prisma.SessaoAutenticacaoUncheckedUpdateManyWithoutUsuarioNestedInput
   arquivos?: Prisma.ArquivoUncheckedUpdateManyWithoutUsuarioNestedInput
   cursosResponsavel?: Prisma.CursoUncheckedUpdateManyWithoutResponsavelNestedInput
   cursosAutorizados?: Prisma.CursoUncheckedUpdateManyWithoutAdminAutorizadorNestedInput
@@ -2813,6 +2890,7 @@ export type UsuarioCreateWithoutInscricoesInput = {
   atualizadoEm?: Date | string
   perfil?: Prisma.PerfilCreateNestedOneWithoutUsuarioInput
   codigosValidacao?: Prisma.CodigoValidacaoCreateNestedManyWithoutUsuarioInput
+  sessoesAutenticacao?: Prisma.SessaoAutenticacaoCreateNestedManyWithoutUsuarioInput
   arquivos?: Prisma.ArquivoCreateNestedManyWithoutUsuarioInput
   cursosResponsavel?: Prisma.CursoCreateNestedManyWithoutResponsavelInput
   cursosAutorizados?: Prisma.CursoCreateNestedManyWithoutAdminAutorizadorInput
@@ -2844,6 +2922,7 @@ export type UsuarioUncheckedCreateWithoutInscricoesInput = {
   atualizadoEm?: Date | string
   perfil?: Prisma.PerfilUncheckedCreateNestedOneWithoutUsuarioInput
   codigosValidacao?: Prisma.CodigoValidacaoUncheckedCreateNestedManyWithoutUsuarioInput
+  sessoesAutenticacao?: Prisma.SessaoAutenticacaoUncheckedCreateNestedManyWithoutUsuarioInput
   arquivos?: Prisma.ArquivoUncheckedCreateNestedManyWithoutUsuarioInput
   cursosResponsavel?: Prisma.CursoUncheckedCreateNestedManyWithoutResponsavelInput
   cursosAutorizados?: Prisma.CursoUncheckedCreateNestedManyWithoutAdminAutorizadorInput
@@ -2891,6 +2970,7 @@ export type UsuarioUpdateWithoutInscricoesInput = {
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   perfil?: Prisma.PerfilUpdateOneWithoutUsuarioNestedInput
   codigosValidacao?: Prisma.CodigoValidacaoUpdateManyWithoutUsuarioNestedInput
+  sessoesAutenticacao?: Prisma.SessaoAutenticacaoUpdateManyWithoutUsuarioNestedInput
   arquivos?: Prisma.ArquivoUpdateManyWithoutUsuarioNestedInput
   cursosResponsavel?: Prisma.CursoUpdateManyWithoutResponsavelNestedInput
   cursosAutorizados?: Prisma.CursoUpdateManyWithoutAdminAutorizadorNestedInput
@@ -2922,6 +3002,7 @@ export type UsuarioUncheckedUpdateWithoutInscricoesInput = {
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   perfil?: Prisma.PerfilUncheckedUpdateOneWithoutUsuarioNestedInput
   codigosValidacao?: Prisma.CodigoValidacaoUncheckedUpdateManyWithoutUsuarioNestedInput
+  sessoesAutenticacao?: Prisma.SessaoAutenticacaoUncheckedUpdateManyWithoutUsuarioNestedInput
   arquivos?: Prisma.ArquivoUncheckedUpdateManyWithoutUsuarioNestedInput
   cursosResponsavel?: Prisma.CursoUncheckedUpdateManyWithoutResponsavelNestedInput
   cursosAutorizados?: Prisma.CursoUncheckedUpdateManyWithoutAdminAutorizadorNestedInput
@@ -2953,6 +3034,7 @@ export type UsuarioCreateWithoutCursosComoProfessorInput = {
   atualizadoEm?: Date | string
   perfil?: Prisma.PerfilCreateNestedOneWithoutUsuarioInput
   codigosValidacao?: Prisma.CodigoValidacaoCreateNestedManyWithoutUsuarioInput
+  sessoesAutenticacao?: Prisma.SessaoAutenticacaoCreateNestedManyWithoutUsuarioInput
   arquivos?: Prisma.ArquivoCreateNestedManyWithoutUsuarioInput
   cursosResponsavel?: Prisma.CursoCreateNestedManyWithoutResponsavelInput
   cursosAutorizados?: Prisma.CursoCreateNestedManyWithoutAdminAutorizadorInput
@@ -2984,6 +3066,7 @@ export type UsuarioUncheckedCreateWithoutCursosComoProfessorInput = {
   atualizadoEm?: Date | string
   perfil?: Prisma.PerfilUncheckedCreateNestedOneWithoutUsuarioInput
   codigosValidacao?: Prisma.CodigoValidacaoUncheckedCreateNestedManyWithoutUsuarioInput
+  sessoesAutenticacao?: Prisma.SessaoAutenticacaoUncheckedCreateNestedManyWithoutUsuarioInput
   arquivos?: Prisma.ArquivoUncheckedCreateNestedManyWithoutUsuarioInput
   cursosResponsavel?: Prisma.CursoUncheckedCreateNestedManyWithoutResponsavelInput
   cursosAutorizados?: Prisma.CursoUncheckedCreateNestedManyWithoutAdminAutorizadorInput
@@ -3020,6 +3103,7 @@ export type UsuarioCreateWithoutVinculosProfessorCriadosInput = {
   atualizadoEm?: Date | string
   perfil?: Prisma.PerfilCreateNestedOneWithoutUsuarioInput
   codigosValidacao?: Prisma.CodigoValidacaoCreateNestedManyWithoutUsuarioInput
+  sessoesAutenticacao?: Prisma.SessaoAutenticacaoCreateNestedManyWithoutUsuarioInput
   arquivos?: Prisma.ArquivoCreateNestedManyWithoutUsuarioInput
   cursosResponsavel?: Prisma.CursoCreateNestedManyWithoutResponsavelInput
   cursosAutorizados?: Prisma.CursoCreateNestedManyWithoutAdminAutorizadorInput
@@ -3051,6 +3135,7 @@ export type UsuarioUncheckedCreateWithoutVinculosProfessorCriadosInput = {
   atualizadoEm?: Date | string
   perfil?: Prisma.PerfilUncheckedCreateNestedOneWithoutUsuarioInput
   codigosValidacao?: Prisma.CodigoValidacaoUncheckedCreateNestedManyWithoutUsuarioInput
+  sessoesAutenticacao?: Prisma.SessaoAutenticacaoUncheckedCreateNestedManyWithoutUsuarioInput
   arquivos?: Prisma.ArquivoUncheckedCreateNestedManyWithoutUsuarioInput
   cursosResponsavel?: Prisma.CursoUncheckedCreateNestedManyWithoutResponsavelInput
   cursosAutorizados?: Prisma.CursoUncheckedCreateNestedManyWithoutAdminAutorizadorInput
@@ -3098,6 +3183,7 @@ export type UsuarioUpdateWithoutCursosComoProfessorInput = {
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   perfil?: Prisma.PerfilUpdateOneWithoutUsuarioNestedInput
   codigosValidacao?: Prisma.CodigoValidacaoUpdateManyWithoutUsuarioNestedInput
+  sessoesAutenticacao?: Prisma.SessaoAutenticacaoUpdateManyWithoutUsuarioNestedInput
   arquivos?: Prisma.ArquivoUpdateManyWithoutUsuarioNestedInput
   cursosResponsavel?: Prisma.CursoUpdateManyWithoutResponsavelNestedInput
   cursosAutorizados?: Prisma.CursoUpdateManyWithoutAdminAutorizadorNestedInput
@@ -3129,6 +3215,7 @@ export type UsuarioUncheckedUpdateWithoutCursosComoProfessorInput = {
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   perfil?: Prisma.PerfilUncheckedUpdateOneWithoutUsuarioNestedInput
   codigosValidacao?: Prisma.CodigoValidacaoUncheckedUpdateManyWithoutUsuarioNestedInput
+  sessoesAutenticacao?: Prisma.SessaoAutenticacaoUncheckedUpdateManyWithoutUsuarioNestedInput
   arquivos?: Prisma.ArquivoUncheckedUpdateManyWithoutUsuarioNestedInput
   cursosResponsavel?: Prisma.CursoUncheckedUpdateManyWithoutResponsavelNestedInput
   cursosAutorizados?: Prisma.CursoUncheckedUpdateManyWithoutAdminAutorizadorNestedInput
@@ -3171,6 +3258,7 @@ export type UsuarioUpdateWithoutVinculosProfessorCriadosInput = {
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   perfil?: Prisma.PerfilUpdateOneWithoutUsuarioNestedInput
   codigosValidacao?: Prisma.CodigoValidacaoUpdateManyWithoutUsuarioNestedInput
+  sessoesAutenticacao?: Prisma.SessaoAutenticacaoUpdateManyWithoutUsuarioNestedInput
   arquivos?: Prisma.ArquivoUpdateManyWithoutUsuarioNestedInput
   cursosResponsavel?: Prisma.CursoUpdateManyWithoutResponsavelNestedInput
   cursosAutorizados?: Prisma.CursoUpdateManyWithoutAdminAutorizadorNestedInput
@@ -3202,6 +3290,7 @@ export type UsuarioUncheckedUpdateWithoutVinculosProfessorCriadosInput = {
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   perfil?: Prisma.PerfilUncheckedUpdateOneWithoutUsuarioNestedInput
   codigosValidacao?: Prisma.CodigoValidacaoUncheckedUpdateManyWithoutUsuarioNestedInput
+  sessoesAutenticacao?: Prisma.SessaoAutenticacaoUncheckedUpdateManyWithoutUsuarioNestedInput
   arquivos?: Prisma.ArquivoUncheckedUpdateManyWithoutUsuarioNestedInput
   cursosResponsavel?: Prisma.CursoUncheckedUpdateManyWithoutResponsavelNestedInput
   cursosAutorizados?: Prisma.CursoUncheckedUpdateManyWithoutAdminAutorizadorNestedInput
@@ -3233,6 +3322,7 @@ export type UsuarioCreateWithoutProgressosInput = {
   atualizadoEm?: Date | string
   perfil?: Prisma.PerfilCreateNestedOneWithoutUsuarioInput
   codigosValidacao?: Prisma.CodigoValidacaoCreateNestedManyWithoutUsuarioInput
+  sessoesAutenticacao?: Prisma.SessaoAutenticacaoCreateNestedManyWithoutUsuarioInput
   arquivos?: Prisma.ArquivoCreateNestedManyWithoutUsuarioInput
   cursosResponsavel?: Prisma.CursoCreateNestedManyWithoutResponsavelInput
   cursosAutorizados?: Prisma.CursoCreateNestedManyWithoutAdminAutorizadorInput
@@ -3264,6 +3354,7 @@ export type UsuarioUncheckedCreateWithoutProgressosInput = {
   atualizadoEm?: Date | string
   perfil?: Prisma.PerfilUncheckedCreateNestedOneWithoutUsuarioInput
   codigosValidacao?: Prisma.CodigoValidacaoUncheckedCreateNestedManyWithoutUsuarioInput
+  sessoesAutenticacao?: Prisma.SessaoAutenticacaoUncheckedCreateNestedManyWithoutUsuarioInput
   arquivos?: Prisma.ArquivoUncheckedCreateNestedManyWithoutUsuarioInput
   cursosResponsavel?: Prisma.CursoUncheckedCreateNestedManyWithoutResponsavelInput
   cursosAutorizados?: Prisma.CursoUncheckedCreateNestedManyWithoutAdminAutorizadorInput
@@ -3311,6 +3402,7 @@ export type UsuarioUpdateWithoutProgressosInput = {
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   perfil?: Prisma.PerfilUpdateOneWithoutUsuarioNestedInput
   codigosValidacao?: Prisma.CodigoValidacaoUpdateManyWithoutUsuarioNestedInput
+  sessoesAutenticacao?: Prisma.SessaoAutenticacaoUpdateManyWithoutUsuarioNestedInput
   arquivos?: Prisma.ArquivoUpdateManyWithoutUsuarioNestedInput
   cursosResponsavel?: Prisma.CursoUpdateManyWithoutResponsavelNestedInput
   cursosAutorizados?: Prisma.CursoUpdateManyWithoutAdminAutorizadorNestedInput
@@ -3342,6 +3434,7 @@ export type UsuarioUncheckedUpdateWithoutProgressosInput = {
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   perfil?: Prisma.PerfilUncheckedUpdateOneWithoutUsuarioNestedInput
   codigosValidacao?: Prisma.CodigoValidacaoUncheckedUpdateManyWithoutUsuarioNestedInput
+  sessoesAutenticacao?: Prisma.SessaoAutenticacaoUncheckedUpdateManyWithoutUsuarioNestedInput
   arquivos?: Prisma.ArquivoUncheckedUpdateManyWithoutUsuarioNestedInput
   cursosResponsavel?: Prisma.CursoUncheckedUpdateManyWithoutResponsavelNestedInput
   cursosAutorizados?: Prisma.CursoUncheckedUpdateManyWithoutAdminAutorizadorNestedInput
@@ -3373,6 +3466,7 @@ export type UsuarioCreateWithoutItensCriadosInput = {
   atualizadoEm?: Date | string
   perfil?: Prisma.PerfilCreateNestedOneWithoutUsuarioInput
   codigosValidacao?: Prisma.CodigoValidacaoCreateNestedManyWithoutUsuarioInput
+  sessoesAutenticacao?: Prisma.SessaoAutenticacaoCreateNestedManyWithoutUsuarioInput
   arquivos?: Prisma.ArquivoCreateNestedManyWithoutUsuarioInput
   cursosResponsavel?: Prisma.CursoCreateNestedManyWithoutResponsavelInput
   cursosAutorizados?: Prisma.CursoCreateNestedManyWithoutAdminAutorizadorInput
@@ -3404,6 +3498,7 @@ export type UsuarioUncheckedCreateWithoutItensCriadosInput = {
   atualizadoEm?: Date | string
   perfil?: Prisma.PerfilUncheckedCreateNestedOneWithoutUsuarioInput
   codigosValidacao?: Prisma.CodigoValidacaoUncheckedCreateNestedManyWithoutUsuarioInput
+  sessoesAutenticacao?: Prisma.SessaoAutenticacaoUncheckedCreateNestedManyWithoutUsuarioInput
   arquivos?: Prisma.ArquivoUncheckedCreateNestedManyWithoutUsuarioInput
   cursosResponsavel?: Prisma.CursoUncheckedCreateNestedManyWithoutResponsavelInput
   cursosAutorizados?: Prisma.CursoUncheckedCreateNestedManyWithoutAdminAutorizadorInput
@@ -3451,6 +3546,7 @@ export type UsuarioUpdateWithoutItensCriadosInput = {
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   perfil?: Prisma.PerfilUpdateOneWithoutUsuarioNestedInput
   codigosValidacao?: Prisma.CodigoValidacaoUpdateManyWithoutUsuarioNestedInput
+  sessoesAutenticacao?: Prisma.SessaoAutenticacaoUpdateManyWithoutUsuarioNestedInput
   arquivos?: Prisma.ArquivoUpdateManyWithoutUsuarioNestedInput
   cursosResponsavel?: Prisma.CursoUpdateManyWithoutResponsavelNestedInput
   cursosAutorizados?: Prisma.CursoUpdateManyWithoutAdminAutorizadorNestedInput
@@ -3482,6 +3578,7 @@ export type UsuarioUncheckedUpdateWithoutItensCriadosInput = {
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   perfil?: Prisma.PerfilUncheckedUpdateOneWithoutUsuarioNestedInput
   codigosValidacao?: Prisma.CodigoValidacaoUncheckedUpdateManyWithoutUsuarioNestedInput
+  sessoesAutenticacao?: Prisma.SessaoAutenticacaoUncheckedUpdateManyWithoutUsuarioNestedInput
   arquivos?: Prisma.ArquivoUncheckedUpdateManyWithoutUsuarioNestedInput
   cursosResponsavel?: Prisma.CursoUncheckedUpdateManyWithoutResponsavelNestedInput
   cursosAutorizados?: Prisma.CursoUncheckedUpdateManyWithoutAdminAutorizadorNestedInput
@@ -3513,6 +3610,7 @@ export type UsuarioCreateWithoutInventarioInput = {
   atualizadoEm?: Date | string
   perfil?: Prisma.PerfilCreateNestedOneWithoutUsuarioInput
   codigosValidacao?: Prisma.CodigoValidacaoCreateNestedManyWithoutUsuarioInput
+  sessoesAutenticacao?: Prisma.SessaoAutenticacaoCreateNestedManyWithoutUsuarioInput
   arquivos?: Prisma.ArquivoCreateNestedManyWithoutUsuarioInput
   cursosResponsavel?: Prisma.CursoCreateNestedManyWithoutResponsavelInput
   cursosAutorizados?: Prisma.CursoCreateNestedManyWithoutAdminAutorizadorInput
@@ -3544,6 +3642,7 @@ export type UsuarioUncheckedCreateWithoutInventarioInput = {
   atualizadoEm?: Date | string
   perfil?: Prisma.PerfilUncheckedCreateNestedOneWithoutUsuarioInput
   codigosValidacao?: Prisma.CodigoValidacaoUncheckedCreateNestedManyWithoutUsuarioInput
+  sessoesAutenticacao?: Prisma.SessaoAutenticacaoUncheckedCreateNestedManyWithoutUsuarioInput
   arquivos?: Prisma.ArquivoUncheckedCreateNestedManyWithoutUsuarioInput
   cursosResponsavel?: Prisma.CursoUncheckedCreateNestedManyWithoutResponsavelInput
   cursosAutorizados?: Prisma.CursoUncheckedCreateNestedManyWithoutAdminAutorizadorInput
@@ -3591,6 +3690,7 @@ export type UsuarioUpdateWithoutInventarioInput = {
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   perfil?: Prisma.PerfilUpdateOneWithoutUsuarioNestedInput
   codigosValidacao?: Prisma.CodigoValidacaoUpdateManyWithoutUsuarioNestedInput
+  sessoesAutenticacao?: Prisma.SessaoAutenticacaoUpdateManyWithoutUsuarioNestedInput
   arquivos?: Prisma.ArquivoUpdateManyWithoutUsuarioNestedInput
   cursosResponsavel?: Prisma.CursoUpdateManyWithoutResponsavelNestedInput
   cursosAutorizados?: Prisma.CursoUpdateManyWithoutAdminAutorizadorNestedInput
@@ -3622,6 +3722,7 @@ export type UsuarioUncheckedUpdateWithoutInventarioInput = {
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   perfil?: Prisma.PerfilUncheckedUpdateOneWithoutUsuarioNestedInput
   codigosValidacao?: Prisma.CodigoValidacaoUncheckedUpdateManyWithoutUsuarioNestedInput
+  sessoesAutenticacao?: Prisma.SessaoAutenticacaoUncheckedUpdateManyWithoutUsuarioNestedInput
   arquivos?: Prisma.ArquivoUncheckedUpdateManyWithoutUsuarioNestedInput
   cursosResponsavel?: Prisma.CursoUncheckedUpdateManyWithoutResponsavelNestedInput
   cursosAutorizados?: Prisma.CursoUncheckedUpdateManyWithoutAdminAutorizadorNestedInput
@@ -3653,6 +3754,7 @@ export type UsuarioCreateWithoutFlashcardsInput = {
   atualizadoEm?: Date | string
   perfil?: Prisma.PerfilCreateNestedOneWithoutUsuarioInput
   codigosValidacao?: Prisma.CodigoValidacaoCreateNestedManyWithoutUsuarioInput
+  sessoesAutenticacao?: Prisma.SessaoAutenticacaoCreateNestedManyWithoutUsuarioInput
   arquivos?: Prisma.ArquivoCreateNestedManyWithoutUsuarioInput
   cursosResponsavel?: Prisma.CursoCreateNestedManyWithoutResponsavelInput
   cursosAutorizados?: Prisma.CursoCreateNestedManyWithoutAdminAutorizadorInput
@@ -3684,6 +3786,7 @@ export type UsuarioUncheckedCreateWithoutFlashcardsInput = {
   atualizadoEm?: Date | string
   perfil?: Prisma.PerfilUncheckedCreateNestedOneWithoutUsuarioInput
   codigosValidacao?: Prisma.CodigoValidacaoUncheckedCreateNestedManyWithoutUsuarioInput
+  sessoesAutenticacao?: Prisma.SessaoAutenticacaoUncheckedCreateNestedManyWithoutUsuarioInput
   arquivos?: Prisma.ArquivoUncheckedCreateNestedManyWithoutUsuarioInput
   cursosResponsavel?: Prisma.CursoUncheckedCreateNestedManyWithoutResponsavelInput
   cursosAutorizados?: Prisma.CursoUncheckedCreateNestedManyWithoutAdminAutorizadorInput
@@ -3731,6 +3834,7 @@ export type UsuarioUpdateWithoutFlashcardsInput = {
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   perfil?: Prisma.PerfilUpdateOneWithoutUsuarioNestedInput
   codigosValidacao?: Prisma.CodigoValidacaoUpdateManyWithoutUsuarioNestedInput
+  sessoesAutenticacao?: Prisma.SessaoAutenticacaoUpdateManyWithoutUsuarioNestedInput
   arquivos?: Prisma.ArquivoUpdateManyWithoutUsuarioNestedInput
   cursosResponsavel?: Prisma.CursoUpdateManyWithoutResponsavelNestedInput
   cursosAutorizados?: Prisma.CursoUpdateManyWithoutAdminAutorizadorNestedInput
@@ -3762,6 +3866,7 @@ export type UsuarioUncheckedUpdateWithoutFlashcardsInput = {
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   perfil?: Prisma.PerfilUncheckedUpdateOneWithoutUsuarioNestedInput
   codigosValidacao?: Prisma.CodigoValidacaoUncheckedUpdateManyWithoutUsuarioNestedInput
+  sessoesAutenticacao?: Prisma.SessaoAutenticacaoUncheckedUpdateManyWithoutUsuarioNestedInput
   arquivos?: Prisma.ArquivoUncheckedUpdateManyWithoutUsuarioNestedInput
   cursosResponsavel?: Prisma.CursoUncheckedUpdateManyWithoutResponsavelNestedInput
   cursosAutorizados?: Prisma.CursoUncheckedUpdateManyWithoutAdminAutorizadorNestedInput
@@ -3782,6 +3887,150 @@ export type UsuarioUncheckedUpdateWithoutFlashcardsInput = {
   vinculosProfessorCriados?: Prisma.CursoProfessorUncheckedUpdateManyWithoutResponsavelVinculoNestedInput
 }
 
+export type UsuarioCreateWithoutSessoesAutenticacaoInput = {
+  id?: string
+  nome: string
+  email: string
+  senha: string
+  tipo?: $Enums.TipoUsuario
+  status?: $Enums.StatusUsuario
+  criadoEm?: Date | string
+  atualizadoEm?: Date | string
+  perfil?: Prisma.PerfilCreateNestedOneWithoutUsuarioInput
+  codigosValidacao?: Prisma.CodigoValidacaoCreateNestedManyWithoutUsuarioInput
+  arquivos?: Prisma.ArquivoCreateNestedManyWithoutUsuarioInput
+  cursosResponsavel?: Prisma.CursoCreateNestedManyWithoutResponsavelInput
+  cursosAutorizados?: Prisma.CursoCreateNestedManyWithoutAdminAutorizadorInput
+  sessoesResponsavel?: Prisma.SessaoCreateNestedManyWithoutResponsavelInput
+  modulosResponsavel?: Prisma.ModuloCreateNestedManyWithoutResponsavelInput
+  aulasResponsavel?: Prisma.AulaCreateNestedManyWithoutResponsavelInput
+  testesResponsavel?: Prisma.TesteCreateNestedManyWithoutResponsavelInput
+  tentativasTeste?: Prisma.TentativaTesteCreateNestedManyWithoutUsuarioInput
+  tentativasQuestoes?: Prisma.TentativaQuestaoCreateNestedManyWithoutUsuarioInput
+  testesQuestoesResponsavel?: Prisma.TesteQuestaoCreateNestedManyWithoutResponsavelInput
+  questoesResponsavel?: Prisma.QuestaoCreateNestedManyWithoutResponsavelInput
+  alternativasResponsavel?: Prisma.AlternativaCreateNestedManyWithoutResponsavelInput
+  inscricoes?: Prisma.InscricaoCreateNestedManyWithoutUsuarioInput
+  progressos?: Prisma.ProgressoCreateNestedManyWithoutUsuarioInput
+  itensCriados?: Prisma.ItemCreateNestedManyWithoutResponsavelInput
+  inventario?: Prisma.InventarioCreateNestedManyWithoutUsuarioInput
+  flashcards?: Prisma.FlashcardCreateNestedManyWithoutUsuarioInput
+  cursosComoProfessor?: Prisma.CursoProfessorCreateNestedManyWithoutProfessorInput
+  vinculosProfessorCriados?: Prisma.CursoProfessorCreateNestedManyWithoutResponsavelVinculoInput
+}
+
+export type UsuarioUncheckedCreateWithoutSessoesAutenticacaoInput = {
+  id?: string
+  nome: string
+  email: string
+  senha: string
+  tipo?: $Enums.TipoUsuario
+  status?: $Enums.StatusUsuario
+  criadoEm?: Date | string
+  atualizadoEm?: Date | string
+  perfil?: Prisma.PerfilUncheckedCreateNestedOneWithoutUsuarioInput
+  codigosValidacao?: Prisma.CodigoValidacaoUncheckedCreateNestedManyWithoutUsuarioInput
+  arquivos?: Prisma.ArquivoUncheckedCreateNestedManyWithoutUsuarioInput
+  cursosResponsavel?: Prisma.CursoUncheckedCreateNestedManyWithoutResponsavelInput
+  cursosAutorizados?: Prisma.CursoUncheckedCreateNestedManyWithoutAdminAutorizadorInput
+  sessoesResponsavel?: Prisma.SessaoUncheckedCreateNestedManyWithoutResponsavelInput
+  modulosResponsavel?: Prisma.ModuloUncheckedCreateNestedManyWithoutResponsavelInput
+  aulasResponsavel?: Prisma.AulaUncheckedCreateNestedManyWithoutResponsavelInput
+  testesResponsavel?: Prisma.TesteUncheckedCreateNestedManyWithoutResponsavelInput
+  tentativasTeste?: Prisma.TentativaTesteUncheckedCreateNestedManyWithoutUsuarioInput
+  tentativasQuestoes?: Prisma.TentativaQuestaoUncheckedCreateNestedManyWithoutUsuarioInput
+  testesQuestoesResponsavel?: Prisma.TesteQuestaoUncheckedCreateNestedManyWithoutResponsavelInput
+  questoesResponsavel?: Prisma.QuestaoUncheckedCreateNestedManyWithoutResponsavelInput
+  alternativasResponsavel?: Prisma.AlternativaUncheckedCreateNestedManyWithoutResponsavelInput
+  inscricoes?: Prisma.InscricaoUncheckedCreateNestedManyWithoutUsuarioInput
+  progressos?: Prisma.ProgressoUncheckedCreateNestedManyWithoutUsuarioInput
+  itensCriados?: Prisma.ItemUncheckedCreateNestedManyWithoutResponsavelInput
+  inventario?: Prisma.InventarioUncheckedCreateNestedManyWithoutUsuarioInput
+  flashcards?: Prisma.FlashcardUncheckedCreateNestedManyWithoutUsuarioInput
+  cursosComoProfessor?: Prisma.CursoProfessorUncheckedCreateNestedManyWithoutProfessorInput
+  vinculosProfessorCriados?: Prisma.CursoProfessorUncheckedCreateNestedManyWithoutResponsavelVinculoInput
+}
+
+export type UsuarioCreateOrConnectWithoutSessoesAutenticacaoInput = {
+  where: Prisma.UsuarioWhereUniqueInput
+  create: Prisma.XOR<Prisma.UsuarioCreateWithoutSessoesAutenticacaoInput, Prisma.UsuarioUncheckedCreateWithoutSessoesAutenticacaoInput>
+}
+
+export type UsuarioUpsertWithoutSessoesAutenticacaoInput = {
+  update: Prisma.XOR<Prisma.UsuarioUpdateWithoutSessoesAutenticacaoInput, Prisma.UsuarioUncheckedUpdateWithoutSessoesAutenticacaoInput>
+  create: Prisma.XOR<Prisma.UsuarioCreateWithoutSessoesAutenticacaoInput, Prisma.UsuarioUncheckedCreateWithoutSessoesAutenticacaoInput>
+  where?: Prisma.UsuarioWhereInput
+}
+
+export type UsuarioUpdateToOneWithWhereWithoutSessoesAutenticacaoInput = {
+  where?: Prisma.UsuarioWhereInput
+  data: Prisma.XOR<Prisma.UsuarioUpdateWithoutSessoesAutenticacaoInput, Prisma.UsuarioUncheckedUpdateWithoutSessoesAutenticacaoInput>
+}
+
+export type UsuarioUpdateWithoutSessoesAutenticacaoInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  nome?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  senha?: Prisma.StringFieldUpdateOperationsInput | string
+  tipo?: Prisma.EnumTipoUsuarioFieldUpdateOperationsInput | $Enums.TipoUsuario
+  status?: Prisma.EnumStatusUsuarioFieldUpdateOperationsInput | $Enums.StatusUsuario
+  criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  perfil?: Prisma.PerfilUpdateOneWithoutUsuarioNestedInput
+  codigosValidacao?: Prisma.CodigoValidacaoUpdateManyWithoutUsuarioNestedInput
+  arquivos?: Prisma.ArquivoUpdateManyWithoutUsuarioNestedInput
+  cursosResponsavel?: Prisma.CursoUpdateManyWithoutResponsavelNestedInput
+  cursosAutorizados?: Prisma.CursoUpdateManyWithoutAdminAutorizadorNestedInput
+  sessoesResponsavel?: Prisma.SessaoUpdateManyWithoutResponsavelNestedInput
+  modulosResponsavel?: Prisma.ModuloUpdateManyWithoutResponsavelNestedInput
+  aulasResponsavel?: Prisma.AulaUpdateManyWithoutResponsavelNestedInput
+  testesResponsavel?: Prisma.TesteUpdateManyWithoutResponsavelNestedInput
+  tentativasTeste?: Prisma.TentativaTesteUpdateManyWithoutUsuarioNestedInput
+  tentativasQuestoes?: Prisma.TentativaQuestaoUpdateManyWithoutUsuarioNestedInput
+  testesQuestoesResponsavel?: Prisma.TesteQuestaoUpdateManyWithoutResponsavelNestedInput
+  questoesResponsavel?: Prisma.QuestaoUpdateManyWithoutResponsavelNestedInput
+  alternativasResponsavel?: Prisma.AlternativaUpdateManyWithoutResponsavelNestedInput
+  inscricoes?: Prisma.InscricaoUpdateManyWithoutUsuarioNestedInput
+  progressos?: Prisma.ProgressoUpdateManyWithoutUsuarioNestedInput
+  itensCriados?: Prisma.ItemUpdateManyWithoutResponsavelNestedInput
+  inventario?: Prisma.InventarioUpdateManyWithoutUsuarioNestedInput
+  flashcards?: Prisma.FlashcardUpdateManyWithoutUsuarioNestedInput
+  cursosComoProfessor?: Prisma.CursoProfessorUpdateManyWithoutProfessorNestedInput
+  vinculosProfessorCriados?: Prisma.CursoProfessorUpdateManyWithoutResponsavelVinculoNestedInput
+}
+
+export type UsuarioUncheckedUpdateWithoutSessoesAutenticacaoInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  nome?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  senha?: Prisma.StringFieldUpdateOperationsInput | string
+  tipo?: Prisma.EnumTipoUsuarioFieldUpdateOperationsInput | $Enums.TipoUsuario
+  status?: Prisma.EnumStatusUsuarioFieldUpdateOperationsInput | $Enums.StatusUsuario
+  criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  perfil?: Prisma.PerfilUncheckedUpdateOneWithoutUsuarioNestedInput
+  codigosValidacao?: Prisma.CodigoValidacaoUncheckedUpdateManyWithoutUsuarioNestedInput
+  arquivos?: Prisma.ArquivoUncheckedUpdateManyWithoutUsuarioNestedInput
+  cursosResponsavel?: Prisma.CursoUncheckedUpdateManyWithoutResponsavelNestedInput
+  cursosAutorizados?: Prisma.CursoUncheckedUpdateManyWithoutAdminAutorizadorNestedInput
+  sessoesResponsavel?: Prisma.SessaoUncheckedUpdateManyWithoutResponsavelNestedInput
+  modulosResponsavel?: Prisma.ModuloUncheckedUpdateManyWithoutResponsavelNestedInput
+  aulasResponsavel?: Prisma.AulaUncheckedUpdateManyWithoutResponsavelNestedInput
+  testesResponsavel?: Prisma.TesteUncheckedUpdateManyWithoutResponsavelNestedInput
+  tentativasTeste?: Prisma.TentativaTesteUncheckedUpdateManyWithoutUsuarioNestedInput
+  tentativasQuestoes?: Prisma.TentativaQuestaoUncheckedUpdateManyWithoutUsuarioNestedInput
+  testesQuestoesResponsavel?: Prisma.TesteQuestaoUncheckedUpdateManyWithoutResponsavelNestedInput
+  questoesResponsavel?: Prisma.QuestaoUncheckedUpdateManyWithoutResponsavelNestedInput
+  alternativasResponsavel?: Prisma.AlternativaUncheckedUpdateManyWithoutResponsavelNestedInput
+  inscricoes?: Prisma.InscricaoUncheckedUpdateManyWithoutUsuarioNestedInput
+  progressos?: Prisma.ProgressoUncheckedUpdateManyWithoutUsuarioNestedInput
+  itensCriados?: Prisma.ItemUncheckedUpdateManyWithoutResponsavelNestedInput
+  inventario?: Prisma.InventarioUncheckedUpdateManyWithoutUsuarioNestedInput
+  flashcards?: Prisma.FlashcardUncheckedUpdateManyWithoutUsuarioNestedInput
+  cursosComoProfessor?: Prisma.CursoProfessorUncheckedUpdateManyWithoutProfessorNestedInput
+  vinculosProfessorCriados?: Prisma.CursoProfessorUncheckedUpdateManyWithoutResponsavelVinculoNestedInput
+}
+
 
 /**
  * Count Type UsuarioCountOutputType
@@ -3789,6 +4038,7 @@ export type UsuarioUncheckedUpdateWithoutFlashcardsInput = {
 
 export type UsuarioCountOutputType = {
   codigosValidacao: number
+  sessoesAutenticacao: number
   arquivos: number
   cursosResponsavel: number
   cursosAutorizados: number
@@ -3812,6 +4062,7 @@ export type UsuarioCountOutputType = {
 
 export type UsuarioCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   codigosValidacao?: boolean | UsuarioCountOutputTypeCountCodigosValidacaoArgs
+  sessoesAutenticacao?: boolean | UsuarioCountOutputTypeCountSessoesAutenticacaoArgs
   arquivos?: boolean | UsuarioCountOutputTypeCountArquivosArgs
   cursosResponsavel?: boolean | UsuarioCountOutputTypeCountCursosResponsavelArgs
   cursosAutorizados?: boolean | UsuarioCountOutputTypeCountCursosAutorizadosArgs
@@ -3848,6 +4099,13 @@ export type UsuarioCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Exte
  */
 export type UsuarioCountOutputTypeCountCodigosValidacaoArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.CodigoValidacaoWhereInput
+}
+
+/**
+ * UsuarioCountOutputType without action
+ */
+export type UsuarioCountOutputTypeCountSessoesAutenticacaoArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.SessaoAutenticacaoWhereInput
 }
 
 /**
@@ -3995,6 +4253,7 @@ export type UsuarioSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   atualizadoEm?: boolean
   perfil?: boolean | Prisma.Usuario$perfilArgs<ExtArgs>
   codigosValidacao?: boolean | Prisma.Usuario$codigosValidacaoArgs<ExtArgs>
+  sessoesAutenticacao?: boolean | Prisma.Usuario$sessoesAutenticacaoArgs<ExtArgs>
   arquivos?: boolean | Prisma.Usuario$arquivosArgs<ExtArgs>
   cursosResponsavel?: boolean | Prisma.Usuario$cursosResponsavelArgs<ExtArgs>
   cursosAutorizados?: boolean | Prisma.Usuario$cursosAutorizadosArgs<ExtArgs>
@@ -4054,6 +4313,7 @@ export type UsuarioOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
 export type UsuarioInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   perfil?: boolean | Prisma.Usuario$perfilArgs<ExtArgs>
   codigosValidacao?: boolean | Prisma.Usuario$codigosValidacaoArgs<ExtArgs>
+  sessoesAutenticacao?: boolean | Prisma.Usuario$sessoesAutenticacaoArgs<ExtArgs>
   arquivos?: boolean | Prisma.Usuario$arquivosArgs<ExtArgs>
   cursosResponsavel?: boolean | Prisma.Usuario$cursosResponsavelArgs<ExtArgs>
   cursosAutorizados?: boolean | Prisma.Usuario$cursosAutorizadosArgs<ExtArgs>
@@ -4083,6 +4343,7 @@ export type $UsuarioPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
   objects: {
     perfil: Prisma.$PerfilPayload<ExtArgs> | null
     codigosValidacao: Prisma.$CodigoValidacaoPayload<ExtArgs>[]
+    sessoesAutenticacao: Prisma.$SessaoAutenticacaoPayload<ExtArgs>[]
     arquivos: Prisma.$ArquivoPayload<ExtArgs>[]
     cursosResponsavel: Prisma.$CursoPayload<ExtArgs>[]
     cursosAutorizados: Prisma.$CursoPayload<ExtArgs>[]
@@ -4508,6 +4769,7 @@ export interface Prisma__UsuarioClient<T, Null = never, ExtArgs extends runtime.
   readonly [Symbol.toStringTag]: "PrismaPromise"
   perfil<T extends Prisma.Usuario$perfilArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Usuario$perfilArgs<ExtArgs>>): Prisma.Prisma__PerfilClient<runtime.Types.Result.GetResult<Prisma.$PerfilPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   codigosValidacao<T extends Prisma.Usuario$codigosValidacaoArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Usuario$codigosValidacaoArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CodigoValidacaoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  sessoesAutenticacao<T extends Prisma.Usuario$sessoesAutenticacaoArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Usuario$sessoesAutenticacaoArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SessaoAutenticacaoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   arquivos<T extends Prisma.Usuario$arquivosArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Usuario$arquivosArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ArquivoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   cursosResponsavel<T extends Prisma.Usuario$cursosResponsavelArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Usuario$cursosResponsavelArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CursoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   cursosAutorizados<T extends Prisma.Usuario$cursosAutorizadosArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Usuario$cursosAutorizadosArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CursoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -4997,6 +5259,30 @@ export type Usuario$codigosValidacaoArgs<ExtArgs extends runtime.Types.Extension
   take?: number
   skip?: number
   distinct?: Prisma.CodigoValidacaoScalarFieldEnum | Prisma.CodigoValidacaoScalarFieldEnum[]
+}
+
+/**
+ * Usuario.sessoesAutenticacao
+ */
+export type Usuario$sessoesAutenticacaoArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the SessaoAutenticacao
+   */
+  select?: Prisma.SessaoAutenticacaoSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the SessaoAutenticacao
+   */
+  omit?: Prisma.SessaoAutenticacaoOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SessaoAutenticacaoInclude<ExtArgs> | null
+  where?: Prisma.SessaoAutenticacaoWhereInput
+  orderBy?: Prisma.SessaoAutenticacaoOrderByWithRelationInput | Prisma.SessaoAutenticacaoOrderByWithRelationInput[]
+  cursor?: Prisma.SessaoAutenticacaoWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.SessaoAutenticacaoScalarFieldEnum | Prisma.SessaoAutenticacaoScalarFieldEnum[]
 }
 
 /**

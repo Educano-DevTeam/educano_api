@@ -416,7 +416,8 @@ export const ModelName = {
   Progresso: 'Progresso',
   Item: 'Item',
   Inventario: 'Inventario',
-  Flashcard: 'Flashcard'
+  Flashcard: 'Flashcard',
+  SessaoAutenticacao: 'SessaoAutenticacao'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -432,7 +433,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "usuario" | "perfil" | "codigoValidacao" | "arquivo" | "curso" | "sessao" | "modulo" | "aula" | "teste" | "questao" | "alternativa" | "testeQuestao" | "tentativaTeste" | "tentativaQuestao" | "inscricao" | "cursoProfessor" | "progresso" | "item" | "inventario" | "flashcard"
+    modelProps: "usuario" | "perfil" | "codigoValidacao" | "arquivo" | "curso" | "sessao" | "modulo" | "aula" | "teste" | "questao" | "alternativa" | "testeQuestao" | "tentativaTeste" | "tentativaQuestao" | "inscricao" | "cursoProfessor" | "progresso" | "item" | "inventario" | "flashcard" | "sessaoAutenticacao"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1916,6 +1917,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    SessaoAutenticacao: {
+      payload: Prisma.$SessaoAutenticacaoPayload<ExtArgs>
+      fields: Prisma.SessaoAutenticacaoFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.SessaoAutenticacaoFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SessaoAutenticacaoPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.SessaoAutenticacaoFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SessaoAutenticacaoPayload>
+        }
+        findFirst: {
+          args: Prisma.SessaoAutenticacaoFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SessaoAutenticacaoPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.SessaoAutenticacaoFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SessaoAutenticacaoPayload>
+        }
+        findMany: {
+          args: Prisma.SessaoAutenticacaoFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SessaoAutenticacaoPayload>[]
+        }
+        create: {
+          args: Prisma.SessaoAutenticacaoCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SessaoAutenticacaoPayload>
+        }
+        createMany: {
+          args: Prisma.SessaoAutenticacaoCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.SessaoAutenticacaoCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SessaoAutenticacaoPayload>[]
+        }
+        delete: {
+          args: Prisma.SessaoAutenticacaoDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SessaoAutenticacaoPayload>
+        }
+        update: {
+          args: Prisma.SessaoAutenticacaoUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SessaoAutenticacaoPayload>
+        }
+        deleteMany: {
+          args: Prisma.SessaoAutenticacaoDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.SessaoAutenticacaoUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.SessaoAutenticacaoUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SessaoAutenticacaoPayload>[]
+        }
+        upsert: {
+          args: Prisma.SessaoAutenticacaoUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SessaoAutenticacaoPayload>
+        }
+        aggregate: {
+          args: Prisma.SessaoAutenticacaoAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateSessaoAutenticacao>
+        }
+        groupBy: {
+          args: Prisma.SessaoAutenticacaoGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SessaoAutenticacaoGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.SessaoAutenticacaoCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SessaoAutenticacaoCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -2250,6 +2325,19 @@ export const FlashcardScalarFieldEnum = {
 } as const
 
 export type FlashcardScalarFieldEnum = (typeof FlashcardScalarFieldEnum)[keyof typeof FlashcardScalarFieldEnum]
+
+
+export const SessaoAutenticacaoScalarFieldEnum = {
+  id: 'id',
+  idUsuario: 'idUsuario',
+  tokenHash: 'tokenHash',
+  expiraEm: 'expiraEm',
+  revogadoEm: 'revogadoEm',
+  criadoEm: 'criadoEm',
+  atualizadoEm: 'atualizadoEm'
+} as const
+
+export type SessaoAutenticacaoScalarFieldEnum = (typeof SessaoAutenticacaoScalarFieldEnum)[keyof typeof SessaoAutenticacaoScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -2781,6 +2869,7 @@ export type GlobalOmitConfig = {
   item?: Prisma.ItemOmit
   inventario?: Prisma.InventarioOmit
   flashcard?: Prisma.FlashcardOmit
+  sessaoAutenticacao?: Prisma.SessaoAutenticacaoOmit
 }
 
 /* Types for Logging */

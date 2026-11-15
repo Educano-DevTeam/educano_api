@@ -5,6 +5,8 @@ import {
   verificarCodigo,
   solicitarCodigoRecuperacao,
   redefinirSenhaUsuario,
+  refresh,
+  logout,
 } from "../controllers/auth.controller.js";
 import { autenticar } from "../../../middlewares/auth.middlewares.js";
 import { consultarSessao } from "../controllers/session.controller.js";
@@ -14,6 +16,9 @@ const authRouter = Router();
 authRouter.post("/register", registrar);
 authRouter.post("/verify-code", verificarCodigo);
 authRouter.post("/login", login);
+
+authRouter.post("/refresh", refresh);
+authRouter.post("/logout", logout);
 
 authRouter.post("/forgot-password", solicitarCodigoRecuperacao);
 authRouter.post("/reset-password", redefinirSenhaUsuario);

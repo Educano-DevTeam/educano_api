@@ -141,3 +141,8 @@ export type Inventario = Prisma.InventarioModel
  * 
  */
 export type Flashcard = Prisma.FlashcardModel
+/**
+ * Model SessaoAutenticacao
+ * 
+ */
+export type SessaoAutenticacao = Prisma.SessaoAutenticacaoModel

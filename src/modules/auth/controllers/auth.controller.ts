@@ -6,6 +6,8 @@ import {
   verifyCodeSchema,
   solicitarRecuperacaoSenhaSchema,
   redefinirSenhaSchema,
+  refreshTokenSchema,
+  logoutSchema,
 } from "../schemas/auth.schema.js";
 import {
   AuthServiceError,
@@ -15,6 +17,8 @@ import {
   validarCodigo,
   solicitarRecuperacaoSenha,
   redefinirSenha,
+  renovarSessao,
+  encerrarSessao,
 } from "../services/auth.service.js";
 
 function responderErro(res: Response, error: unknown) {
@@ -29,6 +33,7 @@ function responderErro(res: Response, error: unknown) {
       CODIGO_EXPIRADO_OU_UTILIZADO: 400,
       CREDENCIAIS_INVALIDAS: 401,
       TOKEN_INVALIDO: 401,
+      SESSAO_INVALIDA: 401,
       CADASTRO_NAO_AUTORIZADO: 403,
     };
 
@@ -186,6 +191,61 @@ export async function redefinirSenhaUsuario(
 
     return res.status(200).json({
       message: "Senha redefinida com sucesso. Você já pode fazer login.",
+    });
+  } catch (error) {
+    return responderErro(res, error);
+  }
+}
+
+/**
+ * POST /api/auth/refresh
+ *
+ * Renova o access token utilizando um refresh token válido.
+ */
+export async function refresh(req: Request, res: Response) {
+  const validacao = refreshTokenSchema.safeParse(req.body);
+
+  if (!validacao.success) {
+    return res.status(400).json({
+      message: "Refresh token não informado ou inválido.",
+      errors: validacao.error.issues,
+    });
+  }
+
+  try {
+    const resultado = await renovarSessao(
+      validacao.data.refreshToken,
+    );
+
+    return res.status(200).json({
+      message: "Sessão renovada com sucesso.",
+      ...resultado,
+    });
+  } catch (error) {
+    return responderErro(res, error);
+  }
+}
+
+/**
+ * POST /api/auth/logout
+ *
+ * Revoga a sessão associada ao refresh token.
+ */
+export async function logout(req: Request, res: Response) {
+  const validacao = logoutSchema.safeParse(req.body);
+
+  if (!validacao.success) {
+    return res.status(400).json({
+      message: "Refresh token não informado ou inválido.",
+      errors: validacao.error.issues,
+    });
+  }
+
+  try {
+    await encerrarSessao(validacao.data.refreshToken);
+
+    return res.status(200).json({
+      message: "Logout realizado com sucesso.",
     });
   } catch (error) {
     return responderErro(res, error);

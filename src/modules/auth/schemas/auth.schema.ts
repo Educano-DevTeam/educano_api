@@ -36,6 +36,14 @@ export const redefinirSenhaSchema = z.object({
   senha: z.string().min(8).max(72),
 });
 
+export const refreshTokenSchema = z.object({
+  refreshToken: z.string().min(1).max(256),
+});
+
+export const logoutSchema = z.object({
+  refreshToken: z.string().min(1).max(256),
+});
+
 export type SolicitarRecuperacaoSenhaInput = z.infer<typeof solicitarRecuperacaoSenhaSchema>;
 export type RedefinirSenhaInput = z.infer<typeof redefinirSenhaSchema>;
 export type TipoUsuarioCadastro = z.infer<typeof tipoUsuarioSchema>;

@@ -70,7 +70,8 @@ export const ModelName = {
   Progresso: 'Progresso',
   Item: 'Item',
   Inventario: 'Inventario',
-  Flashcard: 'Flashcard'
+  Flashcard: 'Flashcard',
+  SessaoAutenticacao: 'SessaoAutenticacao'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -384,6 +385,19 @@ export const FlashcardScalarFieldEnum = {
 } as const
 
 export type FlashcardScalarFieldEnum = (typeof FlashcardScalarFieldEnum)[keyof typeof FlashcardScalarFieldEnum]
+
+
+export const SessaoAutenticacaoScalarFieldEnum = {
+  id: 'id',
+  idUsuario: 'idUsuario',
+  tokenHash: 'tokenHash',
+  expiraEm: 'expiraEm',
+  revogadoEm: 'revogadoEm',
+  criadoEm: 'criadoEm',
+  atualizadoEm: 'atualizadoEm'
+} as const
+
+export type SessaoAutenticacaoScalarFieldEnum = (typeof SessaoAutenticacaoScalarFieldEnum)[keyof typeof SessaoAutenticacaoScalarFieldEnum]
 
 
 export const SortOrder = {

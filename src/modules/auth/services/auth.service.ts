@@ -1,7 +1,9 @@
 
 import bcrypt from "bcryptjs";
 import {
+  createHash,
   createHmac,
+  randomBytes,
   randomInt,
   timingSafeEqual,
 } from "node:crypto";
@@ -24,6 +26,8 @@ import type {
   RedefinirSenhaInput,
 } from "../schemas/auth.schema.js";
 
+const prismaAuth = prisma as any;
+
 const CORES_PERFIL = [
   "#425BC2",
   "#86C5FF",
@@ -32,6 +36,26 @@ const CORES_PERFIL = [
   "#9FBEED",
   "#79B425",
 ];
+
+// O refresh token terá validade máxima de 30 dias.
+const TEMPO_SESSAO_MS = 30 * 24 * 60 * 60 * 1000;
+
+/**
+ * Gera um refresh token aleatório e seguro.
+ */
+function gerarRefreshToken(): string {
+  return randomBytes(48).toString("base64url");
+}
+
+/**
+ * Gera o hash SHA-256 do refresh token.
+ * Somente o hash será armazenado no banco.
+ */
+function hashRefreshToken(token: string): string {
+  return createHash("sha256")
+    .update(token)
+    .digest("hex");
+}
 
 function gerarCodigo(): string {
   const caracteres = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
@@ -74,6 +98,116 @@ export class AuthServiceError extends Error {
   }
 }
 
+/**
+ * Cria uma nova sessão de autenticação.
+ *
+ * A sessão tem validade máxima de 30 dias.
+ */
+async function criarSessaoAutenticacao(idUsuario: string) {
+  const refreshToken = gerarRefreshToken();
+  const tokenHash = hashRefreshToken(refreshToken);
+
+  const expiraEm = new Date(Date.now() + TEMPO_SESSAO_MS);
+
+  await prismaAuth.sessaoAutenticacao.create({
+    data: {
+      idUsuario,
+      tokenHash,
+      expiraEm,
+    },
+  });
+
+  return refreshToken;
+}
+
+/**
+ * Renova a sessão utilizando o refresh token.
+ *
+ * O token anterior é invalidado e substituído por outro.
+ */
+export async function renovarSessao(refreshToken: string) {
+  const tokenHashAtual = hashRefreshToken(refreshToken);
+
+  const agora = new Date();
+
+  const sessao = await prismaAuth.sessaoAutenticacao.findUnique({
+    where: {
+      tokenHash: tokenHashAtual,
+    },
+    select: {
+      id: true,
+      idUsuario: true,
+      expiraEm: true,
+      revogadoEm: true,
+      usuario: {
+        select: {
+          status: true,
+        },
+      },
+    },
+  });
+
+  if (
+    !sessao ||
+    sessao.revogadoEm ||
+    sessao.expiraEm <= agora ||
+    sessao.usuario.status !== "ATIVO"
+  ) {
+    throw new AuthServiceError(
+      "SESSAO_INVALIDA",
+      "Sessão inválida ou expirada. Faça login novamente.",
+    );
+  }
+
+  const novoRefreshToken = gerarRefreshToken();
+  const novoTokenHash = hashRefreshToken(novoRefreshToken);
+
+  // A atualização condicional impede que o mesmo refresh token
+  // seja utilizado novamente, inclusive em requisições simultâneas.
+  const resultado = await prismaAuth.sessaoAutenticacao.updateMany({
+    where: {
+      id: sessao.id,
+      tokenHash: tokenHashAtual,
+      revogadoEm: null,
+      expiraEm: {
+        gt: agora,
+      },
+    },
+    data: {
+      tokenHash: novoTokenHash,
+    },
+  });
+
+  if (resultado.count !== 1) {
+    throw new AuthServiceError(
+      "SESSAO_INVALIDA",
+      "Sessão inválida ou expirada. Faça login novamente.",
+    );
+  }
+
+  return {
+    token: emitirToken(sessao.idUsuario),
+    refreshToken: novoRefreshToken,
+    expiresInSeconds: 15 * 60,
+  };
+}
+
+/**
+ * Encerra uma sessão utilizando seu refresh token.
+ */
+export async function encerrarSessao(refreshToken: string): Promise<void> {
+  const tokenHash = hashRefreshToken(refreshToken);
+
+  await prismaAuth.sessaoAutenticacao.updateMany({
+    where: {
+      tokenHash,
+      revogadoEm: null,
+    },
+    data: {
+      revogadoEm: new Date(),
+    },
+  });
+}
 
 export async function autorizarTipoCadastro(
   tipoSolicitado: TipoUsuarioCadastro,
@@ -366,10 +500,13 @@ export async function autenticarUsuario(dados: LoginInput) {
   }
 
   const token = emitirToken(usuario.id);
+  const refreshToken = await criarSessaoAutenticacao(usuario.id);
 
   // Nunca devolvemos o hash da senha na resposta.
   return {
     token,
+    refreshToken,
+    expiresInSeconds: 15 * 60,
     usuario: {
       id: usuario.id,
       nome: usuario.nome,
@@ -573,6 +710,17 @@ export async function redefinirSenha(
       data: {
         senha: novaSenhaHash,
         atualizadoEm: relogioTransacao.agora,
+      },
+    });
+
+    // Revoga todas as sessões existentes após a alteração da senha.
+    await (tx as any).sessaoAutenticacao.updateMany({
+      where: {
+        idUsuario: usuario.id,
+        revogadoEm: null,
+      },
+      data: {
+        revogadoEm: relogioTransacao.agora,
       },
     });
   });
