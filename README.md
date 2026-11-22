@@ -162,12 +162,16 @@ Todas as rotas começam com `/api`.
 | --- | --- | --- |
 | `POST /api/auth/register` | Público | `{ nome, email, senha, tipo? }`. `tipo` aceita `ALUNO`, `PROFESSOR`, `PARCEIRO` ou `ADMIN`, mas usuários públicos só podem cadastrar `ALUNO`. Um administrador autenticado pode cadastrar outros tipos. |
 | `POST /api/auth/verify-code` | Público | `{ email, codigo }`. Valida o código de seis caracteres e ativa a conta. |
-| `POST /api/auth/login` | Público | `{ email, senha }`. Retorna JWT válido por 15 minutos e os dados do usuário. |
+| `POST /api/auth/login` | Público | `{ email, senha }`. Retorna JWT válido por 15 minutos, refresh token válido por até 30 dias e os dados do usuário. |
+| `POST /api/auth/refresh` | Público | `{ refreshToken }`. Valida a sessão, retorna um novo JWT válido por 15 minutos e substitui o refresh token. |
+| `POST /api/auth/logout` | Público | `{ refreshToken }`. Revoga a sessão associada ao refresh token. |
 | `POST /api/auth/forgot-password` | Público | `{ email }`. Solicita um código de recuperação e envia por e-mail quando a conta existir. A resposta é genérica para evitar enumeração de usuários. |
 | `POST /api/auth/reset-password` | Público | `{ email, codigo, senha }`. Valida o código e redefine a senha do usuário. A senha deve conter entre 8 e 72 caracteres. |
 | `GET /api/auth/me` | Autenticado | Retorna os dados da sessão, da conta e do perfil. |
 
-O cadastro cria o usuário como `PENDENTE`, gera um código de seis caracteres com validade de 10 minutos e envia-o por e-mail. O código não é retornado pela API. O fluxo de recuperação usa o mesmo padrão: o usuário solicita o código por e-mail e, em seguida, envia `email + codigo + novaSenha` para redefinir a senha.
+O cadastro cria o usuário como `PENDENTE`, gera um código de seis caracteres com validade de 10 minutos e envia-o por e-mail. O código não é retornado pela API. O fluxo de recuperação usa o mesmo padrão: o usuário solicita o código por e-mail e, em seguida, envia `email + codigo + senha` para redefinir a senha.
+
+O login cria uma sessão com refresh token válido por até 30 dias. O refresh token deve ser armazenado pelo cliente e enviado em `POST /api/auth/refresh`; cada renovação substitui o refresh token anterior. `POST /api/auth/logout` revoga o token informado.
 
 Erros comuns: `400` para payload inválido, `401` para credenciais ou conta inválida, `403` para cadastro não autorizado, `409` para e-mail existente, `503` para SMTP ou banco indisponível.
 
@@ -349,6 +353,7 @@ Todas as rotas exigem autenticação. Atividades pertencem a módulos de cursos 
 | `POST /api/tests/attempts/:id/submit` | `{ "respostas": [{ "idQuestao": "uuid", "resposta": "A" }] }` | Envia respostas, calcula resultado e finaliza a tentativa. `resposta` também pode ser `null`. |
 | `GET /api/tests/attempts?pagina=1&limite=30` | Paginação opcional | Lista as tentativas do usuário autenticado; limite máximo 100. |
 | `GET /api/tests/attempts/:id` | UUID da tentativa | Consulta tentativa própria. |
+| `GET /api/tests/attempts/grades/monthly?pagina=1&limite=6` | Paginação opcional | Lista o histórico mensal de notas do usuário autenticado, agrupadas por simulado e atividade. Máximo de 12 meses por página. |
 
 `tempoMinutos` deve ser inteiro de 1 a 600; `dificuldade` aceita `FACIL`, `MEDIO` ou `DIFICIL`; simulados aceitam de 1 a 100 questões e exigem quantidade suficiente de questões cadastradas no tema e dificuldade selecionados. O envio é final: uma tentativa concluída não pode receber novas respostas.
 
