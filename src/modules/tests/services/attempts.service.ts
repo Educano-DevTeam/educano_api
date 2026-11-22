@@ -447,7 +447,7 @@ export async function enviarRespostas(
             },
         });
 
-        
+
         const teste = await tx.teste.findUnique({
             where: {
                 id: tentativa.idTeste,
@@ -467,6 +467,7 @@ export async function enviarRespostas(
             );
         }
 
+
         let recompensa = {
             moedas: 0,
             xp: 0,
@@ -479,7 +480,23 @@ export async function enviarRespostas(
             expiraEm: Date | null;
         } | null;
 
-        if (teste.tipo === "ATIVIDADE" || teste.tipo === "SIMULADO") {
+        // -------------------------------------------------
+        // VALIDAR NOTA DE CORTE E REGISTRAR PROGRESSO
+        // -------------------------------------------------
+
+        // O aluno precisa acertar pelo menos 2/3 das questões.
+        // A comparação inteira evita problemas de arredondamento.
+        const atingiuNotaDeCorte =
+            totalQuestoes > 0 &&
+            acertos * 3 >= totalQuestoes * 2;
+
+        // Simulados continuam com o comportamento atual.
+        // Somente atividades exigem a nota de corte.
+        const podeRegistrarProgresso =
+            teste.tipo === "SIMULADO" ||
+            atingiuNotaDeCorte;
+
+        if (podeRegistrarProgresso) {
             const progresso = await registrarConclusaoTeste(tx, {
                 idUsuario,
                 idTeste: teste.id,
@@ -501,6 +518,12 @@ export async function enviarRespostas(
                 acertos,
                 erros: totalQuestoes - acertos,
                 notaFinal,
+
+                // Informa se o aluno atingiu a nota de corte.
+                atividadeConcluida:
+                    teste.tipo === "ATIVIDADE"
+                        ? atingiuNotaDeCorte
+                        : null,
             },
             recompensa,
             boostAplicado,
