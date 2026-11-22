@@ -654,3 +654,206 @@ export async function consultarTentativa(
 
     return tentativa;
 }
+
+// -----------------------------------------------------
+// HISTÓRICO MENSAL DE NOTAS
+// -----------------------------------------------------
+
+const NOMES_MESES = [
+    "Janeiro",
+    "Fevereiro",
+    "Março",
+    "Abril",
+    "Maio",
+    "Junho",
+    "Julho",
+    "Agosto",
+    "Setembro",
+    "Outubro",
+    "Novembro",
+    "Dezembro",
+];
+
+type GrupoNotas = {
+    soma: number;
+    tentativas: number;
+};
+
+export async function consultarHistoricoNotas(
+    idUsuario: string,
+    pagina: number,
+    limite: number,
+) {
+    // Busca apenas tentativas finalizadas e com nota registrada.
+    const tentativas = await prisma.tentativaTeste.findMany({
+        where: {
+            idUsuario,
+            enviadoEm: {
+                not: null,
+            },
+            notaFinal: {
+                not: null,
+            },
+        },
+
+        orderBy: {
+            enviadoEm: "desc",
+        },
+
+        select: {
+            notaFinal: true,
+            enviadoEm: true,
+
+            teste: {
+                select: {
+                    tipo: true,
+                },
+            },
+        },
+    });
+
+    // Estrutura intermediária:
+    // ano -> mês -> tipo -> soma e quantidade.
+    const agrupamentos = new Map<
+        number,
+        Map<number, {
+            SIMULADO?: GrupoNotas;
+            ATIVIDADE?: GrupoNotas;
+        }>
+    >();
+
+    for (const tentativa of tentativas) {
+        if (!tentativa.enviadoEm || tentativa.notaFinal === null) {
+            continue;
+        }
+
+        const data = tentativa.enviadoEm;
+        const ano = data.getFullYear();
+        const mes = data.getMonth();
+
+        const nota = Number(tentativa.notaFinal);
+        const tipo = tentativa.teste.tipo;
+
+        if (!agrupamentos.has(ano)) {
+            agrupamentos.set(ano, new Map());
+        }
+
+        const meses = agrupamentos.get(ano)!;
+
+        if (!meses.has(mes)) {
+            meses.set(mes, {});
+        }
+
+        const dadosMes = meses.get(mes)!;
+
+        if (!dadosMes[tipo]) {
+            dadosMes[tipo] = {
+                soma: 0,
+                tentativas: 0,
+            };
+        }
+
+        dadosMes[tipo]!.soma += nota;
+        dadosMes[tipo]!.tentativas++;
+    }
+
+    // Ordena os meses cronologicamente do mais recente
+    // para o mais antigo antes de aplicar a paginação.
+    const mesesDisponiveis = Array.from(agrupamentos.entries())
+        .flatMap(([ano, meses]) =>
+            Array.from(meses.keys()).map((mes) => ({
+                ano,
+                mes,
+            })),
+        )
+        .sort((a, b) =>
+            (b.ano - a.ano) || (b.mes - a.mes),
+        );
+
+    const totalMeses = mesesDisponiveis.length;
+    const totalPaginas = Math.ceil(totalMeses / limite);
+    const inicio = (pagina - 1) * limite;
+
+    const mesesPagina = mesesDisponiveis.slice(
+        inicio,
+        inicio + limite,
+    );
+
+    // Monta o JSON final.
+    const notas: Record<string, Record<string, {
+        Simulado: {
+            media: number | null;
+            tentativas: number;
+        };
+        Atividade: {
+            media: number | null;
+            tentativas: number;
+        };
+    }>> = {};
+
+    for (const { ano, mes } of mesesPagina) {
+        const dadosMes = agrupamentos.get(ano)!.get(mes)!;
+
+        const simulado = dadosMes.SIMULADO;
+        const atividade = dadosMes.ATIVIDADE;
+
+        if (!notas[ano]) {
+            notas[ano] = {};
+        }
+
+        notas[ano][NOMES_MESES[mes]] = {
+            Simulado: {
+                media: simulado
+                    ? Number(
+                        (simulado.soma / simulado.tentativas).toFixed(2),
+                    )
+                    : null,
+
+                tentativas: simulado?.tentativas ?? 0,
+            },
+
+            Atividade: {
+                media: atividade
+                    ? Number(
+                        (atividade.soma / atividade.tentativas).toFixed(2),
+                    )
+                    : null,
+
+                tentativas: atividade?.tentativas ?? 0,
+            },
+        };
+    }
+
+    // Consulta informações básicas do usuário.
+    const usuario = await prisma.usuario.findUnique({
+        where: {
+            id: idUsuario,
+        },
+
+        select: {
+            id: true,
+            nome: true,
+            tipo: true,
+        },
+    });
+
+    return {
+        usuario,
+
+        notas,
+
+        paginacao: {
+            pagina,
+            limite,
+            totalMeses,
+            totalPaginas,
+            temMais: pagina < totalPaginas,
+            proximaPagina: pagina < totalPaginas
+                ? pagina + 1
+                : null,
+            paginaAnterior: pagina > 1 && totalMeses > 0
+                ? pagina - 1
+                : null,
+        },
+    };
+}

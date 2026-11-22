@@ -5,6 +5,7 @@ import {
     enviarRespostasSchema,
     idTentativaParamsSchema,
     listarTentativasQuerySchema,
+    historicoNotasQuerySchema,
 } from "../schemas/attempts.schema.js";
 
 import {
@@ -13,6 +14,7 @@ import {
     enviarRespostas,
     listarTentativas,
     consultarTentativa,
+    consultarHistoricoNotas,
 } from "../services/attempts.service.js";
 
 function responderErro(res: Response, erro: unknown) {
@@ -178,6 +180,44 @@ export async function consultar(
         return res.status(200).json({
             message: "Tentativa consultada com sucesso.",
             tentativa: resultado,
+        });
+    } catch (erro) {
+        return responderErro(res, erro);
+    }
+}
+
+// -----------------------------------------------------
+// CONSULTAR HISTÓRICO MENSAL DE NOTAS
+// GET /attempts/grades/monthly
+// -----------------------------------------------------
+
+export async function historicoNotas(
+    req: Request,
+    res: Response,
+) {
+    const validacao = historicoNotasQuerySchema.safeParse(req.query);
+
+    if (!validacao.success) {
+        return res.status(400).json({
+            message: "Parâmetros de paginação inválidos.",
+            errors: validacao.error.issues,
+        });
+    }
+
+    try {
+        // O usuário é obtido pelo token.
+        // Não recebemos o ID pelo query param.
+        const usuario = req.usuarioAutenticado!;
+
+        const resultado = await consultarHistoricoNotas(
+            usuario.id,
+            validacao.data.pagina,
+            validacao.data.limite,
+        );
+
+        return res.status(200).json({
+            message: "Histórico de notas consultado com sucesso.",
+            ...resultado,
         });
     } catch (erro) {
         return responderErro(res, erro);

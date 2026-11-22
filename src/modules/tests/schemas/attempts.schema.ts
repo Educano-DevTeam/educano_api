@@ -24,3 +24,17 @@ export const listarTentativasQuerySchema = z.object({
     pagina: z.coerce.number().int().positive().default(1),
     limite: z.coerce.number().int().min(1).max(100).default(30),
 });
+
+// Consulta paginada do histórico mensal de notas.
+export const historicoNotasQuerySchema = z.object({
+    pagina: z.coerce.number()
+        .int()
+        .min(1)
+        .default(1),
+
+    limite: z.coerce.number()
+        .int()
+        .min(1)
+        .max(12)
+        .default(6),
+});

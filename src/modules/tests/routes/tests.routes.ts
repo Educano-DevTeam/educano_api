@@ -17,6 +17,7 @@ import {
     enviar,
     listar as listarTentativasController,
     consultar as consultarTentativaController,
+    historicoNotas,
 } from "../controllers/attempts.controller.js";
 
 const testsRouter = Router();
@@ -38,5 +39,11 @@ testsRouter.get("/", listar);
 testsRouter.get("/:id", consultar);
 testsRouter.patch("/:id", atualizar);
 testsRouter.delete("/:id", excluir);
+
+// Histórico de desempenho
+testsRouter.get(
+    "/attempts/grades/monthly",
+    historicoNotas,
+);
 
 export default testsRouter;
